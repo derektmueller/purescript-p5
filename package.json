@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "scripts": {
+    "test": "pulp test"
+  },
+  "devDependencies": {
+    "p5": "^0.7.2"
+  }
+}

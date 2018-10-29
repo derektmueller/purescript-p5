@@ -1,11 +1,20 @@
 {
-  "name": "p5.purs",
+  "name": "purescript-p5",
+  "authors": [
+    "Derek Mueller <dtmuelle@gmail.com>"
+  ],
+  "description": "p5.js bindings",
+  "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
     "output"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/parenparen/purescript-p5.git"
+  },
   "dependencies": {
     "purescript-prelude": "^4.1.0",
     "purescript-console": "^4.1.0",
