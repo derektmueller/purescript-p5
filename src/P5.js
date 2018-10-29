@@ -41,3 +41,33 @@ exports.backgroundImpl = function(p) {
     };
   }
 };
+
+exports.strokeImpl = function(p) {
+  return function(str) {
+    return function() {
+      p.stroke(str);
+    };
+  };
+};
+
+exports.strokeWeightImpl = function(p) {
+  return function(w) {
+    return function() {
+      p.strokeWeight(w);
+    };
+  };
+};
+
+exports.lineImpl = function(p) {
+  return function(x1) {
+    return function(y1) {
+      return function(x2) {
+        return function(y2) {
+          return function(str) {
+            p.line(x1, y1, x2, y2);
+          };
+        };
+      };
+    };
+  };
+};

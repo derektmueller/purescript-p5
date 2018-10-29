@@ -7,15 +7,14 @@ import P5
 
 main :: Effect Unit
 main = do
-  log "hello p5.purs!"
-
   p5 $ \p -> do
-    log "p5"
     setup p do
-      log "setting up"
-      createCanvas p 500 500
+      createCanvas p 500.0 500.0
       pure unit
 
     draw p do
       background p "red"
+      stroke p "green"
+      strokeWeight p 3.0
+      line p 0.0 0.0 100.0 100.0
       pure unit
