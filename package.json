@@ -1,9 +1,18 @@
 {
   "private": true,
   "scripts": {
-    "test": "pulp test"
+    "test": "pulp test",
+    "build-watch": "pulp --watch browserify --to dist/Main.js",
+    "webpack": "DEBUG=purs-loader* DEBUG_DEPTH=100 webpack --progress --bail",
+    "webpack:server": "webpack-dev-server --progress --inline"
   },
   "devDependencies": {
-    "p5": "^0.7.2"
+    "p5": "^0.7.2",
+    "purescript": "^0.12.0",
+    "purescript-psa": "^0.7.3",
+    "purs-loader": "^3.2.0",
+    "webpack": "^3.12.0",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^2.11.3"
   }
 }

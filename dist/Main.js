@@ -84617,6 +84617,7 @@ var main = P5.p5(function (p) {
             P5.stroke(p)("green")();
             P5.strokeWeight(p)(3.0)();
             P5.line(p)(0.0)(0.0)(100.0)(100.0)();
+            P5.line(p)(100.0)(100.0)(100.0)(200.0)();
             return Data_Unit.unit;
         })();
     };
