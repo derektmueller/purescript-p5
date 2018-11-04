@@ -58,6 +58,24 @@ exports.strokeWeightImpl = function(p) {
   };
 };
 
+exports.strokeJoinMiterImpl = function(p) {
+  return function(strokeJoinType) {
+    p.strokeJoin(p.MITER);
+  };
+};
+
+exports.strokeJoinRoundImpl = function(p) {
+  return function(strokeJoinType) {
+    p.strokeJoin(p.ROUND);
+  };
+};
+
+exports.strokeJoinBevelImpl = function(p) {
+  return function(strokeJoinType) {
+    p.strokeJoin(p.BEVEL);
+  };
+};
+
 exports.lineImpl = function(p) {
   return function(x1) {
     return function(y1) {

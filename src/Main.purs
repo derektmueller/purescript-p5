@@ -20,4 +20,10 @@ main = unsafePerformEffect $ do
       strokeWeight p 3.0
       line p 0.0 0.0 100.0 100.0
       line p 100.0 100.0 100.0 200.0
+      strokeWeight p 10.0
+      line p 100.0 200.0 200.0 200.0
+      line p 200.0 200.0 300.0 300.0
+      strokeJoin p Round
+      strokeJoin p Bevel
+      strokeJoin p Miter
       pure unit
