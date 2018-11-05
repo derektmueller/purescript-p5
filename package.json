@@ -4,7 +4,8 @@
     "test": "pulp test",
     "build-watch": "pulp --watch browserify --to dist/Main.js",
     "webpack": "DEBUG=purs-loader* DEBUG_DEPTH=100 webpack --progress --bail",
-    "webpack:server": "webpack-dev-server --progress --inline"
+    "webpack:server": "webpack-dev-server --progress --inline",
+    "generate-p5-doc": "yuidoc -p ../p5.js/src/"
   },
   "devDependencies": {
     "p5": "^0.7.2",
