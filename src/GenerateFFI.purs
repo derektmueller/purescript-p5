@@ -16,13 +16,19 @@ import Control.Monad.Except
 import Data.Generic.Rep.Show (genericShow)
 import Debug.Trace (trace)
 
-type ClassItem = {
-    name :: Maybe String,
-    className :: String
+type Param = 
+  { name :: String
   }
 
-newtype P5Doc = P5Doc {
-    methods :: String
+type ClassItem = 
+  { name :: Maybe String,
+    itemType :: Maybe String,
+    className :: String,
+    params :: Array Param
+  }
+
+newtype P5Doc = P5Doc 
+  { methods :: String
   }
 
 derive instance genericP5Doc :: Generic P5Doc _
@@ -35,10 +41,19 @@ instance decodeP5Doc :: Decode P5Doc where
     classItems <- (value ! "classitems") >>= readArray
     classes <- traverse (\x -> do
       className <- (x ! "class") >>= readString
-      name <- (x ! "name") >>= readUndefined
+      name <- do
+         (x ! "name") 
+         >>= readUndefined
+         >>= traverse readString
+      itemType <- do
+         (x ! "itemtype") 
+         >>= readUndefined
+         >>= traverse readString
+      params <- (value ! "params") >>= readArray
       pure $ {
           name: name,
-          className: className
+          className: className,
+          itemType: itemType
         }
     ) classItems
     trace (show classes) $ \_ -> do
