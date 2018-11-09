@@ -89,3 +89,18 @@ exports.lineImpl = function(p) {
     };
   };
 };
+
+//Object.keys (
+//  [].concat (
+//    ...
+//      [].concat (
+//        ...json.classitems.filter(
+//          (i) => i.class === 'p5' && i.itemtype === 'method' 
+//            && i.params)
+//        .map ((i) => i.params)
+//      ).map ((p) => p.type)
+//        .map((p) => p.split('|'))
+//  )
+//    .sort()
+//    .reduce((a, b) => { a[b] = true; return a; }, {}))
+//
