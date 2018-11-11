@@ -99,7 +99,7 @@ exports.lineImpl = function(p) {
 //            && i.params)
 //        .map ((i) => i.params)
 //      ).map ((p) => p.type)
-//        .map((p) => p.split('|'))
+//        //.map((p) => p.split('|'))
 //  )
 //    .sort()
 //    .reduce((a, b) => { a[b] = true; return a; }, {}))
