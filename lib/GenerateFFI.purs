@@ -1,6 +1,7 @@
 module GenerateFFI where
 
 import Prelude
+import Data.Identity
 import Data.Maybe
 import Data.Array
 import Data.Either
@@ -99,12 +100,12 @@ readP5Type f = do
 
 generateP5TypeConstructor :: P5Type -> String
 generateP5TypeConstructor P5Boolean = "Boolean"
-generateP5TypeConstructor P5Effect = "Effect Unit"
-generateP5TypeConstructor P5Integer = "Integer"
-generateP5TypeConstructor P5NumberArray = "Array Number"
+generateP5TypeConstructor P5Effect = "(Effect Unit)"
+generateP5TypeConstructor P5Integer = "Int"
+generateP5TypeConstructor P5NumberArray = "(Array Number)"
 generateP5TypeConstructor P5Number = "Number"
 generateP5TypeConstructor P5P5 = "P5"
-generateP5TypeConstructor P5StringArray = "Array String"
+generateP5TypeConstructor P5StringArray = "(Array String)"
 generateP5TypeConstructor P5String = "String"
 generateP5TypeConstructor _ = ""
 
@@ -116,6 +117,13 @@ getParamTypes x =
   case x.params of
     Just params ->
       (\x -> x.p5Type) <$> params
+    Nothing -> []
+
+getParamNames :: ClassItem -> Array String 
+getParamNames x =
+  case x.params of
+    Just params ->
+      (\x -> x.name) <$> params
     Nothing -> []
 
 generateMethodSig :: ClassItem -> Either String String
@@ -131,7 +139,24 @@ generateMethodSig x = do
 generateMethodBody :: ClassItem -> Either String String
 generateMethodBody x = do
   name <- getMethodName x
-  pure $ name <> " = " <> name <> "Impl"
+  pure $ name 
+    <> " = " 
+    <> ("runFn" <> (show $ (1+_) <<< length $ getParamTypes x))
+    <> " " 
+    <> (name <> "Impl")
+
+generateForeignImport :: ClassItem -> Either String String
+generateForeignImport x = do
+  name <- getMethodName x
+  let returnType = x.return.p5Type
+      paramTypes = getParamTypes x
+  pure $
+    "foreign import " <> name <> "Impl :: "
+    <> "Fn" <> (show $ (1+_) <<< length $ paramTypes) <> " "
+    <> (intercalate " " 
+         (generateP5TypeConstructor
+           <$> ([P5P5] <> paramTypes <> [returnType])))
+
 
 generateMethod :: ClassItem -> Either String String
 generateMethod x = do
@@ -145,11 +170,49 @@ generateMethod x = do
 
 generateP5 :: P5Doc -> Either String String
 generateP5 (P5Doc doc) = do
+  let moduleHeader = "module P5.Generated where"
+      imports = [
+          "import Data.Function.Uncurried",
+          "import Effect (Effect)",
+          "import Prelude",
+          "import Data.Int",
+          "import P5 (P5)"
+        ]
   methods <- (traverse generateMethod doc)
-  pure $ "module P5 Generated where" <> "\n" <> (fold methods)
+  foreignImports <- (traverse generateForeignImport doc)
+  pure $ moduleHeader 
+    <> "\n" 
+    <> "\n" 
+    <> (intercalate "\n" imports)
+    <> "\n" 
+    <> "\n" 
+    <> (intercalate "\n" foreignImports)
+    <> "\n" 
+    <> "\n" 
+    <> (intercalate "\n" methods)
 
-generateForeignJSModule :: P5Doc -> String
-generateForeignJSModule doc = ""
+generateWrapper :: ClassItem -> Either String String
+generateWrapper x = do
+  name <- getMethodName x
+  let variables = getParamNames x
+  pure $
+    "exports." 
+    <> name <> "Impl"
+    <> " = function(p, " <> (intercalate ", " variables) <> ") {"
+    <> "\n"
+    <> "  return function() {"
+    <> "\n"
+    <> "    p." <> name <> "(" 
+      <> (intercalate ", " variables) <> ");"
+    <> "\n"
+    <> "  };"
+    <> "\n"
+    <> "};"
+
+generateForeignJSModule :: P5Doc -> Either String String
+generateForeignJSModule (P5Doc doc) = do
+  methods <- (traverse generateWrapper doc)
+  pure $ (intercalate "\n" methods)
 
 instance decodeP5Doc :: Decode P5Doc where
   decode value = do
@@ -203,6 +266,11 @@ main = do
       let eP5 = generateP5 p5Doc
       case eP5 of
         Right p5 -> do
-          writeTextFile UTF8 "./P5Generated.purs" p5
+          writeTextFile UTF8 "./src/P5/Generated.purs" p5
+          let eJS = generateForeignJSModule p5Doc
+          case eJS of
+            Right js -> do
+              writeTextFile UTF8 "./src/P5/Generated.js" js
+            Left e -> log $ show e
         Left e -> log $ show e
   pure unit

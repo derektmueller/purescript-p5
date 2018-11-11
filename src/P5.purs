@@ -22,7 +22,7 @@ foreign import setupImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import drawImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import backgroundImpl :: P5 -> ColorString -> Effect Unit
 foreign import strokeImpl :: P5 -> ColorString -> Effect Unit
-foreign import strokeWeightImpl :: P5 -> Number -> Effect Unit
+foreign import strokeWeightImpl :: Fn2 P5 Number (Effect Unit)
 foreign import strokeJoinMiterImpl :: P5 -> Effect Unit
 foreign import strokeJoinBevelImpl :: P5 -> Effect Unit
 foreign import strokeJoinRoundImpl :: P5 -> Effect Unit
@@ -50,7 +50,7 @@ stroke :: P5 -> ColorString -> Effect Unit
 stroke p colorString = strokeImpl p colorString
 
 strokeWeight :: P5 -> Number -> Effect Unit
-strokeWeight p w = strokeWeightImpl p w
+strokeWeight = runFn2 strokeWeightImpl
 
 strokeJoin :: P5 -> StrokeJoin -> Effect Unit
 strokeJoin p Miter = strokeJoinMiterImpl p

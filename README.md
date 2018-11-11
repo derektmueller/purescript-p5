@@ -7,13 +7,11 @@ p5.js bindings for PureScript
 I'm currently trying to generate the FFI from the p5.js YUIDoc.
 
 Completed:
-  * yuidoc parsing
-  * generating FFI PureScript functions for basic p5.js types
+  * parse p5.js YUIDoc
+  * generate FFI PureScript functions for basic p5.js types
 
 TODO:
   * generate FFI for more complicated p5.js types (e.g. p5.Color, p5.Vector)
-  * generate function wrappers in foreign JavaScript module
-  * use foreign function types instead of curried functions
   * exclude private methods from FFI
   * give unique names to functions that have multiple definitions
   * handle optional parameters

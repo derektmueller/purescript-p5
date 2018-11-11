@@ -50,11 +50,9 @@ exports.strokeImpl = function(p) {
   };
 };
 
-exports.strokeWeightImpl = function(p) {
-  return function(w) {
-    return function() {
-      p.strokeWeight(w);
-    };
+exports.strokeWeightImpl = function(p, w) {
+  return function() {
+    p.strokeWeight(w);
   };
 };
 
