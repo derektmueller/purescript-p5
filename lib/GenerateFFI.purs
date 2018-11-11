@@ -1,6 +1,9 @@
 module GenerateFFI where
 
 import Prelude
+import Data.String.Regex
+import Data.String.Regex.Flags
+import Data.String.Utils (mapChars)
 import Data.Identity
 import Data.Maybe
 import Data.Array
@@ -65,15 +68,28 @@ type Param =
     p5Type :: P5Type
   }
 
+type ReturnType =
+  { description :: String
+  , p5Type :: P5Type
+  }
+
 type ClassItem = 
   { name :: Maybe String,
     itemType :: Maybe String,
     className :: String,
     params :: Maybe (Array Param),
-    return :: Param
+    return :: ReturnType
   }
 
-newtype P5Doc = P5Doc (Array ClassItem)
+type P5Method = 
+  { name :: String,
+    itemType :: Maybe String,
+    className :: String,
+    params :: Array Param,
+    return :: ReturnType
+  }
+
+newtype P5Doc = P5Doc (Array P5Method)
 
 derive instance genericP5Doc :: Generic P5Doc _
 derive instance genericP5Type :: Generic P5Type _
@@ -109,24 +125,16 @@ generateP5TypeConstructor P5StringArray = "(Array String)"
 generateP5TypeConstructor P5String = "String"
 generateP5TypeConstructor _ = ""
 
-getMethodName :: ClassItem -> Either String String
-getMethodName x = note "Missing name" x.name
+getMethodName :: P5Method -> Either String String
+getMethodName x = pure x.name
 
-getParamTypes :: ClassItem -> Array P5Type 
-getParamTypes x =
-  case x.params of
-    Just params ->
-      (\x -> x.p5Type) <$> params
-    Nothing -> []
+getParamTypes :: P5Method -> Array P5Type 
+getParamTypes x = (\x -> x.p5Type) <$> x.params
 
-getParamNames :: ClassItem -> Array String 
-getParamNames x =
-  case x.params of
-    Just params ->
-      (\x -> x.name) <$> params
-    Nothing -> []
+getParamNames :: P5Method -> Array String 
+getParamNames x = (\x -> x.name) <$> x.params
 
-generateMethodSig :: ClassItem -> Either String String
+generateMethodSig :: P5Method -> Either String String
 generateMethodSig x = do
   name <- getMethodName x
   let returnType = x.return.p5Type
@@ -136,19 +144,19 @@ generateMethodSig x = do
          (generateP5TypeConstructor 
           <$> ([P5P5] <> paramTypes <> [returnType])))
 
-generateMethodBody :: ClassItem -> Either String String
+generateMethodBody :: P5Method -> Either String String
 generateMethodBody x = do
-  name <- getMethodName x
-  pure $ name 
+  let jsName = generateJSName x.name
+  pure $ x.name 
     <> " = " 
     <> ("runFn" <> (show $ (1+_) <<< length $ getParamTypes x))
     <> " " 
-    <> (name <> "Impl")
+    <> (jsName <> "Impl")
 
-generateForeignImport :: ClassItem -> Either String String
+generateForeignImport :: P5Method -> Either String String
 generateForeignImport x = do
-  name <- getMethodName x
-  let returnType = x.return.p5Type
+  let name = generateJSName x.name
+      returnType = x.return.p5Type
       paramTypes = getParamTypes x
   pure $
     "foreign import " <> name <> "Impl :: "
@@ -158,7 +166,7 @@ generateForeignImport x = do
            <$> ([P5P5] <> paramTypes <> [returnType])))
 
 
-generateMethod :: ClassItem -> Either String String
+generateMethod :: P5Method -> Either String String
 generateMethod x = do
   methodSig <- generateMethodSig x
   methodBody <- generateMethodBody x
@@ -191,18 +199,34 @@ generateP5 (P5Doc doc) = do
     <> "\n" 
     <> (intercalate "\n" methods)
 
-generateWrapper :: ClassItem -> Either String String
+generateJSName :: String -> String
+generateJSName name = 
+  mapChars (\x -> 
+    case x of
+      "'" -> "_"
+      x' -> x'
+  ) name
+
+generateP5Name :: String -> String
+generateP5Name name = 
+  mapChars (\x -> 
+    case x of
+      "'" -> ""
+      x' -> x'
+  ) name
+
+generateWrapper :: P5Method -> Either String String
 generateWrapper x = do
   name <- getMethodName x
   let variables = getParamNames x
   pure $
     "exports." 
-    <> name <> "Impl"
+    <> (generateJSName name) <> "Impl"
     <> " = function(p, " <> (intercalate ", " variables) <> ") {"
     <> "\n"
     <> "  return function() {"
     <> "\n"
-    <> "    p." <> name <> "(" 
+    <> "    p." <> (generateP5Name name) <> "(" 
       <> (intercalate ", " variables) <> ");"
     <> "\n"
     <> "  };"
@@ -214,15 +238,61 @@ generateForeignJSModule (P5Doc doc) = do
   methods <- (traverse generateWrapper doc)
   pure $ (intercalate "\n" methods)
 
+getPrivateMethodRegex :: F Regex
+getPrivateMethodRegex = do
+  let ePrivateRegex = regex "^_" noFlags
+  case ePrivateRegex of
+    Right regex -> pure regex
+    Left e -> fail $ ForeignError e
+
+classItemToMethod :: ClassItem -> F P5Method
+classItemToMethod i = do
+  case i.name of  
+    Just name -> 
+      case i.params of
+        Just params -> pure $ i { name = name, params = params }
+        Nothing -> pure $ i { name = name, params = [] }
+    Nothing -> fail $ ForeignError "Missing method name"
+
 instance decodeP5Doc :: Decode P5Doc where
   decode value = do
+    privateMethodRegex <- getPrivateMethodRegex
     let onlyP5Methods = filter 
           (\i -> i.className == "p5" 
             && i.itemType == Just "method"
             && ((length <<< (filter (\p -> 
               p.p5Type == P5Unsupported))) <$> i.params) == Just 0)
-        removeDupMethods = nubByEq 
-          (\i1 i2 -> i1.name == i2.name)
+        onlyPublic = filter
+          (\i -> (test privateMethodRegex i.name) == false)
+        suffixDupMethods :: Array P5Method -> Array P5Method
+        suffixDupMethods =
+          reverse 
+          <<< (\acc -> acc.methods) 
+          <$> foldr (\i acc ->
+            if i.name == acc.prevMethodName then do
+              let newName = 
+                    i.name 
+                    <> (fold ((\_ -> "'") <$> (0..acc.duplicates)))
+              {prevMethodName: i.name
+              , duplicates: acc.duplicates + 1
+              , methods: (i {name = newName}) : acc.methods}
+            else
+              {prevMethodName: i.name
+              , duplicates: 0
+              , methods: i : acc.methods}
+          ) {prevMethodName: "", duplicates: 0, methods: []}
+          <<< reverse
+        removeFnsWithTooManyArgs :: Array P5Method -> Array P5Method
+        removeFnsWithTooManyArgs = filter
+          (\i -> length i.params <= 10)
+        sortByNameAndParamLength :: Array P5Method -> Array P5Method
+        sortByNameAndParamLength = sortBy
+          (\i1 i2 -> 
+            case compare i1.name i2.name of
+              LT -> LT 
+              GT -> GT 
+              EQ -> compare (length i1.params) (length i2.params)
+          )
     classItems <- (value ! "classitems") 
       >>= readArray
       >>= traverse (\x -> do
@@ -245,15 +315,37 @@ instance decodeP5Doc :: Decode P5Doc where
               p5Type: p5Type
             }
           )
+--        mReturn <- (x ! "return")
+--          >>= readUndefined
+--          >>= traverse (\doc -> do
+--            description <- (doc ! "description") >>= readString
+--            mP5Type <- (doc ! "type") 
+--              >>= readUndefined
+--              >>= traverse readP5Type
+--            pure $ {
+--              description: description,
+--              p5Type: maybe P5Effect identity mP5Type
+--            }
+--          )
         pure $ {
             name: name,
             className: className,
             itemType: itemType,
             params: params,
-            return: {name: "return", p5Type: P5Effect}
+            return: 
+              maybe 
+                {description: "Unspecified effects", p5Type: P5Effect}
+                identity
+                Nothing
+                --mReturn
           })
     --trace (show (classItems :: Array ClassItem)) $ \_ -> do
-    pure $ P5Doc ((removeDupMethods <<< onlyP5Methods) classItems)
+    methods <- traverse classItemToMethod (onlyP5Methods classItems)
+    pure $ P5Doc 
+      ((suffixDupMethods
+        <<< sortByNameAndParamLength
+        <<< removeFnsWithTooManyArgs
+        <<< onlyPublic) methods)
 
 main :: Effect Unit
 main = do
