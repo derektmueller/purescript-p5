@@ -1,7 +1,8 @@
-const p5 = require('p5');
+var p5;
 
 exports.p5Impl = function(f) {
   return function() {
+    p5 = p5 === undefined ? require('p5') : p5;
     new p5(function(p) {
       f(p)();
     });

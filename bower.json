@@ -28,6 +28,8 @@
     "purescript-quickcheck": "^5.0.0"
   },
   "devDependencies": {
-    "purescript-psci-support": "^4.0.0"
+    "purescript-psci-support": "^4.0.0",
+    "purescript-spec": "^3.0.0",
+    "purescript-jsdom": "../purescript-jsdom-global#^0.0.1"
   }
 }
