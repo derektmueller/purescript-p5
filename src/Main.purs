@@ -5,13 +5,11 @@ import Effect (Effect)
 import Effect.Console (log)
 import Effect.Unsafe (unsafePerformEffect)
 
-import JsdomGlobal
 import P5.Generated as Gen
 import P5
 
 main :: Unit
 main = unsafePerformEffect $ do
-  _ <- jsdomGlobal
   p5 $ \p -> do
     setup p do
       _ <- createCanvas p 500.0 500.0
@@ -30,3 +28,4 @@ main = unsafePerformEffect $ do
       strokeJoin p Bevel
       strokeJoin p Miter
       pure unit
+  pure unit

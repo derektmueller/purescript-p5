@@ -29,26 +29,28 @@ import P5
 import P5.Generated as Gen
 
 lineDrawing :: String -> Number -> Number -> Effect Unit
-lineDrawing canvasId w h =
-  p5 $ \p -> do
-    setup p do
-      e <- createCanvas p w h
-      setId e canvasId
-      pure unit
+lineDrawing canvasId w h = do
+  p <- getP5
 
-    draw p do
-      background p "red"
-      stroke p "green"
-      Gen.strokeWeight p 3.0
-      Gen.line p 0.0 0.0 100.0 100.0
-      Gen.line p 100.0 100.0 100.0 200.0
-      Gen.strokeWeight p 10.0
-      Gen.line p 100.0 200.0 200.0 200.0
-      Gen.line p 200.0 200.0 300.0 300.0
-      strokeJoin p Round
-      strokeJoin p Bevel
-      strokeJoin p Miter
-      pure unit
+  setup p do
+    e <- createCanvas p w h
+    setId e canvasId
+    pure unit
+
+  draw p do
+    background p "red"
+    stroke p "green"
+    Gen.strokeWeight p 3.0
+    Gen.line p 0.0 0.0 100.0 100.0
+    Gen.line p 100.0 100.0 100.0 200.0
+    Gen.strokeWeight p 10.0
+    Gen.line p 100.0 200.0 200.0 200.0
+    Gen.line p 200.0 200.0 300.0 300.0
+    strokeJoin p Round
+    strokeJoin p Bevel
+    strokeJoin p Miter
+    pure unit
+  pure unit
 
 asIntArray ∷ Uint8ClampedArray -> Array Int
 asIntArray = unsafeCoerce
@@ -92,6 +94,10 @@ main = do
         it "renders a line drawing" do
            _ <- rendersALineDrawing
            true `shouldEqual` true
+      describe "math" do
+         describe "dist" do
+            pending "calculates distance between points"
+               
   where
     testConfig = defaultConfig { timeout = Just 10000 }
 

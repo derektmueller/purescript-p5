@@ -260,6 +260,7 @@ instance decodeP5Doc :: Decode P5Doc where
     let onlyP5Methods = filter 
           (\i -> i.className == "p5" 
             && i.itemType == Just "method"
+            && i.return.p5Type /= P5Unsupported
             && ((length <<< (filter (\p -> 
               p.p5Type == P5Unsupported))) <$> i.params) == Just 0)
         onlyPublic = filter
@@ -315,18 +316,18 @@ instance decodeP5Doc :: Decode P5Doc where
               p5Type: p5Type
             }
           )
---        mReturn <- (x ! "return")
---          >>= readUndefined
---          >>= traverse (\doc -> do
---            description <- (doc ! "description") >>= readString
---            mP5Type <- (doc ! "type") 
---              >>= readUndefined
---              >>= traverse readP5Type
---            pure $ {
---              description: description,
---              p5Type: maybe P5Effect identity mP5Type
---            }
---          )
+        mReturn <- (x ! "return")
+          >>= readUndefined
+          >>= traverse (\doc -> do
+            description <- (doc ! "description") >>= readString
+            mP5Type <- (doc ! "type") 
+              >>= readUndefined
+              >>= traverse readP5Type
+            pure $ {
+              description: description,
+              p5Type: maybe P5Effect identity mP5Type
+            }
+          )
         pure $ {
             name: name,
             className: className,
@@ -334,10 +335,10 @@ instance decodeP5Doc :: Decode P5Doc where
             params: params,
             return: 
               maybe 
-                {description: "Unspecified effects", p5Type: P5Effect}
+                { description: "Unspecified effects"
+                , p5Type: P5Effect }
                 identity
-                Nothing
-                --mReturn
+                mReturn
           })
     --trace (show (classItems :: Array ClassItem)) $ \_ -> do
     methods <- traverse classItemToMethod (onlyP5Methods classItems)

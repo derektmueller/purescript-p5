@@ -118,26 +118,6 @@ exports.ceilImpl = function(p, n) {
     p.ceil(n);
   };
 };
-exports.colorImpl = function(p, value) {
-  return function() {
-    p.color(value);
-  };
-};
-exports.color_Impl = function(p, values) {
-  return function() {
-    p.color(values);
-  };
-};
-exports.color__Impl = function(p, gray, alpha) {
-  return function() {
-    p.color(gray, alpha);
-  };
-};
-exports.color___Impl = function(p, v1, v2, v3, alpha) {
-  return function() {
-    p.color(v1, v2, v3, alpha);
-  };
-};
 exports.coneImpl = function(p, radius, height, detailX, detailY, cap) {
   return function() {
     p.cone(radius, height, detailX, detailY, cap);
@@ -156,36 +136,6 @@ exports.copyImpl = function(p, sx, sy, sw, sh, dx, dy, dw, dh) {
 exports.cosImpl = function(p, angle) {
   return function() {
     p.cos(angle);
-  };
-};
-exports.createImageImpl = function(p, width, height) {
-  return function() {
-    p.createImage(width, height);
-  };
-};
-exports.createNumberDictImpl = function(p, key, value) {
-  return function() {
-    p.createNumberDict(key, value);
-  };
-};
-exports.createShaderImpl = function(p, vertSrc, fragSrc) {
-  return function() {
-    p.createShader(vertSrc, fragSrc);
-  };
-};
-exports.createStringDictImpl = function(p, key, value) {
-  return function() {
-    p.createStringDict(key, value);
-  };
-};
-exports.createVectorImpl = function(p, x, y, z) {
-  return function() {
-    p.createVector(x, y, z);
-  };
-};
-exports.createWriterImpl = function(p, name, extension) {
-  return function() {
-    p.createWriter(name, extension);
   };
 };
 exports.curveImpl = function(p, x1, y1, x2, y2, x3, y3, x4, y4) {
@@ -313,19 +263,14 @@ exports.fullscreenImpl = function(p, val) {
     p.fullscreen(val);
   };
 };
-exports.getImpl = function(p, x, y, w, h) {
-  return function() {
-    p.get(x, y, w, h);
-  };
-};
-exports.hexImpl = function(p, ns, digits) {
-  return function() {
-    p.hex(ns, digits);
-  };
-};
-exports.hex_Impl = function(p, n, digits) {
+exports.hexImpl = function(p, n, digits) {
   return function() {
     p.hex(n, digits);
+  };
+};
+exports.hex_Impl = function(p, ns, digits) {
+  return function() {
+    p.hex(ns, digits);
   };
 };
 exports.keyIsDownImpl = function(p, code) {
@@ -346,11 +291,6 @@ exports.lineImpl = function(p, x1, y1, x2, y2) {
 exports.line_Impl = function(p, x1, y1, z1, x2, y2, z2) {
   return function() {
     p.line(x1, y1, z1, x2, y2, z2);
-  };
-};
-exports.loadShaderImpl = function(p, vertFilename, fragFilename) {
-  return function() {
-    p.loadShader(vertFilename, fragFilename);
   };
 };
 exports.logImpl = function(p, n) {
@@ -618,14 +558,14 @@ exports.sqrtImpl = function(p, n) {
     p.sqrt(n);
   };
 };
-exports.strokeImpl = function(p, values) {
-  return function() {
-    p.stroke(values);
-  };
-};
-exports.stroke_Impl = function(p, value) {
+exports.strokeImpl = function(p, value) {
   return function() {
     p.stroke(value);
+  };
+};
+exports.stroke_Impl = function(p, values) {
+  return function() {
+    p.stroke(values);
   };
 };
 exports.stroke__Impl = function(p, gray, alpha) {

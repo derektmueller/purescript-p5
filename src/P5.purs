@@ -2,6 +2,7 @@ module P5 (
   P5,
   Element,
   p5,
+  getP5,
   setup,
   draw,
   background,
@@ -22,6 +23,7 @@ import Data.Function.Uncurried
 foreign import data P5 :: Type
 foreign import data Element :: Type
 foreign import p5Impl :: (P5 -> Effect Unit) -> Effect Unit
+foreign import getP5Impl :: Effect P5
 foreign import setupImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import drawImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import backgroundImpl :: P5 -> ColorString -> Effect Unit
@@ -42,6 +44,9 @@ data StrokeJoin = Miter | Bevel | Round
 
 p5 :: (P5 -> Effect Unit) -> Effect Unit
 p5 f = p5Impl f
+
+getP5 :: Effect P5
+getP5 = getP5Impl
 
 setup :: P5 -> Effect Unit -> Effect Unit
 setup p eff = setupImpl p eff
