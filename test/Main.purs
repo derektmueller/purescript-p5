@@ -96,7 +96,10 @@ main = do
            true `shouldEqual` true
       describe "math" do
          describe "dist" do
-            pending "calculates distance between points"
+            it "calculates distance between points" do
+               p <- liftEffect getP5
+               Gen.dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
+               pure unit
                
   where
     testConfig = defaultConfig { timeout = Just 10000 }

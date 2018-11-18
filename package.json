@@ -2,12 +2,13 @@
   "private": true,
   "scripts": {
     "test": "pulp test",
+    "test-watch": "pulp --watch test",
     "build-watch": "pulp --watch browserify --to dist/Main.js",
     "webpack": "DEBUG=purs-loader* DEBUG_DEPTH=100 webpack --progress --bail",
     "webpack:server": "webpack-dev-server --progress --inline",
     "generate-p5-doc": "yuidoc -p ../p5.js/src/",
     "generate-ffi": "pulp run --src-path lib --main GenerateFFI",
-    "generate-ffi-watch": "pulp -w run --src-path lib --main GenerateFFI"
+    "generate-ffi-watch": "pulp --watch run --src-path lib --main GenerateFFI"
   },
   "devDependencies": {
     "canvas": "^2.1.0",

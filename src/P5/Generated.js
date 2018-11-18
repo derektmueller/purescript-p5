@@ -1,12 +1,8 @@
 exports.absImpl = function(p, n) {
-  return function() {
-    p.abs(n);
-  };
+  return p.abs(n);
 };
 exports.acosImpl = function(p, value) {
-  return function() {
-    p.acos(value);
-  };
+  return p.acos(value);
 };
 exports.ambientLightImpl = function(p, value) {
   return function() {
@@ -39,19 +35,13 @@ exports.applyMatrixImpl = function(p, a, b, c, d, e, f) {
   };
 };
 exports.asinImpl = function(p, value) {
-  return function() {
-    p.asin(value);
-  };
+  return p.asin(value);
 };
 exports.atanImpl = function(p, value) {
-  return function() {
-    p.atan(value);
-  };
+  return p.atan(value);
 };
 exports.atan2Impl = function(p, y, x) {
-  return function() {
-    p.atan2(y, x);
-  };
+  return p.atan2(y, x);
 };
 exports.backgroundImpl = function(p, values) {
   return function() {
@@ -84,14 +74,10 @@ exports.bezierDetailImpl = function(p, detail) {
   };
 };
 exports.bezierPointImpl = function(p, a, b, c, d, t) {
-  return function() {
-    p.bezierPoint(a, b, c, d, t);
-  };
+  return p.bezierPoint(a, b, c, d, t);
 };
 exports.bezierTangentImpl = function(p, a, b, c, d, t) {
-  return function() {
-    p.bezierTangent(a, b, c, d, t);
-  };
+  return p.bezierTangent(a, b, c, d, t);
 };
 exports.bezierVertexImpl = function(p, x2, y2, x3, y3, x4, y4) {
   return function() {
@@ -114,9 +100,7 @@ exports.cameraImpl = function(p, x, y, z, centerX, centerY, centerZ, upX, upY, u
   };
 };
 exports.ceilImpl = function(p, n) {
-  return function() {
-    p.ceil(n);
-  };
+  return p.ceil(n);
 };
 exports.coneImpl = function(p, radius, height, detailX, detailY, cap) {
   return function() {
@@ -124,9 +108,7 @@ exports.coneImpl = function(p, radius, height, detailX, detailY, cap) {
   };
 };
 exports.constrainImpl = function(p, n, low, high) {
-  return function() {
-    p.constrain(n, low, high);
-  };
+  return p.constrain(n, low, high);
 };
 exports.copyImpl = function(p, sx, sy, sw, sh, dx, dy, dw, dh) {
   return function() {
@@ -134,9 +116,7 @@ exports.copyImpl = function(p, sx, sy, sw, sh, dx, dy, dw, dh) {
   };
 };
 exports.cosImpl = function(p, angle) {
-  return function() {
-    p.cos(angle);
-  };
+  return p.cos(angle);
 };
 exports.curveImpl = function(p, x1, y1, x2, y2, x3, y3, x4, y4) {
   return function() {
@@ -149,14 +129,10 @@ exports.curveDetailImpl = function(p, resolution) {
   };
 };
 exports.curvePointImpl = function(p, a, b, c, d, t) {
-  return function() {
-    p.curvePoint(a, b, c, d, t);
-  };
+  return p.curvePoint(a, b, c, d, t);
 };
 exports.curveTangentImpl = function(p, a, b, c, d, t) {
-  return function() {
-    p.curveTangent(a, b, c, d, t);
-  };
+  return p.curveTangent(a, b, c, d, t);
 };
 exports.curveTightnessImpl = function(p, amount) {
   return function() {
@@ -184,9 +160,7 @@ exports.debugModeImpl = function(p, gridSize, gridDivisions, gridXOff, gridYOff,
   };
 };
 exports.degreesImpl = function(p, radians) {
-  return function() {
-    p.degrees(radians);
-  };
+  return p.degrees(radians);
 };
 exports.directionalLightImpl = function(p, v1, v2, v3, x, y, z) {
   return function() {
@@ -194,14 +168,10 @@ exports.directionalLightImpl = function(p, v1, v2, v3, x, y, z) {
   };
 };
 exports.distImpl = function(p, x1, y1, x2, y2) {
-  return function() {
-    p.dist(x1, y1, x2, y2);
-  };
+  return p.dist(x1, y1, x2, y2);
 };
 exports.dist_Impl = function(p, x1, y1, z1, x2, y2, z2) {
-  return function() {
-    p.dist(x1, y1, z1, x2, y2, z2);
-  };
+  return p.dist(x1, y1, z1, x2, y2, z2);
 };
 exports.ellipseImpl = function(p, x, y, w, h) {
   return function() {
@@ -219,9 +189,7 @@ exports.ellipsoidImpl = function(p, radiusx, radiusy, radiusz, detailX, detailY)
   };
 };
 exports.expImpl = function(p, n) {
-  return function() {
-    p.exp(n);
-  };
+  return p.exp(n);
 };
 exports.fillImpl = function(p, value) {
   return function() {
@@ -244,14 +212,10 @@ exports.fill___Impl = function(p, v1, v2, v3, alpha) {
   };
 };
 exports.floatImpl = function(p, str) {
-  return function() {
-    p.float(str);
-  };
+  return p.float(str);
 };
 exports.floorImpl = function(p, n) {
-  return function() {
-    p.floor(n);
-  };
+  return p.floor(n);
 };
 exports.frameRateImpl = function(p, fps) {
   return function() {
@@ -259,29 +223,19 @@ exports.frameRateImpl = function(p, fps) {
   };
 };
 exports.fullscreenImpl = function(p, val) {
-  return function() {
-    p.fullscreen(val);
-  };
+  return p.fullscreen(val);
 };
 exports.hexImpl = function(p, n, digits) {
-  return function() {
-    p.hex(n, digits);
-  };
+  return p.hex(n, digits);
 };
 exports.hex_Impl = function(p, ns, digits) {
-  return function() {
-    p.hex(ns, digits);
-  };
+  return p.hex(ns, digits);
 };
 exports.keyIsDownImpl = function(p, code) {
-  return function() {
-    p.keyIsDown(code);
-  };
+  return p.keyIsDown(code);
 };
 exports.lerpImpl = function(p, start, stop, amt) {
-  return function() {
-    p.lerp(start, stop, amt);
-  };
+  return p.lerp(start, stop, amt);
 };
 exports.lineImpl = function(p, x1, y1, x2, y2) {
   return function() {
@@ -294,69 +248,43 @@ exports.line_Impl = function(p, x1, y1, z1, x2, y2, z2) {
   };
 };
 exports.logImpl = function(p, n) {
-  return function() {
-    p.log(n);
-  };
+  return p.log(n);
 };
 exports.magImpl = function(p, a, b) {
-  return function() {
-    p.mag(a, b);
-  };
+  return p.mag(a, b);
 };
 exports.mapImpl = function(p, value, start1, stop1, start2, stop2, withinBounds) {
-  return function() {
-    p.map(value, start1, stop1, start2, stop2, withinBounds);
-  };
+  return p.map(value, start1, stop1, start2, stop2, withinBounds);
 };
 exports.matchImpl = function(p, str, regexp) {
-  return function() {
-    p.match(str, regexp);
-  };
+  return p.match(str, regexp);
 };
 exports.matchAllImpl = function(p, str, regexp) {
-  return function() {
-    p.matchAll(str, regexp);
-  };
+  return p.matchAll(str, regexp);
 };
 exports.maxImpl = function(p, nums) {
-  return function() {
-    p.max(nums);
-  };
+  return p.max(nums);
 };
 exports.max_Impl = function(p, n0, n1) {
-  return function() {
-    p.max(n0, n1);
-  };
+  return p.max(n0, n1);
 };
 exports.minImpl = function(p, nums) {
-  return function() {
-    p.min(nums);
-  };
+  return p.min(nums);
 };
 exports.min_Impl = function(p, n0, n1) {
-  return function() {
-    p.min(n0, n1);
-  };
+  return p.min(n0, n1);
 };
 exports.nfpImpl = function(p, num, left, right) {
-  return function() {
-    p.nfp(num, left, right);
-  };
+  return p.nfp(num, left, right);
 };
 exports.nfp_Impl = function(p, nums, left, right) {
-  return function() {
-    p.nfp(nums, left, right);
-  };
+  return p.nfp(nums, left, right);
 };
 exports.nfsImpl = function(p, num, left, right) {
-  return function() {
-    p.nfs(num, left, right);
-  };
+  return p.nfs(num, left, right);
 };
 exports.noiseImpl = function(p, x, y, z) {
-  return function() {
-    p.noise(x, y, z);
-  };
+  return p.noise(x, y, z);
 };
 exports.noiseDetailImpl = function(p, lod, falloff) {
   return function() {
@@ -369,9 +297,7 @@ exports.noiseSeedImpl = function(p, seed) {
   };
 };
 exports.normImpl = function(p, value, start, stop) {
-  return function() {
-    p.norm(value, start, stop);
-  };
+  return p.norm(value, start, stop);
 };
 exports.orbitControlImpl = function(p, sensitivityX, sensitivityY) {
   return function() {
@@ -409,9 +335,7 @@ exports.pointLightImpl = function(p, v1, v2, v3, x, y, z) {
   };
 };
 exports.powImpl = function(p, n, e) {
-  return function() {
-    p.pow(n, e);
-  };
+  return p.pow(n, e);
 };
 exports.quadImpl = function(p, x1, y1, x2, y2, x3, y3, x4, y4) {
   return function() {
@@ -429,19 +353,13 @@ exports.quadraticVertex_Impl = function(p, cx, cy, cz, x3, y3, z3) {
   };
 };
 exports.radiansImpl = function(p, degrees) {
-  return function() {
-    p.radians(degrees);
-  };
+  return p.radians(degrees);
 };
 exports.randomImpl = function(p, min, max) {
-  return function() {
-    p.random(min, max);
-  };
+  return p.random(min, max);
 };
 exports.randomGaussianImpl = function(p, mean, sd) {
-  return function() {
-    p.randomGaussian(mean, sd);
-  };
+  return p.randomGaussian(mean, sd);
 };
 exports.randomSeedImpl = function(p, seed) {
   return function() {
@@ -484,9 +402,7 @@ exports.rotateZImpl = function(p, angle) {
   };
 };
 exports.roundImpl = function(p, n) {
-  return function() {
-    p.round(n);
-  };
+  return p.round(n);
 };
 exports.saveCanvasImpl = function(p, filename, extension) {
   return function() {
@@ -524,9 +440,7 @@ exports.shearYImpl = function(p, angle) {
   };
 };
 exports.sinImpl = function(p, angle) {
-  return function() {
-    p.sin(angle);
-  };
+  return p.sin(angle);
 };
 exports.specularMaterialImpl = function(p, v1, v2, v3, a) {
   return function() {
@@ -539,24 +453,16 @@ exports.sphereImpl = function(p, radius, detailX, detailY) {
   };
 };
 exports.splitImpl = function(p, value, delim) {
-  return function() {
-    p.split(value, delim);
-  };
+  return p.split(value, delim);
 };
 exports.splitTokensImpl = function(p, value, delim) {
-  return function() {
-    p.splitTokens(value, delim);
-  };
+  return p.splitTokens(value, delim);
 };
 exports.sqImpl = function(p, n) {
-  return function() {
-    p.sq(n);
-  };
+  return p.sq(n);
 };
 exports.sqrtImpl = function(p, n) {
-  return function() {
-    p.sqrt(n);
-  };
+  return p.sqrt(n);
 };
 exports.strokeImpl = function(p, value) {
   return function() {
@@ -584,9 +490,7 @@ exports.strokeWeightImpl = function(p, weight) {
   };
 };
 exports.tanImpl = function(p, angle) {
-  return function() {
-    p.tan(angle);
-  };
+  return p.tan(angle);
 };
 exports.textLeadingImpl = function(p, leading) {
   return function() {
@@ -599,9 +503,7 @@ exports.textSizeImpl = function(p, theSize) {
   };
 };
 exports.textWidthImpl = function(p, theText) {
-  return function() {
-    p.textWidth(theText);
-  };
+  return p.textWidth(theText);
 };
 exports.tintImpl = function(p, value) {
   return function() {
@@ -639,19 +541,13 @@ exports.triangleImpl = function(p, x1, y1, x2, y2, x3, y3) {
   };
 };
 exports.trimImpl = function(p, str) {
-  return function() {
-    p.trim(str);
-  };
+  return p.trim(str);
 };
 exports.uncharImpl = function(p, n) {
-  return function() {
-    p.unchar(n);
-  };
+  return p.unchar(n);
 };
 exports.unhexImpl = function(p, n) {
-  return function() {
-    p.unhex(n);
-  };
+  return p.unhex(n);
 };
 exports.updatePixelsImpl = function(p, x, y, w, h) {
   return function() {

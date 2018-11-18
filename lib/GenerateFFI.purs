@@ -219,18 +219,26 @@ generateWrapper :: P5Method -> Either String String
 generateWrapper x = do
   name <- getMethodName x
   let variables = getParamNames x
+      generateReturn =
+        if x.return.p5Type == P5Effect then
+          "  return function() {"
+          <> "\n"
+          <> "    p." <> (generateP5Name name) <> "(" 
+            <> (intercalate ", " variables) <> ");"
+          <> "\n"
+          <> "  };"
+          <> "\n"
+        else
+          "  return p." <> (generateP5Name name) <> "(" 
+            <> (intercalate ", " variables) <> ");"
+          <> "\n"
+
   pure $
     "exports." 
     <> (generateJSName name) <> "Impl"
     <> " = function(p, " <> (intercalate ", " variables) <> ") {"
     <> "\n"
-    <> "  return function() {"
-    <> "\n"
-    <> "    p." <> (generateP5Name name) <> "(" 
-      <> (intercalate ", " variables) <> ");"
-    <> "\n"
-    <> "  };"
-    <> "\n"
+    <> generateReturn
     <> "};"
 
 generateForeignJSModule :: P5Doc -> Either String String
