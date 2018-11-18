@@ -1,11 +1,12 @@
 module GenerateFFI where
 
 import Prelude
-import Data.String.Regex
-import Data.String.Regex.Flags
+import Data.String.Regex (Regex, regex, test)
+import Data.String.Regex.Flags (noFlags)
 import Data.String.Utils (mapChars)
 import Data.Identity
 import Data.Maybe
+import Data.String (Pattern(..), split)
 import Data.Array
 import Data.Either
 import Effect (Effect)
@@ -75,6 +76,7 @@ type ReturnType =
 
 type ClassItem = 
   { name :: Maybe String,
+    description :: Maybe String,
     itemType :: Maybe String,
     className :: String,
     params :: Maybe (Array Param),
@@ -83,6 +85,7 @@ type ClassItem =
 
 type P5Method = 
   { name :: String,
+    description :: Maybe String,
     itemType :: Maybe String,
     className :: String,
     params :: Array Param,
@@ -125,8 +128,8 @@ generateP5TypeConstructor P5StringArray = "(Array String)"
 generateP5TypeConstructor P5String = "String"
 generateP5TypeConstructor _ = ""
 
-getMethodName :: P5Method -> Either String String
-getMethodName x = pure x.name
+getMethodName :: P5Method -> String
+getMethodName x = x.name
 
 getParamTypes :: P5Method -> Array P5Type 
 getParamTypes x = (\x -> x.p5Type) <$> x.params
@@ -136,7 +139,7 @@ getParamNames x = (\x -> x.name) <$> x.params
 
 generateMethodSig :: P5Method -> Either String String
 generateMethodSig x = do
-  name <- getMethodName x
+  let name = getMethodName x
   let returnType = x.return.p5Type
       paramTypes = getParamTypes x
   pure $ name <> " :: " 
@@ -165,21 +168,34 @@ generateForeignImport x = do
          (generateP5TypeConstructor
            <$> ([P5P5] <> paramTypes <> [returnType])))
 
+generateMethodDoc :: P5Method -> Maybe String
+generateMethodDoc x = do
+  pure 
+    $ "-- | " 
+    <>  "[p5js.org documentation](https://p5js.org/reference/#/p5/"
+    <> generateP5Name x.name
+    <> ")"
 
 generateMethod :: P5Method -> Either String String
 generateMethod x = do
   methodSig <- generateMethodSig x
   methodBody <- generateMethodBody x
   pure $ 
-    methodSig
+    maybe "" (\doc -> doc <> "\n") (generateMethodDoc x)
+    <> methodSig
     <> "\n" 
     <> methodBody
     <> "\n"
 
+generateModuleHeader :: Array P5Method -> String
+generateModuleHeader xs =
+  "module P5.Generated\n  ( "
+   <> intercalate "\n  , " (getMethodName <$> xs)
+   <> "\n  ) where"
+
 generateP5 :: P5Doc -> Either String String
 generateP5 (P5Doc doc) = do
-  let moduleHeader = "module P5.Generated where"
-      imports = [
+  let imports = [
           "import Data.Function.Uncurried",
           "import Effect (Effect)",
           "import Prelude",
@@ -188,7 +204,7 @@ generateP5 (P5Doc doc) = do
         ]
   methods <- (traverse generateMethod doc)
   foreignImports <- (traverse generateForeignImport doc)
-  pure $ moduleHeader 
+  pure $ generateModuleHeader doc
     <> "\n" 
     <> "\n" 
     <> (intercalate "\n" imports)
@@ -217,8 +233,8 @@ generateP5Name name =
 
 generateWrapper :: P5Method -> Either String String
 generateWrapper x = do
-  name <- getMethodName x
-  let variables = getParamNames x
+  let name = getMethodName x
+      variables = getParamNames x
       generateReturn =
         if x.return.p5Type == P5Effect then
           "  return function() {"
@@ -312,6 +328,9 @@ instance decodeP5Doc :: Decode P5Doc where
         itemType <- (x ! "itemtype") 
           >>= readUndefined
           >>= traverse readString
+        description <- (x ! "description")
+          >>= readUndefined
+          >>= traverse readString
         params <- (x ! "params") 
           >>= readUndefined 
           >>= traverse readArray 
@@ -338,6 +357,7 @@ instance decodeP5Doc :: Decode P5Doc where
           )
         pure $ {
             name: name,
+            description: description,
             className: className,
             itemType: itemType,
             params: params,

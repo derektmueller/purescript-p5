@@ -2,9 +2,12 @@
 
 p5.js bindings for PureScript
 
-*This project has just been started and so far only implements a handful of functions in the p5.js API*
+*Disclaimer: This project has just been started and the API is still very unstable.*
 
-I'm currently trying to generate the FFI from the p5.js YUIDoc.
+- [Module Documentation](generated-docs/)
+
+
+I'm currently in the process of generating the FFI from the p5.js YUIDoc.
 
 Completed:
   * parse p5.js YUIDoc
@@ -18,3 +21,4 @@ TODO:
   * make generated PureScript function names more human readable
   * organize code into modules
   * merge P5/Generated module with P5 module to clean up interface
+  * replace references to local bower packages

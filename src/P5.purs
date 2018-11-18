@@ -1,19 +1,19 @@
-module P5 (
-  P5,
-  Element,
-  p5,
-  getP5,
-  setup,
-  draw,
-  background,
-  stroke,
-  strokeWeight,
-  strokeJoin,
-  StrokeJoin(..),
-  line,
-  createCanvas,
-  id,
-  setId
+module P5 
+  ( P5
+  , Element
+  , p5
+  , getP5
+  , setup
+  , draw
+  , background
+  , stroke
+  , strokeWeight
+  , strokeJoin
+  , StrokeJoin(..)
+  , line
+  , createCanvas
+  , id
+  , setId
   ) where
 
 import Effect (Effect)
