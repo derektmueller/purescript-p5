@@ -8,6 +8,7 @@
     "generate-p5-doc": "yuidoc -p ../p5.js/src/"
   },
   "devDependencies": {
+    "canvas": "^2.1.0",
     "jsdom": "^13.0.0",
     "jsdom-global": "^3.0.2",
     "p5": "^0.7.2",

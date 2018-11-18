@@ -17,4 +17,3 @@ TODO:
   * support functions with greater than 10 arguments
   * make generated PureScript function names more human readable
   * parse return types
-  * add specs

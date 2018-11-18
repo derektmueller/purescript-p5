@@ -29,7 +29,7 @@ exports.createCanvasImpl = function(p) {
   return function(w) {
     return function(h) {
       return function() {
-        p.createCanvas(w, h);
+        return p.createCanvas(w, h);
       };
     };
   };
@@ -88,6 +88,16 @@ exports.lineImpl = function(p) {
     };
   };
 };
+
+exports.idImpl = function(e) {
+  return e.id();
+}
+
+exports.setIdImpl = function(e, x) {
+  return function() {
+    e.id(x);
+  };
+}
 
 //Object.keys (
 //  [].concat (

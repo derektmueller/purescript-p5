@@ -4,15 +4,17 @@ import Prelude
 import Effect (Effect)
 import Effect.Console (log)
 import Effect.Unsafe (unsafePerformEffect)
-import P5.Generated as Gen
 
+import JsdomGlobal
+import P5.Generated as Gen
 import P5
 
 main :: Unit
 main = unsafePerformEffect $ do
+  _ <- jsdomGlobal
   p5 $ \p -> do
     setup p do
-      createCanvas p 500.0 500.0
+      _ <- createCanvas p 500.0 500.0
       pure unit
 
     draw p do

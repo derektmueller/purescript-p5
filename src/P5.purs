@@ -1,5 +1,6 @@
 module P5 (
   P5,
+  Element,
   p5,
   setup,
   draw,
@@ -9,7 +10,9 @@ module P5 (
   strokeJoin,
   StrokeJoin(..),
   line,
-  createCanvas
+  createCanvas,
+  id,
+  setId
   ) where
 
 import Effect (Effect)
@@ -17,6 +20,7 @@ import Prelude -- (Unit, pure, unit)
 import Data.Function.Uncurried
 
 foreign import data P5 :: Type
+foreign import data Element :: Type
 foreign import p5Impl :: (P5 -> Effect Unit) -> Effect Unit
 foreign import setupImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import drawImpl :: P5 -> Effect Unit -> Effect Unit
@@ -29,7 +33,9 @@ foreign import strokeJoinRoundImpl :: P5 -> Effect Unit
 foreign import lineImpl 
   :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 foreign import createCanvasImpl 
-  :: P5 -> Number -> Number -> Effect Unit
+  :: P5 -> Number -> Number -> Effect Element
+foreign import idImpl :: Element -> String
+foreign import setIdImpl :: Fn2 Element String (Effect Unit)
 
 type ColorString = String
 data StrokeJoin = Miter | Bevel | Round
@@ -60,7 +66,11 @@ strokeJoin p Bevel = strokeJoinBevelImpl p
 line :: P5 -> Number -> Number -> Number -> Number -> Effect Unit
 line p x1 y1 x2 y2 = lineImpl p x1 y1 x2 y2
 
-createCanvas :: P5 -> Number -> Number -> Effect Unit
+createCanvas :: P5 -> Number -> Number -> Effect Element
 createCanvas p w h = createCanvasImpl p w h
 
+id :: Element -> String
+id = idImpl
 
+setId :: Element -> String -> Effect Unit
+setId = runFn2 setIdImpl
