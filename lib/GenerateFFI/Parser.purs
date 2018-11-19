@@ -29,34 +29,6 @@ import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 --import Debug.Trace (trace)
 
---[ 'Any',
---  'Array',
---  'Blob',
---  'Boolean', x
---  'Constant',
---  'Function',
---  'Function(Array)',
---  'Function(Event)',
---  'HTMLCanvasElement',
---  'Integer', x
---  'Number', x
---  'Number[]', x
---  'Object',
---  'String', x
---  'String[]', x
---  'function(p5.Geometry)',
---  'function(p5.Image)',
---  'p5.Camera',
---  'p5.Color',
---  'p5.Element',
---  'p5.Geometry',
---  'p5.Graphics',
---  'p5.Image',
---  'p5.MediaElement',
---  'p5.Shader',
---  'p5.Table',
---  'p5.Vector' ]
-
 data P5Type = 
   P5P5
   | P5Boolean 

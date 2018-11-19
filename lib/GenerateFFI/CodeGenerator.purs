@@ -190,5 +190,11 @@ documentUnsupportedMethod x = do
 generateUnsupportedMethodList :: P5Doc -> Either String String
 generateUnsupportedMethodList (P5Doc doc) = do
   let unsupported = filter isUnsupported doc
+      supported = filter (\x -> not (isUnsupported x)) doc
   methodDoc <- traverse documentUnsupportedMethod unsupported
-  pure $ intercalate "\n" methodDoc
+  pure $ 
+    "Progress: implemented **" <> (show $ length supported) 
+    <> "** out of **" 
+    <> (show $ length supported + length unsupported) 
+    <> "** methods\n"
+    <> intercalate "\n" methodDoc

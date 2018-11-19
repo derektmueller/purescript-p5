@@ -1,3 +1,4 @@
+Progress: implemented **179** out of **324** methods
 ```
 alpha :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
 ```
