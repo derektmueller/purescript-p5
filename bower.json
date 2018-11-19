@@ -27,12 +27,12 @@
     "purescript-stringutils": "^0.0.8",
     "purescript-quickcheck": "^5.0.0",
     "purescript-canvas": "^4.0.0",
-    "purescript-aff": "^5.0.2",
-    "purescript-jsdom-global": "../purescript-jsdom-global#^0.0.2"
+    "purescript-aff": "^5.0.2"
   },
   "devDependencies": {
     "purescript-psci-support": "^4.0.0",
     "purescript-spec": "^3.0.0",
-    "purescript-now": "^4.0.0"
+    "purescript-now": "^4.0.0",
+    "purescript-jsdom-global": "https://github.com/parenparen/purescript-jsdom-global.git#0.0.2"
   }
 }
