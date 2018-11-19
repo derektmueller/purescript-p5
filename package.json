@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "test": "pulp test",
-    "test-watch": "pulp --watch test --include src",
+    "test-watch": "./bin/watch",
     "build-watch": "pulp --watch browserify --to dist/Main.js",
     "webpack": "DEBUG=purs-loader* DEBUG_DEPTH=100 webpack --progress --bail",
     "webpack:server": "webpack-dev-server --progress --inline",

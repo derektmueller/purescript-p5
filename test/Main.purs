@@ -100,6 +100,11 @@ main = do
                p <- liftEffect getP5
                Gen.dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
                pure unit
+         describe "abs" do
+            it "calculates absolute value" do
+               p <- liftEffect getP5
+               Gen.abs p (-3.0) `shouldEqual` 3.0
+               pure unit
                
   where
     testConfig = defaultConfig { timeout = Just 10000 }

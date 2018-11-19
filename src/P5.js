@@ -109,9 +109,9 @@ exports.setIdImpl = function(e, x) {
 //    ...
 //      [].concat (
 //        ...json.classitems.filter(
-//          (i) => i.class === 'p5' && i.itemtype === 'method' 
-//            && i.params)
-//        .map ((i) => i.params)
+//          (i) => i.class === 'p5' && i.itemtype === 'method')
+//        .map ((i) => (i.params || []).concat(
+//          i["return"] ? [i["return"]] : []))
 //      ).map ((p) => p.type)
 //        //.map((p) => p.split('|'))
 //  )
