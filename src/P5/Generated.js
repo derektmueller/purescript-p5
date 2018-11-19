@@ -209,11 +209,6 @@ exports.distImpl = function(p, x1, y1, x2, y2) {
 exports.dist_Impl = function(p, x1, y1, z1, x2, y2, z2) {
   return p.dist(x1, y1, z1, x2, y2, z2);
 };
-exports.drawImpl = function(p) {
-  return function() {
-    p.draw();
-  };
-};
 exports.ellipseImpl = function(p, x, y, w, h) {
   return function() {
     p.ellipse(x, y, w, h);
@@ -595,11 +590,6 @@ exports.setMoveThresholdImpl = function(p, value) {
 exports.setShakeThresholdImpl = function(p, value) {
   return function() {
     p.setShakeThreshold(value);
-  };
-};
-exports.setupImpl = function(p) {
-  return function() {
-    p.setup();
   };
 };
 exports.shearXImpl = function(p, angle) {

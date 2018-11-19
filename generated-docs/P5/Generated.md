@@ -392,14 +392,6 @@ dist' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Numbe
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/dist)
 
-#### `draw`
-
-``` purescript
-draw :: P5 -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/draw)
-
 #### `ellipse`
 
 ``` purescript
@@ -1127,14 +1119,6 @@ setShakeThreshold :: P5 -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/setShakeThreshold)
-
-#### `setup`
-
-``` purescript
-setup :: P5 -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/setup)
 
 #### `shearX`
 

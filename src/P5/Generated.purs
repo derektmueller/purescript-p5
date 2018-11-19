@@ -48,7 +48,6 @@ module P5.Generated
   , displayDensity
   , dist
   , dist'
-  , draw
   , ellipse
   , ellipse'
   , ellipsoid
@@ -140,7 +139,6 @@ module P5.Generated
   , setAttributes'
   , setMoveThreshold
   , setShakeThreshold
-  , setup
   , shearX
   , shearY
   , sin
@@ -185,8 +183,7 @@ module P5.Generated
 import Data.Function.Uncurried
 import Effect (Effect)
 import Prelude
-import Data.Int
-import P5 (P5)
+import P5.Types (P5)
 
 foreign import absImpl :: Fn2 P5 Number Number
 foreign import acosImpl :: Fn2 P5 Number Number
@@ -237,7 +234,6 @@ foreign import directionalLight___Impl :: Fn7 P5 Number Number Number Number Num
 foreign import displayDensityImpl :: Fn1 P5 Number
 foreign import distImpl :: Fn5 P5 Number Number Number Number Number
 foreign import dist_Impl :: Fn7 P5 Number Number Number Number Number Number Number
-foreign import drawImpl :: Fn1 P5 (Effect Unit)
 foreign import ellipseImpl :: Fn5 P5 Number Number Number Number (Effect Unit)
 foreign import ellipse_Impl :: Fn6 P5 Number Number Number Number Int (Effect Unit)
 foreign import ellipsoidImpl :: Fn6 P5 Number Number Number Int Int (Effect Unit)
@@ -329,7 +325,6 @@ foreign import secondImpl :: Fn1 P5 Int
 foreign import setAttributes_Impl :: Fn3 P5 String Boolean (Effect Unit)
 foreign import setMoveThresholdImpl :: Fn2 P5 Number (Effect Unit)
 foreign import setShakeThresholdImpl :: Fn2 P5 Number (Effect Unit)
-foreign import setupImpl :: Fn1 P5 (Effect Unit)
 foreign import shearXImpl :: Fn2 P5 Number (Effect Unit)
 foreign import shearYImpl :: Fn2 P5 Number (Effect Unit)
 foreign import sinImpl :: Fn2 P5 Number Number
@@ -665,10 +660,6 @@ dist' = runFn7 dist_Impl
 -- TODO: unsupported: doubleClicked :: P5 -> Unsupported(Object) -> (Effect Unit)
 
 -- TODO: unsupported: downloadFile :: P5 -> Unsupported(String|Blob) -> String -> String -> (Effect Unit)
-
--- | [p5js.org documentation](https://p5js.org/reference/#/p5/draw)
-draw :: P5 -> (Effect Unit)
-draw = runFn1 drawImpl
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ellipse)
 ellipse :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -1171,10 +1162,6 @@ setMoveThreshold = runFn2 setMoveThresholdImpl
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/setShakeThreshold)
 setShakeThreshold :: P5 -> Number -> (Effect Unit)
 setShakeThreshold = runFn2 setShakeThresholdImpl
-
--- | [p5js.org documentation](https://p5js.org/reference/#/p5/setup)
-setup :: P5 -> (Effect Unit)
-setup = runFn1 setupImpl
 
 -- TODO: unsupported: shader :: P5 -> Unsupported(p5.Shader) -> (Effect Unit)
 

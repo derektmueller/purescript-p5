@@ -2,31 +2,26 @@ module Test.Main where
 
 import Prelude
 
-import Control.Monad.Except
-import Control.Monad.Maybe.Trans
+import Control.Monad.Except (runExcept)
 import Data.ArrayBuffer.Types (Uint8ClampedArray)
-import Data.Either
-import Data.Maybe
-import Data.Time.Duration
-import Effect.Aff
-import Effect.Class
-import Effect.Console (log)
+import Data.Either (Either(..))
+import Data.Maybe (Maybe(..))
+import Effect.Aff (Aff, Milliseconds(..), delay)
+import Effect.Class (liftEffect)
 import Effect (Effect)
+import Foreign.Generic (decodeJSON)
 import Foreign (F)
-import Foreign.Generic
-import Foreign (readArray, readNumber, readString)
 import Graphics.Canvas (
   getCanvasElementById, getImageData, getContext2D, imageDataBuffer)
-import JsdomGlobal
+import JsdomGlobal (jsdomGlobal)
 import Node.Encoding (Encoding(..))
 import Node.FS.Sync (readTextFile)
-import Test.Spec.Assertions (shouldEqual, fail)
 import Test.Spec (pending, describe, it)
+import Test.Spec.Assertions (shouldEqual, fail)
 import Test.Spec.Reporter.Console (consoleReporter)
-import Test.Spec.Runner (run, run', defaultConfig)
+import Test.Spec.Runner (run', defaultConfig)
 import Unsafe.Coerce (unsafeCoerce)
 import P5
-import P5.Generated as Gen
 
 lineDrawing :: String -> Number -> Number -> Effect Unit
 lineDrawing canvasId w h = do
@@ -39,13 +34,13 @@ lineDrawing canvasId w h = do
 
   draw p do
     background p "red"
-    stroke p "green"
-    Gen.strokeWeight p 3.0
-    Gen.line p 0.0 0.0 100.0 100.0
-    Gen.line p 100.0 100.0 100.0 200.0
-    Gen.strokeWeight p 10.0
-    Gen.line p 100.0 200.0 200.0 200.0
-    Gen.line p 200.0 200.0 300.0 300.0
+    stroke'' p "green"
+    strokeWeight p 3.0
+    line p 0.0 0.0 100.0 100.0
+    line p 100.0 100.0 100.0 200.0
+    strokeWeight p 10.0
+    line p 100.0 200.0 200.0 200.0
+    line p 200.0 200.0 300.0 300.0
     strokeJoin p Round
     strokeJoin p Bevel
     strokeJoin p Miter
@@ -98,12 +93,12 @@ main = do
          describe "dist" do
             it "calculates distance between points" do
                p <- liftEffect getP5
-               Gen.dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
+               dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
                pure unit
          describe "abs" do
             it "calculates absolute value" do
                p <- liftEffect getP5
-               Gen.abs p (-3.0) `shouldEqual` 3.0
+               abs p (-3.0) `shouldEqual` 3.0
                pure unit
                
   where

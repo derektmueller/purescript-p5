@@ -145,6 +145,8 @@ instance decodeP5Doc :: Decode P5Doc where
             && i.itemType == Just "method")
         onlyPublic = filter
           (\i -> (test privateMethodRegex i.name) == false)
+        removeBlacklisted = filter
+          (\i -> not (i.name `elem` ["draw", "setup"]))
         suffixDupMethods :: Array P5Method -> Array P5Method
         suffixDupMethods =
           reverse 
@@ -230,5 +232,6 @@ instance decodeP5Doc :: Decode P5Doc where
       ((suffixDupMethods
         <<< sortByNameAndParamLength
         <<< removeFnsWithTooManyArgs
+        <<< removeBlacklisted
         <<< onlyPublic) methods)
 

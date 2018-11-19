@@ -1,6 +1,8 @@
 module GenerateFFI.CodeGenerator 
   ( generateP5
-  , generateForeignJSModule ) where
+  , generateForeignJSModule 
+  , generateUnsupportedMethodList
+  ) where
 
 import Prelude
 import Data.String.Utils (mapChars)
@@ -109,8 +111,7 @@ generateP5 (P5Doc doc) = do
           "import Data.Function.Uncurried",
           "import Effect (Effect)",
           "import Prelude",
-          "import Data.Int",
-          "import P5 (P5)"
+          "import P5.Types (P5)"
         ]
       supported = filter (\x -> not (isUnsupported x)) doc
   methods <- (traverse generateMethod doc)
@@ -173,3 +174,21 @@ generateForeignJSModule (P5Doc doc) = do
   methods <- (traverse generateWrapper supported)
   pure $ (intercalate "\n" methods)
 
+documentUnsupportedMethod :: P5Method -> Either String String
+documentUnsupportedMethod x = do
+  methodSig <- generateMethodSig x
+  pure $
+    "```\n"
+    <> methodSig
+    <> "\n"
+    <> "```"
+    <> "\n"
+    <> "[p5js.org documentation](https://p5js.org/reference/#/p5/"
+    <> generateP5Name x.name
+    <> ")"
+
+generateUnsupportedMethodList :: P5Doc -> Either String String
+generateUnsupportedMethodList (P5Doc doc) = do
+  let unsupported = filter isUnsupported doc
+  methodDoc <- traverse documentUnsupportedMethod unsupported
+  pure $ intercalate "\n" methodDoc
