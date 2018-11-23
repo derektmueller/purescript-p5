@@ -61,6 +61,7 @@ type ClassItem =
 
 type P5Method = 
   { name :: String,
+    p5Name :: String,
     description :: Maybe String,
     itemType :: Maybe String,
     className :: String,
@@ -103,10 +104,17 @@ getPrivateMethodRegex = do
 classItemToMethod :: ClassItem -> F P5Method
 classItemToMethod i = do
   case i.name of  
-    Just name -> 
-      case i.params of
-        Just params -> pure $ i { name = name, params = params }
-        Nothing -> pure $ i { name = name, params = [] }
+    Just name -> do 
+      let params = maybe [] identity i.params
+      pure $ 
+        { p5Name: name
+        , name: name
+        , params: params 
+        , description: i.description 
+        , itemType: i.itemType 
+        , className: i.className 
+        , return: i.return 
+        }
     Nothing -> fail $ ForeignError "Missing method name"
 
 instance decodeP5Doc :: Decode P5Doc where
@@ -117,8 +125,13 @@ instance decodeP5Doc :: Decode P5Doc where
             && i.itemType == Just "method")
         onlyPublic = filter
           (\i -> (test privateMethodRegex i.name) == false)
+        methodBlacklist = 
+          [ "draw"
+          , "setup"
+          , "strokeJoin"
+          ]
         removeBlacklisted = filter
-          (\i -> not (i.name `elem` ["draw", "setup"]))
+          (\i -> not (i.name `elem` methodBlacklist))
         suffixDupMethods :: Array P5Method -> Array P5Method
         suffixDupMethods =
           reverse 
@@ -127,15 +140,15 @@ instance decodeP5Doc :: Decode P5Doc where
             if i.name == acc.prevMethodName then do
               let newName = 
                     i.name 
-                    <> (fold ((\_ -> "'") <$> (0..acc.duplicates)))
+                    <> (show (acc.suffix))
               {prevMethodName: i.name
-              , duplicates: acc.duplicates + 1
+              , suffix: acc.suffix + 1
               , methods: (i {name = newName}) : acc.methods}
             else
               {prevMethodName: i.name
-              , duplicates: 0
+              , suffix: 2
               , methods: i : acc.methods}
-          ) {prevMethodName: "", duplicates: 0, methods: []}
+          ) {prevMethodName: "", suffix: 0, methods: []}
           <<< reverse
         removeFnsWithTooManyArgs :: Array P5Method -> Array P5Method
         removeFnsWithTooManyArgs = filter

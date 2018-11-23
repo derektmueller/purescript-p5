@@ -9,22 +9,22 @@ exports.ambientLightImpl = function(p, value) {
     p.ambientLight(value);
   };
 };
-exports.ambientLight_Impl = function(p, values) {
+exports.ambientLight2Impl = function(p, values) {
   return function() {
     p.ambientLight(values);
   };
 };
-exports.ambientLight___Impl = function(p, gray, alpha) {
+exports.ambientLight4Impl = function(p, gray, alpha) {
   return function() {
     p.ambientLight(gray, alpha);
   };
 };
-exports.ambientLight____Impl = function(p, v1, v2, v3, alpha) {
+exports.ambientLight5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
     p.ambientLight(v1, v2, v3, alpha);
   };
 };
-exports.ambientMaterial_Impl = function(p, v1, v2, v3, a) {
+exports.ambientMaterial2Impl = function(p, v1, v2, v3, a) {
   return function() {
     p.ambientMaterial(v1, v2, v3, a);
   };
@@ -43,22 +43,22 @@ exports.atanImpl = function(p, value) {
 exports.atan2Impl = function(p, y, x) {
   return p.atan2(y, x);
 };
-exports.background_Impl = function(p, values) {
+exports.background2Impl = function(p, values) {
   return function() {
     p.background(values);
   };
 };
-exports.background__Impl = function(p, colorstring, a) {
+exports.background3Impl = function(p, colorstring, a) {
   return function() {
     p.background(colorstring, a);
   };
 };
-exports.background___Impl = function(p, gray, a) {
+exports.background4Impl = function(p, gray, a) {
   return function() {
     p.background(gray, a);
   };
 };
-exports.background_____Impl = function(p, v1, v2, v3, a) {
+exports.background6Impl = function(p, v1, v2, v3, a) {
   return function() {
     p.background(v1, v2, v3, a);
   };
@@ -89,7 +89,7 @@ exports.bezierVertexImpl = function(p, x2, y2, x3, y3, x4, y4) {
     p.bezierVertex(x2, y2, x3, y3, x4, y4);
   };
 };
-exports.bezierVertex_Impl = function(p, x2, y2, z2, x3, y3, z3, x4, y4, z4) {
+exports.bezierVertex2Impl = function(p, x2, y2, z2, x3, y3, z3, x4, y4, z4) {
   return function() {
     p.bezierVertex(x2, y2, z2, x3, y3, z3, x4, y4, z4);
   };
@@ -154,7 +154,7 @@ exports.curveVertexImpl = function(p, x, y) {
     p.curveVertex(x, y);
   };
 };
-exports.curveVertex_Impl = function(p, x, y, z) {
+exports.curveVertex2Impl = function(p, x, y, z) {
   return function() {
     p.curveVertex(x, y, z);
   };
@@ -172,7 +172,7 @@ exports.debugModeImpl = function(p) {
     p.debugMode();
   };
 };
-exports.debugMode____Impl = function(p, gridSize, gridDivisions, gridXOff, gridYOff, gridZOff, axesSize, axesXOff, axesYOff, axesZOff) {
+exports.debugMode5Impl = function(p, gridSize, gridDivisions, gridXOff, gridYOff, gridZOff, axesSize, axesXOff, axesYOff, axesZOff) {
   return function() {
     p.debugMode(gridSize, gridDivisions, gridXOff, gridYOff, gridZOff, axesSize, axesXOff, axesYOff, axesZOff);
   };
@@ -195,7 +195,7 @@ exports.deviceTurnedImpl = function(p) {
     p.deviceTurned();
   };
 };
-exports.directionalLight___Impl = function(p, v1, v2, v3, x, y, z) {
+exports.directionalLight4Impl = function(p, v1, v2, v3, x, y, z) {
   return function() {
     p.directionalLight(v1, v2, v3, x, y, z);
   };
@@ -206,7 +206,7 @@ exports.displayDensityImpl = function(p) {
 exports.distImpl = function(p, x1, y1, x2, y2) {
   return p.dist(x1, y1, x2, y2);
 };
-exports.dist_Impl = function(p, x1, y1, z1, x2, y2, z2) {
+exports.dist2Impl = function(p, x1, y1, z1, x2, y2, z2) {
   return p.dist(x1, y1, z1, x2, y2, z2);
 };
 exports.ellipseImpl = function(p, x, y, w, h) {
@@ -214,7 +214,7 @@ exports.ellipseImpl = function(p, x, y, w, h) {
     p.ellipse(x, y, w, h);
   };
 };
-exports.ellipse_Impl = function(p, x, y, w, h, detail) {
+exports.ellipse2Impl = function(p, x, y, w, h, detail) {
   return function() {
     p.ellipse(x, y, w, h, detail);
   };
@@ -237,17 +237,17 @@ exports.fillImpl = function(p, value) {
     p.fill(value);
   };
 };
-exports.fill_Impl = function(p, values) {
+exports.fill2Impl = function(p, values) {
   return function() {
     p.fill(values);
   };
 };
-exports.fill___Impl = function(p, gray, alpha) {
+exports.fill4Impl = function(p, gray, alpha) {
   return function() {
     p.fill(gray, alpha);
   };
 };
-exports.fill____Impl = function(p, v1, v2, v3, alpha) {
+exports.fill5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
     p.fill(v1, v2, v3, alpha);
   };
@@ -261,7 +261,7 @@ exports.floorImpl = function(p, n) {
 exports.frameRateImpl = function(p) {
   return p.frameRate();
 };
-exports.frameRate_Impl = function(p, fps) {
+exports.frameRate2Impl = function(p, fps) {
   return function() {
     p.frameRate(fps);
   };
@@ -278,7 +278,7 @@ exports.getURLPathImpl = function(p) {
 exports.hexImpl = function(p, n, digits) {
   return p.hex(n, digits);
 };
-exports.hex_Impl = function(p, ns, digits) {
+exports.hex2Impl = function(p, ns, digits) {
   return p.hex(ns, digits);
 };
 exports.hourImpl = function(p) {
@@ -310,7 +310,7 @@ exports.lineImpl = function(p, x1, y1, x2, y2) {
     p.line(x1, y1, x2, y2);
   };
 };
-exports.line_Impl = function(p, x1, y1, z1, x2, y2, z2) {
+exports.line2Impl = function(p, x1, y1, z1, x2, y2, z2) {
   return function() {
     p.line(x1, y1, z1, x2, y2, z2);
   };
@@ -343,7 +343,7 @@ exports.matchAllImpl = function(p, str, regexp) {
 exports.maxImpl = function(p, nums) {
   return p.max(nums);
 };
-exports.max_Impl = function(p, n0, n1) {
+exports.max2Impl = function(p, n0, n1) {
   return p.max(n0, n1);
 };
 exports.millisImpl = function(p) {
@@ -352,7 +352,7 @@ exports.millisImpl = function(p) {
 exports.minImpl = function(p, nums) {
   return p.min(nums);
 };
-exports.min_Impl = function(p, n0, n1) {
+exports.min2Impl = function(p, n0, n1) {
   return p.min(n0, n1);
 };
 exports.minuteImpl = function(p) {
@@ -364,7 +364,7 @@ exports.monthImpl = function(p) {
 exports.nfpImpl = function(p, num, left, right) {
   return p.nfp(num, left, right);
 };
-exports.nfp_Impl = function(p, nums, left, right) {
+exports.nfp2Impl = function(p, nums, left, right) {
   return p.nfp(nums, left, right);
 };
 exports.nfsImpl = function(p, num, left, right) {
@@ -449,7 +449,7 @@ exports.perspectiveImpl = function(p, fovy, aspect, near, far) {
 exports.pixelDensityImpl = function(p) {
   return p.pixelDensity();
 };
-exports.pixelDensity_Impl = function(p, val) {
+exports.pixelDensity2Impl = function(p, val) {
   return function() {
     p.pixelDensity(val);
   };
@@ -464,7 +464,7 @@ exports.pointImpl = function(p, x, y, z) {
     p.point(x, y, z);
   };
 };
-exports.pointLight___Impl = function(p, v1, v2, v3, x, y, z) {
+exports.pointLight4Impl = function(p, v1, v2, v3, x, y, z) {
   return function() {
     p.pointLight(v1, v2, v3, x, y, z);
   };
@@ -497,7 +497,7 @@ exports.quadraticVertexImpl = function(p, cx, cy, x3, y3) {
     p.quadraticVertex(cx, cy, x3, y3);
   };
 };
-exports.quadraticVertex_Impl = function(p, cx, cy, cz, x3, y3, z3) {
+exports.quadraticVertex2Impl = function(p, cx, cy, cz, x3, y3, z3) {
   return function() {
     p.quadraticVertex(cx, cy, cz, x3, y3, z3);
   };
@@ -505,7 +505,7 @@ exports.quadraticVertex_Impl = function(p, cx, cy, cz, x3, y3, z3) {
 exports.radiansImpl = function(p, degrees) {
   return p.radians(degrees);
 };
-exports.random_Impl = function(p, min, max) {
+exports.random2Impl = function(p, min, max) {
   return p.random(min, max);
 };
 exports.randomGaussianImpl = function(p, mean, sd) {
@@ -521,7 +521,7 @@ exports.rectImpl = function(p, x, y, w, h, detailX, detailY) {
     p.rect(x, y, w, h, detailX, detailY);
   };
 };
-exports.rect_Impl = function(p, x, y, w, h, tl, tr, br, bl) {
+exports.rect2Impl = function(p, x, y, w, h, tl, tr, br, bl) {
   return function() {
     p.rect(x, y, w, h, tl, tr, br, bl);
   };
@@ -577,7 +577,7 @@ exports.saveStringsImpl = function(p, list, filename, extension) {
 exports.secondImpl = function(p) {
   return p.second();
 };
-exports.setAttributes_Impl = function(p, key, value) {
+exports.setAttributes2Impl = function(p, key, value) {
   return function() {
     p.setAttributes(key, value);
   };
@@ -610,7 +610,7 @@ exports.smoothImpl = function(p) {
     p.smooth();
   };
 };
-exports.specularMaterial_Impl = function(p, v1, v2, v3, a) {
+exports.specularMaterial2Impl = function(p, v1, v2, v3, a) {
   return function() {
     p.specularMaterial(v1, v2, v3, a);
   };
@@ -637,17 +637,17 @@ exports.strokeImpl = function(p, value) {
     p.stroke(value);
   };
 };
-exports.stroke_Impl = function(p, values) {
+exports.stroke2Impl = function(p, values) {
   return function() {
     p.stroke(values);
   };
 };
-exports.stroke___Impl = function(p, gray, alpha) {
+exports.stroke4Impl = function(p, gray, alpha) {
   return function() {
     p.stroke(gray, alpha);
   };
 };
-exports.stroke____Impl = function(p, v1, v2, v3, alpha) {
+exports.stroke5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
     p.stroke(v1, v2, v3, alpha);
   };
@@ -669,7 +669,7 @@ exports.textDescentImpl = function(p) {
 exports.textLeadingImpl = function(p) {
   return p.textLeading();
 };
-exports.textLeading_Impl = function(p, leading) {
+exports.textLeading2Impl = function(p, leading) {
   return function() {
     p.textLeading(leading);
   };
@@ -677,7 +677,7 @@ exports.textLeading_Impl = function(p, leading) {
 exports.textSizeImpl = function(p) {
   return p.textSize();
 };
-exports.textSize_Impl = function(p, theSize) {
+exports.textSize2Impl = function(p, theSize) {
   return function() {
     p.textSize(theSize);
   };
@@ -693,17 +693,17 @@ exports.tintImpl = function(p, value) {
     p.tint(value);
   };
 };
-exports.tint_Impl = function(p, values) {
+exports.tint2Impl = function(p, values) {
   return function() {
     p.tint(values);
   };
 };
-exports.tint___Impl = function(p, gray, alpha) {
+exports.tint4Impl = function(p, gray, alpha) {
   return function() {
     p.tint(gray, alpha);
   };
 };
-exports.tint____Impl = function(p, v1, v2, v3, alpha) {
+exports.tint5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
     p.tint(v1, v2, v3, alpha);
   };
@@ -713,7 +713,7 @@ exports.torusImpl = function(p, radius, tubeRadius, detailX, detailY) {
     p.torus(radius, tubeRadius, detailX, detailY);
   };
 };
-exports.translate_Impl = function(p, x, y, z) {
+exports.translate2Impl = function(p, x, y, z) {
   return function() {
     p.translate(x, y, z);
   };
@@ -742,7 +742,7 @@ exports.vertexImpl = function(p, x, y) {
     p.vertex(x, y);
   };
 };
-exports.vertex_Impl = function(p, x, y, z, u, v) {
+exports.vertex2Impl = function(p, x, y, z, u, v) {
   return function() {
     p.vertex(x, y, z, u, v);
   };

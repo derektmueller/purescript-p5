@@ -4,7 +4,6 @@ module P5
   , setup
   , draw
   , background
-  , stroke''
   , strokeJoin
   , StrokeJoin(..)
   , createCanvas
@@ -24,7 +23,6 @@ foreign import getP5Impl :: Effect P5
 foreign import setupImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import drawImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import backgroundImpl :: P5 -> ColorString -> Effect Unit
-foreign import stroke__Impl :: P5 -> ColorString -> Effect Unit
 foreign import strokeJoinMiterImpl :: P5 -> Effect Unit
 foreign import strokeJoinBevelImpl :: P5 -> Effect Unit
 foreign import strokeJoinRoundImpl :: P5 -> Effect Unit
@@ -50,9 +48,6 @@ draw p eff = drawImpl p eff
 
 background :: P5 -> ColorString -> Effect Unit
 background p colorString = backgroundImpl p colorString
-
-stroke'' :: P5 -> ColorString -> Effect Unit
-stroke'' p colorString = stroke__Impl p colorString
 
 strokeJoin :: P5 -> StrokeJoin -> Effect Unit
 strokeJoin p Miter = strokeJoinMiterImpl p

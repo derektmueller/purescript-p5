@@ -80,7 +80,7 @@ generateMethodDoc x = do
   pure 
     $ "-- | " 
     <>  "[p5js.org documentation](https://p5js.org/reference/#/p5/"
-    <> generateP5Name x.name
+    <> x.p5Name
     <> ")"
 
 generateMethod :: P5Method -> Either String String
@@ -128,20 +128,7 @@ generateP5 (P5Doc doc) = do
     <> (intercalate "\n" methods)
 
 generateJSName :: String -> String
-generateJSName name = 
-  mapChars (\x -> 
-    case x of
-      "'" -> "_"
-      x' -> x'
-  ) name
-
-generateP5Name :: String -> String
-generateP5Name name = 
-  mapChars (\x -> 
-    case x of
-      "'" -> ""
-      x' -> x'
-  ) name
+generateJSName name = name
 
 generateWrapper :: P5Method -> Either String String
 generateWrapper x = do
@@ -151,13 +138,13 @@ generateWrapper x = do
         if x.return.p5Type == P5Effect then
           "  return function() {"
           <> "\n"
-          <> "    p." <> (generateP5Name name) <> "(" 
+          <> "    p." <> x.p5Name <> "(" 
             <> (intercalate ", " variables) <> ");"
           <> "\n"
           <> "  };"
           <> "\n"
         else
-          "  return p." <> (generateP5Name name) <> "(" 
+          "  return p." <> x.p5Name <> "(" 
             <> (intercalate ", " variables) <> ");"
           <> "\n"
   pure $
@@ -184,7 +171,7 @@ documentUnsupportedMethod x = do
     <> "```"
     <> "\n"
     <> "[p5js.org documentation](https://p5js.org/reference/#/p5/"
-    <> generateP5Name x.name
+    <> x.p5Name
     <> ")"
 
 generateUnsupportedMethodList :: P5Doc -> Either String String

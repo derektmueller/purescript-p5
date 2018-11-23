@@ -16,7 +16,7 @@ main = unsafePerformEffect $ do
 
     draw p do
       background p "red"
-      stroke'' p "green"
+      stroke p "green"
       strokeWeight p 3.0
       line p 0.0 0.0 100.0 100.0
       line p 100.0 100.0 100.0 200.0

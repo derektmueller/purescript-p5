@@ -24,34 +24,34 @@ ambientLight :: P5 -> String -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 
-#### `ambientLight'`
+#### `ambientLight2`
 
 ``` purescript
-ambientLight' :: P5 -> (Array Number) -> (Effect Unit)
+ambientLight2 :: P5 -> (Array Number) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 
-#### `ambientLight'''`
+#### `ambientLight4`
 
 ``` purescript
-ambientLight''' :: P5 -> Number -> Number -> (Effect Unit)
+ambientLight4 :: P5 -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 
-#### `ambientLight''''`
+#### `ambientLight5`
 
 ``` purescript
-ambientLight'''' :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
+ambientLight5 :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 
-#### `ambientMaterial'`
+#### `ambientMaterial2`
 
 ``` purescript
-ambientMaterial' :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
+ambientMaterial2 :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
@@ -88,34 +88,34 @@ atan2 :: P5 -> Number -> Number -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/atan2)
 
-#### `background'`
+#### `background2`
 
 ``` purescript
-background' :: P5 -> (Array Number) -> (Effect Unit)
+background2 :: P5 -> (Array Number) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 
-#### `background''`
+#### `background3`
 
 ``` purescript
-background'' :: P5 -> String -> Number -> (Effect Unit)
+background3 :: P5 -> String -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 
-#### `background'''`
+#### `background4`
 
 ``` purescript
-background''' :: P5 -> Number -> Number -> (Effect Unit)
+background4 :: P5 -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 
-#### `background'''''`
+#### `background6`
 
 ``` purescript
-background''''' :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
+background6 :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/background)
@@ -168,10 +168,10 @@ bezierVertex :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/bezierVertex)
 
-#### `bezierVertex'`
+#### `bezierVertex2`
 
 ``` purescript
-bezierVertex' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+bezierVertex2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/bezierVertex)
@@ -288,10 +288,10 @@ curveVertex :: P5 -> Number -> Number -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/curveVertex)
 
-#### `curveVertex'`
+#### `curveVertex2`
 
 ``` purescript
-curveVertex' :: P5 -> Number -> Number -> Number -> (Effect Unit)
+curveVertex2 :: P5 -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/curveVertex)
@@ -320,10 +320,10 @@ debugMode :: P5 -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
 
-#### `debugMode''''`
+#### `debugMode5`
 
 ``` purescript
-debugMode'''' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+debugMode5 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
@@ -360,10 +360,10 @@ deviceTurned :: P5 -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceTurned)
 
-#### `directionalLight'''`
+#### `directionalLight4`
 
 ``` purescript
-directionalLight''' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+directionalLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
@@ -384,10 +384,10 @@ dist :: P5 -> Number -> Number -> Number -> Number -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/dist)
 
-#### `dist'`
+#### `dist2`
 
 ``` purescript
-dist' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number
+dist2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/dist)
@@ -400,10 +400,10 @@ ellipse :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ellipse)
 
-#### `ellipse'`
+#### `ellipse2`
 
 ``` purescript
-ellipse' :: P5 -> Number -> Number -> Number -> Number -> Int -> (Effect Unit)
+ellipse2 :: P5 -> Number -> Number -> Number -> Number -> Int -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ellipse)
@@ -440,26 +440,26 @@ fill :: P5 -> String -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
 
-#### `fill'`
+#### `fill2`
 
 ``` purescript
-fill' :: P5 -> (Array Number) -> (Effect Unit)
+fill2 :: P5 -> (Array Number) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
 
-#### `fill'''`
+#### `fill4`
 
 ``` purescript
-fill''' :: P5 -> Number -> Number -> (Effect Unit)
+fill4 :: P5 -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
 
-#### `fill''''`
+#### `fill5`
 
 ``` purescript
-fill'''' :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
+fill5 :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
@@ -488,10 +488,10 @@ frameRate :: P5 -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/frameRate)
 
-#### `frameRate'`
+#### `frameRate2`
 
 ``` purescript
-frameRate' :: P5 -> Number -> (Effect Unit)
+frameRate2 :: P5 -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/frameRate)
@@ -528,10 +528,10 @@ hex :: P5 -> Number -> Number -> String
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/hex)
 
-#### `hex'`
+#### `hex2`
 
 ``` purescript
-hex' :: P5 -> (Array Number) -> Number -> (Array String)
+hex2 :: P5 -> (Array Number) -> Number -> (Array String)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/hex)
@@ -592,10 +592,10 @@ line :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/line)
 
-#### `line'`
+#### `line2`
 
 ``` purescript
-line' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+line2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/line)
@@ -664,10 +664,10 @@ max :: P5 -> (Array Number) -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/max)
 
-#### `max'`
+#### `max2`
 
 ``` purescript
-max' :: P5 -> Number -> Number -> Number
+max2 :: P5 -> Number -> Number -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/max)
@@ -688,10 +688,10 @@ min :: P5 -> (Array Number) -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/min)
 
-#### `min'`
+#### `min2`
 
 ``` purescript
-min' :: P5 -> Number -> Number -> Number
+min2 :: P5 -> Number -> Number -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/min)
@@ -720,10 +720,10 @@ nfp :: P5 -> Number -> Int -> Int -> String
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/nfp)
 
-#### `nfp'`
+#### `nfp2`
 
 ``` purescript
-nfp' :: P5 -> (Array Number) -> Int -> Int -> (Array String)
+nfp2 :: P5 -> (Array Number) -> Int -> Int -> (Array String)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/nfp)
@@ -872,10 +872,10 @@ pixelDensity :: P5 -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/pixelDensity)
 
-#### `pixelDensity'`
+#### `pixelDensity2`
 
 ``` purescript
-pixelDensity' :: P5 -> Number -> (Effect Unit)
+pixelDensity2 :: P5 -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/pixelDensity)
@@ -896,10 +896,10 @@ point :: P5 -> Number -> Number -> Number -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/point)
 
-#### `pointLight'''`
+#### `pointLight4`
 
 ``` purescript
-pointLight''' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+pointLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
@@ -952,10 +952,10 @@ quadraticVertex :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/quadraticVertex)
 
-#### `quadraticVertex'`
+#### `quadraticVertex2`
 
 ``` purescript
-quadraticVertex' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+quadraticVertex2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/quadraticVertex)
@@ -968,10 +968,10 @@ radians :: P5 -> Number -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/radians)
 
-#### `random'`
+#### `random2`
 
 ``` purescript
-random' :: P5 -> Number -> Number -> Number
+random2 :: P5 -> Number -> Number -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/random)
@@ -1000,10 +1000,10 @@ rect :: P5 -> Number -> Number -> Number -> Number -> Int -> Int -> (Effect Unit
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/rect)
 
-#### `rect'`
+#### `rect2`
 
 ``` purescript
-rect' :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+rect2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/rect)
@@ -1096,10 +1096,10 @@ second :: P5 -> Int
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/second)
 
-#### `setAttributes'`
+#### `setAttributes2`
 
 ``` purescript
-setAttributes' :: P5 -> String -> Boolean -> (Effect Unit)
+setAttributes2 :: P5 -> String -> Boolean -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/setAttributes)
@@ -1152,10 +1152,10 @@ smooth :: P5 -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/smooth)
 
-#### `specularMaterial'`
+#### `specularMaterial2`
 
 ``` purescript
-specularMaterial' :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
+specularMaterial2 :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
@@ -1208,26 +1208,26 @@ stroke :: P5 -> String -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 
-#### `stroke'`
+#### `stroke2`
 
 ``` purescript
-stroke' :: P5 -> (Array Number) -> (Effect Unit)
+stroke2 :: P5 -> (Array Number) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 
-#### `stroke'''`
+#### `stroke4`
 
 ``` purescript
-stroke''' :: P5 -> Number -> Number -> (Effect Unit)
+stroke4 :: P5 -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 
-#### `stroke''''`
+#### `stroke5`
 
 ``` purescript
-stroke'''' :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
+stroke5 :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
@@ -1272,10 +1272,10 @@ textLeading :: P5 -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/textLeading)
 
-#### `textLeading'`
+#### `textLeading2`
 
 ``` purescript
-textLeading' :: P5 -> Number -> (Effect Unit)
+textLeading2 :: P5 -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/textLeading)
@@ -1288,10 +1288,10 @@ textSize :: P5 -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/textSize)
 
-#### `textSize'`
+#### `textSize2`
 
 ``` purescript
-textSize' :: P5 -> Number -> (Effect Unit)
+textSize2 :: P5 -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/textSize)
@@ -1320,26 +1320,26 @@ tint :: P5 -> String -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 
-#### `tint'`
+#### `tint2`
 
 ``` purescript
-tint' :: P5 -> (Array Number) -> (Effect Unit)
+tint2 :: P5 -> (Array Number) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 
-#### `tint'''`
+#### `tint4`
 
 ``` purescript
-tint''' :: P5 -> Number -> Number -> (Effect Unit)
+tint4 :: P5 -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 
-#### `tint''''`
+#### `tint5`
 
 ``` purescript
-tint'''' :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
+tint5 :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
@@ -1352,10 +1352,10 @@ torus :: P5 -> Number -> Number -> Int -> Int -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/torus)
 
-#### `translate'`
+#### `translate2`
 
 ``` purescript
-translate' :: P5 -> Number -> Number -> Number -> (Effect Unit)
+translate2 :: P5 -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/translate)
@@ -1408,10 +1408,10 @@ vertex :: P5 -> Number -> Number -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/vertex)
 
-#### `vertex'`
+#### `vertex2`
 
 ``` purescript
-vertex' :: P5 -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+vertex2 :: P5 -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/vertex)

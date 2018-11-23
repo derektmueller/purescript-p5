@@ -48,14 +48,6 @@ exports.backgroundImpl = function(p) {
   }
 };
 
-exports.stroke__Impl = function(p) {
-  return function(str) {
-    return function() {
-      p.stroke(str);
-    };
-  };
-};
-
 exports.strokeJoinMiterImpl = function(p) {
   return function(strokeJoinType) {
     p.strokeJoin(p.MITER);
