@@ -33,7 +33,7 @@ lineDrawing canvasId w h = do
     pure unit
 
   draw p do
-    background p "red"
+    background3 p "red" Nothing
     stroke p "green"
     strokeWeight p 3.0
     line p 0.0 0.0 100.0 100.0

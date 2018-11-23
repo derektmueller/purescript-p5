@@ -10,7 +10,12 @@ import Data.Maybe (Maybe, maybe)
 import Data.Array
 import Data.Either (Either)
 import Data.Traversable (traverse)
-import GenerateFFI.Parser (P5Doc(..), P5Method, P5Type(..))
+import GenerateFFI.Parser 
+  (P5Doc(..), P5Method, P5Type(..)
+  , isUnsupported
+  , typeIsUnsupported
+  , typeIsMaybe
+  , Param)
 --import Debug.Trace (trace)
 
 generateP5TypeConstructor :: P5Type -> String
@@ -22,8 +27,15 @@ generateP5TypeConstructor P5Number = "Number"
 generateP5TypeConstructor P5P5 = "P5"
 generateP5TypeConstructor P5StringArray = "(Array String)"
 generateP5TypeConstructor P5String = "String"
+generateP5TypeConstructor (P5Maybe p5Type) = 
+  "(Maybe " <> generateP5TypeConstructor p5Type <> ")"
 generateP5TypeConstructor (P5Unsupported str) = 
   "Unsupported(" <> str <> ")"
+
+generateForeignTypeConstructor :: P5Type -> String
+generateForeignTypeConstructor (P5Maybe p5Type) = "Foreign"
+generateForeignTypeConstructor p5Type = 
+  generateP5TypeConstructor p5Type
 
 getMethodName :: P5Method -> String
 getMethodName x = x.name
@@ -32,7 +44,14 @@ getParamTypes :: P5Method -> Array P5Type
 getParamTypes x = (\x' -> x'.p5Type) <$> x.params
 
 getParamNames :: P5Method -> Array String 
-getParamNames x = (\x' -> x'.name) <$> x.params
+getParamNames x = getParamName <$> x.params
+
+getParamName :: Param -> String 
+getParamName = (\x' -> fixupName x'.name)
+  where
+    fixupName :: String -> String
+    fixupName "Height" = "height"
+    fixupName x' = x'
 
 generateMethodSig :: P5Method -> Either String String
 generateMethodSig x = do
@@ -47,21 +66,22 @@ generateMethodSig x = do
 generateMethodBody :: P5Method -> Either String String
 generateMethodBody x = do
   let jsName = generateJSName x.name
+      getImplParam = \x' -> do
+        let name = getParamName x'
+        if typeIsMaybe x'.p5Type then
+          "(maybe undefined unsafeToForeign " <> name <> ")"
+          else
+            name
+
   pure $ x.name 
+    <> " p5 "
+    <> (intercalate " " (getParamNames x))
     <> " = " 
     <> ("runFn" <> (show $ (1+_) <<< length $ getParamTypes x))
     <> " " 
     <> (jsName <> "Impl")
-
-typeIsUnsupported :: P5Type -> Boolean
-typeIsUnsupported (P5Unsupported _) = true
-typeIsUnsupported _ = false
-
-isUnsupported :: P5Method -> Boolean
-isUnsupported x =
-  (length $ filter (\p -> typeIsUnsupported p.p5Type) x.params)
-    > 0
-  || typeIsUnsupported x.return.p5Type
+    <> " p5 " 
+    <> (intercalate " " (getImplParam <$> x.params))
 
 generateForeignImport :: P5Method -> Either String String
 generateForeignImport x = do
@@ -72,7 +92,7 @@ generateForeignImport x = do
     "foreign import " <> name <> "Impl :: "
     <> "Fn" <> (show $ (1+_) <<< length $ paramTypes) <> " "
     <> (intercalate " " 
-         (generateP5TypeConstructor
+         (generateForeignTypeConstructor
            <$> ([P5P5] <> paramTypes <> [returnType])))
 
 generateMethodDoc :: P5Method -> Maybe String
@@ -107,11 +127,14 @@ generateModuleHeader xs =
 
 generateP5 :: P5Doc -> Either String String
 generateP5 (P5Doc doc) = do
-  let imports = [
-          "import Data.Function.Uncurried",
-          "import Effect (Effect)",
-          "import Prelude",
-          "import P5.Types (P5)"
+  let imports = 
+          [ "import Data.Function.Uncurried"
+          , "import Effect (Effect)"
+          , "import Prelude"
+          , "import P5.Types (P5)"
+          , "import Foreign"
+          , "import Data.Maybe (Maybe, maybe)"
+          , "import Foreign.NullOrUndefined (undefined)"
         ]
       supported = filter (\x -> not (isUnsupported x)) doc
   methods <- (traverse generateMethod doc)
@@ -134,18 +157,19 @@ generateWrapper :: P5Method -> Either String String
 generateWrapper x = do
   let name = getMethodName x
       variables = getParamNames x
+      generateCall =
+        "callP5(p, p." <> x.p5Name <> ", [" 
+        <> (intercalate ", " variables) <> "]);"
       generateReturn =
         if x.return.p5Type == P5Effect then
           "  return function() {"
           <> "\n"
-          <> "    p." <> x.p5Name <> "(" 
-            <> (intercalate ", " variables) <> ");"
+          <> "    " <> generateCall
           <> "\n"
           <> "  };"
           <> "\n"
         else
-          "  return p." <> x.p5Name <> "(" 
-            <> (intercalate ", " variables) <> ");"
+          "  return " <> generateCall
           <> "\n"
   pure $
     "exports." 
@@ -158,8 +182,23 @@ generateWrapper x = do
 generateForeignJSModule :: P5Doc -> Either String String
 generateForeignJSModule (P5Doc doc) = do
   let supported = filter (\x -> not (isUnsupported x)) doc
+      helperMethods = 
+        [ "function trimRightUndefined(array) {\n\
+           \  return array.filter(function (x, i) {\n\
+           \    return i < array.length - 1 || x !== undefined;\n\
+           \  });\n\
+           \}"
+        , "function callP5(p5, method, args) {\n\
+           \  return method.apply(\n\
+           \    p5, trimRightUndefined(args));\n\
+           \}"
+        ]
+
   methods <- (traverse generateWrapper supported)
-  pure $ (intercalate "\n" methods)
+  pure $ 
+    (intercalate "\n" helperMethods)
+    <> "\n"
+    <> (intercalate "\n" methods)
 
 documentUnsupportedMethod :: P5Method -> Either String String
 documentUnsupportedMethod x = do

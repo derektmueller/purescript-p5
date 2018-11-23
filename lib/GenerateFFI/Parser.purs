@@ -5,6 +5,9 @@ module GenerateFFI.Parser
   , Param
   , ReturnType
   , ClassItem
+  , isUnsupported
+  , typeIsMaybe
+  , typeIsUnsupported
   ) where
 
 import Prelude
@@ -18,6 +21,7 @@ import Foreign
   , ForeignError(..)
   , readArray
   , readString
+  , readBoolean
   , readUndefined
   , F
   , fail
@@ -38,6 +42,7 @@ data P5Type =
   | P5NumberArray
   | P5String 
   | P5StringArray
+  | P5Maybe P5Type
   | P5Unsupported String
 
 type Param = 
@@ -80,6 +85,20 @@ instance showP5Doc :: Show P5Doc where
 
 instance showP5Type :: Show P5Type where 
   show x = genericShow x
+
+typeIsUnsupported :: P5Type -> Boolean
+typeIsUnsupported (P5Unsupported _) = true
+typeIsUnsupported _ = false
+
+typeIsMaybe :: P5Type -> Boolean
+typeIsMaybe (P5Maybe _) = true
+typeIsMaybe _ = false
+
+isUnsupported :: P5Method -> Boolean
+isUnsupported x =
+  (length $ filter (\p -> typeIsUnsupported p.p5Type) x.params)
+    > 0
+  || typeIsUnsupported x.return.p5Type
 
 readP5Type :: Foreign -> F P5Type
 readP5Type f = do
@@ -181,9 +200,14 @@ instance decodeP5Doc :: Decode P5Doc where
             paramName <- (param ! "name") >>= readString
             p5Type <- (param ! "type") 
               >>= readP5Type
+            optional <- (param ! "optional") 
+              >>= readUndefined
+              >>= traverse readBoolean
             pure $ {
               name: paramName,
-              p5Type: p5Type
+              p5Type: if (optional == Just true
+                          && not (typeIsUnsupported p5Type))
+                        then P5Maybe p5Type else p5Type
             }
           )
         mReturn <- (x ! "return")

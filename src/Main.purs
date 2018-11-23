@@ -4,6 +4,7 @@ import Prelude
 import Effect (Effect)
 import Effect.Console (log)
 import Effect.Unsafe (unsafePerformEffect)
+import Data.Maybe
 
 import P5
 
@@ -15,7 +16,7 @@ main = unsafePerformEffect $ do
       pure unit
 
     draw p do
-      background p "red"
+      background3 p "red" Nothing
       stroke p "green"
       strokeWeight p 3.0
       line p 0.0 0.0 100.0 100.0
