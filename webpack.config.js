@@ -21,11 +21,13 @@ module.exports = {
 
   devServer: {
     contentBase: '.',
-    port: 4040,
-    stats: 'errors-only'
+    port: 4008,
+    stats: 'errors-only',
+    hot: true,
+    hotOnly: true
   },
 
-  entry: './src/Main.purs',
+  entry: './examples/index.js',
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -64,6 +66,11 @@ module.exports = {
   plugins: [
     new webpack.LoaderOptionsPlugin({
       debug: true
-    })
+    }),
+    new webpack.DllReferencePlugin({
+      context: __dirname,
+      manifest: require('./vendor-manifest.json')
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ].concat(plugins)
 };
