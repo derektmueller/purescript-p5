@@ -33,6 +33,7 @@
     "purescript-psci-support": "^4.0.0",
     "purescript-spec": "^3.0.0",
     "purescript-now": "^4.0.0",
-    "purescript-jsdom-global": "https://github.com/parenparen/purescript-jsdom-global.git#0.0.2"
+    "purescript-jsdom-global": "https://github.com/parenparen/purescript-jsdom-global.git#0.0.2",
+    "purescript-web-html": "^1.2.0"
   }
 }

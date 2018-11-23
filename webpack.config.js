@@ -17,6 +17,8 @@ const plugins =
 ;
 
 module.exports = {
+  devtool: 'cheap-module-inline-source-map',
+
   devServer: {
     contentBase: '.',
     port: 4040,
@@ -46,7 +48,7 @@ module.exports = {
               bundle: false,
               psc: 'psa',
               watch: isWebpackDevServer || isWatch,
-              pscIde: false
+              pscIde: true
             }
           }
         ]
