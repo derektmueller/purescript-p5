@@ -45,7 +45,8 @@ module.exports = {
             options: {
               src: [
                 'bower_components/purescript-*/src/**/*.purs',
-                'src/**/*.purs'
+                'src/**/*.purs',
+                'examples/**/*.purs',
               ],
               bundle: false,
               psc: 'psa',
