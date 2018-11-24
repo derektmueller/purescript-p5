@@ -16,23 +16,30 @@ const plugins =
   ]
 ;
 
+const devServerPort = 4008;
+
 module.exports = {
   devtool: 'cheap-module-inline-source-map',
 
   devServer: {
     contentBase: '.',
-    port: 4008,
+    port: devServerPort,
     stats: 'errors-only',
     hot: true,
     hotOnly: true
   },
 
-  entry: './examples/index.js',
+  entry: {
+    basic: './examples/basic/index.js',
+    "structure-width-and-height": 
+      './examples/structure-width-and-height/index.js'
+  },
 
   output: {
     path: path.resolve(__dirname, 'dist'),
     pathinfo: true,
-    filename: 'bundle.js'
+    filename: '[name].js',
+    publicPath: `http://localhost:${devServerPort}/`,
   },
 
   module: {
