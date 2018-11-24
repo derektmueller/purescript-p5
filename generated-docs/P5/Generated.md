@@ -1,5 +1,30 @@
 ## Module P5.Generated
 
+#### `NumberOrStringOrBoolean`
+
+``` purescript
+data NumberOrStringOrBoolean
+  = NumberOrStringOrBooleanNumber Number
+  | NumberOrStringOrBooleanString String
+  | NumberOrStringOrBooleanBoolean Boolean
+```
+
+#### `StringOrNumber`
+
+``` purescript
+data StringOrNumber
+  = StringOrNumberString String
+  | StringOrNumberNumber Number
+```
+
+#### `StringOrInt`
+
+``` purescript
+data StringOrInt
+  = StringOrIntString String
+  | StringOrIntInt Int
+```
+
 #### `abs`
 
 ``` purescript
@@ -184,6 +209,14 @@ box :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/box)
 
+#### `byte`
+
+``` purescript
+byte :: P5 -> NumberOrStringOrBoolean -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/byte)
+
 #### `camera`
 
 ``` purescript
@@ -199,6 +232,14 @@ ceil :: P5 -> Number -> Int
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ceil)
+
+#### `char`
+
+``` purescript
+char :: P5 -> StringOrNumber -> String
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/char)
 
 #### `clear`
 
@@ -544,6 +585,14 @@ hour :: P5 -> Int
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/hour)
 
+#### `int2`
+
+``` purescript
+int2 :: P5 -> NumberOrStringOrBoolean -> (Maybe Int) -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/int)
+
 #### `keyIsDown`
 
 ``` purescript
@@ -711,6 +760,22 @@ month :: P5 -> Int
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/month)
+
+#### `nf`
+
+``` purescript
+nf :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> String
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/nf)
+
+#### `nfc`
+
+``` purescript
+nfc :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> String
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
 
 #### `nfp`
 

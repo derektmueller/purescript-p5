@@ -6,34 +6,55 @@ module GenerateFFI.CodeGenerator
 
 import Prelude
 import Data.String.Utils (mapChars)
-import Data.Maybe (Maybe, maybe)
+import Data.Maybe (Maybe(..), maybe)
 import Data.Array
-import Data.Either (Either)
+import Data.Either (Either(..), note)
 import Data.Traversable (traverse)
+import Data.Foldable (any)
 import GenerateFFI.Parser 
   (P5Doc(..), P5Method, P5Type(..)
   , isUnsupported
   , typeIsUnsupported
   , typeIsMaybe
+  , typeIsOr
   , Param)
---import Debug.Trace (trace)
+import Debug.Trace (trace)
 
-generateP5TypeConstructor :: P5Type -> String
-generateP5TypeConstructor P5Boolean = "Boolean"
-generateP5TypeConstructor P5Effect = "(Effect Unit)"
-generateP5TypeConstructor P5Integer = "Int"
-generateP5TypeConstructor P5NumberArray = "(Array Number)"
-generateP5TypeConstructor P5Number = "Number"
-generateP5TypeConstructor P5P5 = "P5"
-generateP5TypeConstructor P5StringArray = "(Array String)"
-generateP5TypeConstructor P5String = "String"
-generateP5TypeConstructor (P5Maybe p5Type) = 
-  "(Maybe " <> generateP5TypeConstructor p5Type <> ")"
+generateP5TypeConstructor :: P5Type -> Maybe String
+generateP5TypeConstructor P5Boolean = Just "Boolean"
+generateP5TypeConstructor P5Effect = Just "(Effect Unit)"
+generateP5TypeConstructor P5Integer = Just "Int"
+generateP5TypeConstructor P5NumberArray = Just "(Array Number)"
+generateP5TypeConstructor P5Number = Just "Number"
+generateP5TypeConstructor P5P5 = Just "P5"
+generateP5TypeConstructor P5StringArray = Just "(Array String)"
+generateP5TypeConstructor P5String = Just "String"
+generateP5TypeConstructor t@(P5Or p5Type1 p5Type2) = do
+  case typeIsUnsupported t of
+    true ->
+      pure "UnsupportedProduct"
+    false ->
+      generateProductTypeConstructor t
+generateP5TypeConstructor (P5Maybe p5Type) = do
+  inner <- generateP5TypeConstructor p5Type
+  Just $ "(Maybe " <> inner <> ")"
 generateP5TypeConstructor (P5Unsupported str) = 
-  "Unsupported(" <> str <> ")"
+  Just $ "Unsupported(" <> str <> ")"
 
-generateForeignTypeConstructor :: P5Type -> String
-generateForeignTypeConstructor (P5Maybe p5Type) = "Foreign"
+p5TypeToIdentifier :: P5Type -> Maybe String
+p5TypeToIdentifier P5Boolean = Just "Boolean"
+p5TypeToIdentifier P5Integer = Just "Int"
+p5TypeToIdentifier P5NumberArray = Just "ArrayNumber"
+p5TypeToIdentifier P5Number = Just "Number"
+p5TypeToIdentifier P5StringArray = Just "ArrayString"
+p5TypeToIdentifier P5String = Just "String"
+p5TypeToIdentifier (P5Maybe p5Type) = do
+  identifier <- p5TypeToIdentifier p5Type
+  Just $ "Maybe" <> identifier
+p5TypeToIdentifier _ = Nothing
+
+generateForeignTypeConstructor :: P5Type -> Maybe String
+generateForeignTypeConstructor (P5Maybe p5Type) = Just "Foreign"
 generateForeignTypeConstructor p5Type = 
   generateP5TypeConstructor p5Type
 
@@ -51,6 +72,8 @@ getParamName = (\x' -> fixupName x'.name)
   where
     fixupName :: String -> String
     fixupName "Height" = "height"
+    fixupName "type" = "_type"
+    fixupName "data" = "_data"
     fixupName x' = x'
 
 generateMethodSig :: P5Method -> Either String String
@@ -58,21 +81,24 @@ generateMethodSig x = do
   let name = getMethodName x
   let returnType = x.return.p5Type
       paramTypes = getParamTypes x
+  typeConstructor <- 
+    note ("Failed to generate method signature for "
+           <> (intercalate " " $ show <$> paramTypes))
+      $ traverse
+        generateP5TypeConstructor 
+          ([P5P5] <> paramTypes <> [returnType])
   pure $ name <> " :: " 
-    <> (intercalate " -> " 
-         (generateP5TypeConstructor 
-          <$> ([P5P5] <> paramTypes <> [returnType])))
+    <> (intercalate " -> " typeConstructor)
 
 generateMethodBody :: P5Method -> Either String String
 generateMethodBody x = do
-  let jsName = generateJSName x.name
+  let jsName = x.name
       getImplParam = \x' -> do
         let name = getParamName x'
         if typeIsMaybe x'.p5Type then
           "(maybe undefined unsafeToForeign " <> name <> ")"
           else
             name
-
   pure $ x.name 
     <> " p5 "
     <> (intercalate " " (getParamNames x))
@@ -85,15 +111,17 @@ generateMethodBody x = do
 
 generateForeignImport :: P5Method -> Either String String
 generateForeignImport x = do
-  let name = generateJSName x.name
+  let name = x.name
       returnType = x.return.p5Type
       paramTypes = getParamTypes x
+  typeConstructors <-
+    note "Failed to generate foreign import" $ 
+      traverse generateForeignTypeConstructor
+        ([P5P5] <> paramTypes <> [returnType])
   pure $
     "foreign import " <> name <> "Impl :: "
     <> "Fn" <> (show $ (1+_) <<< length $ paramTypes) <> " "
-    <> (intercalate " " 
-         (generateForeignTypeConstructor
-           <$> ([P5P5] <> paramTypes <> [returnType])))
+    <> (intercalate " " typeConstructors)
 
 generateMethodDoc :: P5Method -> Maybe String
 generateMethodDoc x = do
@@ -119,11 +147,70 @@ generateMethod x = do
         <> methodBody
         <> "\n"
 
-generateModuleHeader :: Array P5Method -> String
-generateModuleHeader xs =
-  "module P5.Generated\n  ( "
-   <> intercalate "\n  , " (getMethodName <$> xs)
-     <> "\n  ) where"
+generateModuleHeader :: Array P5Method -> Either String String
+generateModuleHeader xs = do
+  types <- generateProductTypes xs
+  let methodNames = getMethodName <$> xs
+  pure $ "module P5.Generated\n  ( "
+   <> intercalate 
+    "\n  , " 
+    (((\x -> (x <> "(..)")) <$> types)
+      <> methodNames)
+   <> "\n  ) where"
+
+productTypeToArray :: P5Type -> Maybe (Array P5Type)
+productTypeToArray t@(P5Or p5Type1 p5Type2) = 
+  Just $ go t
+  where
+    go (P5Or p5Type1' p5Type2') = go p5Type1' <> go p5Type2'
+    go p5Type = [p5Type]
+productTypeToArray p5Type = Nothing
+
+generateProductTypeConstructor :: P5Type -> Maybe String
+generateProductTypeConstructor t@(P5Or _ _) = do
+  types <- productTypeToArray t
+  identifiers <- traverse p5TypeToIdentifier types
+  let typeName = intercalate "Or" identifiers
+  pure typeName
+generateProductTypeConstructor _ = Nothing
+
+generateProductTypeDef :: P5Type -> Maybe String
+generateProductTypeDef t@(P5Or _ _) = do
+  types <- productTypeToArray t
+  typeConstructor <- generateProductTypeConstructor t
+  dataConstructors <- 
+    (traverse (\x -> 
+      (\x' -> typeConstructor <> x' <> " " <> x')
+        <$> p5TypeToIdentifier x) types)
+  pure 
+    $ "data " <> typeConstructor <> " = "
+    <> (intercalate " | " dataConstructors)
+generateProductTypeDef _ = Nothing
+
+getUniqueOrTypes :: Array P5Method -> Either String (Array P5Type)
+getUniqueOrTypes xs = do
+  pure $
+    nub 
+    $ ((\x -> case x of
+        P5Maybe x' -> x'
+        x' -> x') <$> _)
+    $ filter (typeIsOr)
+    $ (fold $ getParamTypes <$> xs)
+
+generateProductTypes :: Array P5Method -> Either String (Array String)
+generateProductTypes xs = do
+  productTypes <- getUniqueOrTypes xs
+  traverse 
+    ((note "Failed to generate product types") 
+      <<< generateProductTypeConstructor) productTypes
+
+generateTypeDefinitions :: Array P5Method 
+  -> Either String (Array String)
+generateTypeDefinitions xs = do
+  productTypes <- getUniqueOrTypes xs
+  traverse 
+    ((note "Failed to generate type definition") 
+      <<< generateProductTypeDef) productTypes
 
 generateP5 :: P5Doc -> Either String String
 generateP5 (P5Doc doc) = do
@@ -137,12 +224,17 @@ generateP5 (P5Doc doc) = do
           , "import Foreign.NullOrUndefined (undefined)"
         ]
       supported = filter (\x -> not (isUnsupported x)) doc
+  types <- generateTypeDefinitions supported
   methods <- (traverse generateMethod doc)
   foreignImports <- (traverse generateForeignImport supported)
-  pure $ generateModuleHeader supported
+  header <- generateModuleHeader supported
+  pure $ header
     <> "\n" 
     <> "\n" 
     <> (intercalate "\n" imports)
+    <> "\n" 
+    <> "\n" 
+    <> (intercalate "\n" types)
     <> "\n" 
     <> "\n" 
     <> (intercalate "\n" foreignImports)
@@ -150,13 +242,17 @@ generateP5 (P5Doc doc) = do
     <> "\n" 
     <> (intercalate "\n" methods)
 
-generateJSName :: String -> String
-generateJSName name = name
-
 generateWrapper :: P5Method -> Either String String
 generateWrapper x = do
   let name = getMethodName x
-      variables = getParamNames x
+      variables = 
+        (\x' -> do
+          let paramName = getParamName x'
+          case x'.p5Type of
+            (P5Or _ _) -> paramName <> ".value0"
+            _ -> paramName
+        ) <$> x.params
+      params = getParamNames x
       generateCall =
         "callP5(p, p." <> x.p5Name <> ", [" 
         <> (intercalate ", " variables) <> "]);"
@@ -173,8 +269,8 @@ generateWrapper x = do
           <> "\n"
   pure $
     "exports." 
-    <> (generateJSName name) <> "Impl"
-    <> " = function(" <> (intercalate ", " ("p" : variables)) <> ") {"
+    <> name <> "Impl"
+    <> " = function(" <> (intercalate ", " ("p" : params)) <> ") {"
     <> "\n"
     <> generateReturn
     <> "};"

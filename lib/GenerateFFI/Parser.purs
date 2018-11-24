@@ -7,12 +7,15 @@ module GenerateFFI.Parser
   , ClassItem
   , isUnsupported
   , typeIsMaybe
+  , typeIsOr
   , typeIsUnsupported
   ) where
 
 import Prelude
 import Data.String.Regex (Regex, regex, test)
 import Data.String.Regex.Flags (noFlags)
+import Data.String.Pattern (Pattern(..))
+import Data.String.Common (split)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Array
 import Data.Either (Either(..))
@@ -31,7 +34,8 @@ import Foreign.Class (class Decode)
 import Data.Traversable (traverse)
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
---import Debug.Trace (trace)
+import Data.Generic.Rep.Ord (genericCompare)
+import Debug.Trace (trace)
 
 data P5Type = 
   P5P5
@@ -42,6 +46,7 @@ data P5Type =
   | P5NumberArray
   | P5String 
   | P5StringArray
+  | P5Or P5Type P5Type
   | P5Maybe P5Type
   | P5Unsupported String
 
@@ -86,13 +91,23 @@ instance showP5Doc :: Show P5Doc where
 instance showP5Type :: Show P5Type where 
   show x = genericShow x
 
+instance ordP5Type :: Ord P5Type where 
+  compare x1 x2  = genericCompare x1 x2
+
 typeIsUnsupported :: P5Type -> Boolean
 typeIsUnsupported (P5Unsupported _) = true
+typeIsUnsupported (P5Or p5Type1 p5Type2) =
+  typeIsUnsupported p5Type1 || typeIsUnsupported p5Type2
 typeIsUnsupported _ = false
 
 typeIsMaybe :: P5Type -> Boolean
 typeIsMaybe (P5Maybe _) = true
 typeIsMaybe _ = false
+
+typeIsOr :: P5Type -> Boolean
+typeIsOr (P5Maybe (P5Or _ _)) = true
+typeIsOr (P5Or _ _) = true
+typeIsOr _ = false
 
 isUnsupported :: P5Method -> Boolean
 isUnsupported x =
@@ -103,15 +118,27 @@ isUnsupported x =
 readP5Type :: Foreign -> F P5Type
 readP5Type f = do
   str <- readString f
-  case str of
-    "Boolean" -> pure P5Boolean
-    "Integer" -> pure P5Integer
-    "Number" -> pure P5Number
-    "Number[]" -> pure P5NumberArray
-    "String" -> pure P5String
-    "String[]" -> pure P5StringArray
-    _ -> pure $ P5Unsupported str
-    --_ -> fail $ TypeMismatch "P5Type" str
+  let typeStrs = sort $ split (Pattern "|") str
+      toP5Type = 
+        \str' ->
+          case str' of
+            "Boolean" -> P5Boolean
+            "Integer" -> P5Integer
+            "Number" -> P5Number
+            "Number[]" -> P5NumberArray
+            "String" -> P5String
+            "String[]" -> P5StringArray
+            _ -> P5Unsupported str'
+            --_ -> fail $ TypeMismatch "P5Type" str
+      p5Types = toP5Type <$> typeStrs
+
+  case uncons p5Types of
+    Just {head: x, tail: xs} -> do
+      pure $ foldr (\a b -> P5Or a b) x xs
+    Nothing -> do
+      case head p5Types of 
+        Just x -> pure x
+        Nothing -> fail $ TypeMismatch "P5Type" str
 
 getPrivateMethodRegex :: F Regex
 getPrivateMethodRegex = do

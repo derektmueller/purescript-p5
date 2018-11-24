@@ -1,5 +1,8 @@
 module P5.Generated
-  ( abs
+  ( NumberOrStringOrBoolean(..)
+  , StringOrNumber(..)
+  , StringOrInt(..)
+  , abs
   , acos
   , ambientLight
   , ambientLight2
@@ -22,8 +25,10 @@ module P5.Generated
   , bezierVertex
   , bezierVertex2
   , box
+  , byte
   , camera
   , ceil
+  , char
   , clear
   , cone
   , constrain
@@ -67,6 +72,7 @@ module P5.Generated
   , hex
   , hex2
   , hour
+  , int2
   , keyIsDown
   , keyPressed
   , keyReleased
@@ -88,6 +94,8 @@ module P5.Generated
   , min2
   , minute
   , month
+  , nf
+  , nfc
   , nfp
   , nfp2
   , nfs
@@ -188,6 +196,10 @@ import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
 
+data NumberOrStringOrBoolean = NumberOrStringOrBooleanNumber Number | NumberOrStringOrBooleanString String | NumberOrStringOrBooleanBoolean Boolean
+data StringOrNumber = StringOrNumberString String | StringOrNumberNumber Number
+data StringOrInt = StringOrIntString String | StringOrIntInt Int
+
 foreign import absImpl :: Fn2 P5 Number Number
 foreign import acosImpl :: Fn2 P5 Number Number
 foreign import ambientLightImpl :: Fn2 P5 String (Effect Unit)
@@ -211,8 +223,10 @@ foreign import bezierTangentImpl :: Fn6 P5 Number Number Number Number Number Nu
 foreign import bezierVertexImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import bezierVertex2Impl :: Fn10 P5 Number Number Number Number Number Number Number Number Number (Effect Unit)
 foreign import boxImpl :: Fn6 P5 Foreign Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import byteImpl :: Fn2 P5 NumberOrStringOrBoolean Number
 foreign import cameraImpl :: Fn10 P5 Foreign Foreign Foreign Foreign Foreign Foreign Foreign Foreign Foreign (Effect Unit)
 foreign import ceilImpl :: Fn2 P5 Number Int
+foreign import charImpl :: Fn2 P5 StringOrNumber String
 foreign import clearImpl :: Fn1 P5 (Effect Unit)
 foreign import coneImpl :: Fn6 P5 Foreign Foreign Foreign Foreign Foreign (Effect Unit)
 foreign import constrainImpl :: Fn4 P5 Number Number Number Number
@@ -256,6 +270,7 @@ foreign import getURLPathImpl :: Fn1 P5 (Array String)
 foreign import hexImpl :: Fn3 P5 Number Foreign String
 foreign import hex2Impl :: Fn3 P5 (Array Number) Foreign (Array String)
 foreign import hourImpl :: Fn1 P5 Int
+foreign import int2Impl :: Fn3 P5 NumberOrStringOrBoolean Foreign Number
 foreign import keyIsDownImpl :: Fn2 P5 Number Boolean
 foreign import keyPressedImpl :: Fn1 P5 (Effect Unit)
 foreign import keyReleasedImpl :: Fn1 P5 (Effect Unit)
@@ -277,6 +292,8 @@ foreign import minImpl :: Fn2 P5 (Array Number) Number
 foreign import min2Impl :: Fn3 P5 Number Number Number
 foreign import minuteImpl :: Fn1 P5 Int
 foreign import monthImpl :: Fn1 P5 Int
+foreign import nfImpl :: Fn4 P5 StringOrNumber Foreign Foreign String
+foreign import nfcImpl :: Fn3 P5 StringOrNumber Foreign String
 foreign import nfpImpl :: Fn4 P5 Number Foreign Foreign String
 foreign import nfp2Impl :: Fn4 P5 (Array Number) Foreign Foreign (Array String)
 foreign import nfsImpl :: Fn4 P5 Number Foreign Foreign String
@@ -376,7 +393,7 @@ abs p5 n = runFn2 absImpl p5 n
 acos :: P5 -> Number -> Number
 acos p5 value = runFn2 acosImpl p5 value
 
--- TODO: unsupported: alpha :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+-- TODO: unsupported: alpha :: P5 -> UnsupportedProduct -> Number
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 ambientLight :: P5 -> String -> (Effect Unit)
@@ -396,7 +413,7 @@ ambientLight4 p5 gray alpha = runFn3 ambientLight4Impl p5 gray (maybe undefined 
 ambientLight5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 ambientLight5 p5 v1 v2 v3 alpha = runFn5 ambientLight5Impl p5 v1 v2 v3 (maybe undefined unsafeToForeign alpha)
 
--- TODO: unsupported: ambientMaterial :: P5 -> Unsupported(Number[]|String|p5.Color) -> (Effect Unit)
+-- TODO: unsupported: ambientMaterial :: P5 -> UnsupportedProduct -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
 ambientMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
@@ -484,17 +501,19 @@ bezierVertex2 p5 x2 y2 z2 x3 y3 z3 x4 y4 z4 = runFn10 bezierVertex2Impl p5 x2 y2
 
 -- TODO: unsupported: blendMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
--- TODO: unsupported: blue :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+-- TODO: unsupported: blue :: P5 -> UnsupportedProduct -> Number
 
--- TODO: unsupported: boolean :: P5 -> Unsupported(String|Boolean|Number|Array) -> Boolean
+-- TODO: unsupported: boolean :: P5 -> UnsupportedProduct -> Boolean
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/box)
 box :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
 box p5 width height depth detailX detailY = runFn6 boxImpl p5 (maybe undefined unsafeToForeign width) (maybe undefined unsafeToForeign height) (maybe undefined unsafeToForeign depth) (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY)
 
--- TODO: unsupported: brightness :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+-- TODO: unsupported: brightness :: P5 -> UnsupportedProduct -> Number
 
--- TODO: unsupported: byte :: P5 -> Unsupported(String|Boolean|Number) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/byte)
+byte :: P5 -> NumberOrStringOrBoolean -> Number
+byte p5 n = runFn2 byteImpl p5 n
 
 -- TODO: unsupported: byte2 :: P5 -> Unsupported(Array) -> (Array Number)
 
@@ -506,7 +525,9 @@ camera p5 x y z centerX centerY centerZ upX upY upZ = runFn10 cameraImpl p5 (may
 ceil :: P5 -> Number -> Int
 ceil p5 n = runFn2 ceilImpl p5 n
 
--- TODO: unsupported: char :: P5 -> Unsupported(String|Number) -> String
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/char)
+char :: P5 -> StringOrNumber -> String
+char p5 n = runFn2 charImpl p5 n
 
 -- TODO: unsupported: char2 :: P5 -> Unsupported(Array) -> (Array String)
 
@@ -542,7 +563,7 @@ constrain p5 n low high = runFn4 constrainImpl p5 n low high
 copy :: P5 -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
 copy p5 sx sy sw sh dx dy dw dh = runFn9 copyImpl p5 sx sy sw sh dx dy dw dh
 
--- TODO: unsupported: copy2 :: P5 -> Unsupported(p5.Image|p5.Element) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
+-- TODO: unsupported: copy2 :: P5 -> UnsupportedProduct -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/cos)
 cos :: P5 -> Number -> Number
@@ -570,7 +591,7 @@ cos p5 angle = runFn2 cosImpl p5 angle
 
 -- TODO: unsupported: createWriter :: P5 -> String -> (Maybe String) -> Unsupported(p5.PrintWriter)
 
--- TODO: unsupported: cursor :: P5 -> Unsupported(String|Constant) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- TODO: unsupported: cursor :: P5 -> UnsupportedProduct -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/curve)
 curve :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -638,11 +659,11 @@ deviceShaken p5  = runFn1 deviceShakenImpl p5
 deviceTurned :: P5 -> (Effect Unit)
 deviceTurned p5  = runFn1 deviceTurnedImpl p5 
 
--- TODO: unsupported: directionalLight :: P5 -> Unsupported(Number[]|String|p5.Color) -> Unsupported(p5.Vector) -> (Effect Unit)
+-- TODO: unsupported: directionalLight :: P5 -> UnsupportedProduct -> Unsupported(p5.Vector) -> (Effect Unit)
 
 -- TODO: unsupported: directionalLight2 :: P5 -> Number -> Number -> Number -> Unsupported(p5.Vector) -> (Effect Unit)
 
--- TODO: unsupported: directionalLight3 :: P5 -> Unsupported(Number[]|String|p5.Color) -> Number -> Number -> Number -> (Effect Unit)
+-- TODO: unsupported: directionalLight3 :: P5 -> UnsupportedProduct -> Number -> Number -> Number -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 directionalLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -662,7 +683,7 @@ dist2 p5 x1 y1 z1 x2 y2 z2 = runFn7 dist2Impl p5 x1 y1 z1 x2 y2 z2
 
 -- TODO: unsupported: doubleClicked :: P5 -> Unsupported(Object) -> (Effect Unit)
 
--- TODO: unsupported: downloadFile :: P5 -> Unsupported(String|Blob) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
+-- TODO: unsupported: downloadFile :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ellipse)
 ellipse :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
@@ -728,7 +749,7 @@ frameRate2 p5 fps = runFn2 frameRate2Impl p5 fps
 fullscreen :: P5 -> (Maybe Boolean) -> Boolean
 fullscreen p5 val = runFn2 fullscreenImpl p5 (maybe undefined unsafeToForeign val)
 
--- TODO: unsupported: get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> Unsupported(Number[]|p5.Image)
+-- TODO: unsupported: get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> UnsupportedProduct
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/getURL)
 getURL :: P5 -> String
@@ -740,7 +761,7 @@ getURL p5  = runFn1 getURLImpl p5
 getURLPath :: P5 -> (Array String)
 getURLPath p5  = runFn1 getURLPathImpl p5 
 
--- TODO: unsupported: green :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+-- TODO: unsupported: green :: P5 -> UnsupportedProduct -> Number
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/hex)
 hex :: P5 -> Number -> (Maybe Number) -> String
@@ -760,27 +781,29 @@ hour p5  = runFn1 hourImpl p5
 
 -- TODO: unsupported: httpGet :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 
--- TODO: unsupported: httpGet2 :: P5 -> String -> Unsupported(Object|Boolean) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpGet2 :: P5 -> String -> UnsupportedProduct -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 
--- TODO: unsupported: httpGet3 :: P5 -> String -> (Maybe String) -> Unsupported(Object|Boolean) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpGet3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 
 -- TODO: unsupported: httpPost :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 
--- TODO: unsupported: httpPost2 :: P5 -> String -> Unsupported(Object|Boolean) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpPost2 :: P5 -> String -> UnsupportedProduct -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 
--- TODO: unsupported: httpPost3 :: P5 -> String -> (Maybe String) -> Unsupported(Object|Boolean) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpPost3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 
--- TODO: unsupported: hue :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+-- TODO: unsupported: hue :: P5 -> UnsupportedProduct -> Number
 
--- TODO: unsupported: image :: P5 -> Unsupported(p5.Image|p5.Element) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- TODO: unsupported: image :: P5 -> UnsupportedProduct -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
--- TODO: unsupported: image2 :: P5 -> Unsupported(p5.Image|p5.Element) -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- TODO: unsupported: image2 :: P5 -> UnsupportedProduct -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
 -- TODO: unsupported: imageMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
 -- TODO: unsupported: int :: P5 -> Unsupported(Array) -> (Array Number)
 
--- TODO: unsupported: int2 :: P5 -> Unsupported(String|Boolean|Number) -> (Maybe Int) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/int)
+int2 :: P5 -> NumberOrStringOrBoolean -> (Maybe Int) -> Number
+int2 p5 n radix = runFn3 int2Impl p5 n (maybe undefined unsafeToForeign radix)
 
 -- TODO: unsupported: join :: P5 -> Unsupported(Array) -> String -> String
 
@@ -806,7 +829,7 @@ lerp p5 start stop amt = runFn4 lerpImpl p5 start stop amt
 
 -- TODO: unsupported: lerpColor :: P5 -> Unsupported(p5.Color) -> Unsupported(p5.Color) -> Number -> Unsupported(p5.Color)
 
--- TODO: unsupported: lightness :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+-- TODO: unsupported: lightness :: P5 -> UnsupportedProduct -> Number
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/line)
 line :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -822,11 +845,11 @@ line2 p5 x1 y1 z1 x2 y2 z2 = runFn7 line2Impl p5 x1 y1 z1 x2 y2 z2
 
 -- TODO: unsupported: loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Unsupported(p5.Image)
 
--- TODO: unsupported: loadJSON :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object|Array)
+-- TODO: unsupported: loadJSON :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct
 
--- TODO: unsupported: loadJSON2 :: P5 -> String -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object|Array)
+-- TODO: unsupported: loadJSON2 :: P5 -> String -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct
 
--- TODO: unsupported: loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object|Array)
+-- TODO: unsupported: loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct
 
 -- TODO: unsupported: loadModel :: P5 -> String -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Unsupported(p5.Geometry)
 
@@ -912,13 +935,17 @@ month p5  = runFn1 monthImpl p5
 
 -- TODO: unsupported: mouseWheel :: P5 -> Unsupported(Object) -> (Effect Unit)
 
--- TODO: unsupported: nf :: P5 -> Unsupported(Number|String) -> Unsupported(Integer|String) -> Unsupported(Integer|String) -> String
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/nf)
+nf :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> String
+nf p5 num left right = runFn4 nfImpl p5 num (maybe undefined unsafeToForeign left) (maybe undefined unsafeToForeign right)
 
--- TODO: unsupported: nf2 :: P5 -> Unsupported(Array) -> Unsupported(Integer|String) -> Unsupported(Integer|String) -> (Array String)
+-- TODO: unsupported: nf2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> (Array String)
 
--- TODO: unsupported: nfc :: P5 -> Unsupported(Number|String) -> Unsupported(Integer|String) -> String
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
+nfc :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> String
+nfc p5 num right = runFn3 nfcImpl p5 num (maybe undefined unsafeToForeign right)
 
--- TODO: unsupported: nfc2 :: P5 -> Unsupported(Array) -> Unsupported(Integer|String) -> (Array String)
+-- TODO: unsupported: nfc2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Array String)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfp)
 nfp :: P5 -> Number -> (Maybe Int) -> (Maybe Int) -> String
@@ -1014,11 +1041,11 @@ plane p5 width height detailX detailY = runFn5 planeImpl p5 (maybe undefined uns
 point :: P5 -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 point p5 x y z = runFn4 pointImpl p5 x y (maybe undefined unsafeToForeign z)
 
--- TODO: unsupported: pointLight :: P5 -> Unsupported(Number[]|String|p5.Color) -> Unsupported(p5.Vector) -> (Effect Unit)
+-- TODO: unsupported: pointLight :: P5 -> UnsupportedProduct -> Unsupported(p5.Vector) -> (Effect Unit)
 
 -- TODO: unsupported: pointLight2 :: P5 -> Number -> Number -> Number -> Unsupported(p5.Vector) -> (Effect Unit)
 
--- TODO: unsupported: pointLight3 :: P5 -> Unsupported(Number[]|String|p5.Color) -> Number -> Number -> Number -> (Effect Unit)
+-- TODO: unsupported: pointLight3 :: P5 -> UnsupportedProduct -> Number -> Number -> Number -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 pointLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -1082,7 +1109,7 @@ rect2 p5 x y w h tl tr br bl = runFn9 rect2Impl p5 x y w h (maybe undefined unsa
 
 -- TODO: unsupported: rectMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
--- TODO: unsupported: red :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+-- TODO: unsupported: red :: P5 -> UnsupportedProduct -> Number
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/redraw)
 redraw :: P5 -> (Maybe Int) -> (Effect Unit)
@@ -1102,7 +1129,7 @@ resizeCanvas p5 w h noRedraw = runFn4 resizeCanvasImpl p5 w h (maybe undefined u
 
 -- TODO: unsupported: reverse :: P5 -> Unsupported(Array) -> Unsupported(Array)
 
--- TODO: unsupported: rotate :: P5 -> Number -> Unsupported(p5.Vector|Number[]) -> (Effect Unit)
+-- TODO: unsupported: rotate :: P5 -> Number -> UnsupportedProduct -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/rotateX)
 rotateX :: P5 -> Number -> (Effect Unit)
@@ -1120,19 +1147,19 @@ rotateZ p5 angle = runFn2 rotateZImpl p5 angle
 round :: P5 -> Number -> Int
 round p5 n = runFn2 roundImpl p5 n
 
--- TODO: unsupported: saturation :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+-- TODO: unsupported: saturation :: P5 -> UnsupportedProduct -> Number
 
--- TODO: unsupported: save :: P5 -> Unsupported(Object|String) -> (Maybe String) -> Unsupported(Boolean|String) -> (Effect Unit)
+-- TODO: unsupported: save :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe StringOrBoolean) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/saveCanvas)
 saveCanvas :: P5 -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 saveCanvas p5 filename extension = runFn3 saveCanvasImpl p5 (maybe undefined unsafeToForeign filename) (maybe undefined unsafeToForeign extension)
 
--- TODO: unsupported: saveCanvas2 :: P5 -> Unsupported(p5.Element|HTMLCanvasElement) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
+-- TODO: unsupported: saveCanvas2 :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 
 -- TODO: unsupported: saveFrames :: P5 -> String -> String -> Number -> Number -> Unsupported(Function(Array)) -> (Effect Unit)
 
--- TODO: unsupported: saveJSON :: P5 -> Unsupported(Array|Object) -> String -> (Maybe Boolean) -> (Effect Unit)
+-- TODO: unsupported: saveJSON :: P5 -> UnsupportedProduct -> String -> (Maybe Boolean) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/saveStrings)
 saveStrings :: P5 -> (Array String) -> String -> (Maybe String) -> (Effect Unit)
@@ -1140,15 +1167,15 @@ saveStrings p5 list filename extension = runFn4 saveStringsImpl p5 list filename
 
 -- TODO: unsupported: saveTable :: P5 -> Unsupported(p5.Table) -> String -> (Maybe String) -> (Effect Unit)
 
--- TODO: unsupported: scale :: P5 -> Unsupported(p5.Vector|Number[]) -> (Effect Unit)
+-- TODO: unsupported: scale :: P5 -> UnsupportedProduct -> (Effect Unit)
 
--- TODO: unsupported: scale2 :: P5 -> Unsupported(Number|p5.Vector|Number[]) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- TODO: unsupported: scale2 :: P5 -> UnsupportedProduct -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/second)
 second :: P5 -> Int
 second p5  = runFn1 secondImpl p5 
 
--- TODO: unsupported: set :: P5 -> Number -> Number -> Unsupported(Number|Number[]|Object) -> (Effect Unit)
+-- TODO: unsupported: set :: P5 -> Number -> Number -> UnsupportedProduct -> (Effect Unit)
 
 -- TODO: unsupported: setAttributes :: P5 -> Unsupported(Object) -> (Effect Unit)
 
@@ -1190,7 +1217,7 @@ smooth p5  = runFn1 smoothImpl p5
 
 -- TODO: unsupported: sort :: P5 -> Unsupported(Array) -> (Maybe Int) -> Unsupported(Array)
 
--- TODO: unsupported: specularMaterial :: P5 -> Unsupported(Number[]|String|p5.Color) -> (Effect Unit)
+-- TODO: unsupported: specularMaterial :: P5 -> UnsupportedProduct -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
 specularMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
@@ -1218,7 +1245,7 @@ sq p5 n = runFn2 sqImpl p5 n
 sqrt :: P5 -> Number -> Number
 sqrt p5 n = runFn2 sqrtImpl p5 n
 
--- TODO: unsupported: str :: P5 -> Unsupported(String|Boolean|Number|Array) -> String
+-- TODO: unsupported: str :: P5 -> UnsupportedProduct -> String
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 stroke :: P5 -> String -> (Effect Unit)
@@ -1250,7 +1277,7 @@ strokeWeight p5 weight = runFn2 strokeWeightImpl p5 weight
 tan :: P5 -> Number -> Number
 tan p5 angle = runFn2 tanImpl p5 angle
 
--- TODO: unsupported: text :: P5 -> Unsupported(String|Object|Array|Number|Boolean) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- TODO: unsupported: text :: P5 -> UnsupportedProduct -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
 -- TODO: unsupported: textAlign :: P5 -> Unsupported(Object)
 
@@ -1266,7 +1293,7 @@ textDescent p5  = runFn1 textDescentImpl p5
 
 -- TODO: unsupported: textFont :: P5 -> Unsupported(Object)
 
--- TODO: unsupported: textFont2 :: P5 -> Unsupported(Object|String) -> (Maybe Number) -> (Effect Unit)
+-- TODO: unsupported: textFont2 :: P5 -> UnsupportedProduct -> (Maybe Number) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/textLeading)
 textLeading :: P5 -> Number
@@ -1294,7 +1321,7 @@ textStyle p5  = runFn1 textStyleImpl p5
 textWidth :: P5 -> String -> Number
 textWidth p5 theText = runFn2 textWidthImpl p5 theText
 
--- TODO: unsupported: texture :: P5 -> Unsupported(p5.Image|p5.MediaElement|p5.Graphics) -> (Effect Unit)
+-- TODO: unsupported: texture :: P5 -> UnsupportedProduct -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 tint :: P5 -> String -> (Effect Unit)

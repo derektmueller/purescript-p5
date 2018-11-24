@@ -3,22 +3,13 @@ module Main where
 import Prelude 
   (Unit, show, bind, (<$>), pure, discard, unit, ($))
 import Effect (Effect)
---import Effect.Console (log)
+import Effect.Console (log)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Int (toNumber)
 import Web.HTML (window)
 import Web.HTML.Window (innerWidth, innerHeight)
 
 import P5 
-  ( background3
-  , createCanvas
-  , draw
-  , getP5
-  , setup
-  , stroke
-  , strokeWeight
-  , rect
-  )
 import P5.Types (P5)
 
 type AppState = {

@@ -1,6 +1,6 @@
-Progress: implemented **179** out of **323** methods
+Progress: implemented **184** out of **323** methods
 ```
-alpha :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+alpha :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/alpha)
 ```
@@ -8,7 +8,7 @@ ambientLight3 :: P5 -> Unsupported(p5.Color) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 ```
-ambientMaterial :: P5 -> Unsupported(Number[]|String|p5.Color) -> (Effect Unit)
+ambientMaterial :: P5 -> UnsupportedProduct -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
 ```
@@ -56,29 +56,21 @@ blendMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/blendMode)
 ```
-blue :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+blue :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/blue)
 ```
-boolean :: P5 -> Unsupported(String|Boolean|Number|Array) -> Boolean
+boolean :: P5 -> UnsupportedProduct -> Boolean
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/boolean)
 ```
-brightness :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+brightness :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/brightness)
-```
-byte :: P5 -> Unsupported(String|Boolean|Number) -> Number
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/byte)
 ```
 byte2 :: P5 -> Unsupported(Array) -> (Array Number)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/byte)
-```
-char :: P5 -> Unsupported(String|Number) -> String
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/char)
 ```
 char2 :: P5 -> Unsupported(Array) -> (Array String)
 ```
@@ -116,7 +108,7 @@ concat :: P5 -> Unsupported(Array) -> Unsupported(Array) -> Unsupported(Array)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/concat)
 ```
-copy2 :: P5 -> Unsupported(p5.Image|p5.Element) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
+copy2 :: P5 -> UnsupportedProduct -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/copy)
 ```
@@ -164,7 +156,7 @@ createWriter :: P5 -> String -> (Maybe String) -> Unsupported(p5.PrintWriter)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/createWriter)
 ```
-cursor :: P5 -> Unsupported(String|Constant) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+cursor :: P5 -> UnsupportedProduct -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/cursor)
 ```
@@ -180,7 +172,7 @@ debugMode4 :: P5 -> Unsupported(Constant) -> (Maybe Number) -> (Maybe Number) ->
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
 ```
-directionalLight :: P5 -> Unsupported(Number[]|String|p5.Color) -> Unsupported(p5.Vector) -> (Effect Unit)
+directionalLight :: P5 -> UnsupportedProduct -> Unsupported(p5.Vector) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 ```
@@ -188,7 +180,7 @@ directionalLight2 :: P5 -> Number -> Number -> Number -> Unsupported(p5.Vector) 
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 ```
-directionalLight3 :: P5 -> Unsupported(Number[]|String|p5.Color) -> Number -> Number -> Number -> (Effect Unit)
+directionalLight3 :: P5 -> UnsupportedProduct -> Number -> Number -> Number -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 ```
@@ -196,7 +188,7 @@ doubleClicked :: P5 -> Unsupported(Object) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/doubleClicked)
 ```
-downloadFile :: P5 -> Unsupported(String|Blob) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
+downloadFile :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/downloadFile)
 ```
@@ -216,7 +208,7 @@ filter :: P5 -> Unsupported(Constant) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/filter)
 ```
-get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> Unsupported(Number[]|p5.Image)
+get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> UnsupportedProduct
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/get)
 ```
@@ -224,7 +216,7 @@ getURLParams :: P5 -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/getURLParams)
 ```
-green :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+green :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/green)
 ```
@@ -240,11 +232,11 @@ httpGet :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Uns
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpGet)
 ```
-httpGet2 :: P5 -> String -> Unsupported(Object|Boolean) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpGet2 :: P5 -> String -> UnsupportedProduct -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpGet)
 ```
-httpGet3 :: P5 -> String -> (Maybe String) -> Unsupported(Object|Boolean) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpGet3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpGet)
 ```
@@ -252,23 +244,23 @@ httpPost :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Un
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpPost)
 ```
-httpPost2 :: P5 -> String -> Unsupported(Object|Boolean) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpPost2 :: P5 -> String -> UnsupportedProduct -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpPost)
 ```
-httpPost3 :: P5 -> String -> (Maybe String) -> Unsupported(Object|Boolean) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpPost3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpPost)
 ```
-hue :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+hue :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/hue)
 ```
-image :: P5 -> Unsupported(p5.Image|p5.Element) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+image :: P5 -> UnsupportedProduct -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/image)
 ```
-image2 :: P5 -> Unsupported(p5.Image|p5.Element) -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+image2 :: P5 -> UnsupportedProduct -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/image)
 ```
@@ -280,10 +272,6 @@ int :: P5 -> Unsupported(Array) -> (Array Number)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/int)
 ```
-int2 :: P5 -> Unsupported(String|Boolean|Number) -> (Maybe Int) -> Number
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/int)
-```
 join :: P5 -> Unsupported(Array) -> String -> String
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/join)
@@ -292,7 +280,7 @@ lerpColor :: P5 -> Unsupported(p5.Color) -> Unsupported(p5.Color) -> Number -> U
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/lerpColor)
 ```
-lightness :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+lightness :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/lightness)
 ```
@@ -308,15 +296,15 @@ loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Func
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
 ```
-loadJSON :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object|Array)
+loadJSON :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadJSON)
 ```
-loadJSON2 :: P5 -> String -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object|Array)
+loadJSON2 :: P5 -> String -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadJSON)
 ```
-loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object|Array)
+loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadJSON)
 ```
@@ -376,19 +364,11 @@ mouseWheel :: P5 -> Unsupported(Object) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseWheel)
 ```
-nf :: P5 -> Unsupported(Number|String) -> Unsupported(Integer|String) -> Unsupported(Integer|String) -> String
+nf2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> (Array String)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/nf)
 ```
-nf2 :: P5 -> Unsupported(Array) -> Unsupported(Integer|String) -> Unsupported(Integer|String) -> (Array String)
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/nf)
-```
-nfc :: P5 -> Unsupported(Number|String) -> Unsupported(Integer|String) -> String
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
-```
-nfc2 :: P5 -> Unsupported(Array) -> Unsupported(Integer|String) -> (Array String)
+nfc2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Array String)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
 ```
@@ -396,7 +376,7 @@ nfs2 :: P5 -> Unsupported(Array) -> (Maybe Int) -> (Maybe Int) -> (Array String)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/nfs)
 ```
-pointLight :: P5 -> Unsupported(Number[]|String|p5.Color) -> Unsupported(p5.Vector) -> (Effect Unit)
+pointLight :: P5 -> UnsupportedProduct -> Unsupported(p5.Vector) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 ```
@@ -404,7 +384,7 @@ pointLight2 :: P5 -> Number -> Number -> Number -> Unsupported(p5.Vector) -> (Ef
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 ```
-pointLight3 :: P5 -> Unsupported(Number[]|String|p5.Color) -> Number -> Number -> Number -> (Effect Unit)
+pointLight3 :: P5 -> UnsupportedProduct -> Number -> Number -> Number -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 ```
@@ -420,7 +400,7 @@ rectMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/rectMode)
 ```
-red :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+red :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/red)
 ```
@@ -428,19 +408,19 @@ reverse :: P5 -> Unsupported(Array) -> Unsupported(Array)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/reverse)
 ```
-rotate :: P5 -> Number -> Unsupported(p5.Vector|Number[]) -> (Effect Unit)
+rotate :: P5 -> Number -> UnsupportedProduct -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/rotate)
 ```
-saturation :: P5 -> Unsupported(p5.Color|Number[]|String) -> Number
+saturation :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/saturation)
 ```
-save :: P5 -> Unsupported(Object|String) -> (Maybe String) -> Unsupported(Boolean|String) -> (Effect Unit)
+save :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe StringOrBoolean) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/save)
 ```
-saveCanvas2 :: P5 -> Unsupported(p5.Element|HTMLCanvasElement) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
+saveCanvas2 :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/saveCanvas)
 ```
@@ -448,7 +428,7 @@ saveFrames :: P5 -> String -> String -> Number -> Number -> Unsupported(Function
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/saveFrames)
 ```
-saveJSON :: P5 -> Unsupported(Array|Object) -> String -> (Maybe Boolean) -> (Effect Unit)
+saveJSON :: P5 -> UnsupportedProduct -> String -> (Maybe Boolean) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/saveJSON)
 ```
@@ -456,15 +436,15 @@ saveTable :: P5 -> Unsupported(p5.Table) -> String -> (Maybe String) -> (Effect 
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/saveTable)
 ```
-scale :: P5 -> Unsupported(p5.Vector|Number[]) -> (Effect Unit)
+scale :: P5 -> UnsupportedProduct -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/scale)
 ```
-scale2 :: P5 -> Unsupported(Number|p5.Vector|Number[]) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+scale2 :: P5 -> UnsupportedProduct -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/scale)
 ```
-set :: P5 -> Number -> Number -> Unsupported(Number|Number[]|Object) -> (Effect Unit)
+set :: P5 -> Number -> Number -> UnsupportedProduct -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/set)
 ```
@@ -492,7 +472,7 @@ sort :: P5 -> Unsupported(Array) -> (Maybe Int) -> Unsupported(Array)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/sort)
 ```
-specularMaterial :: P5 -> Unsupported(Number[]|String|p5.Color) -> (Effect Unit)
+specularMaterial :: P5 -> UnsupportedProduct -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
 ```
@@ -500,7 +480,7 @@ splice :: P5 -> Unsupported(Array) -> Unsupported(Any) -> Int -> Unsupported(Arr
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/splice)
 ```
-str :: P5 -> Unsupported(String|Boolean|Number|Array) -> String
+str :: P5 -> UnsupportedProduct -> String
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/str)
 ```
@@ -516,7 +496,7 @@ subset :: P5 -> Unsupported(Array) -> Int -> (Maybe Int) -> Unsupported(Array)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/subset)
 ```
-text :: P5 -> Unsupported(String|Object|Array|Number|Boolean) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+text :: P5 -> UnsupportedProduct -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/text)
 ```
@@ -532,7 +512,7 @@ textFont :: P5 -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/textFont)
 ```
-textFont2 :: P5 -> Unsupported(Object|String) -> (Maybe Number) -> (Effect Unit)
+textFont2 :: P5 -> UnsupportedProduct -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/textFont)
 ```
@@ -540,7 +520,7 @@ textStyle2 :: P5 -> Unsupported(Constant) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/textStyle)
 ```
-texture :: P5 -> Unsupported(p5.Image|p5.MediaElement|p5.Graphics) -> (Effect Unit)
+texture :: P5 -> UnsupportedProduct -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/texture)
 ```

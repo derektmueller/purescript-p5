@@ -108,6 +108,9 @@ exports.boxImpl = function(p, width, height, depth, detailX, detailY) {
     callP5(p, p.box, [width, height, depth, detailX, detailY]);
   };
 };
+exports.byteImpl = function(p, n) {
+  return callP5(p, p.byte, [n.value0]);
+};
 exports.cameraImpl = function(p, x, y, z, centerX, centerY, centerZ, upX, upY, upZ) {
   return function() {
     callP5(p, p.camera, [x, y, z, centerX, centerY, centerZ, upX, upY, upZ]);
@@ -115,6 +118,9 @@ exports.cameraImpl = function(p, x, y, z, centerX, centerY, centerZ, upX, upY, u
 };
 exports.ceilImpl = function(p, n) {
   return callP5(p, p.ceil, [n]);
+};
+exports.charImpl = function(p, n) {
+  return callP5(p, p.char, [n.value0]);
 };
 exports.clearImpl = function(p) {
   return function() {
@@ -293,6 +299,9 @@ exports.hex2Impl = function(p, ns, digits) {
 exports.hourImpl = function(p) {
   return callP5(p, p.hour, []);
 };
+exports.int2Impl = function(p, n, radix) {
+  return callP5(p, p.int, [n.value0, radix]);
+};
 exports.keyIsDownImpl = function(p, code) {
   return callP5(p, p.keyIsDown, [code]);
 };
@@ -369,6 +378,12 @@ exports.minuteImpl = function(p) {
 };
 exports.monthImpl = function(p) {
   return callP5(p, p.month, []);
+};
+exports.nfImpl = function(p, num, left, right) {
+  return callP5(p, p.nf, [num.value0, left, right]);
+};
+exports.nfcImpl = function(p, num, right) {
+  return callP5(p, p.nfc, [num.value0, right]);
 };
 exports.nfpImpl = function(p, num, left, right) {
   return callP5(p, p.nfp, [num, left, right]);
