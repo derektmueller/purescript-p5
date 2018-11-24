@@ -32,7 +32,9 @@ module.exports = {
   entry: {
     basic: './examples/basic/index.js',
     "structure-width-and-height": 
-      './examples/structure-width-and-height/index.js'
+      './examples/structure-width-and-height/index.js',
+    "hello-p5-simple-shapes": 
+      './examples/hello-p5-simple-shapes/index.js'
   },
 
   output: {

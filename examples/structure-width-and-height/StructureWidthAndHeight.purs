@@ -52,6 +52,7 @@ main mAppState = do
       fill4 p 255.0 Nothing
       rect p (toNumber i) 0.0 10.0 (toNumber h) Nothing Nothing
     ) (enumFromThenTo 0 20 h)
+
     pure unit
 
   pure $ Just { p5: p }
