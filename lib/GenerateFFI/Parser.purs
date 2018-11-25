@@ -131,10 +131,9 @@ readP5Type f = do
             _ -> P5Unsupported str'
             --_ -> fail $ TypeMismatch "P5Type" str
       p5Types = toP5Type <$> typeStrs
-
   case uncons p5Types of
     Just {head: x, tail: xs} -> do
-      pure $ foldr (\a b -> P5Or a b) x xs
+      pure $ foldl (\b a -> P5Or b a) x xs
     Nothing -> do
       case head p5Types of 
         Just x -> pure x

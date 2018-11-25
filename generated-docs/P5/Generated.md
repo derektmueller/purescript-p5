@@ -1,28 +1,28 @@
 ## Module P5.Generated
 
-#### `NumberOrStringOrBoolean`
+#### `BooleanOrNumberOrString`
 
 ``` purescript
-data NumberOrStringOrBoolean
-  = NumberOrStringOrBooleanNumber Number
-  | NumberOrStringOrBooleanString String
-  | NumberOrStringOrBooleanBoolean Boolean
+data BooleanOrNumberOrString
+  = BooleanOrNumberOrStringBoolean Boolean
+  | BooleanOrNumberOrStringNumber Number
+  | BooleanOrNumberOrStringString String
 ```
 
-#### `StringOrNumber`
+#### `NumberOrString`
 
 ``` purescript
-data StringOrNumber
-  = StringOrNumberString String
-  | StringOrNumberNumber Number
+data NumberOrString
+  = NumberOrStringNumber Number
+  | NumberOrStringString String
 ```
 
-#### `StringOrInt`
+#### `IntOrString`
 
 ``` purescript
-data StringOrInt
-  = StringOrIntString String
-  | StringOrIntInt Int
+data IntOrString
+  = IntOrStringInt Int
+  | IntOrStringString String
 ```
 
 #### `abs`
@@ -212,7 +212,7 @@ box :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -
 #### `byte`
 
 ``` purescript
-byte :: P5 -> NumberOrStringOrBoolean -> Number
+byte :: P5 -> BooleanOrNumberOrString -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/byte)
@@ -236,7 +236,7 @@ ceil :: P5 -> Number -> Int
 #### `char`
 
 ``` purescript
-char :: P5 -> StringOrNumber -> String
+char :: P5 -> NumberOrString -> String
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/char)
@@ -588,7 +588,7 @@ hour :: P5 -> Int
 #### `int2`
 
 ``` purescript
-int2 :: P5 -> NumberOrStringOrBoolean -> (Maybe Int) -> Number
+int2 :: P5 -> BooleanOrNumberOrString -> (Maybe Int) -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/int)
@@ -764,7 +764,7 @@ month :: P5 -> Int
 #### `nf`
 
 ``` purescript
-nf :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> String
+nf :: P5 -> NumberOrString -> (Maybe IntOrString) -> (Maybe IntOrString) -> String
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/nf)
@@ -772,7 +772,7 @@ nf :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> Stri
 #### `nfc`
 
 ``` purescript
-nfc :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> String
+nfc :: P5 -> NumberOrString -> (Maybe IntOrString) -> String
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/nfc)

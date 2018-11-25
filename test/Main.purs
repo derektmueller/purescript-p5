@@ -105,19 +105,19 @@ main = do
           describe "nf" do
             it "formats numbers into strings" do
               p <- liftEffect getP5
-              nf p (StringOrNumberNumber 1.1) 
-                (Just (StringOrIntInt 5)) 
-                (Just (StringOrIntInt 5))
+              nf p (NumberOrStringNumber 1.1) 
+                (Just (IntOrStringInt 5)) 
+                (Just (IntOrStringInt 5))
                 `shouldEqual` "00001.10000"
-              nf p (StringOrNumberNumber 1.1) 
+              nf p (NumberOrStringNumber 1.1) 
                 Nothing
-                (Just (StringOrIntInt 5))
+                (Just (IntOrStringInt 5))
                 `shouldEqual` "1.10000"
-              nf p (StringOrNumberNumber 1.1) 
-                (Just (StringOrIntInt 5)) 
+              nf p (NumberOrStringNumber 1.1) 
+                (Just (IntOrStringInt 5)) 
                 Nothing
                 `shouldEqual` "00001.1"
-              nf p (StringOrNumberNumber 1.1) 
+              nf p (NumberOrStringNumber 1.1) 
                 Nothing
                 Nothing
                 `shouldEqual` "1.1"
@@ -125,9 +125,9 @@ main = do
           describe "char" do
             it "converts to character representation" do
               p <- liftEffect getP5
-              char p (StringOrNumberNumber 65.0)
+              char p (NumberOrStringNumber 65.0)
                 `shouldEqual` "A"
-              char p (StringOrNumberString "65")
+              char p (NumberOrStringString "65")
                 `shouldEqual` "A"
       describe "typography" do
         describe "attributes" do

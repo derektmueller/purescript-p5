@@ -1,7 +1,7 @@
 module P5.Generated
-  ( NumberOrStringOrBoolean(..)
-  , StringOrNumber(..)
-  , StringOrInt(..)
+  ( BooleanOrNumberOrString(..)
+  , NumberOrString(..)
+  , IntOrString(..)
   , abs
   , acos
   , ambientLight
@@ -196,9 +196,9 @@ import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
 
-data NumberOrStringOrBoolean = NumberOrStringOrBooleanNumber Number | NumberOrStringOrBooleanString String | NumberOrStringOrBooleanBoolean Boolean
-data StringOrNumber = StringOrNumberString String | StringOrNumberNumber Number
-data StringOrInt = StringOrIntString String | StringOrIntInt Int
+data BooleanOrNumberOrString = BooleanOrNumberOrStringBoolean Boolean | BooleanOrNumberOrStringNumber Number | BooleanOrNumberOrStringString String
+data NumberOrString = NumberOrStringNumber Number | NumberOrStringString String
+data IntOrString = IntOrStringInt Int | IntOrStringString String
 
 foreign import absImpl :: Fn2 P5 Number Number
 foreign import acosImpl :: Fn2 P5 Number Number
@@ -223,10 +223,10 @@ foreign import bezierTangentImpl :: Fn6 P5 Number Number Number Number Number Nu
 foreign import bezierVertexImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import bezierVertex2Impl :: Fn10 P5 Number Number Number Number Number Number Number Number Number (Effect Unit)
 foreign import boxImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
-foreign import byteImpl :: Fn2 P5 NumberOrStringOrBoolean Number
+foreign import byteImpl :: Fn2 P5 BooleanOrNumberOrString Number
 foreign import cameraImpl :: Fn10 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import ceilImpl :: Fn2 P5 Number Int
-foreign import charImpl :: Fn2 P5 StringOrNumber String
+foreign import charImpl :: Fn2 P5 NumberOrString String
 foreign import clearImpl :: Fn1 P5 (Effect Unit)
 foreign import coneImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Maybe Boolean) (Effect Unit)
 foreign import constrainImpl :: Fn4 P5 Number Number Number Number
@@ -270,7 +270,7 @@ foreign import getURLPathImpl :: Fn1 P5 (Array String)
 foreign import hexImpl :: Fn3 P5 Number (Maybe Number) String
 foreign import hex2Impl :: Fn3 P5 (Array Number) (Maybe Number) (Array String)
 foreign import hourImpl :: Fn1 P5 Int
-foreign import int2Impl :: Fn3 P5 NumberOrStringOrBoolean (Maybe Int) Number
+foreign import int2Impl :: Fn3 P5 BooleanOrNumberOrString (Maybe Int) Number
 foreign import keyIsDownImpl :: Fn2 P5 Number Boolean
 foreign import keyPressedImpl :: Fn1 P5 (Effect Unit)
 foreign import keyReleasedImpl :: Fn1 P5 (Effect Unit)
@@ -292,8 +292,8 @@ foreign import minImpl :: Fn2 P5 (Array Number) Number
 foreign import min2Impl :: Fn3 P5 Number Number Number
 foreign import minuteImpl :: Fn1 P5 Int
 foreign import monthImpl :: Fn1 P5 Int
-foreign import nfImpl :: Fn4 P5 StringOrNumber (Maybe StringOrInt) (Maybe StringOrInt) String
-foreign import nfcImpl :: Fn3 P5 StringOrNumber (Maybe StringOrInt) String
+foreign import nfImpl :: Fn4 P5 NumberOrString (Maybe IntOrString) (Maybe IntOrString) String
+foreign import nfcImpl :: Fn3 P5 NumberOrString (Maybe IntOrString) String
 foreign import nfpImpl :: Fn4 P5 Number (Maybe Int) (Maybe Int) String
 foreign import nfp2Impl :: Fn4 P5 (Array Number) (Maybe Int) (Maybe Int) (Array String)
 foreign import nfsImpl :: Fn4 P5 Number (Maybe Int) (Maybe Int) String
@@ -512,7 +512,7 @@ box p5 width height depth detailX detailY = runFn6 boxImpl p5 width height depth
 -- TODO: unsupported: brightness :: P5 -> UnsupportedProduct -> Number
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/byte)
-byte :: P5 -> NumberOrStringOrBoolean -> Number
+byte :: P5 -> BooleanOrNumberOrString -> Number
 byte p5 n = runFn2 byteImpl p5 n
 
 -- TODO: unsupported: byte2 :: P5 -> Unsupported(Array) -> (Array Number)
@@ -526,7 +526,7 @@ ceil :: P5 -> Number -> Int
 ceil p5 n = runFn2 ceilImpl p5 n
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/char)
-char :: P5 -> StringOrNumber -> String
+char :: P5 -> NumberOrString -> String
 char p5 n = runFn2 charImpl p5 n
 
 -- TODO: unsupported: char2 :: P5 -> Unsupported(Array) -> (Array String)
@@ -802,7 +802,7 @@ hour p5  = runFn1 hourImpl p5
 -- TODO: unsupported: int :: P5 -> Unsupported(Array) -> (Array Number)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/int)
-int2 :: P5 -> NumberOrStringOrBoolean -> (Maybe Int) -> Number
+int2 :: P5 -> BooleanOrNumberOrString -> (Maybe Int) -> Number
 int2 p5 n radix = runFn3 int2Impl p5 n radix
 
 -- TODO: unsupported: join :: P5 -> Unsupported(Array) -> String -> String
@@ -936,16 +936,16 @@ month p5  = runFn1 monthImpl p5
 -- TODO: unsupported: mouseWheel :: P5 -> Unsupported(Object) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nf)
-nf :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> String
+nf :: P5 -> NumberOrString -> (Maybe IntOrString) -> (Maybe IntOrString) -> String
 nf p5 num left right = runFn4 nfImpl p5 num left right
 
--- TODO: unsupported: nf2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> (Array String)
+-- TODO: unsupported: nf2 :: P5 -> Unsupported(Array) -> (Maybe IntOrString) -> (Maybe IntOrString) -> (Array String)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
-nfc :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> String
+nfc :: P5 -> NumberOrString -> (Maybe IntOrString) -> String
 nfc p5 num right = runFn3 nfcImpl p5 num right
 
--- TODO: unsupported: nfc2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Array String)
+-- TODO: unsupported: nfc2 :: P5 -> Unsupported(Array) -> (Maybe IntOrString) -> (Array String)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfp)
 nfp :: P5 -> Number -> (Maybe Int) -> (Maybe Int) -> String
@@ -1149,7 +1149,7 @@ round p5 n = runFn2 roundImpl p5 n
 
 -- TODO: unsupported: saturation :: P5 -> UnsupportedProduct -> Number
 
--- TODO: unsupported: save :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe StringOrBoolean) -> (Effect Unit)
+-- TODO: unsupported: save :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe BooleanOrString) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/saveCanvas)
 saveCanvas :: P5 -> (Maybe String) -> (Maybe String) -> (Effect Unit)

@@ -364,11 +364,11 @@ mouseWheel :: P5 -> Unsupported(Object) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseWheel)
 ```
-nf2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> (Array String)
+nf2 :: P5 -> Unsupported(Array) -> (Maybe IntOrString) -> (Maybe IntOrString) -> (Array String)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/nf)
 ```
-nfc2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Array String)
+nfc2 :: P5 -> Unsupported(Array) -> (Maybe IntOrString) -> (Array String)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
 ```
@@ -416,7 +416,7 @@ saturation :: P5 -> UnsupportedProduct -> Number
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/saturation)
 ```
-save :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe StringOrBoolean) -> (Effect Unit)
+save :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe BooleanOrString) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/save)
 ```
