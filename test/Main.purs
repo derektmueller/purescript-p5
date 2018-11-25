@@ -109,6 +109,34 @@ main = do
                 (Just (StringOrIntInt 5)) 
                 (Just (StringOrIntInt 5))
                 `shouldEqual` "00001.10000"
+              nf p (StringOrNumberNumber 1.1) 
+                Nothing
+                (Just (StringOrIntInt 5))
+                `shouldEqual` "1.10000"
+              nf p (StringOrNumberNumber 1.1) 
+                (Just (StringOrIntInt 5)) 
+                Nothing
+                `shouldEqual` "00001.1"
+              nf p (StringOrNumberNumber 1.1) 
+                Nothing
+                Nothing
+                `shouldEqual` "1.1"
+        describe "conversion" do
+          describe "char" do
+            it "converts to character representation" do
+              p <- liftEffect getP5
+              char p (StringOrNumberNumber 65.0)
+                `shouldEqual` "A"
+              char p (StringOrNumberString "65")
+                `shouldEqual` "A"
+      describe "typography" do
+        describe "attributes" do
+          describe "textLeading" do
+            it "gets the text leading" do
+              p <- liftEffect getP5
+              liftEffect $ textLeading2 p 1.0
+              let leading = textLeading p
+              leading `shouldEqual` 1.0
   where
     testConfig = defaultConfig { timeout = Just 10000 }
 
