@@ -204,17 +204,17 @@ foreign import absImpl :: Fn2 P5 Number Number
 foreign import acosImpl :: Fn2 P5 Number Number
 foreign import ambientLightImpl :: Fn2 P5 String (Effect Unit)
 foreign import ambientLight2Impl :: Fn2 P5 (Array Number) (Effect Unit)
-foreign import ambientLight4Impl :: Fn3 P5 Number Foreign (Effect Unit)
-foreign import ambientLight5Impl :: Fn5 P5 Number Number Number Foreign (Effect Unit)
-foreign import ambientMaterial2Impl :: Fn5 P5 Number Foreign Foreign Foreign (Effect Unit)
+foreign import ambientLight4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
+foreign import ambientLight5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
+foreign import ambientMaterial2Impl :: Fn5 P5 Number (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import applyMatrixImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import asinImpl :: Fn2 P5 Number Number
 foreign import atanImpl :: Fn2 P5 Number Number
 foreign import atan2Impl :: Fn3 P5 Number Number Number
 foreign import background2Impl :: Fn2 P5 (Array Number) (Effect Unit)
-foreign import background3Impl :: Fn3 P5 String Foreign (Effect Unit)
-foreign import background4Impl :: Fn3 P5 Number Foreign (Effect Unit)
-foreign import background6Impl :: Fn5 P5 Number Number Number Foreign (Effect Unit)
+foreign import background3Impl :: Fn3 P5 String (Maybe Number) (Effect Unit)
+foreign import background4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
+foreign import background6Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import beginContourImpl :: Fn1 P5 (Effect Unit)
 foreign import bezierImpl :: Fn9 P5 Number Number Number Number Number Number Number Number (Effect Unit)
 foreign import bezierDetailImpl :: Fn2 P5 Number (Effect Unit)
@@ -222,13 +222,13 @@ foreign import bezierPointImpl :: Fn6 P5 Number Number Number Number Number Numb
 foreign import bezierTangentImpl :: Fn6 P5 Number Number Number Number Number Number
 foreign import bezierVertexImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import bezierVertex2Impl :: Fn10 P5 Number Number Number Number Number Number Number Number Number (Effect Unit)
-foreign import boxImpl :: Fn6 P5 Foreign Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import boxImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import byteImpl :: Fn2 P5 NumberOrStringOrBoolean Number
-foreign import cameraImpl :: Fn10 P5 Foreign Foreign Foreign Foreign Foreign Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import cameraImpl :: Fn10 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import ceilImpl :: Fn2 P5 Number Int
 foreign import charImpl :: Fn2 P5 StringOrNumber String
 foreign import clearImpl :: Fn1 P5 (Effect Unit)
-foreign import coneImpl :: Fn6 P5 Foreign Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import coneImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Maybe Boolean) (Effect Unit)
 foreign import constrainImpl :: Fn4 P5 Number Number Number Number
 foreign import copyImpl :: Fn9 P5 Int Int Int Int Int Int Int Int (Effect Unit)
 foreign import cosImpl :: Fn2 P5 Number Number
@@ -238,11 +238,11 @@ foreign import curvePointImpl :: Fn6 P5 Number Number Number Number Number Numbe
 foreign import curveTangentImpl :: Fn6 P5 Number Number Number Number Number Number
 foreign import curveTightnessImpl :: Fn2 P5 Number (Effect Unit)
 foreign import curveVertexImpl :: Fn3 P5 Number Number (Effect Unit)
-foreign import curveVertex2Impl :: Fn4 P5 Number Number Foreign (Effect Unit)
-foreign import cylinderImpl :: Fn7 P5 Foreign Foreign Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import curveVertex2Impl :: Fn4 P5 Number Number (Maybe Number) (Effect Unit)
+foreign import cylinderImpl :: Fn7 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Maybe Boolean) (Maybe Boolean) (Effect Unit)
 foreign import dayImpl :: Fn1 P5 Int
 foreign import debugModeImpl :: Fn1 P5 (Effect Unit)
-foreign import debugMode5Impl :: Fn10 P5 Foreign Foreign Foreign Foreign Foreign Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import debugMode5Impl :: Fn10 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import degreesImpl :: Fn2 P5 Number Number
 foreign import deviceMovedImpl :: Fn1 P5 (Effect Unit)
 foreign import deviceShakenImpl :: Fn1 P5 (Effect Unit)
@@ -251,26 +251,26 @@ foreign import directionalLight4Impl :: Fn7 P5 Number Number Number Number Numbe
 foreign import displayDensityImpl :: Fn1 P5 Number
 foreign import distImpl :: Fn5 P5 Number Number Number Number Number
 foreign import dist2Impl :: Fn7 P5 Number Number Number Number Number Number Number
-foreign import ellipseImpl :: Fn5 P5 Number Number Number Foreign (Effect Unit)
+foreign import ellipseImpl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import ellipse2Impl :: Fn6 P5 Number Number Number Number Int (Effect Unit)
-foreign import ellipsoidImpl :: Fn6 P5 Foreign Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import ellipsoidImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import endContourImpl :: Fn1 P5 (Effect Unit)
 foreign import expImpl :: Fn2 P5 Number Number
 foreign import fillImpl :: Fn2 P5 String (Effect Unit)
 foreign import fill2Impl :: Fn2 P5 (Array Number) (Effect Unit)
-foreign import fill4Impl :: Fn3 P5 Number Foreign (Effect Unit)
-foreign import fill5Impl :: Fn5 P5 Number Number Number Foreign (Effect Unit)
+foreign import fill4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
+foreign import fill5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import floatImpl :: Fn2 P5 String Number
 foreign import floorImpl :: Fn2 P5 Number Int
 foreign import frameRateImpl :: Fn1 P5 Number
 foreign import frameRate2Impl :: Fn2 P5 Number (Effect Unit)
-foreign import fullscreenImpl :: Fn2 P5 Foreign Boolean
+foreign import fullscreenImpl :: Fn2 P5 (Maybe Boolean) Boolean
 foreign import getURLImpl :: Fn1 P5 String
 foreign import getURLPathImpl :: Fn1 P5 (Array String)
-foreign import hexImpl :: Fn3 P5 Number Foreign String
-foreign import hex2Impl :: Fn3 P5 (Array Number) Foreign (Array String)
+foreign import hexImpl :: Fn3 P5 Number (Maybe Number) String
+foreign import hex2Impl :: Fn3 P5 (Array Number) (Maybe Number) (Array String)
 foreign import hourImpl :: Fn1 P5 Int
-foreign import int2Impl :: Fn3 P5 NumberOrStringOrBoolean Foreign Number
+foreign import int2Impl :: Fn3 P5 NumberOrStringOrBoolean (Maybe Int) Number
 foreign import keyIsDownImpl :: Fn2 P5 Number Boolean
 foreign import keyPressedImpl :: Fn1 P5 (Effect Unit)
 foreign import keyReleasedImpl :: Fn1 P5 (Effect Unit)
@@ -282,7 +282,7 @@ foreign import loadPixelsImpl :: Fn1 P5 (Effect Unit)
 foreign import logImpl :: Fn2 P5 Number Number
 foreign import loopImpl :: Fn1 P5 (Effect Unit)
 foreign import magImpl :: Fn3 P5 Number Number Number
-foreign import mapImpl :: Fn7 P5 Number Number Number Number Number Foreign Number
+foreign import mapImpl :: Fn7 P5 Number Number Number Number Number (Maybe Boolean) Number
 foreign import matchImpl :: Fn3 P5 String String (Array String)
 foreign import matchAllImpl :: Fn3 P5 String String (Array String)
 foreign import maxImpl :: Fn2 P5 (Array Number) Number
@@ -292,11 +292,11 @@ foreign import minImpl :: Fn2 P5 (Array Number) Number
 foreign import min2Impl :: Fn3 P5 Number Number Number
 foreign import minuteImpl :: Fn1 P5 Int
 foreign import monthImpl :: Fn1 P5 Int
-foreign import nfImpl :: Fn4 P5 StringOrNumber Foreign Foreign String
-foreign import nfcImpl :: Fn3 P5 StringOrNumber Foreign String
-foreign import nfpImpl :: Fn4 P5 Number Foreign Foreign String
-foreign import nfp2Impl :: Fn4 P5 (Array Number) Foreign Foreign (Array String)
-foreign import nfsImpl :: Fn4 P5 Number Foreign Foreign String
+foreign import nfImpl :: Fn4 P5 StringOrNumber (Maybe StringOrInt) (Maybe StringOrInt) String
+foreign import nfcImpl :: Fn3 P5 StringOrNumber (Maybe StringOrInt) String
+foreign import nfpImpl :: Fn4 P5 Number (Maybe Int) (Maybe Int) String
+foreign import nfp2Impl :: Fn4 P5 (Array Number) (Maybe Int) (Maybe Int) (Array String)
+foreign import nfsImpl :: Fn4 P5 Number (Maybe Int) (Maybe Int) String
 foreign import noCanvasImpl :: Fn1 P5 (Effect Unit)
 foreign import noCursorImpl :: Fn1 P5 (Effect Unit)
 foreign import noDebugModeImpl :: Fn1 P5 (Effect Unit)
@@ -305,18 +305,18 @@ foreign import noLoopImpl :: Fn1 P5 (Effect Unit)
 foreign import noSmoothImpl :: Fn1 P5 (Effect Unit)
 foreign import noStrokeImpl :: Fn1 P5 (Effect Unit)
 foreign import noTintImpl :: Fn1 P5 (Effect Unit)
-foreign import noiseImpl :: Fn4 P5 Number Foreign Foreign Number
+foreign import noiseImpl :: Fn4 P5 Number (Maybe Number) (Maybe Number) Number
 foreign import noiseDetailImpl :: Fn3 P5 Number Number (Effect Unit)
 foreign import noiseSeedImpl :: Fn2 P5 Number (Effect Unit)
 foreign import normImpl :: Fn4 P5 Number Number Number Number
 foreign import normalMaterialImpl :: Fn1 P5 (Effect Unit)
-foreign import orbitControlImpl :: Fn3 P5 Foreign Foreign (Effect Unit)
-foreign import orthoImpl :: Fn7 P5 Foreign Foreign Foreign Foreign Foreign Foreign (Effect Unit)
-foreign import perspectiveImpl :: Fn5 P5 Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import orbitControlImpl :: Fn3 P5 (Maybe Number) (Maybe Number) (Effect Unit)
+foreign import orthoImpl :: Fn7 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
+foreign import perspectiveImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import pixelDensityImpl :: Fn1 P5 Number
 foreign import pixelDensity2Impl :: Fn2 P5 Number (Effect Unit)
-foreign import planeImpl :: Fn5 P5 Foreign Foreign Foreign Foreign (Effect Unit)
-foreign import pointImpl :: Fn4 P5 Number Number Foreign (Effect Unit)
+foreign import planeImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
+foreign import pointImpl :: Fn4 P5 Number Number (Maybe Number) (Effect Unit)
 foreign import pointLight4Impl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import popImpl :: Fn1 P5 (Effect Unit)
 foreign import powImpl :: Fn3 P5 Number Number Number
@@ -326,21 +326,21 @@ foreign import quadImpl :: Fn9 P5 Number Number Number Number Number Number Numb
 foreign import quadraticVertexImpl :: Fn5 P5 Number Number Number Number (Effect Unit)
 foreign import quadraticVertex2Impl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import radiansImpl :: Fn2 P5 Number Number
-foreign import random2Impl :: Fn3 P5 Foreign Foreign Number
+foreign import random2Impl :: Fn3 P5 (Maybe Number) (Maybe Number) Number
 foreign import randomGaussianImpl :: Fn3 P5 Number Number Number
 foreign import randomSeedImpl :: Fn2 P5 Number (Effect Unit)
-foreign import rectImpl :: Fn7 P5 Number Number Number Number Foreign Foreign (Effect Unit)
-foreign import rect2Impl :: Fn9 P5 Number Number Number Number Foreign Foreign Foreign Foreign (Effect Unit)
-foreign import redrawImpl :: Fn2 P5 Foreign (Effect Unit)
+foreign import rectImpl :: Fn7 P5 Number Number Number Number (Maybe Int) (Maybe Int) (Effect Unit)
+foreign import rect2Impl :: Fn9 P5 Number Number Number Number (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
+foreign import redrawImpl :: Fn2 P5 (Maybe Int) (Effect Unit)
 foreign import removeImpl :: Fn1 P5 (Effect Unit)
 foreign import resetMatrixImpl :: Fn1 P5 (Effect Unit)
-foreign import resizeCanvasImpl :: Fn4 P5 Number Number Foreign (Effect Unit)
+foreign import resizeCanvasImpl :: Fn4 P5 Number Number (Maybe Boolean) (Effect Unit)
 foreign import rotateXImpl :: Fn2 P5 Number (Effect Unit)
 foreign import rotateYImpl :: Fn2 P5 Number (Effect Unit)
 foreign import rotateZImpl :: Fn2 P5 Number (Effect Unit)
 foreign import roundImpl :: Fn2 P5 Number Int
-foreign import saveCanvasImpl :: Fn3 P5 Foreign Foreign (Effect Unit)
-foreign import saveStringsImpl :: Fn4 P5 (Array String) String Foreign (Effect Unit)
+foreign import saveCanvasImpl :: Fn3 P5 (Maybe String) (Maybe String) (Effect Unit)
+foreign import saveStringsImpl :: Fn4 P5 (Array String) String (Maybe String) (Effect Unit)
 foreign import secondImpl :: Fn1 P5 Int
 foreign import setAttributes2Impl :: Fn3 P5 String Boolean (Effect Unit)
 foreign import setMoveThresholdImpl :: Fn2 P5 Number (Effect Unit)
@@ -349,16 +349,16 @@ foreign import shearXImpl :: Fn2 P5 Number (Effect Unit)
 foreign import shearYImpl :: Fn2 P5 Number (Effect Unit)
 foreign import sinImpl :: Fn2 P5 Number Number
 foreign import smoothImpl :: Fn1 P5 (Effect Unit)
-foreign import specularMaterial2Impl :: Fn5 P5 Number Foreign Foreign Foreign (Effect Unit)
-foreign import sphereImpl :: Fn4 P5 Foreign Foreign Foreign (Effect Unit)
+foreign import specularMaterial2Impl :: Fn5 P5 Number (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
+foreign import sphereImpl :: Fn4 P5 (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import splitImpl :: Fn3 P5 String String (Array String)
-foreign import splitTokensImpl :: Fn3 P5 String Foreign (Array String)
+foreign import splitTokensImpl :: Fn3 P5 String (Maybe String) (Array String)
 foreign import sqImpl :: Fn2 P5 Number Number
 foreign import sqrtImpl :: Fn2 P5 Number Number
 foreign import strokeImpl :: Fn2 P5 String (Effect Unit)
 foreign import stroke2Impl :: Fn2 P5 (Array Number) (Effect Unit)
-foreign import stroke4Impl :: Fn3 P5 Number Foreign (Effect Unit)
-foreign import stroke5Impl :: Fn5 P5 Number Number Number Foreign (Effect Unit)
+foreign import stroke4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
+foreign import stroke5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import strokeWeightImpl :: Fn2 P5 Number (Effect Unit)
 foreign import tanImpl :: Fn2 P5 Number Number
 foreign import textAscentImpl :: Fn1 P5 Number
@@ -371,17 +371,17 @@ foreign import textStyleImpl :: Fn1 P5 String
 foreign import textWidthImpl :: Fn2 P5 String Number
 foreign import tintImpl :: Fn2 P5 String (Effect Unit)
 foreign import tint2Impl :: Fn2 P5 (Array Number) (Effect Unit)
-foreign import tint4Impl :: Fn3 P5 Number Foreign (Effect Unit)
-foreign import tint5Impl :: Fn5 P5 Number Number Number Foreign (Effect Unit)
-foreign import torusImpl :: Fn5 P5 Foreign Foreign Foreign Foreign (Effect Unit)
-foreign import translate2Impl :: Fn4 P5 Number Number Foreign (Effect Unit)
+foreign import tint4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
+foreign import tint5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
+foreign import torusImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
+foreign import translate2Impl :: Fn4 P5 Number Number (Maybe Number) (Effect Unit)
 foreign import triangleImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import trimImpl :: Fn2 P5 String String
 foreign import uncharImpl :: Fn2 P5 String Number
 foreign import unhexImpl :: Fn2 P5 String Number
-foreign import updatePixelsImpl :: Fn5 P5 Foreign Foreign Foreign Foreign (Effect Unit)
+foreign import updatePixelsImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import vertexImpl :: Fn3 P5 Number Number (Effect Unit)
-foreign import vertex2Impl :: Fn6 P5 Number Number Number Foreign Foreign (Effect Unit)
+foreign import vertex2Impl :: Fn6 P5 Number Number Number (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import windowResizedImpl :: Fn1 P5 (Effect Unit)
 foreign import yearImpl :: Fn1 P5 Int
 
@@ -407,17 +407,17 @@ ambientLight2 p5 values = runFn2 ambientLight2Impl p5 values
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 ambientLight4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
-ambientLight4 p5 gray alpha = runFn3 ambientLight4Impl p5 gray (maybe undefined unsafeToForeign alpha)
+ambientLight4 p5 gray alpha = runFn3 ambientLight4Impl p5 gray alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 ambientLight5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-ambientLight5 p5 v1 v2 v3 alpha = runFn5 ambientLight5Impl p5 v1 v2 v3 (maybe undefined unsafeToForeign alpha)
+ambientLight5 p5 v1 v2 v3 alpha = runFn5 ambientLight5Impl p5 v1 v2 v3 alpha
 
 -- TODO: unsupported: ambientMaterial :: P5 -> UnsupportedProduct -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
 ambientMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-ambientMaterial2 p5 v1 v2 v3 a = runFn5 ambientMaterial2Impl p5 v1 (maybe undefined unsafeToForeign v2) (maybe undefined unsafeToForeign v3) (maybe undefined unsafeToForeign a)
+ambientMaterial2 p5 v1 v2 v3 a = runFn5 ambientMaterial2Impl p5 v1 v2 v3 a
 
 -- TODO: unsupported: angleMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
@@ -453,17 +453,17 @@ background2 p5 values = runFn2 background2Impl p5 values
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 background3 :: P5 -> String -> (Maybe Number) -> (Effect Unit)
-background3 p5 colorstring a = runFn3 background3Impl p5 colorstring (maybe undefined unsafeToForeign a)
+background3 p5 colorstring a = runFn3 background3Impl p5 colorstring a
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 background4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
-background4 p5 gray a = runFn3 background4Impl p5 gray (maybe undefined unsafeToForeign a)
+background4 p5 gray a = runFn3 background4Impl p5 gray a
 
 -- TODO: unsupported: background5 :: P5 -> Unsupported(p5.Image) -> (Maybe Number) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 background6 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-background6 p5 v1 v2 v3 a = runFn5 background6Impl p5 v1 v2 v3 (maybe undefined unsafeToForeign a)
+background6 p5 v1 v2 v3 a = runFn5 background6Impl p5 v1 v2 v3 a
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/beginContour)
 beginContour :: P5 -> (Effect Unit)
@@ -507,7 +507,7 @@ bezierVertex2 p5 x2 y2 z2 x3 y3 z3 x4 y4 z4 = runFn10 bezierVertex2Impl p5 x2 y2
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/box)
 box :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
-box p5 width height depth detailX detailY = runFn6 boxImpl p5 (maybe undefined unsafeToForeign width) (maybe undefined unsafeToForeign height) (maybe undefined unsafeToForeign depth) (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY)
+box p5 width height depth detailX detailY = runFn6 boxImpl p5 width height depth detailX detailY
 
 -- TODO: unsupported: brightness :: P5 -> UnsupportedProduct -> Number
 
@@ -519,7 +519,7 @@ byte p5 n = runFn2 byteImpl p5 n
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/camera)
 camera :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-camera p5 x y z centerX centerY centerZ upX upY upZ = runFn10 cameraImpl p5 (maybe undefined unsafeToForeign x) (maybe undefined unsafeToForeign y) (maybe undefined unsafeToForeign z) (maybe undefined unsafeToForeign centerX) (maybe undefined unsafeToForeign centerY) (maybe undefined unsafeToForeign centerZ) (maybe undefined unsafeToForeign upX) (maybe undefined unsafeToForeign upY) (maybe undefined unsafeToForeign upZ)
+camera p5 x y z centerX centerY centerZ upX upY upZ = runFn10 cameraImpl p5 x y z centerX centerY centerZ upX upY upZ
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ceil)
 ceil :: P5 -> Number -> Int
@@ -553,7 +553,7 @@ clear p5  = runFn1 clearImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/cone)
 cone :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Maybe Boolean) -> (Effect Unit)
-cone p5 radius height detailX detailY cap = runFn6 coneImpl p5 (maybe undefined unsafeToForeign radius) (maybe undefined unsafeToForeign height) (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY) (maybe undefined unsafeToForeign cap)
+cone p5 radius height detailX detailY cap = runFn6 coneImpl p5 radius height detailX detailY cap
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/constrain)
 constrain :: P5 -> Number -> Number -> Number -> Number
@@ -619,11 +619,11 @@ curveVertex p5 x y = runFn3 curveVertexImpl p5 x y
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/curveVertex)
 curveVertex2 :: P5 -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-curveVertex2 p5 x y z = runFn4 curveVertex2Impl p5 x y (maybe undefined unsafeToForeign z)
+curveVertex2 p5 x y z = runFn4 curveVertex2Impl p5 x y z
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/cylinder)
 cylinder :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Maybe Boolean) -> (Maybe Boolean) -> (Effect Unit)
-cylinder p5 radius height detailX detailY bottomCap topCap = runFn7 cylinderImpl p5 (maybe undefined unsafeToForeign radius) (maybe undefined unsafeToForeign height) (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY) (maybe undefined unsafeToForeign bottomCap) (maybe undefined unsafeToForeign topCap)
+cylinder p5 radius height detailX detailY bottomCap topCap = runFn7 cylinderImpl p5 radius height detailX detailY bottomCap topCap
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/day)
 day :: P5 -> Int
@@ -641,7 +641,7 @@ debugMode p5  = runFn1 debugModeImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
 debugMode5 :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-debugMode5 p5 gridSize gridDivisions gridXOff gridYOff gridZOff axesSize axesXOff axesYOff axesZOff = runFn10 debugMode5Impl p5 (maybe undefined unsafeToForeign gridSize) (maybe undefined unsafeToForeign gridDivisions) (maybe undefined unsafeToForeign gridXOff) (maybe undefined unsafeToForeign gridYOff) (maybe undefined unsafeToForeign gridZOff) (maybe undefined unsafeToForeign axesSize) (maybe undefined unsafeToForeign axesXOff) (maybe undefined unsafeToForeign axesYOff) (maybe undefined unsafeToForeign axesZOff)
+debugMode5 p5 gridSize gridDivisions gridXOff gridYOff gridZOff axesSize axesXOff axesYOff axesZOff = runFn10 debugMode5Impl p5 gridSize gridDivisions gridXOff gridYOff gridZOff axesSize axesXOff axesYOff axesZOff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/degrees)
 degrees :: P5 -> Number -> Number
@@ -687,7 +687,7 @@ dist2 p5 x1 y1 z1 x2 y2 z2 = runFn7 dist2Impl p5 x1 y1 z1 x2 y2 z2
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ellipse)
 ellipse :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-ellipse p5 x y w h = runFn5 ellipseImpl p5 x y w (maybe undefined unsafeToForeign h)
+ellipse p5 x y w h = runFn5 ellipseImpl p5 x y w h
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ellipse)
 ellipse2 :: P5 -> Number -> Number -> Number -> Number -> Int -> (Effect Unit)
@@ -697,7 +697,7 @@ ellipse2 p5 x y w h detail = runFn6 ellipse2Impl p5 x y w h detail
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ellipsoid)
 ellipsoid :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
-ellipsoid p5 radiusx radiusy radiusz detailX detailY = runFn6 ellipsoidImpl p5 (maybe undefined unsafeToForeign radiusx) (maybe undefined unsafeToForeign radiusy) (maybe undefined unsafeToForeign radiusz) (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY)
+ellipsoid p5 radiusx radiusy radiusz detailX detailY = runFn6 ellipsoidImpl p5 radiusx radiusy radiusz detailX detailY
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/endContour)
 endContour :: P5 -> (Effect Unit)
@@ -721,11 +721,11 @@ fill2 p5 values = runFn2 fill2Impl p5 values
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
 fill4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
-fill4 p5 gray alpha = runFn3 fill4Impl p5 gray (maybe undefined unsafeToForeign alpha)
+fill4 p5 gray alpha = runFn3 fill4Impl p5 gray alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
 fill5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-fill5 p5 v1 v2 v3 alpha = runFn5 fill5Impl p5 v1 v2 v3 (maybe undefined unsafeToForeign alpha)
+fill5 p5 v1 v2 v3 alpha = runFn5 fill5Impl p5 v1 v2 v3 alpha
 
 -- TODO: unsupported: filter :: P5 -> Unsupported(Constant) -> (Maybe Number) -> (Effect Unit)
 
@@ -747,7 +747,7 @@ frameRate2 p5 fps = runFn2 frameRate2Impl p5 fps
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/fullscreen)
 fullscreen :: P5 -> (Maybe Boolean) -> Boolean
-fullscreen p5 val = runFn2 fullscreenImpl p5 (maybe undefined unsafeToForeign val)
+fullscreen p5 val = runFn2 fullscreenImpl p5 val
 
 -- TODO: unsupported: get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> UnsupportedProduct
 
@@ -765,11 +765,11 @@ getURLPath p5  = runFn1 getURLPathImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/hex)
 hex :: P5 -> Number -> (Maybe Number) -> String
-hex p5 n digits = runFn3 hexImpl p5 n (maybe undefined unsafeToForeign digits)
+hex p5 n digits = runFn3 hexImpl p5 n digits
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/hex)
 hex2 :: P5 -> (Array Number) -> (Maybe Number) -> (Array String)
-hex2 p5 ns digits = runFn3 hex2Impl p5 ns (maybe undefined unsafeToForeign digits)
+hex2 p5 ns digits = runFn3 hex2Impl p5 ns digits
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/hour)
 hour :: P5 -> Int
@@ -803,7 +803,7 @@ hour p5  = runFn1 hourImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/int)
 int2 :: P5 -> NumberOrStringOrBoolean -> (Maybe Int) -> Number
-int2 p5 n radix = runFn3 int2Impl p5 n (maybe undefined unsafeToForeign radix)
+int2 p5 n radix = runFn3 int2Impl p5 n radix
 
 -- TODO: unsupported: join :: P5 -> Unsupported(Array) -> String -> String
 
@@ -883,7 +883,7 @@ mag p5 a b = runFn3 magImpl p5 a b
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/map)
 map :: P5 -> Number -> Number -> Number -> Number -> Number -> (Maybe Boolean) -> Number
-map p5 value start1 stop1 start2 stop2 withinBounds = runFn7 mapImpl p5 value start1 stop1 start2 stop2 (maybe undefined unsafeToForeign withinBounds)
+map p5 value start1 stop1 start2 stop2 withinBounds = runFn7 mapImpl p5 value start1 stop1 start2 stop2 withinBounds
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/match)
 match :: P5 -> String -> String -> (Array String)
@@ -937,27 +937,27 @@ month p5  = runFn1 monthImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nf)
 nf :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> String
-nf p5 num left right = runFn4 nfImpl p5 num (maybe undefined unsafeToForeign left) (maybe undefined unsafeToForeign right)
+nf p5 num left right = runFn4 nfImpl p5 num left right
 
 -- TODO: unsupported: nf2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Maybe StringOrInt) -> (Array String)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
 nfc :: P5 -> StringOrNumber -> (Maybe StringOrInt) -> String
-nfc p5 num right = runFn3 nfcImpl p5 num (maybe undefined unsafeToForeign right)
+nfc p5 num right = runFn3 nfcImpl p5 num right
 
 -- TODO: unsupported: nfc2 :: P5 -> Unsupported(Array) -> (Maybe StringOrInt) -> (Array String)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfp)
 nfp :: P5 -> Number -> (Maybe Int) -> (Maybe Int) -> String
-nfp p5 num left right = runFn4 nfpImpl p5 num (maybe undefined unsafeToForeign left) (maybe undefined unsafeToForeign right)
+nfp p5 num left right = runFn4 nfpImpl p5 num left right
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfp)
 nfp2 :: P5 -> (Array Number) -> (Maybe Int) -> (Maybe Int) -> (Array String)
-nfp2 p5 nums left right = runFn4 nfp2Impl p5 nums (maybe undefined unsafeToForeign left) (maybe undefined unsafeToForeign right)
+nfp2 p5 nums left right = runFn4 nfp2Impl p5 nums left right
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfs)
 nfs :: P5 -> Number -> (Maybe Int) -> (Maybe Int) -> String
-nfs p5 num left right = runFn4 nfsImpl p5 num (maybe undefined unsafeToForeign left) (maybe undefined unsafeToForeign right)
+nfs p5 num left right = runFn4 nfsImpl p5 num left right
 
 -- TODO: unsupported: nfs2 :: P5 -> Unsupported(Array) -> (Maybe Int) -> (Maybe Int) -> (Array String)
 
@@ -995,7 +995,7 @@ noTint p5  = runFn1 noTintImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/noise)
 noise :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> Number
-noise p5 x y z = runFn4 noiseImpl p5 x (maybe undefined unsafeToForeign y) (maybe undefined unsafeToForeign z)
+noise p5 x y z = runFn4 noiseImpl p5 x y z
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/noiseDetail)
 noiseDetail :: P5 -> Number -> Number -> (Effect Unit)
@@ -1015,15 +1015,15 @@ normalMaterial p5  = runFn1 normalMaterialImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/orbitControl)
 orbitControl :: P5 -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-orbitControl p5 sensitivityX sensitivityY = runFn3 orbitControlImpl p5 (maybe undefined unsafeToForeign sensitivityX) (maybe undefined unsafeToForeign sensitivityY)
+orbitControl p5 sensitivityX sensitivityY = runFn3 orbitControlImpl p5 sensitivityX sensitivityY
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ortho)
 ortho :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-ortho p5 left right bottom top near far = runFn7 orthoImpl p5 (maybe undefined unsafeToForeign left) (maybe undefined unsafeToForeign right) (maybe undefined unsafeToForeign bottom) (maybe undefined unsafeToForeign top) (maybe undefined unsafeToForeign near) (maybe undefined unsafeToForeign far)
+ortho p5 left right bottom top near far = runFn7 orthoImpl p5 left right bottom top near far
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/perspective)
 perspective :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-perspective p5 fovy aspect near far = runFn5 perspectiveImpl p5 (maybe undefined unsafeToForeign fovy) (maybe undefined unsafeToForeign aspect) (maybe undefined unsafeToForeign near) (maybe undefined unsafeToForeign far)
+perspective p5 fovy aspect near far = runFn5 perspectiveImpl p5 fovy aspect near far
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/pixelDensity)
 pixelDensity :: P5 -> Number
@@ -1035,11 +1035,11 @@ pixelDensity2 p5 val = runFn2 pixelDensity2Impl p5 val
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/plane)
 plane :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
-plane p5 width height detailX detailY = runFn5 planeImpl p5 (maybe undefined unsafeToForeign width) (maybe undefined unsafeToForeign height) (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY)
+plane p5 width height detailX detailY = runFn5 planeImpl p5 width height detailX detailY
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/point)
 point :: P5 -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-point p5 x y z = runFn4 pointImpl p5 x y (maybe undefined unsafeToForeign z)
+point p5 x y z = runFn4 pointImpl p5 x y z
 
 -- TODO: unsupported: pointLight :: P5 -> UnsupportedProduct -> Unsupported(p5.Vector) -> (Effect Unit)
 
@@ -1089,7 +1089,7 @@ radians p5 degrees = runFn2 radiansImpl p5 degrees
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/random)
 random2 :: P5 -> (Maybe Number) -> (Maybe Number) -> Number
-random2 p5 min max = runFn3 random2Impl p5 (maybe undefined unsafeToForeign min) (maybe undefined unsafeToForeign max)
+random2 p5 min max = runFn3 random2Impl p5 min max
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/randomGaussian)
 randomGaussian :: P5 -> Number -> Number -> Number
@@ -1101,11 +1101,11 @@ randomSeed p5 seed = runFn2 randomSeedImpl p5 seed
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/rect)
 rect :: P5 -> Number -> Number -> Number -> Number -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
-rect p5 x y w h detailX detailY = runFn7 rectImpl p5 x y w h (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY)
+rect p5 x y w h detailX detailY = runFn7 rectImpl p5 x y w h detailX detailY
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/rect)
 rect2 :: P5 -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-rect2 p5 x y w h tl tr br bl = runFn9 rect2Impl p5 x y w h (maybe undefined unsafeToForeign tl) (maybe undefined unsafeToForeign tr) (maybe undefined unsafeToForeign br) (maybe undefined unsafeToForeign bl)
+rect2 p5 x y w h tl tr br bl = runFn9 rect2Impl p5 x y w h tl tr br bl
 
 -- TODO: unsupported: rectMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
@@ -1113,7 +1113,7 @@ rect2 p5 x y w h tl tr br bl = runFn9 rect2Impl p5 x y w h (maybe undefined unsa
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/redraw)
 redraw :: P5 -> (Maybe Int) -> (Effect Unit)
-redraw p5 n = runFn2 redrawImpl p5 (maybe undefined unsafeToForeign n)
+redraw p5 n = runFn2 redrawImpl p5 n
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/remove)
 remove :: P5 -> (Effect Unit)
@@ -1125,7 +1125,7 @@ resetMatrix p5  = runFn1 resetMatrixImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/resizeCanvas)
 resizeCanvas :: P5 -> Number -> Number -> (Maybe Boolean) -> (Effect Unit)
-resizeCanvas p5 w h noRedraw = runFn4 resizeCanvasImpl p5 w h (maybe undefined unsafeToForeign noRedraw)
+resizeCanvas p5 w h noRedraw = runFn4 resizeCanvasImpl p5 w h noRedraw
 
 -- TODO: unsupported: reverse :: P5 -> Unsupported(Array) -> Unsupported(Array)
 
@@ -1153,7 +1153,7 @@ round p5 n = runFn2 roundImpl p5 n
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/saveCanvas)
 saveCanvas :: P5 -> (Maybe String) -> (Maybe String) -> (Effect Unit)
-saveCanvas p5 filename extension = runFn3 saveCanvasImpl p5 (maybe undefined unsafeToForeign filename) (maybe undefined unsafeToForeign extension)
+saveCanvas p5 filename extension = runFn3 saveCanvasImpl p5 filename extension
 
 -- TODO: unsupported: saveCanvas2 :: P5 -> UnsupportedProduct -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 
@@ -1163,7 +1163,7 @@ saveCanvas p5 filename extension = runFn3 saveCanvasImpl p5 (maybe undefined uns
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/saveStrings)
 saveStrings :: P5 -> (Array String) -> String -> (Maybe String) -> (Effect Unit)
-saveStrings p5 list filename extension = runFn4 saveStringsImpl p5 list filename (maybe undefined unsafeToForeign extension)
+saveStrings p5 list filename extension = runFn4 saveStringsImpl p5 list filename extension
 
 -- TODO: unsupported: saveTable :: P5 -> Unsupported(p5.Table) -> String -> (Maybe String) -> (Effect Unit)
 
@@ -1221,11 +1221,11 @@ smooth p5  = runFn1 smoothImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
 specularMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-specularMaterial2 p5 v1 v2 v3 a = runFn5 specularMaterial2Impl p5 v1 (maybe undefined unsafeToForeign v2) (maybe undefined unsafeToForeign v3) (maybe undefined unsafeToForeign a)
+specularMaterial2 p5 v1 v2 v3 a = runFn5 specularMaterial2Impl p5 v1 v2 v3 a
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/sphere)
 sphere :: P5 -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
-sphere p5 radius detailX detailY = runFn4 sphereImpl p5 (maybe undefined unsafeToForeign radius) (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY)
+sphere p5 radius detailX detailY = runFn4 sphereImpl p5 radius detailX detailY
 
 -- TODO: unsupported: splice :: P5 -> Unsupported(Array) -> Unsupported(Any) -> Int -> Unsupported(Array)
 
@@ -1235,7 +1235,7 @@ split p5 value delim = runFn3 splitImpl p5 value delim
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/splitTokens)
 splitTokens :: P5 -> String -> (Maybe String) -> (Array String)
-splitTokens p5 value delim = runFn3 splitTokensImpl p5 value (maybe undefined unsafeToForeign delim)
+splitTokens p5 value delim = runFn3 splitTokensImpl p5 value delim
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/sq)
 sq :: P5 -> Number -> Number
@@ -1259,11 +1259,11 @@ stroke2 p5 values = runFn2 stroke2Impl p5 values
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 stroke4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
-stroke4 p5 gray alpha = runFn3 stroke4Impl p5 gray (maybe undefined unsafeToForeign alpha)
+stroke4 p5 gray alpha = runFn3 stroke4Impl p5 gray alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 stroke5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-stroke5 p5 v1 v2 v3 alpha = runFn5 stroke5Impl p5 v1 v2 v3 (maybe undefined unsafeToForeign alpha)
+stroke5 p5 v1 v2 v3 alpha = runFn5 stroke5Impl p5 v1 v2 v3 alpha
 
 -- TODO: unsupported: strokeCap :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
@@ -1335,15 +1335,15 @@ tint2 p5 values = runFn2 tint2Impl p5 values
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 tint4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
-tint4 p5 gray alpha = runFn3 tint4Impl p5 gray (maybe undefined unsafeToForeign alpha)
+tint4 p5 gray alpha = runFn3 tint4Impl p5 gray alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 tint5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-tint5 p5 v1 v2 v3 alpha = runFn5 tint5Impl p5 v1 v2 v3 (maybe undefined unsafeToForeign alpha)
+tint5 p5 v1 v2 v3 alpha = runFn5 tint5Impl p5 v1 v2 v3 alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/torus)
 torus :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
-torus p5 radius tubeRadius detailX detailY = runFn5 torusImpl p5 (maybe undefined unsafeToForeign radius) (maybe undefined unsafeToForeign tubeRadius) (maybe undefined unsafeToForeign detailX) (maybe undefined unsafeToForeign detailY)
+torus p5 radius tubeRadius detailX detailY = runFn5 torusImpl p5 radius tubeRadius detailX detailY
 
 -- TODO: unsupported: touchEnded :: P5 -> Unsupported(Object) -> (Effect Unit)
 
@@ -1355,7 +1355,7 @@ torus p5 radius tubeRadius detailX detailY = runFn5 torusImpl p5 (maybe undefine
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/translate)
 translate2 :: P5 -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-translate2 p5 x y z = runFn4 translate2Impl p5 x y (maybe undefined unsafeToForeign z)
+translate2 p5 x y z = runFn4 translate2Impl p5 x y z
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/triangle)
 triangle :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -1381,7 +1381,7 @@ unhex p5 n = runFn2 unhexImpl p5 n
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/updatePixels)
 updatePixels :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-updatePixels p5 x y w h = runFn5 updatePixelsImpl p5 (maybe undefined unsafeToForeign x) (maybe undefined unsafeToForeign y) (maybe undefined unsafeToForeign w) (maybe undefined unsafeToForeign h)
+updatePixels p5 x y w h = runFn5 updatePixelsImpl p5 x y w h
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/vertex)
 vertex :: P5 -> Number -> Number -> (Effect Unit)
@@ -1389,7 +1389,7 @@ vertex p5 x y = runFn3 vertexImpl p5 x y
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/vertex)
 vertex2 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-vertex2 p5 x y z u v = runFn6 vertex2Impl p5 x y z (maybe undefined unsafeToForeign u) (maybe undefined unsafeToForeign v)
+vertex2 p5 x y z u v = runFn6 vertex2Impl p5 x y z u v
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/windowResized)
 windowResized :: P5 -> (Effect Unit)

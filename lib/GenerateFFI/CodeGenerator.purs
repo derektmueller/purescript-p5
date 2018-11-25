@@ -53,11 +53,6 @@ p5TypeToIdentifier (P5Maybe p5Type) = do
   Just $ "Maybe" <> identifier
 p5TypeToIdentifier _ = Nothing
 
-generateForeignTypeConstructor :: P5Type -> Maybe String
-generateForeignTypeConstructor (P5Maybe p5Type) = Just "Foreign"
-generateForeignTypeConstructor p5Type = 
-  generateP5TypeConstructor p5Type
-
 getMethodName :: P5Method -> String
 getMethodName x = x.name
 
@@ -95,10 +90,7 @@ generateMethodBody x = do
   let jsName = x.name
       getImplParam = \x' -> do
         let name = getParamName x'
-        if typeIsMaybe x'.p5Type then
-          "(maybe undefined unsafeToForeign " <> name <> ")"
-          else
-            name
+        name
   pure $ x.name 
     <> " p5 "
     <> (intercalate " " (getParamNames x))
@@ -116,7 +108,7 @@ generateForeignImport x = do
       paramTypes = getParamTypes x
   typeConstructors <-
     note "Failed to generate foreign import" $ 
-      traverse generateForeignTypeConstructor
+      traverse generateP5TypeConstructor
         ([P5P5] <> paramTypes <> [returnType])
   pure $
     "foreign import " <> name <> "Impl :: "
@@ -250,6 +242,8 @@ generateWrapper x = do
           let paramName = getParamName x'
           case x'.p5Type of
             (P5Or _ _) -> paramName <> ".value0"
+            (P5Maybe _) -> paramName <> ".value0 ? "
+              <> paramName <> ".value0.value0 : undefined"
             _ -> paramName
         ) <$> x.params
       params = getParamNames x

@@ -87,20 +87,28 @@ main = do
     describe "purescript-spec" do
       describe "snapshots" do
         it "renders a line drawing" do
-           _ <- rendersALineDrawing
-           true `shouldEqual` true
+          _ <- rendersALineDrawing
+          true `shouldEqual` true
       describe "math" do
-         describe "dist" do
-            it "calculates distance between points" do
-               p <- liftEffect getP5
-               dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
-               pure unit
-         describe "abs" do
-            it "calculates absolute value" do
-               p <- liftEffect getP5
-               abs p (-3.0) `shouldEqual` 3.0
-               pure unit
-               
+        describe "dist" do
+          it "calculates distance between points" do
+             p <- liftEffect getP5
+             dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
+             pure unit
+        describe "abs" do
+          it "calculates absolute value" do
+             p <- liftEffect getP5
+             abs p (-3.0) `shouldEqual` 3.0
+             pure unit
+      describe "data" do
+        describe "string functions" do
+          describe "nf" do
+            it "formats numbers into strings" do
+              p <- liftEffect getP5
+              nf p (StringOrNumberNumber 1.1) 
+                (Just (StringOrIntInt 5)) 
+                (Just (StringOrIntInt 5))
+                `shouldEqual` "00001.10000"
   where
     testConfig = defaultConfig { timeout = Just 10000 }
 
