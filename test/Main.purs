@@ -22,9 +22,10 @@ import Test.Spec.Assertions (shouldEqual, fail)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (run', defaultConfig)
 import Unsafe.Coerce (unsafeCoerce)
-import P5 (StrokeJoin(..), background3, createCanvas, draw, getP5, line, setId, setup, stroke, strokeJoin, strokeWeight)
+import P5 (StrokeJoin(..), background3, createCanvas, draw, getP5, line, setId, setup, stroke, strokeJoin, strokeWeight, dist, nf, abs, NumberOrString(..), IntOrString(..), char, textLeading2, textLeading)
 import Node.Crypto.Hash (Algorithm(..), base64)
 import Data.String.Common (trim)
+import HelloP5SimpleShapes as HelloP5SimpleShapes
 
 lineDrawing :: String -> Number -> Number -> Effect Unit
 lineDrawing canvasId w h = do
@@ -56,16 +57,12 @@ asIntArray = unsafeCoerce
 fromIntArray ∷ Array Int -> Uint8ClampedArray
 fromIntArray = unsafeCoerce
 
-rendersALineDrawing :: Aff Unit
-rendersALineDrawing = do
+expectCanvasToMatchSnapshot 
+  :: String -> Number -> Number -> String -> Aff Unit
+expectCanvasToMatchSnapshot canvasId w h snapshotFilename = do
   hash <- liftEffect 
-    $ trim <$> readTextFile UTF8 "./snapshots/lineDrawing"
-
-  let canvasId = "test-canvas"
-      w = 500.0
-      h = 500.0
-
-  _ <- liftEffect $ lineDrawing canvasId w h
+    $ trim 
+    <$> readTextFile UTF8 ("./snapshots/" <> snapshotFilename)
 
   delay $ Milliseconds 0.0
   mCanvas <- liftEffect $ getCanvasElementById canvasId
@@ -88,56 +85,67 @@ main = do
     describe "purescript-spec" do
       describe "snapshots" do
         it "renders a line drawing" do
-          _ <- rendersALineDrawing
-          true `shouldEqual` true
---      describe "math" do
---        describe "dist" do
---          it "calculates distance between points" do
---             p <- liftEffect getP5
---             dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
---             pure unit
---        describe "abs" do
---          it "calculates absolute value" do
---             p <- liftEffect getP5
---             abs p (-3.0) `shouldEqual` 3.0
---             pure unit
---      describe "data" do
---        describe "string functions" do
---          describe "nf" do
---            it "formats numbers into strings" do
---              p <- liftEffect getP5
---              nf p (NumberOrStringNumber 1.1) 
---                (Just (IntOrStringInt 5)) 
---                (Just (IntOrStringInt 5))
---                `shouldEqual` "00001.10000"
---              nf p (NumberOrStringNumber 1.1) 
---                Nothing
---                (Just (IntOrStringInt 5))
---                `shouldEqual` "1.10000"
---              nf p (NumberOrStringNumber 1.1) 
---                (Just (IntOrStringInt 5)) 
---                Nothing
---                `shouldEqual` "00001.1"
---              nf p (NumberOrStringNumber 1.1) 
---                Nothing
---                Nothing
---                `shouldEqual` "1.1"
---        describe "conversion" do
---          describe "char" do
---            it "converts to character representation" do
---              p <- liftEffect getP5
---              char p (NumberOrStringNumber 65.0)
---                `shouldEqual` "A"
---              char p (NumberOrStringString "65")
---                `shouldEqual` "A"
---      describe "typography" do
---        describe "attributes" do
---          describe "textLeading" do
---            it "gets the text leading" do
---              p <- liftEffect getP5
---              liftEffect $ textLeading2 p 1.0
---              let leading = textLeading p
---              leading `shouldEqual` 1.0
+          let canvasId = "test-canvas"
+              w = 500.0
+              h = 500.0
+
+          liftEffect $ lineDrawing canvasId w h
+          expectCanvasToMatchSnapshot 
+            canvasId w h "lineDrawing"
+        it "renders hello-p5-simple-shapes" do
+          _ <- liftEffect 
+            $ HelloP5SimpleShapes.main 
+                HelloP5SimpleShapes.initialState
+          expectCanvasToMatchSnapshot 
+            "defaultCanvas0" 720.0 400.0 "helloP5SimpleShapes"
+      describe "math" do
+        describe "dist" do
+          it "calculates distance between points" do
+             p <- liftEffect getP5
+             dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
+             pure unit
+        describe "abs" do
+          it "calculates absolute value" do
+             p <- liftEffect getP5
+             abs p (-3.0) `shouldEqual` 3.0
+             pure unit
+      describe "data" do
+        describe "string functions" do
+          describe "nf" do
+            it "formats numbers into strings" do
+              p <- liftEffect getP5
+              nf p (NumberOrStringNumber 1.1) 
+                (Just (IntOrStringInt 5)) 
+                (Just (IntOrStringInt 5))
+                `shouldEqual` "00001.10000"
+              nf p (NumberOrStringNumber 1.1) 
+                Nothing
+                (Just (IntOrStringInt 5))
+                `shouldEqual` "1.10000"
+              nf p (NumberOrStringNumber 1.1) 
+                (Just (IntOrStringInt 5)) 
+                Nothing
+                `shouldEqual` "00001.1"
+              nf p (NumberOrStringNumber 1.1) 
+                Nothing
+                Nothing
+                `shouldEqual` "1.1"
+        describe "conversion" do
+          describe "char" do
+            it "converts to character representation" do
+              p <- liftEffect getP5
+              char p (NumberOrStringNumber 65.0)
+                `shouldEqual` "A"
+              char p (NumberOrStringString "65")
+                `shouldEqual` "A"
+      describe "typography" do
+        describe "attributes" do
+          describe "textLeading" do
+            it "gets the text leading" do
+              p <- liftEffect getP5
+              liftEffect $ textLeading2 p 1.0
+              let leading = textLeading p
+              leading `shouldEqual` 1.0
   where
     testConfig = defaultConfig { timeout = Just 10000 }
 

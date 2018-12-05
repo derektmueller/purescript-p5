@@ -2,6 +2,6 @@
 
 while true; do
   change=$(inotifywait -e close_write,moved_to,create ./src/P5 ./src ./test)
-  pulp test
+  pulp test --include examples
 done
 
