@@ -8,6 +8,7 @@ import Data.Either (Either(..))
 import Data.Maybe (Maybe(..))
 import Effect.Aff (Aff, Milliseconds(..), delay)
 import Effect.Class (liftEffect)
+import Effect.Console (log)
 import Effect (Effect)
 import Foreign.Generic (decodeJSON)
 import Foreign (F)
@@ -21,7 +22,9 @@ import Test.Spec.Assertions (shouldEqual, fail)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (run', defaultConfig)
 import Unsafe.Coerce (unsafeCoerce)
-import P5
+import P5 (StrokeJoin(..), background3, createCanvas, draw, getP5, line, setId, setup, stroke, strokeJoin, strokeWeight)
+import Node.Crypto.Hash (Algorithm(..), base64)
+import Data.String.Common (trim)
 
 lineDrawing :: String -> Number -> Number -> Effect Unit
 lineDrawing canvasId w h = do
@@ -55,11 +58,8 @@ fromIntArray = unsafeCoerce
 
 rendersALineDrawing :: Aff Unit
 rendersALineDrawing = do
-  json <- liftEffect 
-    $ readTextFile UTF8 "./snapshots/lineDrawing.json"
-
-  let eLineDrawing = 
-        runExcept $ decodeJSON json :: F (Array Int)
+  hash <- liftEffect 
+    $ trim <$> readTextFile UTF8 "./snapshots/lineDrawing"
 
   let canvasId = "test-canvas"
       w = 500.0
@@ -74,8 +74,9 @@ rendersALineDrawing = do
       ctx <- liftEffect $ getContext2D canvas
       imageData <- liftEffect $ 
         getImageData ctx 0.0 0.0 w h
-      (Right $ asIntArray $ imageDataBuffer imageData)
-        `shouldEqual` eLineDrawing
+      hash' <- liftEffect 
+        $ base64 MD5 (show $ asIntArray $ imageDataBuffer imageData)
+      hash' `shouldEqual` hash
       pure unit
     Nothing ->
       fail "failed to retrieve canvas"
@@ -89,54 +90,54 @@ main = do
         it "renders a line drawing" do
           _ <- rendersALineDrawing
           true `shouldEqual` true
-      describe "math" do
-        describe "dist" do
-          it "calculates distance between points" do
-             p <- liftEffect getP5
-             dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
-             pure unit
-        describe "abs" do
-          it "calculates absolute value" do
-             p <- liftEffect getP5
-             abs p (-3.0) `shouldEqual` 3.0
-             pure unit
-      describe "data" do
-        describe "string functions" do
-          describe "nf" do
-            it "formats numbers into strings" do
-              p <- liftEffect getP5
-              nf p (NumberOrStringNumber 1.1) 
-                (Just (IntOrStringInt 5)) 
-                (Just (IntOrStringInt 5))
-                `shouldEqual` "00001.10000"
-              nf p (NumberOrStringNumber 1.1) 
-                Nothing
-                (Just (IntOrStringInt 5))
-                `shouldEqual` "1.10000"
-              nf p (NumberOrStringNumber 1.1) 
-                (Just (IntOrStringInt 5)) 
-                Nothing
-                `shouldEqual` "00001.1"
-              nf p (NumberOrStringNumber 1.1) 
-                Nothing
-                Nothing
-                `shouldEqual` "1.1"
-        describe "conversion" do
-          describe "char" do
-            it "converts to character representation" do
-              p <- liftEffect getP5
-              char p (NumberOrStringNumber 65.0)
-                `shouldEqual` "A"
-              char p (NumberOrStringString "65")
-                `shouldEqual` "A"
-      describe "typography" do
-        describe "attributes" do
-          describe "textLeading" do
-            it "gets the text leading" do
-              p <- liftEffect getP5
-              liftEffect $ textLeading2 p 1.0
-              let leading = textLeading p
-              leading `shouldEqual` 1.0
+--      describe "math" do
+--        describe "dist" do
+--          it "calculates distance between points" do
+--             p <- liftEffect getP5
+--             dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
+--             pure unit
+--        describe "abs" do
+--          it "calculates absolute value" do
+--             p <- liftEffect getP5
+--             abs p (-3.0) `shouldEqual` 3.0
+--             pure unit
+--      describe "data" do
+--        describe "string functions" do
+--          describe "nf" do
+--            it "formats numbers into strings" do
+--              p <- liftEffect getP5
+--              nf p (NumberOrStringNumber 1.1) 
+--                (Just (IntOrStringInt 5)) 
+--                (Just (IntOrStringInt 5))
+--                `shouldEqual` "00001.10000"
+--              nf p (NumberOrStringNumber 1.1) 
+--                Nothing
+--                (Just (IntOrStringInt 5))
+--                `shouldEqual` "1.10000"
+--              nf p (NumberOrStringNumber 1.1) 
+--                (Just (IntOrStringInt 5)) 
+--                Nothing
+--                `shouldEqual` "00001.1"
+--              nf p (NumberOrStringNumber 1.1) 
+--                Nothing
+--                Nothing
+--                `shouldEqual` "1.1"
+--        describe "conversion" do
+--          describe "char" do
+--            it "converts to character representation" do
+--              p <- liftEffect getP5
+--              char p (NumberOrStringNumber 65.0)
+--                `shouldEqual` "A"
+--              char p (NumberOrStringString "65")
+--                `shouldEqual` "A"
+--      describe "typography" do
+--        describe "attributes" do
+--          describe "textLeading" do
+--            it "gets the text leading" do
+--              p <- liftEffect getP5
+--              liftEffect $ textLeading2 p 1.0
+--              let leading = textLeading p
+--              leading `shouldEqual` 1.0
   where
     testConfig = defaultConfig { timeout = Just 10000 }
 
