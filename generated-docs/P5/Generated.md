@@ -25,6 +25,23 @@ data IntOrString
   | IntOrStringString String
 ```
 
+#### `ArrayNumberOrVector`
+
+``` purescript
+data ArrayNumberOrVector
+  = ArrayNumberOrVectorArrayNumber (Array Number)
+  | ArrayNumberOrVectorVector Vector
+```
+
+#### `NumberOrArrayNumberOrVector`
+
+``` purescript
+data NumberOrArrayNumberOrVector
+  = NumberOrArrayNumberOrVectorNumber Number
+  | NumberOrArrayNumberOrVectorArrayNumber (Array Number)
+  | NumberOrArrayNumberOrVectorVector Vector
+```
+
 #### `abs`
 
 ``` purescript
@@ -281,6 +298,14 @@ cos :: P5 -> Number -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/cos)
 
+#### `createVector`
+
+``` purescript
+createVector :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> Vector
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/createVector)
+
 #### `curve`
 
 ``` purescript
@@ -400,6 +425,14 @@ deviceTurned :: P5 -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceTurned)
+
+#### `directionalLight2`
+
+``` purescript
+directionalLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 
 #### `directionalLight4`
 
@@ -961,6 +994,14 @@ point :: P5 -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/point)
 
+#### `pointLight2`
+
+``` purescript
+pointLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
+
 #### `pointLight4`
 
 ``` purescript
@@ -1105,6 +1146,14 @@ resizeCanvas :: P5 -> Number -> Number -> (Maybe Boolean) -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/resizeCanvas)
 
+#### `rotate`
+
+``` purescript
+rotate :: P5 -> Number -> (Maybe ArrayNumberOrVector) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/rotate)
+
 #### `rotateX`
 
 ``` purescript
@@ -1152,6 +1201,22 @@ saveStrings :: P5 -> (Array String) -> String -> (Maybe String) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/saveStrings)
+
+#### `scale`
+
+``` purescript
+scale :: P5 -> ArrayNumberOrVector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/scale)
+
+#### `scale2`
+
+``` purescript
+scale2 :: P5 -> NumberOrArrayNumberOrVector -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/scale)
 
 #### `second`
 
@@ -1416,6 +1481,14 @@ torus :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) ->
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/torus)
+
+#### `translate`
+
+``` purescript
+translate :: P5 -> Vector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/translate)
 
 #### `translate2`
 

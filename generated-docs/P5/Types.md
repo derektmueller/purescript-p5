@@ -12,4 +12,10 @@ data P5 :: Type
 data Element :: Type
 ```
 
+#### `Vector`
+
+``` purescript
+data Vector :: Type
+```
+
 

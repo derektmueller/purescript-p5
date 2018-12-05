@@ -9,13 +9,14 @@ module P5
   , createCanvas
   , id
   , setId
+  , module P5.Types
   , module P5.Generated
   ) where
 
 import Effect (Effect)
 import Prelude (Unit)
 import Data.Function.Uncurried (Fn2, runFn2)
-import P5.Types (Element, P5)
+import P5.Types (Element, P5, Vector)
 import P5.Generated 
 
 foreign import p5Impl :: (P5 -> Effect Unit) -> Effect Unit

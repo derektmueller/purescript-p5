@@ -48,6 +48,7 @@ data P5Type =
   | P5StringArray
   | P5Or P5Type P5Type
   | P5Maybe P5Type
+  | P5Vector
   | P5Unsupported String
 
 type Param = 
@@ -128,6 +129,7 @@ readP5Type f = do
             "Number[]" -> P5NumberArray
             "String" -> P5String
             "String[]" -> P5StringArray
+            "p5.Vector" -> P5Vector
             _ -> P5Unsupported str'
             --_ -> fail $ TypeMismatch "P5Type" str
       p5Types = toP5Type <$> typeStrs

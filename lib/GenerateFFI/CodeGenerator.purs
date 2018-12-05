@@ -29,10 +29,17 @@ generateP5TypeConstructor P5Number = Just "Number"
 generateP5TypeConstructor P5P5 = Just "P5"
 generateP5TypeConstructor P5StringArray = Just "(Array String)"
 generateP5TypeConstructor P5String = Just "String"
+generateP5TypeConstructor P5Vector = Just "Vector"
 generateP5TypeConstructor t@(P5Or p5Type1 p5Type2) = do
   case typeIsUnsupported t of
-    true ->
-      pure "UnsupportedProduct"
+    true -> do
+      typeConstructor1 <- generateP5TypeConstructor p5Type1 
+      typeConstructor2 <- generateP5TypeConstructor p5Type2 
+      pure $ "UnsupportedProduct(" 
+        <> typeConstructor1
+        <> "|"
+        <> typeConstructor2
+        <> ")"
     false ->
       generateProductTypeConstructor t
 generateP5TypeConstructor (P5Maybe p5Type) = do
@@ -51,7 +58,11 @@ p5TypeToIdentifier P5String = Just "String"
 p5TypeToIdentifier (P5Maybe p5Type) = do
   identifier <- p5TypeToIdentifier p5Type
   Just $ "Maybe" <> identifier
-p5TypeToIdentifier _ = Nothing
+p5TypeToIdentifier P5P5 = Just "P5"
+p5TypeToIdentifier P5Vector = Just "Vector"
+p5TypeToIdentifier (P5Or _ _) = Nothing
+p5TypeToIdentifier P5Effect = Nothing
+p5TypeToIdentifier (P5Unsupported _) = Nothing
 
 getMethodName :: P5Method -> String
 getMethodName x = x.name
@@ -171,9 +182,13 @@ generateProductTypeDef t@(P5Or _ _) = do
   types <- productTypeToArray t
   typeConstructor <- generateProductTypeConstructor t
   dataConstructors <- 
-    (traverse (\x -> 
-      (\x' -> typeConstructor <> x' <> " " <> x')
-        <$> p5TypeToIdentifier x) types)
+    (traverse 
+      (\x -> do
+        termIdentifier <- p5TypeToIdentifier x
+        termConstructor <- generateP5TypeConstructor x
+        pure $ typeConstructor 
+          <> termIdentifier <> " " <> termConstructor)
+      types)
   pure 
     $ "data " <> typeConstructor <> " = "
     <> (intercalate " | " dataConstructors)
@@ -210,7 +225,7 @@ generateP5 (P5Doc doc) = do
           [ "import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)"
           , "import Effect (Effect)"
           , "import Prelude (Unit)"
-          , "import P5.Types (P5)"
+          , "import P5.Types (P5, Vector)"
           , "import Foreign (Foreign, unsafeToForeign)"
           , "import Data.Maybe (Maybe, maybe)"
           , "import Foreign.NullOrUndefined (undefined)"

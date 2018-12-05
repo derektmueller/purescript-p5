@@ -143,6 +143,9 @@ exports.copyImpl = function(p, sx, sy, sw, sh, dx, dy, dw, dh) {
 exports.cosImpl = function(p, angle) {
   return callP5(p, p.cos, [angle]);
 };
+exports.createVectorImpl = function(p, x, y, z) {
+  return callP5(p, p.createVector, [x.value0 ? x.value0.value0 : undefined, y.value0 ? y.value0.value0 : undefined, z.value0 ? z.value0.value0 : undefined]);
+};
 exports.curveImpl = function(p, x1, y1, x2, y2, x3, y3, x4, y4) {
   return function() {
     callP5(p, p.curve, [x1, y1, x2, y2, x3, y3, x4, y4]);
@@ -208,6 +211,11 @@ exports.deviceShakenImpl = function(p) {
 exports.deviceTurnedImpl = function(p) {
   return function() {
     callP5(p, p.deviceTurned, []);
+  };
+};
+exports.directionalLight2Impl = function(p, v1, v2, v3, position) {
+  return function() {
+    callP5(p, p.directionalLight, [v1, v2, v3, position]);
   };
 };
 exports.directionalLight4Impl = function(p, v1, v2, v3, x, y, z) {
@@ -488,6 +496,11 @@ exports.pointImpl = function(p, x, y, z) {
     callP5(p, p.point, [x, y, z.value0 ? z.value0.value0 : undefined]);
   };
 };
+exports.pointLight2Impl = function(p, v1, v2, v3, position) {
+  return function() {
+    callP5(p, p.pointLight, [v1, v2, v3, position]);
+  };
+};
 exports.pointLight4Impl = function(p, v1, v2, v3, x, y, z) {
   return function() {
     callP5(p, p.pointLight, [v1, v2, v3, x, y, z]);
@@ -570,6 +583,11 @@ exports.resizeCanvasImpl = function(p, w, h, noRedraw) {
     callP5(p, p.resizeCanvas, [w, h, noRedraw.value0 ? noRedraw.value0.value0 : undefined]);
   };
 };
+exports.rotateImpl = function(p, angle, axis) {
+  return function() {
+    callP5(p, p.rotate, [angle, axis.value0 ? axis.value0.value0 : undefined]);
+  };
+};
 exports.rotateXImpl = function(p, angle) {
   return function() {
     callP5(p, p.rotateX, [angle]);
@@ -596,6 +614,16 @@ exports.saveCanvasImpl = function(p, filename, extension) {
 exports.saveStringsImpl = function(p, list, filename, extension) {
   return function() {
     callP5(p, p.saveStrings, [list, filename, extension.value0 ? extension.value0.value0 : undefined]);
+  };
+};
+exports.scaleImpl = function(p, scales) {
+  return function() {
+    callP5(p, p.scale, [scales.value0]);
+  };
+};
+exports.scale2Impl = function(p, s, y, z) {
+  return function() {
+    callP5(p, p.scale, [s.value0, y.value0 ? y.value0.value0 : undefined, z.value0 ? z.value0.value0 : undefined]);
   };
 };
 exports.secondImpl = function(p) {
@@ -735,6 +763,11 @@ exports.tint5Impl = function(p, v1, v2, v3, alpha) {
 exports.torusImpl = function(p, radius, tubeRadius, detailX, detailY) {
   return function() {
     callP5(p, p.torus, [radius.value0 ? radius.value0.value0 : undefined, tubeRadius.value0 ? tubeRadius.value0.value0 : undefined, detailX.value0 ? detailX.value0.value0 : undefined, detailY.value0 ? detailY.value0.value0 : undefined]);
+  };
+};
+exports.translateImpl = function(p, vector) {
+  return function() {
+    callP5(p, p.translate, [vector]);
   };
 };
 exports.translate2Impl = function(p, x, y, z) {
