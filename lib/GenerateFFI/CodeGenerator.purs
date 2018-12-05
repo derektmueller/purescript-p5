@@ -256,9 +256,11 @@ generateWrapper x = do
         (\x' -> do
           let paramName = getParamName x'
           case x'.p5Type of
+            (P5Maybe (P5Or _ _)) -> paramName <> ".value0 ? "
+              <> paramName <> ".value0.value0 : undefined"
             (P5Or _ _) -> paramName <> ".value0"
             (P5Maybe _) -> paramName <> ".value0 ? "
-              <> paramName <> ".value0.value0 : undefined"
+              <> paramName <> ".value0 : undefined"
             _ -> paramName
         ) <$> x.params
       params = getParamNames x

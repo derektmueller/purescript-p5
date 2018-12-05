@@ -17,6 +17,8 @@ import Web.HTML (window)
 import Web.HTML.Window (innerWidth, innerHeight)
 import P5 
 import P5.Types (P5)
+import Data.Enum
+import Math (pi)
 
 type AppState = {
   p5 :: P5
@@ -33,11 +35,18 @@ drawExample p = do
   stroke5 p 127.0 63.0 120.0 Nothing
   rect p 40.0 120.0 120.0 40.0 Nothing Nothing
   ellipse p 240.0 240.0 80.0 (Just 80.0)  
-  triangle p 300.0 100.0 230.0 100.0 310.0 80.0
+  triangle p 300.0 100.0 320.0 100.0 310.0 80.0
   translate2 p 580.0 200.0 Nothing
   noStroke p
 
-  ellipse p 0.0 30.0 20.0 (Just 80.0)  
+  _ <- traverse
+    (\_ -> do
+      ellipse p 0.0 30.0 20.0 (Just 80.0)  
+      rotate p (pi / 5.0) Nothing
+    )
+    (enumFromTo 0 9) :: Effect (Array Unit)
+
+  pure unit
 
 main :: Maybe AppState -> Effect (Maybe AppState)
 main mAppState = do
