@@ -19,7 +19,7 @@ import Data.Function.Uncurried (Fn2, runFn2)
 import P5.Types (Element, P5, Vector)
 import P5.Generated 
 
-foreign import p5Impl :: (P5 -> Effect Unit) -> Effect Unit
+foreign import p5Impl :: (P5 -> Effect Unit) -> Effect P5
 foreign import getP5Impl :: Effect P5
 foreign import setupImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import drawImpl :: P5 -> Effect Unit -> Effect Unit
@@ -35,7 +35,7 @@ foreign import setIdImpl :: Fn2 Element String (Effect Unit)
 type ColorString = String
 data StrokeJoin = Miter | Bevel | Round
 
-p5 :: (P5 -> Effect Unit) -> Effect Unit
+p5 :: (P5 -> Effect Unit) -> Effect P5
 p5 f = p5Impl f
 
 getP5 :: Effect P5
