@@ -39,7 +39,8 @@ main mAppState = do
   p <- maybe getP5 (\x -> pure x.p5) mAppState
 
   setup p do
-    _ <- createCanvas p (toNumber w) (toNumber h)
+    e <- createCanvas p (toNumber w) (toNumber h)
+    setId e "structureWidthAndHeight"
     pure unit
 
   draw p do
@@ -54,5 +55,26 @@ main mAppState = do
     ) (enumFromThenTo 0 20 h)
 
     pure unit
+
+--  p' <- getP5
+--
+--  setup p' do
+--    e <- createCanvas p' 500.0 500.0 
+--    setId e "testtest"
+--    pure unit
+--
+--  draw p' do
+--    background3 p' "red" Nothing
+--    stroke p' "green"
+--    strokeWeight p' 3.0
+--    line p' 0.0 0.0 100.0 100.0
+--    line p' 100.0 100.0 100.0 200.0
+--    strokeWeight p' 10.0
+--    line p' 100.0 200.0 200.0 200.0
+--    line p' 200.0 200.0 300.0 300.0
+--    strokeJoin p' Round
+--    strokeJoin p' Bevel
+--    strokeJoin p' Miter
+--    pure unit
 
   pure $ Just { p5: p }

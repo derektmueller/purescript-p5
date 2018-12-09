@@ -57,7 +57,8 @@ main mAppState = do
   case mAppState of
     Nothing ->
       setup p do
-        _ <- createCanvas p (toNumber w) (toNumber h)
+        e <- createCanvas p (toNumber w) (toNumber h)
+        setId e "helloP5SimpleShapes"
         drawExample p
         pure unit
     _ -> drawExample p

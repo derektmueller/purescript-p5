@@ -22,15 +22,14 @@ import Test.Spec.Assertions (shouldEqual, fail)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (run', defaultConfig)
 import Unsafe.Coerce (unsafeCoerce)
-import P5 (StrokeJoin(..), background3, createCanvas, draw, getP5, line, setId, setup, stroke, strokeJoin, strokeWeight, dist, nf, abs, NumberOrString(..), IntOrString(..), char, textLeading2, textLeading)
+import P5 (P5, StrokeJoin(..), background3, createCanvas, draw, getP5, line, setId, setup, stroke, strokeJoin, strokeWeight, dist, nf, abs, NumberOrString(..), IntOrString(..), char, textLeading2, textLeading, resizeCanvas)
 import Node.Crypto.Hash (Algorithm(..), base64)
 import Data.String.Common (trim)
 import HelloP5SimpleShapes as HelloP5SimpleShapes
+import StructureWidthAndHeight as StructureWidthAndHeight
 
-lineDrawing :: String -> Number -> Number -> Effect Unit
-lineDrawing canvasId w h = do
-  p <- getP5
-
+lineDrawing :: P5 -> String -> Number -> Number -> Effect Unit
+lineDrawing p canvasId w h = do
   setup p do
     e <- createCanvas p w h
     setId e canvasId
@@ -80,40 +79,44 @@ expectCanvasToMatchSnapshot canvasId w h snapshotFilename = do
 
 main :: Effect Unit
 main = do
-  _ <- jsdomGlobal
+  _ <- liftEffect jsdomGlobal
+  p <- getP5
   run' testConfig [consoleReporter] do
     describe "purescript-spec" do
       describe "snapshots" do
         it "renders a line drawing" do
-          let canvasId = "test-canvas"
+          let canvasId = "defaultCanvas0"
               w = 500.0
               h = 500.0
 
-          liftEffect $ lineDrawing canvasId w h
+          liftEffect $ lineDrawing p canvasId w h
           expectCanvasToMatchSnapshot 
             canvasId w h "lineDrawing"
         it "renders hello-p5-simple-shapes" do
+          liftEffect $ resizeCanvas p 720.0 400.0 Nothing
           _ <- liftEffect 
-            $ HelloP5SimpleShapes.main 
-                HelloP5SimpleShapes.initialState
+            $ HelloP5SimpleShapes.main (Just {p5: p})
           expectCanvasToMatchSnapshot 
             "defaultCanvas0" 720.0 400.0 "helloP5SimpleShapes"
+        it "renders structure-width-and-height" do
+          liftEffect $ resizeCanvas p 720.0 400.0 Nothing
+          _ <- liftEffect 
+            $ StructureWidthAndHeight.main (Just {p5: p})
+          expectCanvasToMatchSnapshot 
+            "defaultCanvas0" 720.0 400.0 "structureWidthAndHeight"
       describe "math" do
         describe "dist" do
           it "calculates distance between points" do
-             p <- liftEffect getP5
              dist p 0.0 0.0 1.0 0.0 `shouldEqual` 1.0
              pure unit
         describe "abs" do
           it "calculates absolute value" do
-             p <- liftEffect getP5
              abs p (-3.0) `shouldEqual` 3.0
              pure unit
       describe "data" do
         describe "string functions" do
           describe "nf" do
             it "formats numbers into strings" do
-              p <- liftEffect getP5
               nf p (NumberOrStringNumber 1.1) 
                 (Just (IntOrStringInt 5)) 
                 (Just (IntOrStringInt 5))
@@ -133,7 +136,6 @@ main = do
         describe "conversion" do
           describe "char" do
             it "converts to character representation" do
-              p <- liftEffect getP5
               char p (NumberOrStringNumber 65.0)
                 `shouldEqual` "A"
               char p (NumberOrStringString "65")
@@ -142,7 +144,6 @@ main = do
         describe "attributes" do
           describe "textLeading" do
             it "gets the text leading" do
-              p <- liftEffect getP5
               liftEffect $ textLeading2 p 1.0
               let leading = textLeading p
               leading `shouldEqual` 1.0
