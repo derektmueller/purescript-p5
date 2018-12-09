@@ -1,20 +1,25 @@
 module P5.Generated
-  ( BooleanOrNumberOrString(..)
+  ( ArrayNumberOrStringOrColor(..)
+  , BooleanOrNumberOrString(..)
   , NumberOrString(..)
   , IntOrString(..)
   , ArrayNumberOrVector(..)
   , NumberOrArrayNumberOrVector(..)
   , abs
   , acos
+  , alpha
   , ambientLight
   , ambientLight2
+  , ambientLight3
   , ambientLight4
   , ambientLight5
+  , ambientMaterial
   , ambientMaterial2
   , applyMatrix
   , asin
   , atan
   , atan2
+  , background
   , background2
   , background3
   , background4
@@ -26,12 +31,19 @@ module P5.Generated
   , bezierTangent
   , bezierVertex
   , bezierVertex2
+  , blue
   , box
+  , brightness
   , byte
   , camera
   , ceil
   , char
   , clear
+  , color
+  , color2
+  , color3
+  , color4
+  , color5
   , cone
   , constrain
   , copy
@@ -52,7 +64,9 @@ module P5.Generated
   , deviceMoved
   , deviceShaken
   , deviceTurned
+  , directionalLight
   , directionalLight2
+  , directionalLight3
   , directionalLight4
   , displayDensity
   , dist
@@ -64,6 +78,7 @@ module P5.Generated
   , exp
   , fill
   , fill2
+  , fill3
   , fill4
   , fill5
   , float
@@ -73,15 +88,19 @@ module P5.Generated
   , fullscreen
   , getURL
   , getURLPath
+  , green
   , hex
   , hex2
   , hour
+  , hue
   , int2
   , keyIsDown
   , keyPressed
   , keyReleased
   , keyTyped
   , lerp
+  , lerpColor
+  , lightness
   , line
   , line2
   , loadPixels
@@ -123,7 +142,9 @@ module P5.Generated
   , pixelDensity2
   , plane
   , point
+  , pointLight
   , pointLight2
+  , pointLight3
   , pointLight4
   , pop
   , pow
@@ -138,6 +159,7 @@ module P5.Generated
   , randomSeed
   , rect
   , rect2
+  , red
   , redraw
   , remove
   , resetMatrix
@@ -147,6 +169,7 @@ module P5.Generated
   , rotateY
   , rotateZ
   , round
+  , saturation
   , saveCanvas
   , saveStrings
   , scale
@@ -159,6 +182,7 @@ module P5.Generated
   , shearY
   , sin
   , smooth
+  , specularMaterial
   , specularMaterial2
   , sphere
   , split
@@ -167,6 +191,7 @@ module P5.Generated
   , sqrt
   , stroke
   , stroke2
+  , stroke3
   , stroke4
   , stroke5
   , strokeWeight
@@ -181,6 +206,7 @@ module P5.Generated
   , textWidth
   , tint
   , tint2
+  , tint3
   , tint4
   , tint5
   , torus
@@ -200,11 +226,12 @@ module P5.Generated
 import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)
 import Effect (Effect)
 import Prelude (Unit)
-import P5.Types (P5, Vector)
+import P5.Types (P5, Vector, Color)
 import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
 
+data ArrayNumberOrStringOrColor = ArrayNumberOrStringOrColorArrayNumber (Array Number) | ArrayNumberOrStringOrColorString String | ArrayNumberOrStringOrColorColor Color
 data BooleanOrNumberOrString = BooleanOrNumberOrStringBoolean Boolean | BooleanOrNumberOrStringNumber Number | BooleanOrNumberOrStringString String
 data NumberOrString = NumberOrStringNumber Number | NumberOrStringString String
 data IntOrString = IntOrStringInt Int | IntOrStringString String
@@ -213,15 +240,19 @@ data NumberOrArrayNumberOrVector = NumberOrArrayNumberOrVectorNumber Number | Nu
 
 foreign import absImpl :: Fn2 P5 Number Number
 foreign import acosImpl :: Fn2 P5 Number Number
+foreign import alphaImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import ambientLightImpl :: Fn2 P5 String (Effect Unit)
 foreign import ambientLight2Impl :: Fn2 P5 (Array Number) (Effect Unit)
+foreign import ambientLight3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import ambientLight4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import ambientLight5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
+foreign import ambientMaterialImpl :: Fn2 P5 ArrayNumberOrStringOrColor (Effect Unit)
 foreign import ambientMaterial2Impl :: Fn5 P5 Number (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import applyMatrixImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import asinImpl :: Fn2 P5 Number Number
 foreign import atanImpl :: Fn2 P5 Number Number
 foreign import atan2Impl :: Fn3 P5 Number Number Number
+foreign import backgroundImpl :: Fn2 P5 Color (Effect Unit)
 foreign import background2Impl :: Fn2 P5 (Array Number) (Effect Unit)
 foreign import background3Impl :: Fn3 P5 String (Maybe Number) (Effect Unit)
 foreign import background4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
@@ -233,12 +264,19 @@ foreign import bezierPointImpl :: Fn6 P5 Number Number Number Number Number Numb
 foreign import bezierTangentImpl :: Fn6 P5 Number Number Number Number Number Number
 foreign import bezierVertexImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import bezierVertex2Impl :: Fn10 P5 Number Number Number Number Number Number Number Number Number (Effect Unit)
+foreign import blueImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import boxImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
+foreign import brightnessImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import byteImpl :: Fn2 P5 BooleanOrNumberOrString Number
 foreign import cameraImpl :: Fn10 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import ceilImpl :: Fn2 P5 Number Int
 foreign import charImpl :: Fn2 P5 NumberOrString String
 foreign import clearImpl :: Fn1 P5 (Effect Unit)
+foreign import colorImpl :: Fn2 P5 String Color
+foreign import color2Impl :: Fn2 P5 (Array Number) Color
+foreign import color3Impl :: Fn2 P5 Color Color
+foreign import color4Impl :: Fn3 P5 Number (Maybe Number) Color
+foreign import color5Impl :: Fn5 P5 Number Number Number (Maybe Number) Color
 foreign import coneImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Maybe Boolean) (Effect Unit)
 foreign import constrainImpl :: Fn4 P5 Number Number Number Number
 foreign import copyImpl :: Fn9 P5 Int Int Int Int Int Int Int Int (Effect Unit)
@@ -259,7 +297,9 @@ foreign import degreesImpl :: Fn2 P5 Number Number
 foreign import deviceMovedImpl :: Fn1 P5 (Effect Unit)
 foreign import deviceShakenImpl :: Fn1 P5 (Effect Unit)
 foreign import deviceTurnedImpl :: Fn1 P5 (Effect Unit)
+foreign import directionalLightImpl :: Fn3 P5 ArrayNumberOrStringOrColor Vector (Effect Unit)
 foreign import directionalLight2Impl :: Fn5 P5 Number Number Number Vector (Effect Unit)
+foreign import directionalLight3Impl :: Fn5 P5 ArrayNumberOrStringOrColor Number Number Number (Effect Unit)
 foreign import directionalLight4Impl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import displayDensityImpl :: Fn1 P5 Number
 foreign import distImpl :: Fn5 P5 Number Number Number Number Number
@@ -271,6 +311,7 @@ foreign import endContourImpl :: Fn1 P5 (Effect Unit)
 foreign import expImpl :: Fn2 P5 Number Number
 foreign import fillImpl :: Fn2 P5 String (Effect Unit)
 foreign import fill2Impl :: Fn2 P5 (Array Number) (Effect Unit)
+foreign import fill3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import fill4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import fill5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import floatImpl :: Fn2 P5 String Number
@@ -280,15 +321,19 @@ foreign import frameRate2Impl :: Fn2 P5 Number (Effect Unit)
 foreign import fullscreenImpl :: Fn2 P5 (Maybe Boolean) Boolean
 foreign import getURLImpl :: Fn1 P5 String
 foreign import getURLPathImpl :: Fn1 P5 (Array String)
+foreign import greenImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import hexImpl :: Fn3 P5 Number (Maybe Number) String
 foreign import hex2Impl :: Fn3 P5 (Array Number) (Maybe Number) (Array String)
 foreign import hourImpl :: Fn1 P5 Int
+foreign import hueImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import int2Impl :: Fn3 P5 BooleanOrNumberOrString (Maybe Int) Number
 foreign import keyIsDownImpl :: Fn2 P5 Number Boolean
 foreign import keyPressedImpl :: Fn1 P5 (Effect Unit)
 foreign import keyReleasedImpl :: Fn1 P5 (Effect Unit)
 foreign import keyTypedImpl :: Fn1 P5 (Effect Unit)
 foreign import lerpImpl :: Fn4 P5 Number Number Number Number
+foreign import lerpColorImpl :: Fn4 P5 Color Color Number Color
+foreign import lightnessImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import lineImpl :: Fn5 P5 Number Number Number Number (Effect Unit)
 foreign import line2Impl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import loadPixelsImpl :: Fn1 P5 (Effect Unit)
@@ -330,7 +375,9 @@ foreign import pixelDensityImpl :: Fn1 P5 Number
 foreign import pixelDensity2Impl :: Fn2 P5 Number (Effect Unit)
 foreign import planeImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import pointImpl :: Fn4 P5 Number Number (Maybe Number) (Effect Unit)
+foreign import pointLightImpl :: Fn3 P5 ArrayNumberOrStringOrColor Vector (Effect Unit)
 foreign import pointLight2Impl :: Fn5 P5 Number Number Number Vector (Effect Unit)
+foreign import pointLight3Impl :: Fn5 P5 ArrayNumberOrStringOrColor Number Number Number (Effect Unit)
 foreign import pointLight4Impl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import popImpl :: Fn1 P5 (Effect Unit)
 foreign import powImpl :: Fn3 P5 Number Number Number
@@ -345,6 +392,7 @@ foreign import randomGaussianImpl :: Fn3 P5 Number Number Number
 foreign import randomSeedImpl :: Fn2 P5 Number (Effect Unit)
 foreign import rectImpl :: Fn7 P5 Number Number Number Number (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import rect2Impl :: Fn9 P5 Number Number Number Number (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
+foreign import redImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import redrawImpl :: Fn2 P5 (Maybe Int) (Effect Unit)
 foreign import removeImpl :: Fn1 P5 (Effect Unit)
 foreign import resetMatrixImpl :: Fn1 P5 (Effect Unit)
@@ -354,6 +402,7 @@ foreign import rotateXImpl :: Fn2 P5 Number (Effect Unit)
 foreign import rotateYImpl :: Fn2 P5 Number (Effect Unit)
 foreign import rotateZImpl :: Fn2 P5 Number (Effect Unit)
 foreign import roundImpl :: Fn2 P5 Number Int
+foreign import saturationImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import saveCanvasImpl :: Fn3 P5 (Maybe String) (Maybe String) (Effect Unit)
 foreign import saveStringsImpl :: Fn4 P5 (Array String) String (Maybe String) (Effect Unit)
 foreign import scaleImpl :: Fn2 P5 ArrayNumberOrVector (Effect Unit)
@@ -366,6 +415,7 @@ foreign import shearXImpl :: Fn2 P5 Number (Effect Unit)
 foreign import shearYImpl :: Fn2 P5 Number (Effect Unit)
 foreign import sinImpl :: Fn2 P5 Number Number
 foreign import smoothImpl :: Fn1 P5 (Effect Unit)
+foreign import specularMaterialImpl :: Fn2 P5 ArrayNumberOrStringOrColor (Effect Unit)
 foreign import specularMaterial2Impl :: Fn5 P5 Number (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import sphereImpl :: Fn4 P5 (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import splitImpl :: Fn3 P5 String String (Array String)
@@ -374,6 +424,7 @@ foreign import sqImpl :: Fn2 P5 Number Number
 foreign import sqrtImpl :: Fn2 P5 Number Number
 foreign import strokeImpl :: Fn2 P5 String (Effect Unit)
 foreign import stroke2Impl :: Fn2 P5 (Array Number) (Effect Unit)
+foreign import stroke3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import stroke4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import stroke5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import strokeWeightImpl :: Fn2 P5 Number (Effect Unit)
@@ -388,6 +439,7 @@ foreign import textStyleImpl :: Fn1 P5 String
 foreign import textWidthImpl :: Fn2 P5 String Number
 foreign import tintImpl :: Fn2 P5 String (Effect Unit)
 foreign import tint2Impl :: Fn2 P5 (Array Number) (Effect Unit)
+foreign import tint3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import tint4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import tint5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import torusImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
@@ -411,7 +463,9 @@ abs p5 n = runFn2 absImpl p5 n
 acos :: P5 -> Number -> Number
 acos p5 value = runFn2 acosImpl p5 value
 
--- TODO: unsupported: alpha :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/alpha)
+alpha :: P5 -> ArrayNumberOrStringOrColor -> Number
+alpha p5 color = runFn2 alphaImpl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 ambientLight :: P5 -> String -> (Effect Unit)
@@ -421,7 +475,9 @@ ambientLight p5 value = runFn2 ambientLightImpl p5 value
 ambientLight2 :: P5 -> (Array Number) -> (Effect Unit)
 ambientLight2 p5 values = runFn2 ambientLight2Impl p5 values
 
--- TODO: unsupported: ambientLight3 :: P5 -> Unsupported(p5.Color) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+ambientLight3 :: P5 -> Color -> (Effect Unit)
+ambientLight3 p5 color = runFn2 ambientLight3Impl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
 ambientLight4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
@@ -431,7 +487,9 @@ ambientLight4 p5 gray alpha = runFn3 ambientLight4Impl p5 gray alpha
 ambientLight5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 ambientLight5 p5 v1 v2 v3 alpha = runFn5 ambientLight5Impl p5 v1 v2 v3 alpha
 
--- TODO: unsupported: ambientMaterial :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
+ambientMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
+ambientMaterial p5 color = runFn2 ambientMaterialImpl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
 ambientMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
@@ -463,7 +521,9 @@ atan p5 value = runFn2 atanImpl p5 value
 atan2 :: P5 -> Number -> Number -> Number
 atan2 p5 y x = runFn3 atan2Impl p5 y x
 
--- TODO: unsupported: background :: P5 -> Unsupported(p5.Color) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/background)
+background :: P5 -> Color -> (Effect Unit)
+background p5 color = runFn2 backgroundImpl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 background2 :: P5 -> (Array Number) -> (Effect Unit)
@@ -519,7 +579,9 @@ bezierVertex2 p5 x2 y2 z2 x3 y3 z3 x4 y4 z4 = runFn10 bezierVertex2Impl p5 x2 y2
 
 -- TODO: unsupported: blendMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
--- TODO: unsupported: blue :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/blue)
+blue :: P5 -> ArrayNumberOrStringOrColor -> Number
+blue p5 color = runFn2 blueImpl p5 color
 
 -- TODO: unsupported: boolean :: P5 -> UnsupportedProduct(UnsupportedProduct(UnsupportedProduct(Unsupported(Array)|Boolean)|Number)|String) -> Boolean
 
@@ -527,7 +589,9 @@ bezierVertex2 p5 x2 y2 z2 x3 y3 z3 x4 y4 z4 = runFn10 bezierVertex2Impl p5 x2 y2
 box :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
 box p5 width height depth detailX detailY = runFn6 boxImpl p5 width height depth detailX detailY
 
--- TODO: unsupported: brightness :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/brightness)
+brightness :: P5 -> ArrayNumberOrStringOrColor -> Number
+brightness p5 color = runFn2 brightnessImpl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/byte)
 byte :: P5 -> BooleanOrNumberOrString -> Number
@@ -553,15 +617,25 @@ char p5 n = runFn2 charImpl p5 n
 clear :: P5 -> (Effect Unit)
 clear p5  = runFn1 clearImpl p5 
 
--- TODO: unsupported: color :: P5 -> String -> Unsupported(p5.Color)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/color)
+color :: P5 -> String -> Color
+color p5 value = runFn2 colorImpl p5 value
 
--- TODO: unsupported: color2 :: P5 -> (Array Number) -> Unsupported(p5.Color)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/color)
+color2 :: P5 -> (Array Number) -> Color
+color2 p5 values = runFn2 color2Impl p5 values
 
--- TODO: unsupported: color3 :: P5 -> Unsupported(p5.Color) -> Unsupported(p5.Color)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/color)
+color3 :: P5 -> Color -> Color
+color3 p5 color = runFn2 color3Impl p5 color
 
--- TODO: unsupported: color4 :: P5 -> Number -> (Maybe Number) -> Unsupported(p5.Color)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/color)
+color4 :: P5 -> Number -> (Maybe Number) -> Color
+color4 p5 gray alpha = runFn3 color4Impl p5 gray alpha
 
--- TODO: unsupported: color5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> Unsupported(p5.Color)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/color)
+color5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> Color
+color5 p5 v1 v2 v3 alpha = runFn5 color5Impl p5 v1 v2 v3 alpha
 
 -- TODO: unsupported: colorMode :: P5 -> Unsupported(Constant) -> (Maybe Number) -> (Effect Unit)
 
@@ -679,13 +753,17 @@ deviceShaken p5  = runFn1 deviceShakenImpl p5
 deviceTurned :: P5 -> (Effect Unit)
 deviceTurned p5  = runFn1 deviceTurnedImpl p5 
 
--- TODO: unsupported: directionalLight :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Vector -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
+directionalLight :: P5 -> ArrayNumberOrStringOrColor -> Vector -> (Effect Unit)
+directionalLight p5 color position = runFn3 directionalLightImpl p5 color position
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 directionalLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
 directionalLight2 p5 v1 v2 v3 position = runFn5 directionalLight2Impl p5 v1 v2 v3 position
 
--- TODO: unsupported: directionalLight3 :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number -> Number -> Number -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
+directionalLight3 :: P5 -> ArrayNumberOrStringOrColor -> Number -> Number -> Number -> (Effect Unit)
+directionalLight3 p5 color x y z = runFn5 directionalLight3Impl p5 color x y z
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 directionalLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -739,7 +817,9 @@ fill p5 value = runFn2 fillImpl p5 value
 fill2 :: P5 -> (Array Number) -> (Effect Unit)
 fill2 p5 values = runFn2 fill2Impl p5 values
 
--- TODO: unsupported: fill3 :: P5 -> Unsupported(p5.Color) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
+fill3 :: P5 -> Color -> (Effect Unit)
+fill3 p5 color = runFn2 fill3Impl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
 fill4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
@@ -783,7 +863,9 @@ getURL p5  = runFn1 getURLImpl p5
 getURLPath :: P5 -> (Array String)
 getURLPath p5  = runFn1 getURLPathImpl p5 
 
--- TODO: unsupported: green :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/green)
+green :: P5 -> ArrayNumberOrStringOrColor -> Number
+green p5 color = runFn2 greenImpl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/hex)
 hex :: P5 -> Number -> (Maybe Number) -> String
@@ -813,7 +895,9 @@ hour p5  = runFn1 hourImpl p5
 
 -- TODO: unsupported: httpPost3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
 
--- TODO: unsupported: hue :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/hue)
+hue :: P5 -> ArrayNumberOrStringOrColor -> Number
+hue p5 color = runFn2 hueImpl p5 color
 
 -- TODO: unsupported: image :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Unsupported(p5.Image)) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
@@ -849,9 +933,13 @@ keyTyped p5  = runFn1 keyTypedImpl p5
 lerp :: P5 -> Number -> Number -> Number -> Number
 lerp p5 start stop amt = runFn4 lerpImpl p5 start stop amt
 
--- TODO: unsupported: lerpColor :: P5 -> Unsupported(p5.Color) -> Unsupported(p5.Color) -> Number -> Unsupported(p5.Color)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/lerpColor)
+lerpColor :: P5 -> Color -> Color -> Number -> Color
+lerpColor p5 c1 c2 amt = runFn4 lerpColorImpl p5 c1 c2 amt
 
--- TODO: unsupported: lightness :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/lightness)
+lightness :: P5 -> ArrayNumberOrStringOrColor -> Number
+lightness p5 color = runFn2 lightnessImpl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/line)
 line :: P5 -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -1063,13 +1151,17 @@ plane p5 width height detailX detailY = runFn5 planeImpl p5 width height detailX
 point :: P5 -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 point p5 x y z = runFn4 pointImpl p5 x y z
 
--- TODO: unsupported: pointLight :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Vector -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
+pointLight :: P5 -> ArrayNumberOrStringOrColor -> Vector -> (Effect Unit)
+pointLight p5 color position = runFn3 pointLightImpl p5 color position
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 pointLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
 pointLight2 p5 v1 v2 v3 position = runFn5 pointLight2Impl p5 v1 v2 v3 position
 
--- TODO: unsupported: pointLight3 :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number -> Number -> Number -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
+pointLight3 :: P5 -> ArrayNumberOrStringOrColor -> Number -> Number -> Number -> (Effect Unit)
+pointLight3 p5 color x y z = runFn5 pointLight3Impl p5 color x y z
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 pointLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
@@ -1133,7 +1225,9 @@ rect2 p5 x y w h tl tr br bl = runFn9 rect2Impl p5 x y w h tl tr br bl
 
 -- TODO: unsupported: rectMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
--- TODO: unsupported: red :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/red)
+red :: P5 -> ArrayNumberOrStringOrColor -> Number
+red p5 color = runFn2 redImpl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/redraw)
 redraw :: P5 -> (Maybe Int) -> (Effect Unit)
@@ -1173,7 +1267,9 @@ rotateZ p5 angle = runFn2 rotateZImpl p5 angle
 round :: P5 -> Number -> Int
 round p5 n = runFn2 roundImpl p5 n
 
--- TODO: unsupported: saturation :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> Number
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/saturation)
+saturation :: P5 -> ArrayNumberOrStringOrColor -> Number
+saturation p5 color = runFn2 saturationImpl p5 color
 
 -- TODO: unsupported: save :: P5 -> UnsupportedProduct(Unsupported(Object)|String) -> (Maybe String) -> (Maybe BooleanOrString) -> (Effect Unit)
 
@@ -1247,7 +1343,9 @@ smooth p5  = runFn1 smoothImpl p5
 
 -- TODO: unsupported: sort :: P5 -> Unsupported(Array) -> (Maybe Int) -> Unsupported(Array)
 
--- TODO: unsupported: specularMaterial :: P5 -> UnsupportedProduct(ArrayNumberOrString|Unsupported(p5.Color)) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
+specularMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
+specularMaterial p5 color = runFn2 specularMaterialImpl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
 specularMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
@@ -1285,7 +1383,9 @@ stroke p5 value = runFn2 strokeImpl p5 value
 stroke2 :: P5 -> (Array Number) -> (Effect Unit)
 stroke2 p5 values = runFn2 stroke2Impl p5 values
 
--- TODO: unsupported: stroke3 :: P5 -> Unsupported(p5.Color) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
+stroke3 :: P5 -> Color -> (Effect Unit)
+stroke3 p5 color = runFn2 stroke3Impl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 stroke4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
@@ -1361,7 +1461,9 @@ tint p5 value = runFn2 tintImpl p5 value
 tint2 :: P5 -> (Array Number) -> (Effect Unit)
 tint2 p5 values = runFn2 tint2Impl p5 values
 
--- TODO: unsupported: tint3 :: P5 -> Unsupported(p5.Color) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
+tint3 :: P5 -> Color -> (Effect Unit)
+tint3 p5 color = runFn2 tint3Impl p5 color
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 tint4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)

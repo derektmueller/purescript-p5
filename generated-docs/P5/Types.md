@@ -18,4 +18,10 @@ data Element :: Type
 data Vector :: Type
 ```
 
+#### `Color`
+
+``` purescript
+data Color :: Type
+```
+
 

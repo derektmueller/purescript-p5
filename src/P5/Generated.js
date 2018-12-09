@@ -13,6 +13,9 @@ exports.absImpl = function(p, n) {
 exports.acosImpl = function(p, value) {
   return callP5(p, p.acos, [value]);
 };
+exports.alphaImpl = function(p, color) {
+  return callP5(p, p.alpha, [color.value0]);
+};
 exports.ambientLightImpl = function(p, value) {
   return function() {
     callP5(p, p.ambientLight, [value]);
@@ -23,6 +26,11 @@ exports.ambientLight2Impl = function(p, values) {
     callP5(p, p.ambientLight, [values]);
   };
 };
+exports.ambientLight3Impl = function(p, color) {
+  return function() {
+    callP5(p, p.ambientLight, [color]);
+  };
+};
 exports.ambientLight4Impl = function(p, gray, alpha) {
   return function() {
     callP5(p, p.ambientLight, [gray, alpha.value0 ? alpha.value0 : undefined]);
@@ -31,6 +39,11 @@ exports.ambientLight4Impl = function(p, gray, alpha) {
 exports.ambientLight5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
     callP5(p, p.ambientLight, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+  };
+};
+exports.ambientMaterialImpl = function(p, color) {
+  return function() {
+    callP5(p, p.ambientMaterial, [color.value0]);
   };
 };
 exports.ambientMaterial2Impl = function(p, v1, v2, v3, a) {
@@ -51,6 +64,11 @@ exports.atanImpl = function(p, value) {
 };
 exports.atan2Impl = function(p, y, x) {
   return callP5(p, p.atan2, [y, x]);
+};
+exports.backgroundImpl = function(p, color) {
+  return function() {
+    callP5(p, p.background, [color]);
+  };
 };
 exports.background2Impl = function(p, values) {
   return function() {
@@ -103,10 +121,16 @@ exports.bezierVertex2Impl = function(p, x2, y2, z2, x3, y3, z3, x4, y4, z4) {
     callP5(p, p.bezierVertex, [x2, y2, z2, x3, y3, z3, x4, y4, z4]);
   };
 };
+exports.blueImpl = function(p, color) {
+  return callP5(p, p.blue, [color.value0]);
+};
 exports.boxImpl = function(p, width, height, depth, detailX, detailY) {
   return function() {
     callP5(p, p.box, [width.value0 ? width.value0 : undefined, height.value0 ? height.value0 : undefined, depth.value0 ? depth.value0 : undefined, detailX.value0 ? detailX.value0 : undefined, detailY.value0 ? detailY.value0 : undefined]);
   };
+};
+exports.brightnessImpl = function(p, color) {
+  return callP5(p, p.brightness, [color.value0]);
 };
 exports.byteImpl = function(p, n) {
   return callP5(p, p.byte, [n.value0]);
@@ -126,6 +150,21 @@ exports.clearImpl = function(p) {
   return function() {
     callP5(p, p.clear, []);
   };
+};
+exports.colorImpl = function(p, value) {
+  return callP5(p, p.color, [value]);
+};
+exports.color2Impl = function(p, values) {
+  return callP5(p, p.color, [values]);
+};
+exports.color3Impl = function(p, color) {
+  return callP5(p, p.color, [color]);
+};
+exports.color4Impl = function(p, gray, alpha) {
+  return callP5(p, p.color, [gray, alpha.value0 ? alpha.value0 : undefined]);
+};
+exports.color5Impl = function(p, v1, v2, v3, alpha) {
+  return callP5(p, p.color, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
 };
 exports.coneImpl = function(p, radius, height, detailX, detailY, cap) {
   return function() {
@@ -213,9 +252,19 @@ exports.deviceTurnedImpl = function(p) {
     callP5(p, p.deviceTurned, []);
   };
 };
+exports.directionalLightImpl = function(p, color, position) {
+  return function() {
+    callP5(p, p.directionalLight, [color.value0, position]);
+  };
+};
 exports.directionalLight2Impl = function(p, v1, v2, v3, position) {
   return function() {
     callP5(p, p.directionalLight, [v1, v2, v3, position]);
+  };
+};
+exports.directionalLight3Impl = function(p, color, x, y, z) {
+  return function() {
+    callP5(p, p.directionalLight, [color.value0, x, y, z]);
   };
 };
 exports.directionalLight4Impl = function(p, v1, v2, v3, x, y, z) {
@@ -265,6 +314,11 @@ exports.fill2Impl = function(p, values) {
     callP5(p, p.fill, [values]);
   };
 };
+exports.fill3Impl = function(p, color) {
+  return function() {
+    callP5(p, p.fill, [color]);
+  };
+};
 exports.fill4Impl = function(p, gray, alpha) {
   return function() {
     callP5(p, p.fill, [gray, alpha.value0 ? alpha.value0 : undefined]);
@@ -298,6 +352,9 @@ exports.getURLImpl = function(p) {
 exports.getURLPathImpl = function(p) {
   return callP5(p, p.getURLPath, []);
 };
+exports.greenImpl = function(p, color) {
+  return callP5(p, p.green, [color.value0]);
+};
 exports.hexImpl = function(p, n, digits) {
   return callP5(p, p.hex, [n, digits.value0 ? digits.value0 : undefined]);
 };
@@ -306,6 +363,9 @@ exports.hex2Impl = function(p, ns, digits) {
 };
 exports.hourImpl = function(p) {
   return callP5(p, p.hour, []);
+};
+exports.hueImpl = function(p, color) {
+  return callP5(p, p.hue, [color.value0]);
 };
 exports.int2Impl = function(p, n, radix) {
   return callP5(p, p.int, [n.value0, radix.value0 ? radix.value0 : undefined]);
@@ -330,6 +390,12 @@ exports.keyTypedImpl = function(p) {
 };
 exports.lerpImpl = function(p, start, stop, amt) {
   return callP5(p, p.lerp, [start, stop, amt]);
+};
+exports.lerpColorImpl = function(p, c1, c2, amt) {
+  return callP5(p, p.lerpColor, [c1, c2, amt]);
+};
+exports.lightnessImpl = function(p, color) {
+  return callP5(p, p.lightness, [color.value0]);
 };
 exports.lineImpl = function(p, x1, y1, x2, y2) {
   return function() {
@@ -496,9 +562,19 @@ exports.pointImpl = function(p, x, y, z) {
     callP5(p, p.point, [x, y, z.value0 ? z.value0 : undefined]);
   };
 };
+exports.pointLightImpl = function(p, color, position) {
+  return function() {
+    callP5(p, p.pointLight, [color.value0, position]);
+  };
+};
 exports.pointLight2Impl = function(p, v1, v2, v3, position) {
   return function() {
     callP5(p, p.pointLight, [v1, v2, v3, position]);
+  };
+};
+exports.pointLight3Impl = function(p, color, x, y, z) {
+  return function() {
+    callP5(p, p.pointLight, [color.value0, x, y, z]);
   };
 };
 exports.pointLight4Impl = function(p, v1, v2, v3, x, y, z) {
@@ -563,6 +639,9 @@ exports.rect2Impl = function(p, x, y, w, h, tl, tr, br, bl) {
     callP5(p, p.rect, [x, y, w, h, tl.value0 ? tl.value0 : undefined, tr.value0 ? tr.value0 : undefined, br.value0 ? br.value0 : undefined, bl.value0 ? bl.value0 : undefined]);
   };
 };
+exports.redImpl = function(p, color) {
+  return callP5(p, p.red, [color.value0]);
+};
 exports.redrawImpl = function(p, n) {
   return function() {
     callP5(p, p.redraw, [n.value0 ? n.value0 : undefined]);
@@ -605,6 +684,9 @@ exports.rotateZImpl = function(p, angle) {
 };
 exports.roundImpl = function(p, n) {
   return callP5(p, p.round, [n]);
+};
+exports.saturationImpl = function(p, color) {
+  return callP5(p, p.saturation, [color.value0]);
 };
 exports.saveCanvasImpl = function(p, filename, extension) {
   return function() {
@@ -662,6 +744,11 @@ exports.smoothImpl = function(p) {
     callP5(p, p.smooth, []);
   };
 };
+exports.specularMaterialImpl = function(p, color) {
+  return function() {
+    callP5(p, p.specularMaterial, [color.value0]);
+  };
+};
 exports.specularMaterial2Impl = function(p, v1, v2, v3, a) {
   return function() {
     callP5(p, p.specularMaterial, [v1, v2.value0 ? v2.value0 : undefined, v3.value0 ? v3.value0 : undefined, a.value0 ? a.value0 : undefined]);
@@ -692,6 +779,11 @@ exports.strokeImpl = function(p, value) {
 exports.stroke2Impl = function(p, values) {
   return function() {
     callP5(p, p.stroke, [values]);
+  };
+};
+exports.stroke3Impl = function(p, color) {
+  return function() {
+    callP5(p, p.stroke, [color]);
   };
 };
 exports.stroke4Impl = function(p, gray, alpha) {
@@ -748,6 +840,11 @@ exports.tintImpl = function(p, value) {
 exports.tint2Impl = function(p, values) {
   return function() {
     callP5(p, p.tint, [values]);
+  };
+};
+exports.tint3Impl = function(p, color) {
+  return function() {
+    callP5(p, p.tint, [color]);
   };
 };
 exports.tint4Impl = function(p, gray, alpha) {

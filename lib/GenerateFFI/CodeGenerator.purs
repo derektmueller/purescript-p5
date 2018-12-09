@@ -30,6 +30,7 @@ generateP5TypeConstructor P5P5 = Just "P5"
 generateP5TypeConstructor P5StringArray = Just "(Array String)"
 generateP5TypeConstructor P5String = Just "String"
 generateP5TypeConstructor P5Vector = Just "Vector"
+generateP5TypeConstructor P5Color = Just "Color"
 generateP5TypeConstructor t@(P5Or p5Type1 p5Type2) = do
   case typeIsUnsupported t of
     true -> do
@@ -60,6 +61,7 @@ p5TypeToIdentifier (P5Maybe p5Type) = do
   Just $ "Maybe" <> identifier
 p5TypeToIdentifier P5P5 = Just "P5"
 p5TypeToIdentifier P5Vector = Just "Vector"
+p5TypeToIdentifier P5Color = Just "Color"
 p5TypeToIdentifier (P5Or _ _) = Nothing
 p5TypeToIdentifier P5Effect = Nothing
 p5TypeToIdentifier (P5Unsupported _) = Nothing
@@ -225,7 +227,7 @@ generateP5 (P5Doc doc) = do
           [ "import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)"
           , "import Effect (Effect)"
           , "import Prelude (Unit)"
-          , "import P5.Types (P5, Vector)"
+          , "import P5.Types (P5, Vector, Color)"
           , "import Foreign (Foreign, unsafeToForeign)"
           , "import Data.Maybe (Maybe, maybe)"
           , "import Foreign.NullOrUndefined (undefined)"

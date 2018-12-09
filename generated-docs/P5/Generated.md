@@ -1,5 +1,14 @@
 ## Module P5.Generated
 
+#### `ArrayNumberOrStringOrColor`
+
+``` purescript
+data ArrayNumberOrStringOrColor
+  = ArrayNumberOrStringOrColorArrayNumber (Array Number)
+  | ArrayNumberOrStringOrColorString String
+  | ArrayNumberOrStringOrColorColor Color
+```
+
 #### `BooleanOrNumberOrString`
 
 ``` purescript
@@ -58,6 +67,14 @@ acos :: P5 -> Number -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/acos)
 
+#### `alpha`
+
+``` purescript
+alpha :: P5 -> ArrayNumberOrStringOrColor -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/alpha)
+
 #### `ambientLight`
 
 ``` purescript
@@ -70,6 +87,14 @@ ambientLight :: P5 -> String -> (Effect Unit)
 
 ``` purescript
 ambientLight2 :: P5 -> (Array Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+
+#### `ambientLight3`
+
+``` purescript
+ambientLight3 :: P5 -> Color -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
@@ -89,6 +114,14 @@ ambientLight5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect U
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+
+#### `ambientMaterial`
+
+``` purescript
+ambientMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
 
 #### `ambientMaterial2`
 
@@ -129,6 +162,14 @@ atan2 :: P5 -> Number -> Number -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/atan2)
+
+#### `background`
+
+``` purescript
+background :: P5 -> Color -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/background)
 
 #### `background2`
 
@@ -218,6 +259,14 @@ bezierVertex2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number 
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/bezierVertex)
 
+#### `blue`
+
+``` purescript
+blue :: P5 -> ArrayNumberOrStringOrColor -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/blue)
+
 #### `box`
 
 ``` purescript
@@ -225,6 +274,14 @@ box :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/box)
+
+#### `brightness`
+
+``` purescript
+brightness :: P5 -> ArrayNumberOrStringOrColor -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/brightness)
 
 #### `byte`
 
@@ -265,6 +322,46 @@ clear :: P5 -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/clear)
+
+#### `color`
+
+``` purescript
+color :: P5 -> String -> Color
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/color)
+
+#### `color2`
+
+``` purescript
+color2 :: P5 -> (Array Number) -> Color
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/color)
+
+#### `color3`
+
+``` purescript
+color3 :: P5 -> Color -> Color
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/color)
+
+#### `color4`
+
+``` purescript
+color4 :: P5 -> Number -> (Maybe Number) -> Color
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/color)
+
+#### `color5`
+
+``` purescript
+color5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> Color
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/color)
 
 #### `cone`
 
@@ -426,10 +523,26 @@ deviceTurned :: P5 -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceTurned)
 
+#### `directionalLight`
+
+``` purescript
+directionalLight :: P5 -> ArrayNumberOrStringOrColor -> Vector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
+
 #### `directionalLight2`
 
 ``` purescript
 directionalLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
+
+#### `directionalLight3`
+
+``` purescript
+directionalLight3 :: P5 -> ArrayNumberOrStringOrColor -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
@@ -522,6 +635,14 @@ fill2 :: P5 -> (Array Number) -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
 
+#### `fill3`
+
+``` purescript
+fill3 :: P5 -> Color -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/fill)
+
 #### `fill4`
 
 ``` purescript
@@ -594,6 +715,14 @@ getURLPath :: P5 -> (Array String)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/getURLPath)
 
+#### `green`
+
+``` purescript
+green :: P5 -> ArrayNumberOrStringOrColor -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/green)
+
 #### `hex`
 
 ``` purescript
@@ -617,6 +746,14 @@ hour :: P5 -> Int
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/hour)
+
+#### `hue`
+
+``` purescript
+hue :: P5 -> ArrayNumberOrStringOrColor -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/hue)
 
 #### `int2`
 
@@ -665,6 +802,22 @@ lerp :: P5 -> Number -> Number -> Number -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/lerp)
+
+#### `lerpColor`
+
+``` purescript
+lerpColor :: P5 -> Color -> Color -> Number -> Color
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/lerpColor)
+
+#### `lightness`
+
+``` purescript
+lightness :: P5 -> ArrayNumberOrStringOrColor -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/lightness)
 
 #### `line`
 
@@ -994,10 +1147,26 @@ point :: P5 -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/point)
 
+#### `pointLight`
+
+``` purescript
+pointLight :: P5 -> ArrayNumberOrStringOrColor -> Vector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
+
 #### `pointLight2`
 
 ``` purescript
 pointLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
+
+#### `pointLight3`
+
+``` purescript
+pointLight3 :: P5 -> ArrayNumberOrStringOrColor -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
@@ -1114,6 +1283,14 @@ rect2 :: P5 -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe 
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/rect)
 
+#### `red`
+
+``` purescript
+red :: P5 -> ArrayNumberOrStringOrColor -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/red)
+
 #### `redraw`
 
 ``` purescript
@@ -1185,6 +1362,14 @@ round :: P5 -> Number -> Int
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/round)
+
+#### `saturation`
+
+``` purescript
+saturation :: P5 -> ArrayNumberOrStringOrColor -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/saturation)
 
 #### `saveCanvas`
 
@@ -1282,6 +1467,14 @@ smooth :: P5 -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/smooth)
 
+#### `specularMaterial`
+
+``` purescript
+specularMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
+
 #### `specularMaterial2`
 
 ``` purescript
@@ -1342,6 +1535,14 @@ stroke :: P5 -> String -> (Effect Unit)
 
 ``` purescript
 stroke2 :: P5 -> (Array Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
+
+#### `stroke3`
+
+``` purescript
+stroke3 :: P5 -> Color -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
@@ -1454,6 +1655,14 @@ tint :: P5 -> String -> (Effect Unit)
 
 ``` purescript
 tint2 :: P5 -> (Array Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/tint)
+
+#### `tint3`
+
+``` purescript
+tint3 :: P5 -> Color -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/tint)

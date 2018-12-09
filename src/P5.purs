@@ -3,7 +3,6 @@ module P5
   , getP5
   , setup
   , draw
-  , background
   , strokeJoin
   , StrokeJoin(..)
   , createCanvas
@@ -23,7 +22,6 @@ foreign import p5Impl :: (P5 -> Effect Unit) -> Effect P5
 foreign import getP5Impl :: Effect P5
 foreign import setupImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import drawImpl :: P5 -> Effect Unit -> Effect Unit
-foreign import backgroundImpl :: P5 -> ColorString -> Effect Unit
 foreign import strokeJoinMiterImpl :: P5 -> Effect Unit
 foreign import strokeJoinBevelImpl :: P5 -> Effect Unit
 foreign import strokeJoinRoundImpl :: P5 -> Effect Unit
@@ -32,7 +30,6 @@ foreign import createCanvasImpl
 foreign import idImpl :: Element -> String
 foreign import setIdImpl :: Fn2 Element String (Effect Unit)
 
-type ColorString = String
 data StrokeJoin = Miter | Bevel | Round
 
 p5 :: (P5 -> Effect Unit) -> Effect P5
@@ -46,9 +43,6 @@ setup p eff = setupImpl p eff
 
 draw :: P5 -> Effect Unit -> Effect Unit
 draw p eff = drawImpl p eff
-
-background :: P5 -> ColorString -> Effect Unit
-background p colorString = backgroundImpl p colorString
 
 strokeJoin :: P5 -> StrokeJoin -> Effect Unit
 strokeJoin p Miter = strokeJoinMiterImpl p
