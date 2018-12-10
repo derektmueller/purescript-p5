@@ -174,13 +174,14 @@ generateMethod x = do
 
 generateModuleHeader :: Array P5Method -> Either String String
 generateModuleHeader xs = do
-  types <- generateProductTypes xs
-  constantTypes <- generateConstantTypes xs
+  types <- Right (<>) 
+    <*> generateProductTypes xs 
+    <*> generateConstantTypes xs
   let methodNames = getMethodName <$> xs
   pure $ "module P5.Generated\n  ( "
    <> intercalate 
     "\n  , " 
-    (((\x -> (x <> "(..)")) <$> (types <> constantTypes))
+    (((\x -> (x <> "(..)")) <$> types)
       <> methodNames)
    <> "\n  ) where"
 
