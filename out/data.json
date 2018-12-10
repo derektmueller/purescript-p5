@@ -3088,7 +3088,7 @@
             "params": [
                 {
                     "name": "mode",
-                    "description": "",
+                    "description": "either RGB, HSB or HSL, corresponding to\n                         Red/Green/Blue and Hue/Saturation/Brightness\n                         (or Lightness)",
                     "type": "Constant"
                 },
                 {
@@ -9881,7 +9881,7 @@
             "params": [
                 {
                     "name": "filterType",
-                    "description": "either THRESHOLD, GRAY, OPAQUE, INVERT,\n                               POSTERIZE, BLUR, ERODE, DILATE or BLUR.\n                               See Filters.js for docs on\n                               each available filter",
+                    "description": "either THRESHOLD, GRAY, OPAQUE, INVERT,\n                               POSTERIZE, ERODE, DILATE or BLUR.\n                               See Filters.js for docs on\n                               each available filter",
                     "type": "Constant"
                 },
                 {
@@ -10013,7 +10013,7 @@
                 },
                 {
                     "name": "blendMode",
-                    "description": "",
+                    "description": "the blend mode. either\n    BLEND, DARKEST, LIGHTEST, DIFFERENCE,\n    MULTIPLY, EXCLUSION, SCREEN, REPLACE, OVERLAY, HARD_LIGHT,\n    SOFT_LIGHT, DODGE, BURN, ADD or NORMAL.\n\nAvailable blend modes are: normal | multiply | screen | overlay |\n           darken | lighten | color-dodge | color-burn | hard-light |\n           soft-light | difference | exclusion | hue | saturation |\n           color | luminosity\n\n\nhttp://blogs.adobe.com/webplatform/2013/01/28/blending-features-in-canvas/",
                     "type": "Constant"
                 }
             ],
@@ -10211,7 +10211,7 @@
                 },
                 {
                     "name": "blendMode",
-                    "description": "",
+                    "description": "the blend mode. either\n    BLEND, DARKEST, LIGHTEST, DIFFERENCE,\n    MULTIPLY, EXCLUSION, SCREEN, REPLACE, OVERLAY, HARD_LIGHT,\n    SOFT_LIGHT, DODGE, BURN, ADD or NORMAL.",
                     "type": "Constant"
                 }
             ],
@@ -10340,7 +10340,7 @@
             "params": [
                 {
                     "name": "filterType",
-                    "description": "either THRESHOLD, GRAY, OPAQUE, INVERT,\n                               POSTERIZE, BLUR, ERODE, DILATE or BLUR.\n                               See Filters.js for docs on\n                               each available filter",
+                    "description": "either THRESHOLD, GRAY, OPAQUE, INVERT,\n                               POSTERIZE, ERODE, DILATE or BLUR.\n                               See Filters.js for docs on\n                               each available filter",
                     "type": "Constant"
                 },
                 {
@@ -17141,7 +17141,7 @@
             "params": [
                 {
                     "name": "mode",
-                    "description": "",
+                    "description": "either GRID or AXES",
                     "type": "Constant"
                 },
                 {
@@ -17187,7 +17187,7 @@
             "params": [
                 {
                     "name": "mode",
-                    "description": "",
+                    "description": "either GRID or AXES",
                     "type": "Constant"
                 },
                 {

@@ -24,4 +24,10 @@ data Vector :: Type
 data Color :: Type
 ```
 
+#### `Image`
+
+``` purescript
+data Image :: Type
+```
+
 

@@ -6,8 +6,11 @@ module GenerateFFI.CodeGenerator
 
 import Prelude
 import Data.String.Utils (mapChars)
+import Data.Array.NonEmpty (toArray, fromNonEmpty)
+import Data.String (toUpper, drop, take)
 import Data.Maybe (Maybe(..), maybe)
-import Data.Array
+import Data.Array 
+  (filter, fold, intercalate, length, nub, (:))
 import Data.Either (Either(..), note)
 import Data.Traversable (traverse)
 import Data.Foldable (any)
@@ -17,8 +20,19 @@ import GenerateFFI.Parser
   , typeIsUnsupported
   , typeIsMaybe
   , typeIsOr
+  , typeIsConstant
   , Param)
 import Debug.Trace (trace)
+
+toUpperCaseInitial :: String -> String
+toUpperCaseInitial str = do
+  let head = take 1 str
+      tail = drop 1 str
+  toUpper head <> tail
+
+titleCaseConstant :: String -> String -> String
+titleCaseConstant fnName paramName = 
+  toUpperCaseInitial fnName <> toUpperCaseInitial paramName
 
 generateP5TypeConstructor :: P5Type -> Maybe String
 generateP5TypeConstructor P5Boolean = Just "Boolean"
@@ -32,6 +46,8 @@ generateP5TypeConstructor P5String = Just "String"
 generateP5TypeConstructor P5Vector = Just "Vector"
 generateP5TypeConstructor P5Color = Just "Color"
 generateP5TypeConstructor P5Image = Just "Image"
+generateP5TypeConstructor (P5Constant fnName paramName _) = 
+  Just $ titleCaseConstant fnName paramName
 generateP5TypeConstructor t@(P5Or p5Type1 p5Type2) = do
   case typeIsUnsupported t of
     true -> do
@@ -66,6 +82,8 @@ p5TypeToIdentifier P5Color = Just "Color"
 p5TypeToIdentifier P5Image = Just "Image"
 p5TypeToIdentifier (P5Or _ _) = Nothing
 p5TypeToIdentifier P5Effect = Nothing
+p5TypeToIdentifier (P5Constant fnName paramName _) = 
+  Just $ titleCaseConstant fnName paramName
 p5TypeToIdentifier (P5Unsupported _) = Nothing
 
 getMethodName :: P5Method -> String
@@ -157,11 +175,12 @@ generateMethod x = do
 generateModuleHeader :: Array P5Method -> Either String String
 generateModuleHeader xs = do
   types <- generateProductTypes xs
+  constantTypes <- generateConstantTypes xs
   let methodNames = getMethodName <$> xs
   pure $ "module P5.Generated\n  ( "
    <> intercalate 
     "\n  , " 
-    (((\x -> (x <> "(..)")) <$> types)
+    (((\x -> (x <> "(..)")) <$> (types <> constantTypes))
       <> methodNames)
    <> "\n  ) where"
 
@@ -198,6 +217,17 @@ generateProductTypeDef t@(P5Or _ _) = do
     <> (intercalate " | " dataConstructors)
 generateProductTypeDef _ = Nothing
 
+generateConstantTypeDef :: P5Type -> Maybe String
+generateConstantTypeDef t@(P5Constant fnName paramName constants) = do
+  typeConstructor <- generateP5TypeConstructor t
+  let dataConstructors = 
+        (\x -> typeConstructor <> toUpper x)
+        <$> toArray (fromNonEmpty constants)
+  pure 
+    $ "data " <> typeConstructor <> " = "
+    <> (intercalate " | " dataConstructors)
+generateConstantTypeDef _ = Nothing
+
 getUniqueOrTypes :: Array P5Method -> Either String (Array P5Type)
 getUniqueOrTypes xs = do
   pure $
@@ -208,6 +238,22 @@ getUniqueOrTypes xs = do
     $ filter (typeIsOr)
     $ (fold $ (\x -> getParamTypes x <> [x.return.p5Type]) <$> xs)
 
+flattenType :: P5Type -> Array P5Type
+flattenType (P5Maybe x) = flattenType x
+flattenType (P5Or x y) = flattenType x <> flattenType y
+flattenType x = [x]
+
+getUniqueConstantTypes :: 
+  Array P5Method -> Either String (Array P5Type)
+getUniqueConstantTypes xs = do
+  pure $ nub $ do
+    paramType <- fold $ getParamTypes <$> xs
+    flattened <- flattenType paramType
+    if typeIsConstant flattened then
+        pure flattened
+      else
+        []
+
 generateProductTypes :: Array P5Method -> Either String (Array String)
 generateProductTypes xs = do
   productTypes <- getUniqueOrTypes xs
@@ -215,13 +261,26 @@ generateProductTypes xs = do
     ((note "Failed to generate product types") 
       <<< generateProductTypeConstructor) productTypes
 
+generateConstantTypes :: 
+  Array P5Method -> Either String (Array String)
+generateConstantTypes xs = do
+  constantTypes <- getUniqueConstantTypes xs
+  traverse 
+    ((note "Failed to generate constantTypes types") 
+      <<< generateP5TypeConstructor) constantTypes
+
 generateTypeDefinitions :: Array P5Method 
   -> Either String (Array String)
 generateTypeDefinitions xs = do
   productTypes <- getUniqueOrTypes xs
-  traverse 
-    ((note "Failed to generate type definition") 
+  productTypeDefs <- traverse 
+    ((note "Failed to generate type definition for product") 
       <<< generateProductTypeDef) productTypes
+  constantTypes <- getUniqueConstantTypes xs
+  constantTypeDefs <- traverse 
+    ((note "Failed to generate type definition for constant") 
+      <<< generateConstantTypeDef) constantTypes
+  pure $ productTypeDefs <> constantTypeDefs
 
 generateP5 :: P5Doc -> Either String String
 generateP5 (P5Doc doc) = do

@@ -51,9 +51,19 @@ exports.ambientMaterial2Impl = function(p, v1, v2, v3, a) {
     callP5(p, p.ambientMaterial, [v1, v2.value0 ? v2.value0 : undefined, v3.value0 ? v3.value0 : undefined, a.value0 ? a.value0 : undefined]);
   };
 };
+exports.angleModeImpl = function(p, mode) {
+  return function() {
+    callP5(p, p.angleMode, [mode]);
+  };
+};
 exports.applyMatrixImpl = function(p, a, b, c, d, e, f) {
   return function() {
     callP5(p, p.applyMatrix, [a, b, c, d, e, f]);
+  };
+};
+exports.arcImpl = function(p, x, y, w, h, start, stop, mode, detail) {
+  return function() {
+    callP5(p, p.arc, [x, y, w, h, start, stop, mode.value0 ? mode.value0 : undefined, detail.value0 ? detail.value0 : undefined]);
   };
 };
 exports.asinImpl = function(p, value) {
@@ -100,6 +110,11 @@ exports.beginContourImpl = function(p) {
     callP5(p, p.beginContour, []);
   };
 };
+exports.beginShapeImpl = function(p, kind) {
+  return function() {
+    callP5(p, p.beginShape, [kind.value0 ? kind.value0 : undefined]);
+  };
+};
 exports.bezierImpl = function(p, x1, y1, x2, y2, x3, y3, x4, y4) {
   return function() {
     callP5(p, p.bezier, [x1, y1, x2, y2, x3, y3, x4, y4]);
@@ -124,6 +139,16 @@ exports.bezierVertexImpl = function(p, x2, y2, x3, y3, x4, y4) {
 exports.bezierVertex2Impl = function(p, x2, y2, z2, x3, y3, z3, x4, y4, z4) {
   return function() {
     callP5(p, p.bezierVertex, [x2, y2, z2, x3, y3, z3, x4, y4, z4]);
+  };
+};
+exports.blendImpl = function(p, sx, sy, sw, sh, dx, dy, dw, dh, blendMode) {
+  return function() {
+    callP5(p, p.blend, [sx, sy, sw, sh, dx, dy, dw, dh, blendMode]);
+  };
+};
+exports.blendModeImpl = function(p, mode) {
+  return function() {
+    callP5(p, p.blendMode, [mode]);
   };
 };
 exports.blueImpl = function(p, color) {
@@ -171,6 +196,16 @@ exports.color4Impl = function(p, gray, alpha) {
 exports.color5Impl = function(p, v1, v2, v3, alpha) {
   return callP5(p, p.color, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
 };
+exports.colorModeImpl = function(p, mode, max) {
+  return function() {
+    callP5(p, p.colorMode, [mode, max.value0 ? max.value0 : undefined]);
+  };
+};
+exports.colorMode2Impl = function(p, mode, max1, max2, max3, maxA) {
+  return function() {
+    callP5(p, p.colorMode, [mode, max1, max2, max3, maxA.value0 ? maxA.value0 : undefined]);
+  };
+};
 exports.coneImpl = function(p, radius, height, detailX, detailY, cap) {
   return function() {
     callP5(p, p.cone, [radius.value0 ? radius.value0 : undefined, height.value0 ? height.value0 : undefined, detailX.value0 ? detailX.value0 : undefined, detailY.value0 ? detailY.value0 : undefined, cap.value0 ? cap.value0 : undefined]);
@@ -192,6 +227,11 @@ exports.createImageImpl = function(p, width, height) {
 };
 exports.createVectorImpl = function(p, x, y, z) {
   return callP5(p, p.createVector, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
+};
+exports.cursorImpl = function(p, _type, x, y) {
+  return function() {
+    callP5(p, p.cursor, [_type.value0, x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined]);
+  };
 };
 exports.curveImpl = function(p, x1, y1, x2, y2, x3, y3, x4, y4) {
   return function() {
@@ -235,6 +275,21 @@ exports.dayImpl = function(p) {
 exports.debugModeImpl = function(p) {
   return function() {
     callP5(p, p.debugMode, []);
+  };
+};
+exports.debugMode2Impl = function(p, mode) {
+  return function() {
+    callP5(p, p.debugMode, [mode]);
+  };
+};
+exports.debugMode3Impl = function(p, mode, axesSize, xOff, yOff, zOff) {
+  return function() {
+    callP5(p, p.debugMode, [mode, axesSize.value0 ? axesSize.value0 : undefined, xOff.value0 ? xOff.value0 : undefined, yOff.value0 ? yOff.value0 : undefined, zOff.value0 ? zOff.value0 : undefined]);
+  };
+};
+exports.debugMode4Impl = function(p, mode, gridSize, gridDivisions, xOff, yOff, zOff) {
+  return function() {
+    callP5(p, p.debugMode, [mode, gridSize.value0 ? gridSize.value0 : undefined, gridDivisions.value0 ? gridDivisions.value0 : undefined, xOff.value0 ? xOff.value0 : undefined, yOff.value0 ? yOff.value0 : undefined, zOff.value0 ? zOff.value0 : undefined]);
   };
 };
 exports.debugMode5Impl = function(p, gridSize, gridDivisions, gridXOff, gridYOff, gridZOff, axesSize, axesXOff, axesYOff, axesZOff) {
@@ -299,6 +354,11 @@ exports.ellipse2Impl = function(p, x, y, w, h, detail) {
     callP5(p, p.ellipse, [x, y, w, h, detail]);
   };
 };
+exports.ellipseModeImpl = function(p, mode) {
+  return function() {
+    callP5(p, p.ellipseMode, [mode]);
+  };
+};
 exports.ellipsoidImpl = function(p, radiusx, radiusy, radiusz, detailX, detailY) {
   return function() {
     callP5(p, p.ellipsoid, [radiusx.value0 ? radiusx.value0 : undefined, radiusy.value0 ? radiusy.value0 : undefined, radiusz.value0 ? radiusz.value0 : undefined, detailX.value0 ? detailX.value0 : undefined, detailY.value0 ? detailY.value0 : undefined]);
@@ -307,6 +367,11 @@ exports.ellipsoidImpl = function(p, radiusx, radiusy, radiusz, detailX, detailY)
 exports.endContourImpl = function(p) {
   return function() {
     callP5(p, p.endContour, []);
+  };
+};
+exports.endShapeImpl = function(p, mode) {
+  return function() {
+    callP5(p, p.endShape, [mode.value0 ? mode.value0 : undefined]);
   };
 };
 exports.expImpl = function(p, n) {
@@ -335,6 +400,11 @@ exports.fill4Impl = function(p, gray, alpha) {
 exports.fill5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
     callP5(p, p.fill, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+  };
+};
+exports.filterImpl = function(p, filterType, filterParam) {
+  return function() {
+    callP5(p, p.filter, [filterType, filterParam.value0 ? filterParam.value0 : undefined]);
   };
 };
 exports.floatImpl = function(p, str) {
@@ -377,6 +447,11 @@ exports.hourImpl = function(p) {
 };
 exports.hueImpl = function(p, color) {
   return callP5(p, p.hue, [color.value0]);
+};
+exports.imageModeImpl = function(p, mode) {
+  return function() {
+    callP5(p, p.imageMode, [mode]);
+  };
 };
 exports.int2Impl = function(p, n, radix) {
   return callP5(p, p.int, [n.value0, radix.value0 ? radix.value0 : undefined]);
@@ -653,6 +728,11 @@ exports.rect2Impl = function(p, x, y, w, h, tl, tr, br, bl) {
     callP5(p, p.rect, [x, y, w, h, tl.value0 ? tl.value0 : undefined, tr.value0 ? tr.value0 : undefined, br.value0 ? br.value0 : undefined, bl.value0 ? bl.value0 : undefined]);
   };
 };
+exports.rectModeImpl = function(p, mode) {
+  return function() {
+    callP5(p, p.rectMode, [mode]);
+  };
+};
 exports.redImpl = function(p, color) {
   return callP5(p, p.red, [color.value0]);
 };
@@ -810,6 +890,11 @@ exports.stroke5Impl = function(p, v1, v2, v3, alpha) {
     callP5(p, p.stroke, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
   };
 };
+exports.strokeCapImpl = function(p, cap) {
+  return function() {
+    callP5(p, p.strokeCap, [cap]);
+  };
+};
 exports.strokeWeightImpl = function(p, weight) {
   return function() {
     callP5(p, p.strokeWeight, [weight]);
@@ -817,6 +902,11 @@ exports.strokeWeightImpl = function(p, weight) {
 };
 exports.tanImpl = function(p, angle) {
   return callP5(p, p.tan, [angle]);
+};
+exports.textAlign2Impl = function(p, horizAlign, vertAlign) {
+  return function() {
+    callP5(p, p.textAlign, [horizAlign, vertAlign.value0 ? vertAlign.value0 : undefined]);
+  };
 };
 exports.textAscentImpl = function(p) {
   return callP5(p, p.textAscent, []);
@@ -842,6 +932,11 @@ exports.textSize2Impl = function(p, theSize) {
 };
 exports.textStyleImpl = function(p) {
   return callP5(p, p.textStyle, []);
+};
+exports.textStyle2Impl = function(p, theStyle) {
+  return function() {
+    callP5(p, p.textStyle, [theStyle]);
+  };
 };
 exports.textWidthImpl = function(p, theText) {
   return callP5(p, p.textWidth, [theText]);

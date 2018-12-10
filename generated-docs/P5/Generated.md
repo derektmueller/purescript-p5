@@ -26,6 +26,22 @@ data NumberOrString
   | NumberOrStringString String
 ```
 
+#### `CursorTypeOrString`
+
+``` purescript
+data CursorTypeOrString
+  = CursorTypeOrStringCursorType CursorType
+  | CursorTypeOrStringString String
+```
+
+#### `ArrayNumberOrImage`
+
+``` purescript
+data ArrayNumberOrImage
+  = ArrayNumberOrImageArrayNumber (Array Number)
+  | ArrayNumberOrImageImage Image
+```
+
 #### `IntOrString`
 
 ``` purescript
@@ -49,6 +65,194 @@ data NumberOrArrayNumberOrVector
   = NumberOrArrayNumberOrVectorNumber Number
   | NumberOrArrayNumberOrVectorArrayNumber (Array Number)
   | NumberOrArrayNumberOrVectorVector Vector
+```
+
+#### `AngleModeMode`
+
+``` purescript
+data AngleModeMode
+  = AngleModeModeRADIANS
+  | AngleModeModeDEGREES
+```
+
+#### `ArcMode`
+
+``` purescript
+data ArcMode
+  = ArcModeCHORD
+  | ArcModePIE
+  | ArcModeOPEN
+```
+
+#### `BeginShapeKind`
+
+``` purescript
+data BeginShapeKind
+  = BeginShapeKindPOINTS
+  | BeginShapeKindLINES
+  | BeginShapeKindTRIANGLES
+  | BeginShapeKindTRIANGLE_FAN
+  | BeginShapeKindTRIANGLE_STRIP
+  | BeginShapeKindQUADS
+  | BeginShapeKindQUAD_STRIP
+```
+
+#### `BlendBlendMode`
+
+``` purescript
+data BlendBlendMode
+  = BlendBlendModeBLEND
+  | BlendBlendModeDARKEST
+  | BlendBlendModeLIGHTEST
+  | BlendBlendModeDIFFERENCE
+  | BlendBlendModeMULTIPLY
+  | BlendBlendModeEXCLUSION
+  | BlendBlendModeSCREEN
+  | BlendBlendModeREPLACE
+  | BlendBlendModeOVERLAY
+  | BlendBlendModeHARD_LIGHT
+  | BlendBlendModeSOFT_LIGHT
+  | BlendBlendModeDODGE
+  | BlendBlendModeBURN
+  | BlendBlendModeADD
+  | BlendBlendModeNORMAL
+```
+
+#### `BlendModeMode`
+
+``` purescript
+data BlendModeMode
+  = BlendModeModeBLEND
+  | BlendModeModeDARKEST
+  | BlendModeModeLIGHTEST
+  | BlendModeModeDIFFERENCE
+  | BlendModeModeMULTIPLY
+  | BlendModeModeEXCLUSION
+  | BlendModeModeSCREEN
+  | BlendModeModeREPLACE
+  | BlendModeModeOVERLAY
+  | BlendModeModeHARD_LIGHT
+  | BlendModeModeSOFT_LIGHT
+  | BlendModeModeDODGE
+  | BlendModeModeBURN
+  | BlendModeModeADD
+  | BlendModeModeNORMAL
+```
+
+#### `ColorModeMode`
+
+``` purescript
+data ColorModeMode
+  = ColorModeModeRGB
+  | ColorModeModeHSB
+  | ColorModeModeHSL
+```
+
+#### `CursorType`
+
+``` purescript
+data CursorType
+  = CursorTypeARROW
+  | CursorTypeCROSS
+  | CursorTypeHAND
+  | CursorTypeMOVE
+  | CursorTypeTEXT
+  | CursorTypeWAIT
+```
+
+#### `DebugModeMode`
+
+``` purescript
+data DebugModeMode
+  = DebugModeModeGRID
+  | DebugModeModeAXES
+```
+
+#### `EllipseModeMode`
+
+``` purescript
+data EllipseModeMode
+  = EllipseModeModeCENTER
+  | EllipseModeModeRADIUS
+  | EllipseModeModeCORNER
+  | EllipseModeModeCORNERS
+```
+
+#### `EndShapeMode`
+
+``` purescript
+data EndShapeMode
+  = EndShapeModeCLOSE
+```
+
+#### `FilterFilterType`
+
+``` purescript
+data FilterFilterType
+  = FilterFilterTypeTHRESHOLD
+  | FilterFilterTypeGRAY
+  | FilterFilterTypeOPAQUE
+  | FilterFilterTypeINVERT
+  | FilterFilterTypePOSTERIZE
+  | FilterFilterTypeERODE
+  | FilterFilterTypeDILATE
+  | FilterFilterTypeBLUR
+```
+
+#### `ImageModeMode`
+
+``` purescript
+data ImageModeMode
+  = ImageModeModeCORNER
+  | ImageModeModeCORNERS
+  | ImageModeModeCENTER
+```
+
+#### `RectModeMode`
+
+``` purescript
+data RectModeMode
+  = RectModeModeCORNER
+  | RectModeModeCORNERS
+  | RectModeModeCENTER
+  | RectModeModeRADIUS
+```
+
+#### `StrokeCapCap`
+
+``` purescript
+data StrokeCapCap
+  = StrokeCapCapSQUARE
+  | StrokeCapCapPROJECT
+  | StrokeCapCapROUND
+```
+
+#### `TextAlignHorizAlign`
+
+``` purescript
+data TextAlignHorizAlign
+  = TextAlignHorizAlignLEFT
+  | TextAlignHorizAlignCENTER
+  | TextAlignHorizAlignRIGHT
+```
+
+#### `TextAlignVertAlign`
+
+``` purescript
+data TextAlignVertAlign
+  = TextAlignVertAlignTOP
+  | TextAlignVertAlignBOTTOM
+  | TextAlignVertAlignCENTER
+  | TextAlignVertAlignBASELINE
+```
+
+#### `TextStyleTheStyle`
+
+``` purescript
+data TextStyleTheStyle
+  = TextStyleTheStyleNORMAL
+  | TextStyleTheStyleITALIC
+  | TextStyleTheStyleBOLD
 ```
 
 #### `abs`
@@ -131,6 +335,14 @@ ambientMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe N
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
 
+#### `angleMode`
+
+``` purescript
+angleMode :: P5 -> AngleModeMode -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/angleMode)
+
 #### `applyMatrix`
 
 ``` purescript
@@ -138,6 +350,14 @@ applyMatrix :: P5 -> Number -> Number -> Number -> Number -> Number -> Number ->
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/applyMatrix)
+
+#### `arc`
+
+``` purescript
+arc :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe ArcMode) -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/arc)
 
 #### `asin`
 
@@ -195,6 +415,14 @@ background4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 
+#### `background5`
+
+``` purescript
+background5 :: P5 -> Image -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/background)
+
 #### `background6`
 
 ``` purescript
@@ -210,6 +438,14 @@ beginContour :: P5 -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/beginContour)
+
+#### `beginShape`
+
+``` purescript
+beginShape :: P5 -> (Maybe BeginShapeKind) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/beginShape)
 
 #### `bezier`
 
@@ -258,6 +494,22 @@ bezierVertex2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number 
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/bezierVertex)
+
+#### `blend`
+
+``` purescript
+blend :: P5 -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> BlendBlendMode -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/blend)
+
+#### `blendMode`
+
+``` purescript
+blendMode :: P5 -> BlendModeMode -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/blendMode)
 
 #### `blue`
 
@@ -363,6 +615,22 @@ color5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> Color
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/color)
 
+#### `colorMode`
+
+``` purescript
+colorMode :: P5 -> ColorModeMode -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/colorMode)
+
+#### `colorMode2`
+
+``` purescript
+colorMode2 :: P5 -> ColorModeMode -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/colorMode)
+
 #### `cone`
 
 ``` purescript
@@ -395,6 +663,14 @@ cos :: P5 -> Number -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/cos)
 
+#### `createImage`
+
+``` purescript
+createImage :: P5 -> Int -> Int -> Image
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/createImage)
+
 #### `createVector`
 
 ``` purescript
@@ -402,6 +678,14 @@ createVector :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> Vect
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/createVector)
+
+#### `cursor`
+
+``` purescript
+cursor :: P5 -> CursorTypeOrString -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/cursor)
 
 #### `curve`
 
@@ -479,6 +763,30 @@ day :: P5 -> Int
 
 ``` purescript
 debugMode :: P5 -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
+
+#### `debugMode2`
+
+``` purescript
+debugMode2 :: P5 -> DebugModeMode -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
+
+#### `debugMode3`
+
+``` purescript
+debugMode3 :: P5 -> DebugModeMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
+
+#### `debugMode4`
+
+``` purescript
+debugMode4 :: P5 -> DebugModeMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
@@ -595,6 +903,14 @@ ellipse2 :: P5 -> Number -> Number -> Number -> Number -> Int -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/ellipse)
 
+#### `ellipseMode`
+
+``` purescript
+ellipseMode :: P5 -> EllipseModeMode -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ellipseMode)
+
 #### `ellipsoid`
 
 ``` purescript
@@ -610,6 +926,14 @@ endContour :: P5 -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/endContour)
+
+#### `endShape`
+
+``` purescript
+endShape :: P5 -> (Maybe EndShapeMode) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/endShape)
 
 #### `exp`
 
@@ -659,6 +983,14 @@ fill5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/fill)
 
+#### `filter`
+
+``` purescript
+filter :: P5 -> FilterFilterType -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/filter)
+
 #### `float`
 
 ``` purescript
@@ -698,6 +1030,14 @@ fullscreen :: P5 -> (Maybe Boolean) -> Boolean
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/fullscreen)
+
+#### `get`
+
+``` purescript
+get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> ArrayNumberOrImage
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/get)
 
 #### `getURL`
 
@@ -754,6 +1094,14 @@ hue :: P5 -> ArrayNumberOrStringOrColor -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/hue)
+
+#### `imageMode`
+
+``` purescript
+imageMode :: P5 -> ImageModeMode -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/imageMode)
 
 #### `int2`
 
@@ -842,6 +1190,14 @@ loadPixels :: P5 -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadPixels)
+
+#### `loadStrings`
+
+``` purescript
+loadStrings :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> (Array String)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/loadStrings)
 
 #### `log`
 
@@ -1283,6 +1639,14 @@ rect2 :: P5 -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe 
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/rect)
 
+#### `rectMode`
+
+``` purescript
+rectMode :: P5 -> RectModeMode -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/rectMode)
+
 #### `red`
 
 ``` purescript
@@ -1563,6 +1927,14 @@ stroke5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 
+#### `strokeCap`
+
+``` purescript
+strokeCap :: P5 -> StrokeCapCap -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/strokeCap)
+
 #### `strokeWeight`
 
 ``` purescript
@@ -1578,6 +1950,14 @@ tan :: P5 -> Number -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/tan)
+
+#### `textAlign2`
+
+``` purescript
+textAlign2 :: P5 -> TextAlignHorizAlign -> (Maybe TextAlignVertAlign) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/textAlign)
 
 #### `textAscent`
 
@@ -1631,6 +2011,14 @@ textSize2 :: P5 -> Number -> (Effect Unit)
 
 ``` purescript
 textStyle :: P5 -> String
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/textStyle)
+
+#### `textStyle2`
+
+``` purescript
+textStyle2 :: P5 -> TextStyleTheStyle -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/textStyle)
