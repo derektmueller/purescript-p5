@@ -423,6 +423,9 @@ exports.loadPixelsImpl = function(p) {
     callP5(p, p.loadPixels, []);
   };
 };
+exports.loadStringsImpl = function(p, filename, callback, errorCallback) {
+  return callP5(p, p.loadStrings, [filename, callback.value0 ? callback.value0 : undefined, errorCallback.value0 ? errorCallback.value0 : undefined]);
+};
 exports.logImpl = function(p, n) {
   return callP5(p, p.log, [n]);
 };

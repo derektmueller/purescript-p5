@@ -108,6 +108,7 @@ module P5.Generated
   , line
   , line2
   , loadPixels
+  , loadStrings
   , log
   , loop
   , mag
@@ -345,6 +346,7 @@ foreign import lightnessImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import lineImpl :: Fn5 P5 Number Number Number Number (Effect Unit)
 foreign import line2Impl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import loadPixelsImpl :: Fn1 P5 (Effect Unit)
+foreign import loadStringsImpl :: Fn4 P5 String (Maybe (Effect Unit)) (Maybe (Effect Unit)) (Array String)
 foreign import logImpl :: Fn2 P5 Number Number
 foreign import loopImpl :: Fn1 P5 (Effect Unit)
 foreign import magImpl :: Fn3 P5 Number Number Number
@@ -893,21 +895,21 @@ hex2 p5 ns digits = runFn3 hex2Impl p5 ns digits
 hour :: P5 -> Int
 hour p5  = runFn1 hourImpl p5 
 
--- TODO: unsupported: httpDo :: P5 -> String -> Unsupported(Object) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpDo :: P5 -> String -> Unsupported(Object) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 
--- TODO: unsupported: httpDo2 :: P5 -> String -> (Maybe String) -> (Maybe String) -> Unsupported(Object) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpDo2 :: P5 -> String -> (Maybe String) -> (Maybe String) -> Unsupported(Object) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 
--- TODO: unsupported: httpGet :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpGet :: P5 -> String -> (Effect Unit) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 
--- TODO: unsupported: httpGet2 :: P5 -> String -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpGet2 :: P5 -> String -> UnsupportedProduct(Boolean|Unsupported(Object)) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 
--- TODO: unsupported: httpGet3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpGet3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 
--- TODO: unsupported: httpPost :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpPost :: P5 -> String -> (Effect Unit) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 
--- TODO: unsupported: httpPost2 :: P5 -> String -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpPost2 :: P5 -> String -> UnsupportedProduct(Boolean|Unsupported(Object)) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 
--- TODO: unsupported: httpPost3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+-- TODO: unsupported: httpPost3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/hue)
 hue :: P5 -> ArrayNumberOrStringOrColor -> Number
@@ -963,17 +965,17 @@ line p5 x1 y1 x2 y2 = runFn5 lineImpl p5 x1 y1 x2 y2
 line2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 line2 p5 x1 y1 z1 x2 y2 z2 = runFn7 line2Impl p5 x1 y1 z1 x2 y2 z2
 
--- TODO: unsupported: loadBytes :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object)
+-- TODO: unsupported: loadBytes :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 
--- TODO: unsupported: loadFont :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(p5.Font)
+-- TODO: unsupported: loadFont :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(p5.Font)
 
 -- TODO: unsupported: loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Image
 
--- TODO: unsupported: loadJSON :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
+-- TODO: unsupported: loadJSON :: P5 -> String -> (Effect Unit) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 
--- TODO: unsupported: loadJSON2 :: P5 -> String -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
+-- TODO: unsupported: loadJSON2 :: P5 -> String -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 
--- TODO: unsupported: loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
+-- TODO: unsupported: loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 
 -- TODO: unsupported: loadModel :: P5 -> String -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Unsupported(p5.Geometry)
 
@@ -985,13 +987,15 @@ loadPixels p5  = runFn1 loadPixelsImpl p5
 
 -- TODO: unsupported: loadShader :: P5 -> (Maybe String) -> (Maybe String) -> Unsupported(p5.Shader)
 
--- TODO: unsupported: loadStrings :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> (Array String)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/loadStrings)
+loadStrings :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> (Array String)
+loadStrings p5 filename callback errorCallback = runFn4 loadStringsImpl p5 filename callback errorCallback
 
--- TODO: unsupported: loadTable :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object)
+-- TODO: unsupported: loadTable :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 
--- TODO: unsupported: loadTable2 :: P5 -> String -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object)
+-- TODO: unsupported: loadTable2 :: P5 -> String -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 
--- TODO: unsupported: loadXML :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object)
+-- TODO: unsupported: loadXML :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/log)
 log :: P5 -> Number -> Number

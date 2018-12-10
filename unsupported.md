@@ -1,4 +1,4 @@
-Progress: implemented **219** out of **323** methods
+Progress: implemented **220** out of **323** methods
 ```
 angleMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 ```
@@ -140,35 +140,35 @@ getURLParams :: P5 -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/getURLParams)
 ```
-httpDo :: P5 -> String -> Unsupported(Object) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpDo :: P5 -> String -> Unsupported(Object) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpDo)
 ```
-httpDo2 :: P5 -> String -> (Maybe String) -> (Maybe String) -> Unsupported(Object) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpDo2 :: P5 -> String -> (Maybe String) -> (Maybe String) -> Unsupported(Object) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpDo)
 ```
-httpGet :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpGet :: P5 -> String -> (Effect Unit) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpGet)
 ```
-httpGet2 :: P5 -> String -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpGet2 :: P5 -> String -> UnsupportedProduct(Boolean|Unsupported(Object)) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpGet)
 ```
-httpGet3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpGet3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpGet)
 ```
-httpPost :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpPost :: P5 -> String -> (Effect Unit) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpPost)
 ```
-httpPost2 :: P5 -> String -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpPost2 :: P5 -> String -> UnsupportedProduct(Boolean|Unsupported(Object)) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpPost)
 ```
-httpPost3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Promise)
+httpPost3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupported(Object)) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpPost)
 ```
@@ -192,11 +192,11 @@ join :: P5 -> Unsupported(Array) -> String -> String
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/join)
 ```
-loadBytes :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object)
+loadBytes :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadBytes)
 ```
-loadFont :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(p5.Font)
+loadFont :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(p5.Font)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadFont)
 ```
@@ -204,15 +204,15 @@ loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Func
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
 ```
-loadJSON :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
+loadJSON :: P5 -> String -> (Effect Unit) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadJSON)
 ```
-loadJSON2 :: P5 -> String -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
+loadJSON2 :: P5 -> String -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadJSON)
 ```
-loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
+loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadJSON)
 ```
@@ -228,19 +228,15 @@ loadShader :: P5 -> (Maybe String) -> (Maybe String) -> Unsupported(p5.Shader)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadShader)
 ```
-loadStrings :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> (Array String)
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/loadStrings)
-```
-loadTable :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object)
+loadTable :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadTable)
 ```
-loadTable2 :: P5 -> String -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object)
+loadTable2 :: P5 -> String -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadTable)
 ```
-loadXML :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(Object)
+loadXML :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadXML)
 ```

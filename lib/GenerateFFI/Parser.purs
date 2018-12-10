@@ -134,6 +134,7 @@ readP5Type f = do
             "p5.Vector" -> P5Vector
             "p5.Color" -> P5Color
             "p5.Image" -> P5Image
+            "Function" -> P5Effect
             _ -> P5Unsupported str'
             --_ -> fail $ TypeMismatch "P5Type" str
       p5Types = toP5Type <$> typeStrs
