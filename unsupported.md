@@ -1,4 +1,4 @@
-Progress: implemented **216** out of **323** methods
+Progress: implemented **219** out of **323** methods
 ```
 angleMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 ```
@@ -20,10 +20,6 @@ arrayCopy2 :: P5 -> Unsupported(Array) -> Int -> Unsupported(Array) -> Int -> In
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/arrayCopy)
 ```
-background5 :: P5 -> Unsupported(p5.Image) -> (Maybe Number) -> (Effect Unit)
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/background)
-```
 beginShape :: P5 -> Unsupported(Constant) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/beginShape)
@@ -32,7 +28,7 @@ blend :: P5 -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Unsupport
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/blend)
 ```
-blend2 :: P5 -> Unsupported(p5.Image) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Unsupported(Constant) -> (Effect Unit)
+blend2 :: P5 -> Image -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Unsupported(Constant) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/blend)
 ```
@@ -64,7 +60,7 @@ concat :: P5 -> Unsupported(Array) -> Unsupported(Array) -> Unsupported(Array)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/concat)
 ```
-copy2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Unsupported(p5.Image)) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
+copy2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/copy)
 ```
@@ -79,10 +75,6 @@ createCanvas :: P5 -> Number -> Number -> Unsupported(Constant) -> Unsupported(p
 createGraphics :: P5 -> Number -> Number -> Unsupported(Constant) -> Unsupported(p5.Graphics)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/createGraphics)
-```
-createImage :: P5 -> Int -> Int -> Unsupported(p5.Image)
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/createImage)
 ```
 createNumberDict :: P5 -> Unsupported(Object) -> Unsupported(p5.NumberDict)
 ```
@@ -144,10 +136,6 @@ filter :: P5 -> Unsupported(Constant) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/filter)
 ```
-get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> UnsupportedProduct((Array Number)|Unsupported(p5.Image))
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/get)
-```
 getURLParams :: P5 -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/getURLParams)
@@ -184,11 +172,11 @@ httpPost3 :: P5 -> String -> (Maybe String) -> UnsupportedProduct(Boolean|Unsupp
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/httpPost)
 ```
-image :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Unsupported(p5.Image)) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+image :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/image)
 ```
-image2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Unsupported(p5.Image)) -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+image2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/image)
 ```
@@ -212,7 +200,7 @@ loadFont :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Un
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadFont)
 ```
-loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Unsupported(p5.Image)
+loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Image
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
 ```
@@ -400,7 +388,7 @@ textStyle2 :: P5 -> Unsupported(Constant) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/textStyle)
 ```
-texture :: P5 -> UnsupportedProduct(UnsupportedProduct(Unsupported(p5.Graphics)|Unsupported(p5.Image))|Unsupported(p5.MediaElement)) -> (Effect Unit)
+texture :: P5 -> UnsupportedProduct(UnsupportedProduct(Unsupported(p5.Graphics)|Image)|Unsupported(p5.MediaElement)) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/texture)
 ```

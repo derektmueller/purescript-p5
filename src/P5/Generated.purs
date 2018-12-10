@@ -2,6 +2,7 @@ module P5.Generated
   ( ArrayNumberOrStringOrColor(..)
   , BooleanOrNumberOrString(..)
   , NumberOrString(..)
+  , ArrayNumberOrImage(..)
   , IntOrString(..)
   , ArrayNumberOrVector(..)
   , NumberOrArrayNumberOrVector(..)
@@ -23,6 +24,7 @@ module P5.Generated
   , background2
   , background3
   , background4
+  , background5
   , background6
   , beginContour
   , bezier
@@ -48,6 +50,7 @@ module P5.Generated
   , constrain
   , copy
   , cos
+  , createImage
   , createVector
   , curve
   , curveDetail
@@ -86,6 +89,7 @@ module P5.Generated
   , frameRate
   , frameRate2
   , fullscreen
+  , get
   , getURL
   , getURLPath
   , green
@@ -226,7 +230,7 @@ module P5.Generated
 import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)
 import Effect (Effect)
 import Prelude (Unit)
-import P5.Types (P5, Vector, Color)
+import P5.Types (P5, Vector, Color, Image)
 import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
@@ -234,6 +238,7 @@ import Foreign.NullOrUndefined (undefined)
 data ArrayNumberOrStringOrColor = ArrayNumberOrStringOrColorArrayNumber (Array Number) | ArrayNumberOrStringOrColorString String | ArrayNumberOrStringOrColorColor Color
 data BooleanOrNumberOrString = BooleanOrNumberOrStringBoolean Boolean | BooleanOrNumberOrStringNumber Number | BooleanOrNumberOrStringString String
 data NumberOrString = NumberOrStringNumber Number | NumberOrStringString String
+data ArrayNumberOrImage = ArrayNumberOrImageArrayNumber (Array Number) | ArrayNumberOrImageImage Image
 data IntOrString = IntOrStringInt Int | IntOrStringString String
 data ArrayNumberOrVector = ArrayNumberOrVectorArrayNumber (Array Number) | ArrayNumberOrVectorVector Vector
 data NumberOrArrayNumberOrVector = NumberOrArrayNumberOrVectorNumber Number | NumberOrArrayNumberOrVectorArrayNumber (Array Number) | NumberOrArrayNumberOrVectorVector Vector
@@ -256,6 +261,7 @@ foreign import backgroundImpl :: Fn2 P5 Color (Effect Unit)
 foreign import background2Impl :: Fn2 P5 (Array Number) (Effect Unit)
 foreign import background3Impl :: Fn3 P5 String (Maybe Number) (Effect Unit)
 foreign import background4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
+foreign import background5Impl :: Fn3 P5 Image (Maybe Number) (Effect Unit)
 foreign import background6Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import beginContourImpl :: Fn1 P5 (Effect Unit)
 foreign import bezierImpl :: Fn9 P5 Number Number Number Number Number Number Number Number (Effect Unit)
@@ -281,6 +287,7 @@ foreign import coneImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Int) (May
 foreign import constrainImpl :: Fn4 P5 Number Number Number Number
 foreign import copyImpl :: Fn9 P5 Int Int Int Int Int Int Int Int (Effect Unit)
 foreign import cosImpl :: Fn2 P5 Number Number
+foreign import createImageImpl :: Fn3 P5 Int Int Image
 foreign import createVectorImpl :: Fn4 P5 (Maybe Number) (Maybe Number) (Maybe Number) Vector
 foreign import curveImpl :: Fn9 P5 Number Number Number Number Number Number Number Number (Effect Unit)
 foreign import curveDetailImpl :: Fn2 P5 Number (Effect Unit)
@@ -319,6 +326,7 @@ foreign import floorImpl :: Fn2 P5 Number Int
 foreign import frameRateImpl :: Fn1 P5 Number
 foreign import frameRate2Impl :: Fn2 P5 Number (Effect Unit)
 foreign import fullscreenImpl :: Fn2 P5 (Maybe Boolean) Boolean
+foreign import getImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) ArrayNumberOrImage
 foreign import getURLImpl :: Fn1 P5 String
 foreign import getURLPathImpl :: Fn1 P5 (Array String)
 foreign import greenImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
@@ -537,7 +545,9 @@ background3 p5 colorstring a = runFn3 background3Impl p5 colorstring a
 background4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
 background4 p5 gray a = runFn3 background4Impl p5 gray a
 
--- TODO: unsupported: background5 :: P5 -> Unsupported(p5.Image) -> (Maybe Number) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/background)
+background5 :: P5 -> Image -> (Maybe Number) -> (Effect Unit)
+background5 p5 image a = runFn3 background5Impl p5 image a
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 background6 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
@@ -575,7 +585,7 @@ bezierVertex2 p5 x2 y2 z2 x3 y3 z3 x4 y4 z4 = runFn10 bezierVertex2Impl p5 x2 y2
 
 -- TODO: unsupported: blend :: P5 -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Unsupported(Constant) -> (Effect Unit)
 
--- TODO: unsupported: blend2 :: P5 -> Unsupported(p5.Image) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Unsupported(Constant) -> (Effect Unit)
+-- TODO: unsupported: blend2 :: P5 -> Image -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Unsupported(Constant) -> (Effect Unit)
 
 -- TODO: unsupported: blendMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
@@ -655,7 +665,7 @@ constrain p5 n low high = runFn4 constrainImpl p5 n low high
 copy :: P5 -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
 copy p5 sx sy sw sh dx dy dw dh = runFn9 copyImpl p5 sx sy sw sh dx dy dw dh
 
--- TODO: unsupported: copy2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Unsupported(p5.Image)) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
+-- TODO: unsupported: copy2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/cos)
 cos :: P5 -> Number -> Number
@@ -667,7 +677,9 @@ cos p5 angle = runFn2 cosImpl p5 angle
 
 -- TODO: unsupported: createGraphics :: P5 -> Number -> Number -> Unsupported(Constant) -> Unsupported(p5.Graphics)
 
--- TODO: unsupported: createImage :: P5 -> Int -> Int -> Unsupported(p5.Image)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/createImage)
+createImage :: P5 -> Int -> Int -> Image
+createImage p5 width height = runFn3 createImageImpl p5 width height
 
 -- TODO: unsupported: createNumberDict :: P5 -> Unsupported(Object) -> Unsupported(p5.NumberDict)
 
@@ -851,7 +863,9 @@ frameRate2 p5 fps = runFn2 frameRate2Impl p5 fps
 fullscreen :: P5 -> (Maybe Boolean) -> Boolean
 fullscreen p5 val = runFn2 fullscreenImpl p5 val
 
--- TODO: unsupported: get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> UnsupportedProduct((Array Number)|Unsupported(p5.Image))
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/get)
+get :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> ArrayNumberOrImage
+get p5 x y w h = runFn5 getImpl p5 x y w h
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/getURL)
 getURL :: P5 -> String
@@ -899,9 +913,9 @@ hour p5  = runFn1 hourImpl p5
 hue :: P5 -> ArrayNumberOrStringOrColor -> Number
 hue p5 color = runFn2 hueImpl p5 color
 
--- TODO: unsupported: image :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Unsupported(p5.Image)) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- TODO: unsupported: image :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
--- TODO: unsupported: image2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Unsupported(p5.Image)) -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- TODO: unsupported: image2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
 -- TODO: unsupported: imageMode :: P5 -> Unsupported(Constant) -> (Effect Unit)
 
@@ -953,7 +967,7 @@ line2 p5 x1 y1 z1 x2 y2 z2 = runFn7 line2Impl p5 x1 y1 z1 x2 y2 z2
 
 -- TODO: unsupported: loadFont :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> Unsupported(p5.Font)
 
--- TODO: unsupported: loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Unsupported(p5.Image)
+-- TODO: unsupported: loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Image
 
 -- TODO: unsupported: loadJSON :: P5 -> String -> Unsupported(Function) -> Unsupported(Function) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 
@@ -1451,7 +1465,7 @@ textStyle p5  = runFn1 textStyleImpl p5
 textWidth :: P5 -> String -> Number
 textWidth p5 theText = runFn2 textWidthImpl p5 theText
 
--- TODO: unsupported: texture :: P5 -> UnsupportedProduct(UnsupportedProduct(Unsupported(p5.Graphics)|Unsupported(p5.Image))|Unsupported(p5.MediaElement)) -> (Effect Unit)
+-- TODO: unsupported: texture :: P5 -> UnsupportedProduct(UnsupportedProduct(Unsupported(p5.Graphics)|Image)|Unsupported(p5.MediaElement)) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 tint :: P5 -> String -> (Effect Unit)

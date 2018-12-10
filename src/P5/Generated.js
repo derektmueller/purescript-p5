@@ -85,6 +85,11 @@ exports.background4Impl = function(p, gray, a) {
     callP5(p, p.background, [gray, a.value0 ? a.value0 : undefined]);
   };
 };
+exports.background5Impl = function(p, image, a) {
+  return function() {
+    callP5(p, p.background, [image, a.value0 ? a.value0 : undefined]);
+  };
+};
 exports.background6Impl = function(p, v1, v2, v3, a) {
   return function() {
     callP5(p, p.background, [v1, v2, v3, a.value0 ? a.value0 : undefined]);
@@ -181,6 +186,9 @@ exports.copyImpl = function(p, sx, sy, sw, sh, dx, dy, dw, dh) {
 };
 exports.cosImpl = function(p, angle) {
   return callP5(p, p.cos, [angle]);
+};
+exports.createImageImpl = function(p, width, height) {
+  return callP5(p, p.createImage, [width, height]);
 };
 exports.createVectorImpl = function(p, x, y, z) {
   return callP5(p, p.createVector, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
@@ -345,6 +353,9 @@ exports.frameRate2Impl = function(p, fps) {
 };
 exports.fullscreenImpl = function(p, val) {
   return callP5(p, p.fullscreen, [val.value0 ? val.value0 : undefined]);
+};
+exports.getImpl = function(p, x, y, w, h) {
+  return callP5(p, p.get, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, w.value0 ? w.value0 : undefined, h.value0 ? h.value0 : undefined]);
 };
 exports.getURLImpl = function(p) {
   return callP5(p, p.getURL, []);
