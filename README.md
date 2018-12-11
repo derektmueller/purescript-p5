@@ -39,7 +39,7 @@ With webpack dev server running, examples can be viewed in a browser by visiting
 Most of the FFI as been auto-generated from the p5.js YUIDoc. There are still a large number of functions that couldn't be auto-generated, sometimes because of missing type information in the YUIDoc (see [unsupported.md](unsupported.md)). These might have to be written by hand.
 
 Completed:
-  * generate FFI PureScript functions for p5.js functions of basic types (e.g. Number, String, Boolean), p5.Vector, p5.Color, array types, optional types, and product types (e.g. Number|String)
+  * generate FFI PureScript functions for p5.js functions of basic types (e.g. Number, String, Boolean), p5.Vector, p5.Color, array types, optional types, p5 constants, and product types (e.g. Number|String)
 
 TODO:
   * export easier-to-use interface to hide complicated signatures in generated interface

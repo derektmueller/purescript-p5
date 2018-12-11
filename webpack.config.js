@@ -34,7 +34,9 @@ module.exports = {
     "structure-width-and-height": 
       './examples/structure-width-and-height/index.js',
     "hello-p5-simple-shapes": 
-      './examples/hello-p5-simple-shapes/index.js'
+      './examples/hello-p5-simple-shapes/index.js',
+    "l-systems": 
+      './examples/l-systems/index.js'
   },
 
   output: {
