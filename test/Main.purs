@@ -27,6 +27,7 @@ import Node.Crypto.Hash (Algorithm(..), base64)
 import Data.String.Common (trim)
 import HelloP5SimpleShapes as HelloP5SimpleShapes
 import StructureWidthAndHeight as StructureWidthAndHeight
+import LSystems as LSystems
 
 lineDrawing :: P5 -> String -> Number -> Number -> Effect Unit
 lineDrawing p sketchName w h = do
@@ -114,6 +115,19 @@ main = do
             $ StructureWidthAndHeight.main (Just {p5: p})
           expectCanvasToMatchSnapshot 
             sketchName w h sketchName
+--        it "renders l-systems" do
+--          p <- liftEffect getP5
+--          let sketchName = "lSystems"
+--              w = 710.0
+--              h = 400.0
+--          p <- liftEffect $ p5 $ \p -> do
+--            setup p $ do
+--              e <- liftEffect $ createCanvas p w h
+--              liftEffect $ setId e sketchName
+--          _ <- liftEffect 
+--            $ LSystems.main (Just {p5: p})
+--          expectCanvasToMatchSnapshot 
+--            sketchName w h sketchName
       describe "math" do
         describe "dist" do
           it "calculates distance between points" do

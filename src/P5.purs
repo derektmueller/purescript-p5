@@ -11,6 +11,7 @@ module P5
   ) where
 
 import Effect (Effect)
+import Effect.Aff (Aff)
 import Prelude (Unit)
 import Data.Function.Uncurried (Fn2, runFn2)
 import P5.Types (Element, P5, Vector)
