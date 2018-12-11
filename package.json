@@ -13,6 +13,7 @@
   },
   "devDependencies": {
     "canvas": "^2.1.0",
+    "inflection": "^1.12.0",
     "jsdom": "^13.0.0",
     "jsdom-global": "^3.0.2",
     "p5": "^0.7.2",

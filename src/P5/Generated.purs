@@ -7,23 +7,24 @@ module P5.Generated
   , IntOrString(..)
   , ArrayNumberOrVector(..)
   , NumberOrArrayNumberOrVector(..)
-  , AngleModeMode(..)
+  , AngleMode(..)
   , ArcMode(..)
   , BeginShapeKind(..)
-  , BlendBlendMode(..)
-  , BlendModeMode(..)
-  , ColorModeMode(..)
+  , BlendMode(..)
+  , BlendMode(..)
+  , ColorMode(..)
   , CursorType(..)
-  , DebugModeMode(..)
-  , EllipseModeMode(..)
+  , DebugMode(..)
+  , EllipseMode(..)
   , EndShapeMode(..)
-  , FilterFilterType(..)
-  , ImageModeMode(..)
-  , RectModeMode(..)
-  , StrokeCapCap(..)
+  , FilterType(..)
+  , ImageMode(..)
+  , RectMode(..)
+  , StrokeCap(..)
+  , StrokeJoin(..)
   , TextAlignHorizAlign(..)
   , TextAlignVertAlign(..)
-  , TextStyleTheStyle(..)
+  , TextStyle(..)
   , abs
   , acos
   , alpha
@@ -234,6 +235,7 @@ module P5.Generated
   , stroke4
   , stroke5
   , strokeCap
+  , strokeJoin
   , strokeWeight
   , tan
   , textAlign2
@@ -281,23 +283,23 @@ data ArrayNumberOrImage = ArrayNumberOrImageArrayNumber (Array Number) | ArrayNu
 data IntOrString = IntOrStringInt Int | IntOrStringString String
 data ArrayNumberOrVector = ArrayNumberOrVectorArrayNumber (Array Number) | ArrayNumberOrVectorVector Vector
 data NumberOrArrayNumberOrVector = NumberOrArrayNumberOrVectorNumber Number | NumberOrArrayNumberOrVectorArrayNumber (Array Number) | NumberOrArrayNumberOrVectorVector Vector
-data AngleModeMode = AngleModeModeRADIANS | AngleModeModeDEGREES
-data ArcMode = ArcModeCHORD | ArcModePIE | ArcModeOPEN
-data BeginShapeKind = BeginShapeKindPOINTS | BeginShapeKindLINES | BeginShapeKindTRIANGLES | BeginShapeKindTRIANGLE_FAN | BeginShapeKindTRIANGLE_STRIP | BeginShapeKindQUADS | BeginShapeKindQUAD_STRIP
-data BlendBlendMode = BlendBlendModeBLEND | BlendBlendModeDARKEST | BlendBlendModeLIGHTEST | BlendBlendModeDIFFERENCE | BlendBlendModeMULTIPLY | BlendBlendModeEXCLUSION | BlendBlendModeSCREEN | BlendBlendModeREPLACE | BlendBlendModeOVERLAY | BlendBlendModeHARD_LIGHT | BlendBlendModeSOFT_LIGHT | BlendBlendModeDODGE | BlendBlendModeBURN | BlendBlendModeADD | BlendBlendModeNORMAL
-data BlendModeMode = BlendModeModeBLEND | BlendModeModeDARKEST | BlendModeModeLIGHTEST | BlendModeModeDIFFERENCE | BlendModeModeMULTIPLY | BlendModeModeEXCLUSION | BlendModeModeSCREEN | BlendModeModeREPLACE | BlendModeModeOVERLAY | BlendModeModeHARD_LIGHT | BlendModeModeSOFT_LIGHT | BlendModeModeDODGE | BlendModeModeBURN | BlendModeModeADD | BlendModeModeNORMAL
-data ColorModeMode = ColorModeModeRGB | ColorModeModeHSB | ColorModeModeHSL
-data CursorType = CursorTypeARROW | CursorTypeCROSS | CursorTypeHAND | CursorTypeMOVE | CursorTypeTEXT | CursorTypeWAIT
-data DebugModeMode = DebugModeModeGRID | DebugModeModeAXES
-data EllipseModeMode = EllipseModeModeCENTER | EllipseModeModeRADIUS | EllipseModeModeCORNER | EllipseModeModeCORNERS
-data EndShapeMode = EndShapeModeCLOSE
-data FilterFilterType = FilterFilterTypeTHRESHOLD | FilterFilterTypeGRAY | FilterFilterTypeOPAQUE | FilterFilterTypeINVERT | FilterFilterTypePOSTERIZE | FilterFilterTypeERODE | FilterFilterTypeDILATE | FilterFilterTypeBLUR
-data ImageModeMode = ImageModeModeCORNER | ImageModeModeCORNERS | ImageModeModeCENTER
-data RectModeMode = RectModeModeCORNER | RectModeModeCORNERS | RectModeModeCENTER | RectModeModeRADIUS
-data StrokeCapCap = StrokeCapCapSQUARE | StrokeCapCapPROJECT | StrokeCapCapROUND
-data TextAlignHorizAlign = TextAlignHorizAlignLEFT | TextAlignHorizAlignCENTER | TextAlignHorizAlignRIGHT
-data TextAlignVertAlign = TextAlignVertAlignTOP | TextAlignVertAlignBOTTOM | TextAlignVertAlignCENTER | TextAlignVertAlignBASELINE
-data TextStyleTheStyle = TextStyleTheStyleNORMAL | TextStyleTheStyleITALIC | TextStyleTheStyleBOLD
+data AngleMode = ANGLE_MODE_RADIANS | ANGLE_MODE_DEGREES
+data ArcMode = ARC_MODE_CHORD | ARC_MODE_PIE | ARC_MODE_OPEN
+data BeginShapeKind = BEGIN_SHAPE_KIND_POINTS | BEGIN_SHAPE_KIND_LINES | BEGIN_SHAPE_KIND_TRIANGLES | BEGIN_SHAPE_KIND_TRIANGLE_FAN | BEGIN_SHAPE_KIND_TRIANGLE_STRIP | BEGIN_SHAPE_KIND_QUADS | BEGIN_SHAPE_KIND_QUAD_STRIP
+data BlendMode = BLEND_MODE_BLEND | BLEND_MODE_DARKEST | BLEND_MODE_LIGHTEST | BLEND_MODE_DIFFERENCE | BLEND_MODE_MULTIPLY | BLEND_MODE_EXCLUSION | BLEND_MODE_SCREEN | BLEND_MODE_REPLACE | BLEND_MODE_OVERLAY | BLEND_MODE_HARD_LIGHT | BLEND_MODE_SOFT_LIGHT | BLEND_MODE_DODGE | BLEND_MODE_BURN | BLEND_MODE_ADD | BLEND_MODE_NORMAL
+data ColorMode = COLOR_MODE_RGB | COLOR_MODE_HSB | COLOR_MODE_HSL
+data CursorType = CURSOR_TYPE_ARROW | CURSOR_TYPE_CROSS | CURSOR_TYPE_HAND | CURSOR_TYPE_MOVE | CURSOR_TYPE_TEXT | CURSOR_TYPE_WAIT
+data DebugMode = DEBUG_MODE_GRID | DEBUG_MODE_AXES
+data EllipseMode = ELLIPSE_MODE_CENTER | ELLIPSE_MODE_RADIUS | ELLIPSE_MODE_CORNER | ELLIPSE_MODE_CORNERS
+data EndShapeMode = END_SHAPE_MODE_CLOSE
+data FilterType = FILTER_TYPE_THRESHOLD | FILTER_TYPE_GRAY | FILTER_TYPE_OPAQUE | FILTER_TYPE_INVERT | FILTER_TYPE_POSTERIZE | FILTER_TYPE_ERODE | FILTER_TYPE_DILATE | FILTER_TYPE_BLUR
+data ImageMode = IMAGE_MODE_CORNER | IMAGE_MODE_CORNERS | IMAGE_MODE_CENTER
+data RectMode = RECT_MODE_CORNER | RECT_MODE_CORNERS | RECT_MODE_CENTER | RECT_MODE_RADIUS
+data StrokeCap = STROKE_CAP_SQUARE | STROKE_CAP_PROJECT | STROKE_CAP_ROUND
+data StrokeJoin = STROKE_JOIN_MITER | STROKE_JOIN_BEVEL | STROKE_JOIN_ROUND
+data TextAlignHorizAlign = TEXT_ALIGN_HORIZ_ALIGN_LEFT | TEXT_ALIGN_HORIZ_ALIGN_CENTER | TEXT_ALIGN_HORIZ_ALIGN_RIGHT
+data TextAlignVertAlign = TEXT_ALIGN_VERT_ALIGN_TOP | TEXT_ALIGN_VERT_ALIGN_BOTTOM | TEXT_ALIGN_VERT_ALIGN_CENTER | TEXT_ALIGN_VERT_ALIGN_BASELINE
+data TextStyle = TEXT_STYLE_NORMAL | TEXT_STYLE_ITALIC | TEXT_STYLE_BOLD
 
 foreign import absImpl :: Fn2 P5 Number Number
 foreign import acosImpl :: Fn2 P5 Number Number
@@ -309,7 +311,7 @@ foreign import ambientLight4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import ambientLight5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import ambientMaterialImpl :: Fn2 P5 ArrayNumberOrStringOrColor (Effect Unit)
 foreign import ambientMaterial2Impl :: Fn5 P5 Number (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
-foreign import angleModeImpl :: Fn2 P5 AngleModeMode (Effect Unit)
+foreign import angleModeImpl :: Fn2 P5 AngleMode (Effect Unit)
 foreign import applyMatrixImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import arcImpl :: Fn9 P5 Number Number Number Number Number Number (Maybe ArcMode) (Maybe Number) (Effect Unit)
 foreign import asinImpl :: Fn2 P5 Number Number
@@ -329,8 +331,8 @@ foreign import bezierPointImpl :: Fn6 P5 Number Number Number Number Number Numb
 foreign import bezierTangentImpl :: Fn6 P5 Number Number Number Number Number Number
 foreign import bezierVertexImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import bezierVertex2Impl :: Fn10 P5 Number Number Number Number Number Number Number Number Number (Effect Unit)
-foreign import blendImpl :: Fn10 P5 Int Int Int Int Int Int Int Int BlendBlendMode (Effect Unit)
-foreign import blendModeImpl :: Fn2 P5 BlendModeMode (Effect Unit)
+foreign import blendImpl :: Fn10 P5 Int Int Int Int Int Int Int Int BlendMode (Effect Unit)
+foreign import blendModeImpl :: Fn2 P5 BlendMode (Effect Unit)
 foreign import blueImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import boxImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import brightnessImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
@@ -344,8 +346,8 @@ foreign import color2Impl :: Fn2 P5 (Array Number) Color
 foreign import color3Impl :: Fn2 P5 Color Color
 foreign import color4Impl :: Fn3 P5 Number (Maybe Number) Color
 foreign import color5Impl :: Fn5 P5 Number Number Number (Maybe Number) Color
-foreign import colorModeImpl :: Fn3 P5 ColorModeMode (Maybe Number) (Effect Unit)
-foreign import colorMode2Impl :: Fn6 P5 ColorModeMode Number Number Number (Maybe Number) (Effect Unit)
+foreign import colorModeImpl :: Fn3 P5 ColorMode (Maybe Number) (Effect Unit)
+foreign import colorMode2Impl :: Fn6 P5 ColorMode Number Number Number (Maybe Number) (Effect Unit)
 foreign import coneImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Maybe Boolean) (Effect Unit)
 foreign import constrainImpl :: Fn4 P5 Number Number Number Number
 foreign import copyImpl :: Fn9 P5 Int Int Int Int Int Int Int Int (Effect Unit)
@@ -363,9 +365,9 @@ foreign import curveVertex2Impl :: Fn4 P5 Number Number (Maybe Number) (Effect U
 foreign import cylinderImpl :: Fn7 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Maybe Boolean) (Maybe Boolean) (Effect Unit)
 foreign import dayImpl :: Fn1 P5 Int
 foreign import debugModeImpl :: Fn1 P5 (Effect Unit)
-foreign import debugMode2Impl :: Fn2 P5 DebugModeMode (Effect Unit)
-foreign import debugMode3Impl :: Fn6 P5 DebugModeMode (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
-foreign import debugMode4Impl :: Fn7 P5 DebugModeMode (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
+foreign import debugMode2Impl :: Fn2 P5 DebugMode (Effect Unit)
+foreign import debugMode3Impl :: Fn6 P5 DebugMode (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
+foreign import debugMode4Impl :: Fn7 P5 DebugMode (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import debugMode5Impl :: Fn10 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import degreesImpl :: Fn2 P5 Number Number
 foreign import deviceMovedImpl :: Fn1 P5 (Effect Unit)
@@ -380,7 +382,7 @@ foreign import distImpl :: Fn5 P5 Number Number Number Number Number
 foreign import dist2Impl :: Fn7 P5 Number Number Number Number Number Number Number
 foreign import ellipseImpl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import ellipse2Impl :: Fn6 P5 Number Number Number Number Int (Effect Unit)
-foreign import ellipseModeImpl :: Fn2 P5 EllipseModeMode (Effect Unit)
+foreign import ellipseModeImpl :: Fn2 P5 EllipseMode (Effect Unit)
 foreign import ellipsoidImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import endContourImpl :: Fn1 P5 (Effect Unit)
 foreign import endShapeImpl :: Fn2 P5 (Maybe EndShapeMode) (Effect Unit)
@@ -390,7 +392,7 @@ foreign import fill2Impl :: Fn2 P5 (Array Number) (Effect Unit)
 foreign import fill3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import fill4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import fill5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
-foreign import filterImpl :: Fn3 P5 FilterFilterType (Maybe Number) (Effect Unit)
+foreign import filterImpl :: Fn3 P5 FilterType (Maybe Number) (Effect Unit)
 foreign import floatImpl :: Fn2 P5 String Number
 foreign import floorImpl :: Fn2 P5 Number Int
 foreign import frameRateImpl :: Fn1 P5 Number
@@ -404,7 +406,7 @@ foreign import hexImpl :: Fn3 P5 Number (Maybe Number) String
 foreign import hex2Impl :: Fn3 P5 (Array Number) (Maybe Number) (Array String)
 foreign import hourImpl :: Fn1 P5 Int
 foreign import hueImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
-foreign import imageModeImpl :: Fn2 P5 ImageModeMode (Effect Unit)
+foreign import imageModeImpl :: Fn2 P5 ImageMode (Effect Unit)
 foreign import int2Impl :: Fn3 P5 BooleanOrNumberOrString (Maybe Int) Number
 foreign import keyIsDownImpl :: Fn2 P5 Number Boolean
 foreign import keyPressedImpl :: Fn1 P5 (Effect Unit)
@@ -472,7 +474,7 @@ foreign import randomGaussianImpl :: Fn3 P5 Number Number Number
 foreign import randomSeedImpl :: Fn2 P5 Number (Effect Unit)
 foreign import rectImpl :: Fn7 P5 Number Number Number Number (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import rect2Impl :: Fn9 P5 Number Number Number Number (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
-foreign import rectModeImpl :: Fn2 P5 RectModeMode (Effect Unit)
+foreign import rectModeImpl :: Fn2 P5 RectMode (Effect Unit)
 foreign import redImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import redrawImpl :: Fn2 P5 (Maybe Int) (Effect Unit)
 foreign import removeImpl :: Fn1 P5 (Effect Unit)
@@ -508,7 +510,8 @@ foreign import stroke2Impl :: Fn2 P5 (Array Number) (Effect Unit)
 foreign import stroke3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import stroke4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import stroke5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
-foreign import strokeCapImpl :: Fn2 P5 StrokeCapCap (Effect Unit)
+foreign import strokeCapImpl :: Fn2 P5 StrokeCap (Effect Unit)
+foreign import strokeJoinImpl :: Fn2 P5 StrokeJoin (Effect Unit)
 foreign import strokeWeightImpl :: Fn2 P5 Number (Effect Unit)
 foreign import tanImpl :: Fn2 P5 Number Number
 foreign import textAlign2Impl :: Fn3 P5 TextAlignHorizAlign (Maybe TextAlignVertAlign) (Effect Unit)
@@ -519,7 +522,7 @@ foreign import textLeading2Impl :: Fn2 P5 Number (Effect Unit)
 foreign import textSizeImpl :: Fn1 P5 Number
 foreign import textSize2Impl :: Fn2 P5 Number (Effect Unit)
 foreign import textStyleImpl :: Fn1 P5 String
-foreign import textStyle2Impl :: Fn2 P5 TextStyleTheStyle (Effect Unit)
+foreign import textStyle2Impl :: Fn2 P5 TextStyle (Effect Unit)
 foreign import textWidthImpl :: Fn2 P5 String Number
 foreign import tintImpl :: Fn2 P5 String (Effect Unit)
 foreign import tint2Impl :: Fn2 P5 (Array Number) (Effect Unit)
@@ -580,7 +583,7 @@ ambientMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe N
 ambientMaterial2 p5 v1 v2 v3 a = runFn5 ambientMaterial2Impl p5 v1 v2 v3 a
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/angleMode)
-angleMode :: P5 -> AngleModeMode -> (Effect Unit)
+angleMode :: P5 -> AngleMode -> (Effect Unit)
 angleMode p5 mode = runFn2 angleModeImpl p5 mode
 
 -- TODO: unsupported: append :: P5 -> Unsupported(Array) -> Unsupported(Any) -> Unsupported(Array)
@@ -666,11 +669,11 @@ bezierVertex2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number 
 bezierVertex2 p5 x2 y2 z2 x3 y3 z3 x4 y4 z4 = runFn10 bezierVertex2Impl p5 x2 y2 z2 x3 y3 z3 x4 y4 z4
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/blend)
-blend :: P5 -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> BlendBlendMode -> (Effect Unit)
+blend :: P5 -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> BlendMode -> (Effect Unit)
 blend p5 sx sy sw sh dx dy dw dh blendMode = runFn10 blendImpl p5 sx sy sw sh dx dy dw dh blendMode
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/blendMode)
-blendMode :: P5 -> BlendModeMode -> (Effect Unit)
+blendMode :: P5 -> BlendMode -> (Effect Unit)
 blendMode p5 mode = runFn2 blendModeImpl p5 mode
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/blue)
@@ -732,11 +735,11 @@ color5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> Color
 color5 p5 v1 v2 v3 alpha = runFn5 color5Impl p5 v1 v2 v3 alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/colorMode)
-colorMode :: P5 -> ColorModeMode -> (Maybe Number) -> (Effect Unit)
+colorMode :: P5 -> ColorMode -> (Maybe Number) -> (Effect Unit)
 colorMode p5 mode max = runFn3 colorModeImpl p5 mode max
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/colorMode)
-colorMode2 :: P5 -> ColorModeMode -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
+colorMode2 :: P5 -> ColorMode -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 colorMode2 p5 mode max1 max2 max3 maxA = runFn6 colorMode2Impl p5 mode max1 max2 max3 maxA
 
 -- TODO: unsupported: concat :: P5 -> Unsupported(Array) -> Unsupported(Array) -> Unsupported(Array)
@@ -830,15 +833,15 @@ debugMode :: P5 -> (Effect Unit)
 debugMode p5  = runFn1 debugModeImpl p5 
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
-debugMode2 :: P5 -> DebugModeMode -> (Effect Unit)
+debugMode2 :: P5 -> DebugMode -> (Effect Unit)
 debugMode2 p5 mode = runFn2 debugMode2Impl p5 mode
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
-debugMode3 :: P5 -> DebugModeMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+debugMode3 :: P5 -> DebugMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 debugMode3 p5 mode axesSize xOff yOff zOff = runFn6 debugMode3Impl p5 mode axesSize xOff yOff zOff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
-debugMode4 :: P5 -> DebugModeMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+debugMode4 :: P5 -> DebugMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 debugMode4 p5 mode gridSize gridDivisions xOff yOff zOff = runFn7 debugMode4Impl p5 mode gridSize gridDivisions xOff yOff zOff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
@@ -902,7 +905,7 @@ ellipse2 :: P5 -> Number -> Number -> Number -> Number -> Int -> (Effect Unit)
 ellipse2 p5 x y w h detail = runFn6 ellipse2Impl p5 x y w h detail
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ellipseMode)
-ellipseMode :: P5 -> EllipseModeMode -> (Effect Unit)
+ellipseMode :: P5 -> EllipseMode -> (Effect Unit)
 ellipseMode p5 mode = runFn2 ellipseModeImpl p5 mode
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/ellipsoid)
@@ -942,7 +945,7 @@ fill5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 fill5 p5 v1 v2 v3 alpha = runFn5 fill5Impl p5 v1 v2 v3 alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/filter)
-filter :: P5 -> FilterFilterType -> (Maybe Number) -> (Effect Unit)
+filter :: P5 -> FilterType -> (Maybe Number) -> (Effect Unit)
 filter p5 filterType filterParam = runFn3 filterImpl p5 filterType filterParam
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/float)
@@ -1020,7 +1023,7 @@ hue p5 color = runFn2 hueImpl p5 color
 -- TODO: unsupported: image2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/imageMode)
-imageMode :: P5 -> ImageModeMode -> (Effect Unit)
+imageMode :: P5 -> ImageMode -> (Effect Unit)
 imageMode p5 mode = runFn2 imageModeImpl p5 mode
 
 -- TODO: unsupported: int :: P5 -> Unsupported(Array) -> (Array Number)
@@ -1344,7 +1347,7 @@ rect2 :: P5 -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe 
 rect2 p5 x y w h tl tr br bl = runFn9 rect2Impl p5 x y w h tl tr br bl
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/rectMode)
-rectMode :: P5 -> RectModeMode -> (Effect Unit)
+rectMode :: P5 -> RectMode -> (Effect Unit)
 rectMode p5 mode = runFn2 rectModeImpl p5 mode
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/red)
@@ -1518,8 +1521,12 @@ stroke5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 stroke5 p5 v1 v2 v3 alpha = runFn5 stroke5Impl p5 v1 v2 v3 alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/strokeCap)
-strokeCap :: P5 -> StrokeCapCap -> (Effect Unit)
+strokeCap :: P5 -> StrokeCap -> (Effect Unit)
 strokeCap p5 cap = runFn2 strokeCapImpl p5 cap
+
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/strokeJoin)
+strokeJoin :: P5 -> StrokeJoin -> (Effect Unit)
+strokeJoin p5 join = runFn2 strokeJoinImpl p5 join
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/strokeWeight)
 strokeWeight :: P5 -> Number -> (Effect Unit)
@@ -1572,7 +1579,7 @@ textStyle :: P5 -> String
 textStyle p5  = runFn1 textStyleImpl p5 
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/textStyle)
-textStyle2 :: P5 -> TextStyleTheStyle -> (Effect Unit)
+textStyle2 :: P5 -> TextStyle -> (Effect Unit)
 textStyle2 p5 theStyle = runFn2 textStyle2Impl p5 theStyle
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/textWidth)

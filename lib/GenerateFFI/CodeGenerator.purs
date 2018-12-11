@@ -5,13 +5,16 @@ module GenerateFFI.CodeGenerator
   ) where
 
 import Prelude
+import Data.String.Regex (Regex, regex, test, match, replace)
+import Data.String.Regex.Flags (noFlags, global)
+import Data.String.Inflection (underscore)
 import Data.String.Utils (mapChars)
 import Data.Array.NonEmpty (toArray, fromNonEmpty)
 import Data.String (toUpper, drop, take)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Array 
   (filter, fold, intercalate, length, nub, (:))
-import Data.Either (Either(..), note)
+import Data.Either (Either(..), note, hush)
 import Data.Traversable (traverse)
 import Data.Foldable (any)
 import GenerateFFI.Parser 
@@ -30,9 +33,17 @@ toUpperCaseInitial str = do
       tail = drop 1 str
   toUpper head <> tail
 
-titleCaseConstant :: String -> String -> String
-titleCaseConstant fnName paramName = 
-  toUpperCaseInitial fnName <> toUpperCaseInitial paramName
+prettifyConstant :: String -> String -> Maybe String
+prettifyConstant fnName paramName = do
+  let paramName' = toUpperCaseInitial paramName
+      fnName' = toUpperCaseInitial fnName
+  theRegex <- hush $ regex "^The" noFlags
+  let paramName'' = replace theRegex "" paramName'
+  paramRegex <- hush $ regex (paramName'' <> "$") noFlags
+  let fnName'' = replace paramRegex "" fnName'
+  fnNameRegex <- hush $ regex ("^" <> fnName'') noFlags
+  let paramName''' = replace fnNameRegex "" paramName''
+  pure $ fnName'' <> paramName'''
 
 generateP5TypeConstructor :: P5Type -> Maybe String
 generateP5TypeConstructor P5Boolean = Just "Boolean"
@@ -46,8 +57,8 @@ generateP5TypeConstructor P5String = Just "String"
 generateP5TypeConstructor P5Vector = Just "Vector"
 generateP5TypeConstructor P5Color = Just "Color"
 generateP5TypeConstructor P5Image = Just "Image"
-generateP5TypeConstructor (P5Constant fnName paramName _) = 
-  Just $ titleCaseConstant fnName paramName
+generateP5TypeConstructor (P5Constant fnName paramName _) = do
+  prettifyConstant fnName paramName
 generateP5TypeConstructor t@(P5Or p5Type1 p5Type2) = do
   case typeIsUnsupported t of
     true -> do
@@ -83,7 +94,7 @@ p5TypeToIdentifier P5Image = Just "Image"
 p5TypeToIdentifier (P5Or _ _) = Nothing
 p5TypeToIdentifier P5Effect = Nothing
 p5TypeToIdentifier (P5Constant fnName paramName _) = 
-  Just $ titleCaseConstant fnName paramName
+  prettifyConstant fnName paramName
 p5TypeToIdentifier (P5Unsupported _) = Nothing
 
 getMethodName :: P5Method -> String
@@ -222,7 +233,8 @@ generateConstantTypeDef :: P5Type -> Maybe String
 generateConstantTypeDef t@(P5Constant fnName paramName constants) = do
   typeConstructor <- generateP5TypeConstructor t
   let dataConstructors = 
-        (\x -> typeConstructor <> toUpper x)
+        (\x -> 
+          toUpper (underscore typeConstructor) <> "_" <> toUpper x)
         <$> toArray (fromNonEmpty constants)
   pure 
     $ "data " <> typeConstructor <> " = "
@@ -281,7 +293,7 @@ generateTypeDefinitions xs = do
   constantTypeDefs <- traverse 
     ((note "Failed to generate type definition for constant") 
       <<< generateConstantTypeDef) constantTypes
-  pure $ productTypeDefs <> constantTypeDefs
+  pure $ productTypeDefs <> (nub constantTypeDefs)
 
 generateP5 :: P5Doc -> Either String String
 generateP5 (P5Doc doc) = do
@@ -313,21 +325,33 @@ generateP5 (P5Doc doc) = do
     <> "\n" 
     <> (intercalate "\n" methods)
 
+p5TypeJSRepresentation :: String -> P5Type -> Maybe String
+p5TypeJSRepresentation p (P5Maybe (P5Or _ _)) =
+  pure $ p <> ".value0 ? "
+    <> p <> ".value0.value0 : undefined"
+p5TypeJSRepresentation p (P5Or _ _) = pure $ p <> ".value0"
+p5TypeJSRepresentation p (P5Maybe _) = 
+  pure $ p <> ".value0 ? "
+    <> p <> ".value0 : undefined"
+p5TypeJSRepresentation p (P5Constant fnName paramName _) = do
+  prettyConstant <- 
+    (toUpper <<< underscore) <$> prettifyConstant fnName paramName
+  pure 
+    $ "p[" <> p 
+    <> ".constructor.name.replace(new RegExp('^" 
+      <> prettyConstant <> "_'), '')]"
+p5TypeJSRepresentation p _ = pure p
+
 generateWrapper :: P5Method -> Either String String
 generateWrapper x = do
   let name = getMethodName x
-      variables = 
-        (\x' -> do
-          let paramName = getParamName x'
-          case x'.p5Type of
-            (P5Maybe (P5Or _ _)) -> paramName <> ".value0 ? "
-              <> paramName <> ".value0.value0 : undefined"
-            (P5Or _ _) -> paramName <> ".value0"
-            (P5Maybe _) -> paramName <> ".value0 ? "
-              <> paramName <> ".value0 : undefined"
-            _ -> paramName
-        ) <$> x.params
-      params = getParamNames x
+  variables <- traverse
+    (\x' -> do
+      let paramName = getParamName x'
+      note "Failed to generate js rep" 
+        $ p5TypeJSRepresentation paramName x'.p5Type
+    ) x.params
+  let params = getParamNames x
       generateCall =
         "callP5(p, p." <> x.p5Name <> ", [" 
         <> (intercalate ", " variables) <> "]);"

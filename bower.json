@@ -35,7 +35,8 @@
     "purescript-now": "^4.0.0",
     "purescript-jsdom-global": "https://github.com/parenparen/purescript-jsdom-global.git#0.1.0",
     "purescript-web-html": "^1.2.0",
-    "purescript-crypto": "^1.1.0"
+    "purescript-crypto": "^1.1.0",
+    "purescript-inflection": "^1.0.0"
   },
   "resolutions": {
     "purescript-jsdom-global": "0.1.0"

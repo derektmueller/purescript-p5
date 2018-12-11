@@ -53,7 +53,7 @@ exports.ambientMaterial2Impl = function(p, v1, v2, v3, a) {
 };
 exports.angleModeImpl = function(p, mode) {
   return function() {
-    callP5(p, p.angleMode, [mode]);
+    callP5(p, p.angleMode, [p[mode.constructor.name.replace(new RegExp('^ANGLE_MODE_'), '')]]);
   };
 };
 exports.applyMatrixImpl = function(p, a, b, c, d, e, f) {
@@ -143,12 +143,12 @@ exports.bezierVertex2Impl = function(p, x2, y2, z2, x3, y3, z3, x4, y4, z4) {
 };
 exports.blendImpl = function(p, sx, sy, sw, sh, dx, dy, dw, dh, blendMode) {
   return function() {
-    callP5(p, p.blend, [sx, sy, sw, sh, dx, dy, dw, dh, blendMode]);
+    callP5(p, p.blend, [sx, sy, sw, sh, dx, dy, dw, dh, p[blendMode.constructor.name.replace(new RegExp('^BLEND_MODE_'), '')]]);
   };
 };
 exports.blendModeImpl = function(p, mode) {
   return function() {
-    callP5(p, p.blendMode, [mode]);
+    callP5(p, p.blendMode, [p[mode.constructor.name.replace(new RegExp('^BLEND_MODE_'), '')]]);
   };
 };
 exports.blueImpl = function(p, color) {
@@ -198,12 +198,12 @@ exports.color5Impl = function(p, v1, v2, v3, alpha) {
 };
 exports.colorModeImpl = function(p, mode, max) {
   return function() {
-    callP5(p, p.colorMode, [mode, max.value0 ? max.value0 : undefined]);
+    callP5(p, p.colorMode, [p[mode.constructor.name.replace(new RegExp('^COLOR_MODE_'), '')], max.value0 ? max.value0 : undefined]);
   };
 };
 exports.colorMode2Impl = function(p, mode, max1, max2, max3, maxA) {
   return function() {
-    callP5(p, p.colorMode, [mode, max1, max2, max3, maxA.value0 ? maxA.value0 : undefined]);
+    callP5(p, p.colorMode, [p[mode.constructor.name.replace(new RegExp('^COLOR_MODE_'), '')], max1, max2, max3, maxA.value0 ? maxA.value0 : undefined]);
   };
 };
 exports.coneImpl = function(p, radius, height, detailX, detailY, cap) {
@@ -279,17 +279,17 @@ exports.debugModeImpl = function(p) {
 };
 exports.debugMode2Impl = function(p, mode) {
   return function() {
-    callP5(p, p.debugMode, [mode]);
+    callP5(p, p.debugMode, [p[mode.constructor.name.replace(new RegExp('^DEBUG_MODE_'), '')]]);
   };
 };
 exports.debugMode3Impl = function(p, mode, axesSize, xOff, yOff, zOff) {
   return function() {
-    callP5(p, p.debugMode, [mode, axesSize.value0 ? axesSize.value0 : undefined, xOff.value0 ? xOff.value0 : undefined, yOff.value0 ? yOff.value0 : undefined, zOff.value0 ? zOff.value0 : undefined]);
+    callP5(p, p.debugMode, [p[mode.constructor.name.replace(new RegExp('^DEBUG_MODE_'), '')], axesSize.value0 ? axesSize.value0 : undefined, xOff.value0 ? xOff.value0 : undefined, yOff.value0 ? yOff.value0 : undefined, zOff.value0 ? zOff.value0 : undefined]);
   };
 };
 exports.debugMode4Impl = function(p, mode, gridSize, gridDivisions, xOff, yOff, zOff) {
   return function() {
-    callP5(p, p.debugMode, [mode, gridSize.value0 ? gridSize.value0 : undefined, gridDivisions.value0 ? gridDivisions.value0 : undefined, xOff.value0 ? xOff.value0 : undefined, yOff.value0 ? yOff.value0 : undefined, zOff.value0 ? zOff.value0 : undefined]);
+    callP5(p, p.debugMode, [p[mode.constructor.name.replace(new RegExp('^DEBUG_MODE_'), '')], gridSize.value0 ? gridSize.value0 : undefined, gridDivisions.value0 ? gridDivisions.value0 : undefined, xOff.value0 ? xOff.value0 : undefined, yOff.value0 ? yOff.value0 : undefined, zOff.value0 ? zOff.value0 : undefined]);
   };
 };
 exports.debugMode5Impl = function(p, gridSize, gridDivisions, gridXOff, gridYOff, gridZOff, axesSize, axesXOff, axesYOff, axesZOff) {
@@ -356,7 +356,7 @@ exports.ellipse2Impl = function(p, x, y, w, h, detail) {
 };
 exports.ellipseModeImpl = function(p, mode) {
   return function() {
-    callP5(p, p.ellipseMode, [mode]);
+    callP5(p, p.ellipseMode, [p[mode.constructor.name.replace(new RegExp('^ELLIPSE_MODE_'), '')]]);
   };
 };
 exports.ellipsoidImpl = function(p, radiusx, radiusy, radiusz, detailX, detailY) {
@@ -404,7 +404,7 @@ exports.fill5Impl = function(p, v1, v2, v3, alpha) {
 };
 exports.filterImpl = function(p, filterType, filterParam) {
   return function() {
-    callP5(p, p.filter, [filterType, filterParam.value0 ? filterParam.value0 : undefined]);
+    callP5(p, p.filter, [p[filterType.constructor.name.replace(new RegExp('^FILTER_TYPE_'), '')], filterParam.value0 ? filterParam.value0 : undefined]);
   };
 };
 exports.floatImpl = function(p, str) {
@@ -450,7 +450,7 @@ exports.hueImpl = function(p, color) {
 };
 exports.imageModeImpl = function(p, mode) {
   return function() {
-    callP5(p, p.imageMode, [mode]);
+    callP5(p, p.imageMode, [p[mode.constructor.name.replace(new RegExp('^IMAGE_MODE_'), '')]]);
   };
 };
 exports.int2Impl = function(p, n, radix) {
@@ -730,7 +730,7 @@ exports.rect2Impl = function(p, x, y, w, h, tl, tr, br, bl) {
 };
 exports.rectModeImpl = function(p, mode) {
   return function() {
-    callP5(p, p.rectMode, [mode]);
+    callP5(p, p.rectMode, [p[mode.constructor.name.replace(new RegExp('^RECT_MODE_'), '')]]);
   };
 };
 exports.redImpl = function(p, color) {
@@ -892,7 +892,12 @@ exports.stroke5Impl = function(p, v1, v2, v3, alpha) {
 };
 exports.strokeCapImpl = function(p, cap) {
   return function() {
-    callP5(p, p.strokeCap, [cap]);
+    callP5(p, p.strokeCap, [p[cap.constructor.name.replace(new RegExp('^STROKE_CAP_'), '')]]);
+  };
+};
+exports.strokeJoinImpl = function(p, join) {
+  return function() {
+    callP5(p, p.strokeJoin, [p[join.constructor.name.replace(new RegExp('^STROKE_JOIN_'), '')]]);
   };
 };
 exports.strokeWeightImpl = function(p, weight) {
@@ -905,7 +910,7 @@ exports.tanImpl = function(p, angle) {
 };
 exports.textAlign2Impl = function(p, horizAlign, vertAlign) {
   return function() {
-    callP5(p, p.textAlign, [horizAlign, vertAlign.value0 ? vertAlign.value0 : undefined]);
+    callP5(p, p.textAlign, [p[horizAlign.constructor.name.replace(new RegExp('^TEXT_ALIGN_HORIZ_ALIGN_'), '')], vertAlign.value0 ? vertAlign.value0 : undefined]);
   };
 };
 exports.textAscentImpl = function(p) {
@@ -935,7 +940,7 @@ exports.textStyleImpl = function(p) {
 };
 exports.textStyle2Impl = function(p, theStyle) {
   return function() {
-    callP5(p, p.textStyle, [theStyle]);
+    callP5(p, p.textStyle, [p[theStyle.constructor.name.replace(new RegExp('^TEXT_STYLE_'), '')]]);
   };
 };
 exports.textWidthImpl = function(p, theText) {

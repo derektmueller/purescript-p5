@@ -39,9 +39,9 @@ lineDrawing p sketchName w h = do
     strokeWeight p 10.0
     line p 100.0 200.0 200.0 200.0
     line p 200.0 200.0 300.0 300.0
-    strokeJoin p Round
-    strokeJoin p Bevel
-    strokeJoin p Miter
+    strokeJoin p STROKE_JOIN_ROUND
+    strokeJoin p STROKE_JOIN_BEVEL
+    strokeJoin p STROKE_JOIN_MITER
     pure unit
   pure unit
 

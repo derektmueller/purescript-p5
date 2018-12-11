@@ -3,8 +3,6 @@ module P5
   , getP5
   , setup
   , draw
-  , strokeJoin
-  , StrokeJoin(..)
   , createCanvas
   , id
   , setId
@@ -22,15 +20,10 @@ foreign import p5Impl :: (P5 -> Effect Unit) -> Effect P5
 foreign import getP5Impl :: Effect P5
 foreign import setupImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import drawImpl :: P5 -> Effect Unit -> Effect Unit
-foreign import strokeJoinMiterImpl :: P5 -> Effect Unit
-foreign import strokeJoinBevelImpl :: P5 -> Effect Unit
-foreign import strokeJoinRoundImpl :: P5 -> Effect Unit
 foreign import createCanvasImpl 
   :: P5 -> Number -> Number -> Effect Element
 foreign import idImpl :: Element -> String
 foreign import setIdImpl :: Fn2 Element String (Effect Unit)
-
-data StrokeJoin = Miter | Bevel | Round
 
 p5 :: (P5 -> Effect Unit) -> Effect P5
 p5 f = p5Impl f
@@ -43,11 +36,6 @@ setup p eff = setupImpl p eff
 
 draw :: P5 -> Effect Unit -> Effect Unit
 draw p eff = drawImpl p eff
-
-strokeJoin :: P5 -> StrokeJoin -> Effect Unit
-strokeJoin p Miter = strokeJoinMiterImpl p
-strokeJoin p Round = strokeJoinRoundImpl p
-strokeJoin p Bevel = strokeJoinBevelImpl p
 
 createCanvas :: P5 -> Number -> Number -> Effect Element
 createCanvas p w h = createCanvasImpl p w h

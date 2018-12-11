@@ -236,7 +236,6 @@ instance decodeP5Doc :: Decode P5Doc where
         methodBlacklist = 
           [ "draw"
           , "setup"
-          , "strokeJoin"
           ]
         removeBlacklisted = filter
           (\i -> not (i.name `elem` methodBlacklist))
