@@ -1395,14 +1395,6 @@ noTint :: P5 -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/noTint)
 
-#### `noise`
-
-``` purescript
-noise :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> Number
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/noise)
-
 #### `noiseDetail`
 
 ``` purescript
@@ -1586,22 +1578,6 @@ radians :: P5 -> Number -> Number
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/radians)
-
-#### `random2`
-
-``` purescript
-random2 :: P5 -> (Maybe Number) -> (Maybe Number) -> Number
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/random)
-
-#### `randomGaussian`
-
-``` purescript
-randomGaussian :: P5 -> Number -> Number -> Number
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/randomGaussian)
 
 #### `randomSeed`
 

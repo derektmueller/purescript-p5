@@ -22,7 +22,7 @@ import Test.Spec.Assertions (shouldEqual, fail)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (run', defaultConfig)
 import Unsafe.Coerce (unsafeCoerce)
-import P5 (p5, P5, StrokeJoin(..), background3, createCanvas, draw, getP5, line, setId, setup, stroke, strokeJoin, strokeWeight, dist, nf, abs, NumberOrString(..), IntOrString(..), char, textLeading2, textLeading, resizeCanvas, remove)
+import P5 (p5, P5, StrokeJoin(..), background3, createCanvas, draw, getP5, line, setId, setup, stroke, strokeJoin, strokeWeight, dist, nf, abs, NumberOrString(..), IntOrString(..), char, textLeading2, textLeading, resizeCanvas, remove, noise, noiseSeed, random2, randomSeed, randomGaussian)
 import Node.Crypto.Hash (Algorithm(..), base64)
 import Data.String.Common (trim)
 import HelloP5SimpleShapes as HelloP5SimpleShapes
@@ -138,6 +138,27 @@ main = do
           it "calculates absolute value" do
             p <- liftEffect getP5
             abs p (-3.0) `shouldEqual` 3.0
+            pure unit
+        describe "noise" do
+          it "calculates random noise" do
+            p <- liftEffect getP5
+            liftEffect $ noiseSeed p 1.0
+            n <- liftEffect $ noise p 1.0 Nothing Nothing
+            n `shouldEqual` 0.3180446257465519 
+            pure unit
+        describe "random2" do
+          it "generates a random number" do
+            p <- liftEffect getP5
+            liftEffect $ randomSeed p 1.0
+            n <- liftEffect $ random2 p (Just 1.0) (Just 2.0)
+            n `shouldEqual` 1.2364555252715945
+            pure unit
+        describe "randomGaussian" do
+          it "generates a random number" do
+            p <- liftEffect getP5
+            liftEffect $ randomSeed p 1.0
+            n <- liftEffect $ randomGaussian p 50.0 15.0
+            n `shouldEqual` 30.42728495051592
             pure unit
       describe "data" do
         describe "string functions" do

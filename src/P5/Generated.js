@@ -597,9 +597,6 @@ exports.noTintImpl = function(p) {
     callP5(p, p.noTint, []);
   };
 };
-exports.noiseImpl = function(p, x, y, z) {
-  return callP5(p, p.noise, [x, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
-};
 exports.noiseDetailImpl = function(p, lod, falloff) {
   return function() {
     callP5(p, p.noiseDetail, [lod, falloff]);
@@ -706,12 +703,6 @@ exports.quadraticVertex2Impl = function(p, cx, cy, cz, x3, y3, z3) {
 };
 exports.radiansImpl = function(p, degrees) {
   return callP5(p, p.radians, [degrees]);
-};
-exports.random2Impl = function(p, min, max) {
-  return callP5(p, p.random, [min.value0 ? min.value0 : undefined, max.value0 ? max.value0 : undefined]);
-};
-exports.randomGaussianImpl = function(p, mean, sd) {
-  return callP5(p, p.randomGaussian, [mean, sd]);
 };
 exports.randomSeedImpl = function(p, seed) {
   return function() {

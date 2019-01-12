@@ -1,5 +1,16 @@
 var p5;
 
+function trimRightUndefined(array) {
+  return array.filter(function (x, i) {
+    return i < array.length - 1 || x !== undefined;
+  });
+}
+
+function callP5(p5, method, args) {
+  return method.apply(
+    p5, trimRightUndefined(args));
+}
+
 exports.p5Impl = function(f) {
   return function() {
     p5 = p5 === undefined ? require('p5') : p5;
@@ -57,6 +68,24 @@ exports.setIdImpl = function(e, x) {
     e.id(x);
   };
 }
+
+exports.noiseImpl = function(p, x, y, z) {
+  return function() {
+    return callP5(p, p.noise, [x, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
+  };
+};
+
+exports.random2Impl = function(p, min, max) {
+  return function() {
+    return callP5(p, p.random, [min.value0 ? min.value0 : undefined, max.value0 ? max.value0 : undefined]);
+  };
+};
+
+exports.randomGaussianImpl = function(p, mean, sd) {
+  return function() {
+    return callP5(p, p.randomGaussian, [mean, sd]);
+  };
+};
 
 //Object.keys (
 //  [].concat (

@@ -169,7 +169,6 @@ module P5.Generated
   , noSmooth
   , noStroke
   , noTint
-  , noise
   , noiseDetail
   , noiseSeed
   , norm
@@ -193,8 +192,6 @@ module P5.Generated
   , quadraticVertex
   , quadraticVertex2
   , radians
-  , random2
-  , randomGaussian
   , randomSeed
   , rect
   , rect2
@@ -445,7 +442,6 @@ foreign import noLoopImpl :: Fn1 P5 (Effect Unit)
 foreign import noSmoothImpl :: Fn1 P5 (Effect Unit)
 foreign import noStrokeImpl :: Fn1 P5 (Effect Unit)
 foreign import noTintImpl :: Fn1 P5 (Effect Unit)
-foreign import noiseImpl :: Fn4 P5 Number (Maybe Number) (Maybe Number) Number
 foreign import noiseDetailImpl :: Fn3 P5 Number Number (Effect Unit)
 foreign import noiseSeedImpl :: Fn2 P5 Number (Effect Unit)
 foreign import normImpl :: Fn4 P5 Number Number Number Number
@@ -469,8 +465,6 @@ foreign import quadImpl :: Fn9 P5 Number Number Number Number Number Number Numb
 foreign import quadraticVertexImpl :: Fn5 P5 Number Number Number Number (Effect Unit)
 foreign import quadraticVertex2Impl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import radiansImpl :: Fn2 P5 Number Number
-foreign import random2Impl :: Fn3 P5 (Maybe Number) (Maybe Number) Number
-foreign import randomGaussianImpl :: Fn3 P5 Number Number Number
 foreign import randomSeedImpl :: Fn2 P5 Number (Effect Unit)
 foreign import rectImpl :: Fn7 P5 Number Number Number Number (Maybe Int) (Maybe Int) (Effect Unit)
 foreign import rect2Impl :: Fn9 P5 Number Number Number Number (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
@@ -1226,10 +1220,6 @@ noStroke p5  = runFn1 noStrokeImpl p5
 noTint :: P5 -> (Effect Unit)
 noTint p5  = runFn1 noTintImpl p5 
 
--- | [p5js.org documentation](https://p5js.org/reference/#/p5/noise)
-noise :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> Number
-noise p5 x y z = runFn4 noiseImpl p5 x y z
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/noiseDetail)
 noiseDetail :: P5 -> Number -> Number -> (Effect Unit)
 noiseDetail p5 lod falloff = runFn3 noiseDetailImpl p5 lod falloff
@@ -1325,14 +1315,6 @@ radians :: P5 -> Number -> Number
 radians p5 degrees = runFn2 radiansImpl p5 degrees
 
 -- TODO: unsupported: random :: P5 -> Unsupported(Array) -> Unsupported(*)
-
--- | [p5js.org documentation](https://p5js.org/reference/#/p5/random)
-random2 :: P5 -> (Maybe Number) -> (Maybe Number) -> Number
-random2 p5 min max = runFn3 random2Impl p5 min max
-
--- | [p5js.org documentation](https://p5js.org/reference/#/p5/randomGaussian)
-randomGaussian :: P5 -> Number -> Number -> Number
-randomGaussian p5 mean sd = runFn3 randomGaussianImpl p5 mean sd
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/randomSeed)
 randomSeed :: P5 -> Number -> (Effect Unit)

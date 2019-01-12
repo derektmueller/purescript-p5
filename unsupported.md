@@ -1,4 +1,4 @@
-Progress: implemented **240** out of **323** methods
+Progress: implemented **237** out of **320** methods
 ```
 append :: P5 -> Unsupported(Array) -> Unsupported(Any) -> Unsupported(Array)
 ```

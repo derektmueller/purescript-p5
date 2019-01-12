@@ -236,6 +236,9 @@ instance decodeP5Doc :: Decode P5Doc where
         methodBlacklist = 
           [ "draw"
           , "setup"
+          , "noise"
+          , "random2"
+          , "randomGaussian"
           ]
         removeBlacklisted = filter
           (\i -> not (i.name `elem` methodBlacklist))
@@ -328,9 +331,9 @@ instance decodeP5Doc :: Decode P5Doc where
     --trace (show (classItems :: Array ClassItem)) $ \_ -> do
     methods <- traverse classItemToMethod (onlyP5Methods classItems)
     pure $ P5Doc 
-      ((suffixDupMethods
+      ((removeBlacklisted
+        <<< suffixDupMethods
         <<< sortByNameAndParamLength
         <<< removeFnsWithTooManyArgs
-        <<< removeBlacklisted
         <<< onlyPublic) methods)
 
