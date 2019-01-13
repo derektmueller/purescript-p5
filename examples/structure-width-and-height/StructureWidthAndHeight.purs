@@ -39,7 +39,7 @@ main mAppState = do
   p <- maybe getP5 (\x -> pure x.p5) mAppState
 
   setup p do
-    e <- createCanvas p (toNumber w) (toNumber h)
+    e <- createCanvas p (toNumber w) (toNumber h) Nothing
     setId e "structureWidthAndHeight"
     pure unit
 

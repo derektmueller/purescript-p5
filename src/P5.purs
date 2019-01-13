@@ -9,6 +9,7 @@ module P5
   , noise
   , random2
   , randomGaussian
+  , CreateCanvasRenderer(..)
   , module P5.Types
   , module P5.Generated
   ) where
@@ -22,12 +23,14 @@ import P5.Types (Element, P5, Vector)
 import P5.Generated 
 import Data.Function.Uncurried (Fn3, Fn4, runFn3, runFn4)
 
+data CreateCanvasRenderer = CREATE_CANVAS_RENDERER_P2D | CREATE_CANVAS_RENDERER_WEBGL
+
 foreign import p5Impl :: (P5 -> Effect Unit) -> Effect P5
 foreign import getP5Impl :: Effect P5
 foreign import setupImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import drawImpl :: P5 -> Effect Unit -> Effect Unit
 foreign import createCanvasImpl 
-  :: P5 -> Number -> Number -> Effect Element
+  :: P5 -> Number -> Number -> Maybe CreateCanvasRenderer -> Effect Element
 foreign import idImpl :: Element -> String
 foreign import setIdImpl :: Fn2 Element String (Effect Unit)
 foreign import noiseImpl :: Fn4 P5 Number (Maybe Number) (Maybe Number) (Effect Number)
@@ -49,14 +52,14 @@ draw :: P5 -> Effect Unit -> Effect Unit
 draw p eff = drawImpl p eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/createCanvas)
-createCanvas :: P5 -> Number -> Number -> Effect Element
-createCanvas p w h = createCanvasImpl p w h
+createCanvas :: P5 -> Number -> Number -> Maybe CreateCanvasRenderer -> Effect Element
+createCanvas p w h r = createCanvasImpl p w h r
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/id)
 id :: Element -> String
 id = idImpl
 
--- | [p5js.org documentation](https://p5js.org/reference/#/p5/setId)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/id)
 setId :: Element -> String -> Effect Unit
 setId = runFn2 setIdImpl
 

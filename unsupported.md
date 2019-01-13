@@ -1,4 +1,4 @@
-Progress: implemented **237** out of **320** methods
+Progress: implemented **237** out of **319** methods
 ```
 append :: P5 -> Unsupported(Array) -> Unsupported(Any) -> Unsupported(Array)
 ```
@@ -35,10 +35,6 @@ copy2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Int -> Int -
 createCamera :: P5 -> Unsupported(p5.Camera)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/createCamera)
-```
-createCanvas :: P5 -> Number -> Number -> (Maybe CreateCanvasRenderer) -> Unsupported(p5.Renderer)
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/createCanvas)
 ```
 createGraphics :: P5 -> Number -> Number -> (Maybe CreateGraphicsRenderer) -> Unsupported(p5.Graphics)
 ```

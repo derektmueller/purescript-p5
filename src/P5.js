@@ -44,8 +44,11 @@ exports.drawImpl = function(p) {
 exports.createCanvasImpl = function(p) {
   return function(w) {
     return function(h) {
-      return function() {
-        return p.createCanvas(w, h);
+      return function(r) {
+        return function() {
+          return p.createCanvas(
+            w, h, r.value0 ? r.value0 : undefined);
+        };
       };
     };
   };

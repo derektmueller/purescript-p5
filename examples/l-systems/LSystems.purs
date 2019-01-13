@@ -121,7 +121,7 @@ main mAppState = do
   case mAppState of
     Nothing ->
       setup p do
-        e <- createCanvas p (toNumber w) (toNumber h)
+        e <- createCanvas p (toNumber w) (toNumber h) Nothing
         background4 p 255.0 Nothing
         stroke5 p 0.0 0.0 0.0 (Just 255.0)
         setId e "lSystems"

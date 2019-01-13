@@ -758,8 +758,6 @@ cos p5 angle = runFn2 cosImpl p5 angle
 
 -- TODO: unsupported: createCamera :: P5 -> Unsupported(p5.Camera)
 
--- TODO: unsupported: createCanvas :: P5 -> Number -> Number -> (Maybe CreateCanvasRenderer) -> Unsupported(p5.Renderer)
-
 -- TODO: unsupported: createGraphics :: P5 -> Number -> Number -> (Maybe CreateGraphicsRenderer) -> Unsupported(p5.Graphics)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/createImage)

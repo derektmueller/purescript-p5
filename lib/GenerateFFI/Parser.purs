@@ -239,6 +239,7 @@ instance decodeP5Doc :: Decode P5Doc where
           , "noise"
           , "random2"
           , "randomGaussian"
+          , "createCanvas"
           ]
         removeBlacklisted = filter
           (\i -> not (i.name `elem` methodBlacklist))

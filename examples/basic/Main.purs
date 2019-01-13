@@ -34,7 +34,7 @@ main mAppState = do
         , e: "#9d7f38"
         }
   setup p do
-    _ <- createCanvas p w h
+    _ <- createCanvas p w h Nothing
     pure unit
 
   draw p do
