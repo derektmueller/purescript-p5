@@ -4,11 +4,17 @@ p5.js bindings for PureScript
 
 *Disclaimer: This project has just been started and the API is still very unstable.*
 
-* [Module documentation](generated-docs/P5.md)
+## Documentation
+
+Module documentation is [published on Pursuit](https://pursuit.purescript.org/packages/purescript-p5).
 
 There are still a large percentage of p5.js functions that have not yet been implemented (see [unsupported.md](unsupported.md)).
 
 ## Installation
+
+```
+bower install purescript-p5
+```
 
 This library depends on p5.js. This dependency may be satisfied by installing the NPM [p5.js package](https://www.npmjs.com/package/p5).
 
