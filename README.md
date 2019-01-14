@@ -49,11 +49,9 @@ Completed:
 
 TODO:
   * generate methods for classes other than p5 (e.g. p5.Vector, p5.Image)
-  * organize methods into modules
   * export easier-to-use interface to hide complicated signatures in generated interface
   * support functions with greater than 10 arguments (the library uses runFn, which is only defined for functions of at most 10 arguments) 
   * need something like Haskell's randT so that drawings can be easily seeded
-  * move generated functions out of Generated module so that API doc doesn't separate generated and non-generated functions
 
 ## References
 
