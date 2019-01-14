@@ -20,7 +20,6 @@ foreign import data Element :: Type
 foreign import data Vector :: Type
 foreign import data Color :: Type
 foreign import data Image :: Type
-
 foreign import data Graphics :: Type
 foreign import data MediaElement :: Type
 foreign import data Shader :: Type

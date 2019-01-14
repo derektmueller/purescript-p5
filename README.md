@@ -42,7 +42,7 @@ With webpack dev server running, examples can be viewed in a browser by visiting
 
 ## Project Status
 
-Most of the FFI as been auto-generated from the p5.js YUIDoc. There are still a large number of functions that couldn't be auto-generated, sometimes because of missing type information in the YUIDoc. These might have to be written by hand.
+Most of the FFI as been auto-generated from the p5.js YUIDoc. Some functions couldn't be auto-generated, sometimes because of missing type information in the YUIDoc. These might have to be written by hand.
 
 Completed:
   * wrappers for most methods defined on the p5 class
