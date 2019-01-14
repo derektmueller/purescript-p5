@@ -7,6 +7,8 @@ module GenerateFFI.Parser
   , Param
   , ReturnType
   , ClassItem
+  , getModuleNames
+  , filterByModuleName
   , isUnsupported
   , typeIsMaybe
   , typeIsOr
@@ -93,7 +95,8 @@ type ClassItem =
     itemType :: Maybe String,
     className :: String,
     params :: Maybe (Array Param),
-    return :: ReturnType
+    return :: ReturnType,
+    p5Module :: String
   }
 
 type P5Method = 
@@ -103,7 +106,8 @@ type P5Method =
     itemType :: Maybe String,
     className :: String,
     params :: Array Param,
-    return :: ReturnType
+    return :: ReturnType,
+    p5Module :: String
   }
 
 newtype P5Doc = P5Doc (Array P5Method)
@@ -231,6 +235,15 @@ getConstantsRegex = do
     Right regex -> pure regex
     Left e -> fail $ ForeignError e
 
+getModuleNames :: P5Doc -> Array String
+getModuleNames (P5Doc methods) = nub $ do
+  m <- methods
+  pure m.p5Module
+
+filterByModuleName :: String -> P5Doc -> P5Doc
+filterByModuleName moduleName (P5Doc methods) = 
+  P5Doc $ filter (\m -> m.p5Module == moduleName) methods
+
 classItemToMethod :: ClassItem -> F P5Method
 classItemToMethod i = do
   case i.name of  
@@ -244,6 +257,7 @@ classItemToMethod i = do
         , itemType: i.itemType 
         , className: i.className 
         , return: i.return 
+        , p5Module: i.p5Module 
         }
     Nothing -> fail $ ForeignError "Missing method name"
 
@@ -314,6 +328,11 @@ instance decodeP5Doc :: Decode P5Doc where
               GT -> GT 
               EQ -> compare (length i1.params) (length i2.params)
           )
+        sortByModule :: Array P5Method -> Array P5Method
+        sortByModule = sortBy
+          (\i1 i2 -> 
+            compare i1.p5Module i2.p5Module
+          )
     classItems <- (value ! "classitems") 
       >>= readArray
       >>= traverse (\x -> do
@@ -358,6 +377,8 @@ instance decodeP5Doc :: Decode P5Doc where
               p5Type: maybe P5Effect identity mP5Type
             }
           )
+        p5Module <- (x ! "module") 
+          >>= readString
         pure $ {
             name: name,
             description: description,
@@ -369,12 +390,14 @@ instance decodeP5Doc :: Decode P5Doc where
                 { description: "Unspecified effects"
                 , p5Type: P5Effect }
                 identity
-                mReturn
+                mReturn,
+            p5Module
           })
     --trace (show (classItems :: Array ClassItem)) $ \_ -> do
     methods <- traverse classItemToMethod (onlyP5Methods classItems)
     pure $ P5Doc 
       ((removeBlacklisted
+        <<< sortByModule
         <<< suffixDupMethods
         <<< sortByNameAndParamLength
         <<< removeFnsWithTooManyArgs

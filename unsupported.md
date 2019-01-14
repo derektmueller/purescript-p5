@@ -4,13 +4,13 @@ createStringDict :: P5 -> Unsupported(Object) -> StringDict
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/createStringDict)
 ```
-downloadFile :: P5 -> UnsupportedProduct(Unsupported(Blob)|String) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/downloadFile)
-```
 getURLParams :: P5 -> Unsupported(Object)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/getURLParams)
+```
+downloadFile :: P5 -> UnsupportedProduct(Unsupported(Blob)|String) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
+```
+[p5js.org documentation](https://p5js.org/reference/#/p5/downloadFile)
 ```
 httpDo :: P5 -> String -> Unsupported(Object) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Promise)
 ```
@@ -48,10 +48,6 @@ loadBytes :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> U
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadBytes)
 ```
-loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Image
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
-```
 loadJSON :: P5 -> String -> (Effect Unit) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadJSON)
@@ -63,14 +59,6 @@ loadJSON2 :: P5 -> String -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect U
 loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadJSON)
-```
-loadModel :: P5 -> String -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Geometry
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/loadModel)
-```
-loadModel2 :: P5 -> String -> Boolean -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Geometry
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/loadModel)
 ```
 loadTable :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 ```
@@ -84,13 +72,17 @@ loadXML :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Uns
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/loadXML)
 ```
-random :: P5 -> Unsupported(Array) -> Unsupported(*)
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/random)
-```
 save :: P5 -> UnsupportedProduct(Unsupported(Object)|String) -> (Maybe String) -> (Maybe BooleanOrString) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/save)
+```
+saveJSON :: P5 -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object)) -> String -> (Maybe Boolean) -> (Effect Unit)
+```
+[p5js.org documentation](https://p5js.org/reference/#/p5/saveJSON)
+```
+loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Image
+```
+[p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
 ```
 saveCanvas2 :: P5 -> UnsupportedProduct(Unsupported(HTMLCanvasElement)|Element) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 ```
@@ -100,13 +92,21 @@ saveFrames :: P5 -> String -> String -> Number -> Number -> Unsupported(Function
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/saveFrames)
 ```
-saveJSON :: P5 -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object)) -> String -> (Maybe Boolean) -> (Effect Unit)
+random :: P5 -> Unsupported(Array) -> Unsupported(*)
 ```
-[p5js.org documentation](https://p5js.org/reference/#/p5/saveJSON)
+[p5js.org documentation](https://p5js.org/reference/#/p5/random)
 ```
 setAttributes :: P5 -> Unsupported(Object) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/setAttributes)
+```
+loadModel :: P5 -> String -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Geometry
+```
+[p5js.org documentation](https://p5js.org/reference/#/p5/loadModel)
+```
+loadModel2 :: P5 -> String -> Boolean -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Geometry
+```
+[p5js.org documentation](https://p5js.org/reference/#/p5/loadModel)
 ```
 text :: P5 -> UnsupportedProduct(UnsupportedProduct(UnsupportedProduct(UnsupportedProduct(Unsupported(Array)|Boolean)|Number)|Unsupported(Object))|String) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```

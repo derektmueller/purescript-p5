@@ -205,17 +205,20 @@ generateMethod x = do
         <> methodBody
         <> "\n"
 
-generateModuleHeader :: Array P5Method -> Either String String
-generateModuleHeader xs = do
-  types <- Right (<>) 
-    <*> generateProductTypes xs 
-    <*> generateConstantTypes xs
+generateModuleHeader :: 
+  String -> Array P5Method -> Either String String
+generateModuleHeader moduleName xs = do
+  types <- -- Right (<>) 
+    -- <*> generateProductTypes xs 
+    -- <*> 
+    generateConstantTypes xs
   let methodNames = getMethodName <$> xs
-  pure $ "module P5.Generated\n  ( "
+  pure $ "module P5." <> moduleName <> "\n  ( "
    <> intercalate 
     "\n  , " 
-    (((\x -> (x <> "(..)")) <$> types)
-      <> methodNames)
+    methodNames
+    --(((\x -> (x <> "(..)")) <$> types)
+      -- <> methodNames)
    <> "\n  ) where"
 
 productTypeToArray :: P5Type -> Maybe (Array P5Type)
@@ -307,41 +310,43 @@ generateConstantTypes xs = do
 generateTypeDefinitions :: Array P5Method 
   -> Either String (Array String)
 generateTypeDefinitions xs = do
-  productTypes <- getUniqueOrTypes xs
-  productTypeDefs <- traverse 
-    ((note "Failed to generate type definition for product") 
-      <<< generateProductTypeDef) productTypes
+--  productTypes <- getUniqueOrTypes xs
+--  productTypeDefs <- traverse 
+--    ((note "Failed to generate type definition for product") 
+--      <<< generateProductTypeDef) productTypes
   constantTypes <- getUniqueConstantTypes xs
   constantTypeDefs <- traverse 
     ((note "Failed to generate type definition for constant") 
       <<< generateConstantTypeDef) constantTypes
-  pure $ productTypeDefs <> (nub constantTypeDefs)
+  pure $ 
+    --productTypeDefs <> 
+    (nub constantTypeDefs)
 
-generateP5 :: P5Doc -> Either String String
-generateP5 (P5Doc doc) = do
+generateP5 :: String -> P5Doc -> Either String String
+generateP5 moduleName (P5Doc doc) = do
   let imports = 
           [ "import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)"
           , "import Effect (Effect)"
           , "import Prelude (Unit)"
-          , "import P5.Types (P5, Vector, Color, Element, Image, Graphics, MediaElement, Shader, Camera, Table, PrintWriter, StringDict, Font, Geometry)"
+          , "import P5.Types"
           , "import Foreign (Foreign, unsafeToForeign)"
           , "import Data.Maybe (Maybe, maybe)"
           , "import Foreign.NullOrUndefined (undefined)"
         ]
       supported = filter (\x -> not (isUnsupported x)) doc
-  types <- generateTypeDefinitions supported
+  --types <- generateTypeDefinitions supported
   methods <- (traverse generateMethod doc)
   foreignImports <- (traverse generateForeignImport supported)
-  header <- generateModuleHeader supported
+  header <- generateModuleHeader moduleName supported
   pure $ header
     <> "\n" 
     <> "\n" 
     <> (intercalate "\n" imports)
     <> "\n" 
     <> "\n" 
-    <> (intercalate "\n" types)
-    <> "\n" 
-    <> "\n" 
+--    <> (intercalate "\n" types)
+--    <> "\n" 
+--    <> "\n" 
     <> (intercalate "\n" foreignImports)
     <> "\n" 
     <> "\n" 

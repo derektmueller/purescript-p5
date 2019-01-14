@@ -11,17 +11,40 @@ module P5
   , randomGaussian
   , CreateCanvasRenderer(..)
   , module P5.Types
-  , module P5.Generated
+  , module P5.Color
+  , module P5.Data
+  , module P5.Environment
+  , module P5.Events
+  , module P5.IO
+  , module P5.Image
+  , module P5.LightsAndCamera
+  , module P5.Math
+  , module P5.Rendering
+  , module P5.Shape
+  , module P5.Structure
+  , module P5.Transform
+  , module P5.Typography
   ) where
 
 import Effect (Effect)
 import Effect.Aff (Aff)
 import Prelude (Unit)
 import Data.Maybe (Maybe)
-import Data.Function.Uncurried (Fn2, runFn2)
-import P5.Types (Element, P5, Vector)
-import P5.Generated 
-import Data.Function.Uncurried (Fn3, Fn4, runFn3, runFn4)
+import Data.Function.Uncurried (Fn2, Fn3, Fn4, runFn2, runFn3, runFn4)
+import P5.Types
+import P5.Color
+import P5.Data
+import P5.Environment
+import P5.Events
+import P5.IO
+import P5.Image
+import P5.LightsAndCamera
+import P5.Math
+import P5.Rendering
+import P5.Shape
+import P5.Structure
+import P5.Transform
+import P5.Typography
 
 data CreateCanvasRenderer = CREATE_CANVAS_RENDERER_P2D | CREATE_CANVAS_RENDERER_WEBGL
 
