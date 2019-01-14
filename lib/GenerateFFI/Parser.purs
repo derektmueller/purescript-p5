@@ -51,12 +51,23 @@ type ParamName = String
 data P5Type = 
   P5P5
   | P5Boolean 
+  | P5Camera 
   | P5Effect 
+  | P5Element
+  | P5Graphics
   | P5Integer 
+  | P5IntegerArray
+  | P5MediaElement
   | P5Number 
   | P5NumberArray
+  | P5PrintWriter
+  | P5StringDict
+  | P5Font
+  | P5Geometry
+  | P5Shader 
   | P5String 
   | P5StringArray
+  | P5Table
   | P5Or P5Type P5Type
   | P5Maybe P5Type
   | P5Vector
@@ -173,14 +184,25 @@ readP5Type description mFnName mName f = do
         \str' ->
           case str' of
             "Boolean" -> pure P5Boolean
+            "p5.Camera" -> pure P5Camera
+            "p5.Graphics" -> pure P5Graphics
             "Integer" -> pure P5Integer
+            "Integer[]" -> pure P5IntegerArray
+            "p5.MediaElement" -> pure P5MediaElement
             "Number" -> pure P5Number
             "Number[]" -> pure P5NumberArray
+            "p5.Shader" -> pure P5Shader
+            "p5.PrintWriter" -> pure P5PrintWriter
+            "p5.StringDict" -> pure P5StringDict
+            "p5.Font" -> pure P5Font
+            "p5.Geometry" -> pure P5Geometry
             "String" -> pure P5String
             "String[]" -> pure P5StringArray
+            "p5.Table" -> pure P5Table
             "p5.Vector" -> pure P5Vector
             "p5.Color" -> pure P5Color
             "p5.Image" -> pure P5Image
+            "p5.Element" -> pure P5Element
             "Function" -> pure P5Effect
             "Constant" -> do
               readConstantType description mFnName mName 
@@ -234,12 +256,32 @@ instance decodeP5Doc :: Decode P5Doc where
         onlyPublic = filter
           (\i -> (test privateMethodRegex i.name) == false)
         methodBlacklist = 
-          [ "draw"
-          , "setup"
-          , "noise"
-          , "random2"
-          , "randomGaussian"
-          , "createCanvas"
+          [ "append" -- deprecated
+          , "arrayCopy" -- deprecated
+          , "arrayCopy2" -- deprecated
+          , "boolean" -- useless
+          , "byte2" -- useless - use fmap
+          , "char2" -- useless - use fmap
+          , "concat" -- deprecated
+          , "createCanvas" -- implemented
+          , "createNumberDict" -- unsafe
+          , "createNumberDict2" -- unsafe
+          , "draw" --implemented
+          , "join" -- useless - use array method instead
+          , "int" -- useless - use fmap
+          , "nf2" -- useless -- use fmap
+          , "noise" --implemented
+          , "print" -- useless -- use log
+          , "random2" --implemented
+          , "randomGaussian" --implemented
+          , "reverse" -- deprecated
+          , "setup" -- implemented
+          , "shorten" -- deprecated
+          , "shuffle" -- deprecated
+          , "sort" -- deprecated
+          , "splice" -- deprecated
+          , "subset" -- deprecated
+          , "trim2" -- useless - use fmap
           ]
         removeBlacklisted = filter
           (\i -> not (i.name `elem` methodBlacklist))

@@ -2,17 +2,21 @@ module P5.Generated
   ( ArrayNumberOrStringOrColor(..)
   , BooleanOrNumberOrString(..)
   , NumberOrString(..)
+  , ElementOrImage(..)
   , CursorTypeOrString(..)
   , ArrayNumberOrImage(..)
   , IntOrString(..)
   , ArrayNumberOrVector(..)
   , NumberOrArrayNumberOrVector(..)
+  , NumberOrArrayNumberOrColorOrImage(..)
+  , GraphicsOrImageOrMediaElement(..)
   , AngleMode(..)
   , ArcMode(..)
   , BeginShapeKind(..)
   , BlendMode(..)
   , BlendMode(..)
   , ColorMode(..)
+  , CreateGraphicsRenderer(..)
   , CursorType(..)
   , DebugMode(..)
   , EllipseMode(..)
@@ -75,9 +79,15 @@ module P5.Generated
   , cone
   , constrain
   , copy
+  , copy2
   , cos
+  , createCamera
+  , createGraphics
   , createImage
+  , createShader
+  , createStringDict2
   , createVector
+  , createWriter
   , cursor
   , curve
   , curveDetail
@@ -104,6 +114,7 @@ module P5.Generated
   , displayDensity
   , dist
   , dist2
+  , doubleClicked
   , ellipse
   , ellipse2
   , ellipseMode
@@ -130,6 +141,8 @@ module P5.Generated
   , hex2
   , hour
   , hue
+  , image
+  , image2
   , imageMode
   , int2
   , keyIsDown
@@ -141,7 +154,9 @@ module P5.Generated
   , lightness
   , line
   , line2
+  , loadFont
   , loadPixels
+  , loadShader
   , loadStrings
   , log
   , loop
@@ -155,12 +170,21 @@ module P5.Generated
   , min
   , min2
   , minute
+  , model
   , month
+  , mouseClicked
+  , mouseDragged
+  , mouseMoved
+  , mousePressed
+  , mouseReleased
+  , mouseWheel
   , nf
   , nfc
+  , nfc2
   , nfp
   , nfp2
   , nfs
+  , nfs2
   , noCanvas
   , noCursor
   , noDebugMode
@@ -209,12 +233,16 @@ module P5.Generated
   , saturation
   , saveCanvas
   , saveStrings
+  , saveTable
   , scale
   , scale2
   , second
+  , set
   , setAttributes2
+  , setCamera
   , setMoveThreshold
   , setShakeThreshold
+  , shader
   , shearX
   , shearY
   , sin
@@ -226,6 +254,7 @@ module P5.Generated
   , splitTokens
   , sq
   , sqrt
+  , str
   , stroke
   , stroke2
   , stroke3
@@ -245,18 +274,24 @@ module P5.Generated
   , textStyle
   , textStyle2
   , textWidth
+  , texture
   , tint
   , tint2
   , tint3
   , tint4
   , tint5
   , torus
+  , touchEnded
+  , touchMoved
+  , touchStarted
   , translate
   , translate2
   , triangle
   , trim
   , unchar
+  , unchar2
   , unhex
+  , unhex2
   , updatePixels
   , vertex
   , vertex2
@@ -267,7 +302,7 @@ module P5.Generated
 import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)
 import Effect (Effect)
 import Prelude (Unit)
-import P5.Types (P5, Vector, Color, Image)
+import P5.Types (P5, Vector, Color, Element, Image, Graphics, MediaElement, Shader, Camera, Table, PrintWriter, StringDict, Font, Geometry)
 import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
@@ -275,16 +310,20 @@ import Foreign.NullOrUndefined (undefined)
 data ArrayNumberOrStringOrColor = ArrayNumberOrStringOrColorArrayNumber (Array Number) | ArrayNumberOrStringOrColorString String | ArrayNumberOrStringOrColorColor Color
 data BooleanOrNumberOrString = BooleanOrNumberOrStringBoolean Boolean | BooleanOrNumberOrStringNumber Number | BooleanOrNumberOrStringString String
 data NumberOrString = NumberOrStringNumber Number | NumberOrStringString String
+data ElementOrImage = ElementOrImageElement Element | ElementOrImageImage Image
 data CursorTypeOrString = CursorTypeOrStringCursorType CursorType | CursorTypeOrStringString String
 data ArrayNumberOrImage = ArrayNumberOrImageArrayNumber (Array Number) | ArrayNumberOrImageImage Image
 data IntOrString = IntOrStringInt Int | IntOrStringString String
 data ArrayNumberOrVector = ArrayNumberOrVectorArrayNumber (Array Number) | ArrayNumberOrVectorVector Vector
 data NumberOrArrayNumberOrVector = NumberOrArrayNumberOrVectorNumber Number | NumberOrArrayNumberOrVectorArrayNumber (Array Number) | NumberOrArrayNumberOrVectorVector Vector
+data NumberOrArrayNumberOrColorOrImage = NumberOrArrayNumberOrColorOrImageNumber Number | NumberOrArrayNumberOrColorOrImageArrayNumber (Array Number) | NumberOrArrayNumberOrColorOrImageColor Color | NumberOrArrayNumberOrColorOrImageImage Image
+data GraphicsOrImageOrMediaElement = GraphicsOrImageOrMediaElementGraphics Graphics | GraphicsOrImageOrMediaElementImage Image | GraphicsOrImageOrMediaElementMediaElement MediaElement
 data AngleMode = ANGLE_MODE_RADIANS | ANGLE_MODE_DEGREES
 data ArcMode = ARC_MODE_CHORD | ARC_MODE_PIE | ARC_MODE_OPEN
 data BeginShapeKind = BEGIN_SHAPE_KIND_POINTS | BEGIN_SHAPE_KIND_LINES | BEGIN_SHAPE_KIND_TRIANGLES | BEGIN_SHAPE_KIND_TRIANGLE_FAN | BEGIN_SHAPE_KIND_TRIANGLE_STRIP | BEGIN_SHAPE_KIND_QUADS | BEGIN_SHAPE_KIND_QUAD_STRIP
 data BlendMode = BLEND_MODE_BLEND | BLEND_MODE_DARKEST | BLEND_MODE_LIGHTEST | BLEND_MODE_DIFFERENCE | BLEND_MODE_MULTIPLY | BLEND_MODE_EXCLUSION | BLEND_MODE_SCREEN | BLEND_MODE_REPLACE | BLEND_MODE_OVERLAY | BLEND_MODE_HARD_LIGHT | BLEND_MODE_SOFT_LIGHT | BLEND_MODE_DODGE | BLEND_MODE_BURN | BLEND_MODE_ADD | BLEND_MODE_NORMAL
 data ColorMode = COLOR_MODE_RGB | COLOR_MODE_HSB | COLOR_MODE_HSL
+data CreateGraphicsRenderer = CREATE_GRAPHICS_RENDERER_WEBGL
 data CursorType = CURSOR_TYPE_ARROW | CURSOR_TYPE_CROSS | CURSOR_TYPE_HAND | CURSOR_TYPE_MOVE | CURSOR_TYPE_TEXT | CURSOR_TYPE_WAIT
 data DebugMode = DEBUG_MODE_GRID | DEBUG_MODE_AXES
 data EllipseMode = ELLIPSE_MODE_CENTER | ELLIPSE_MODE_RADIUS | ELLIPSE_MODE_CORNER | ELLIPSE_MODE_CORNERS
@@ -348,9 +387,15 @@ foreign import colorMode2Impl :: Fn6 P5 ColorMode Number Number Number (Maybe Nu
 foreign import coneImpl :: Fn6 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Maybe Boolean) (Effect Unit)
 foreign import constrainImpl :: Fn4 P5 Number Number Number Number
 foreign import copyImpl :: Fn9 P5 Int Int Int Int Int Int Int Int (Effect Unit)
+foreign import copy2Impl :: Fn10 P5 ElementOrImage Int Int Int Int Int Int Int Int (Effect Unit)
 foreign import cosImpl :: Fn2 P5 Number Number
+foreign import createCameraImpl :: Fn1 P5 Camera
+foreign import createGraphicsImpl :: Fn4 P5 Number Number (Maybe CreateGraphicsRenderer) Graphics
 foreign import createImageImpl :: Fn3 P5 Int Int Image
+foreign import createShaderImpl :: Fn3 P5 String String Shader
+foreign import createStringDict2Impl :: Fn3 P5 String String StringDict
 foreign import createVectorImpl :: Fn4 P5 (Maybe Number) (Maybe Number) (Maybe Number) Vector
+foreign import createWriterImpl :: Fn3 P5 String (Maybe String) PrintWriter
 foreign import cursorImpl :: Fn4 P5 CursorTypeOrString (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import curveImpl :: Fn9 P5 Number Number Number Number Number Number Number Number (Effect Unit)
 foreign import curveDetailImpl :: Fn2 P5 Number (Effect Unit)
@@ -377,6 +422,7 @@ foreign import directionalLight4Impl :: Fn7 P5 Number Number Number Number Numbe
 foreign import displayDensityImpl :: Fn1 P5 Number
 foreign import distImpl :: Fn5 P5 Number Number Number Number Number
 foreign import dist2Impl :: Fn7 P5 Number Number Number Number Number Number Number
+foreign import doubleClickedImpl :: Fn1 P5 (Effect Unit)
 foreign import ellipseImpl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import ellipse2Impl :: Fn6 P5 Number Number Number Number Int (Effect Unit)
 foreign import ellipseModeImpl :: Fn2 P5 EllipseMode (Effect Unit)
@@ -403,6 +449,8 @@ foreign import hexImpl :: Fn3 P5 Number (Maybe Number) String
 foreign import hex2Impl :: Fn3 P5 (Array Number) (Maybe Number) (Array String)
 foreign import hourImpl :: Fn1 P5 Int
 foreign import hueImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
+foreign import imageImpl :: Fn6 P5 ElementOrImage Number Number (Maybe Number) (Maybe Number) (Effect Unit)
+foreign import image2Impl :: Fn10 P5 ElementOrImage Number Number Number Number Number Number (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import imageModeImpl :: Fn2 P5 ImageMode (Effect Unit)
 foreign import int2Impl :: Fn3 P5 BooleanOrNumberOrString (Maybe Int) Number
 foreign import keyIsDownImpl :: Fn2 P5 Number Boolean
@@ -414,7 +462,9 @@ foreign import lerpColorImpl :: Fn4 P5 Color Color Number Color
 foreign import lightnessImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import lineImpl :: Fn5 P5 Number Number Number Number (Effect Unit)
 foreign import line2Impl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
+foreign import loadFontImpl :: Fn4 P5 String (Maybe (Effect Unit)) (Maybe (Effect Unit)) Font
 foreign import loadPixelsImpl :: Fn1 P5 (Effect Unit)
+foreign import loadShaderImpl :: Fn3 P5 (Maybe String) (Maybe String) Shader
 foreign import loadStringsImpl :: Fn4 P5 String (Maybe (Effect Unit)) (Maybe (Effect Unit)) (Array String)
 foreign import logImpl :: Fn2 P5 Number Number
 foreign import loopImpl :: Fn1 P5 (Effect Unit)
@@ -428,12 +478,21 @@ foreign import millisImpl :: Fn1 P5 Number
 foreign import minImpl :: Fn2 P5 (Array Number) Number
 foreign import min2Impl :: Fn3 P5 Number Number Number
 foreign import minuteImpl :: Fn1 P5 Int
+foreign import modelImpl :: Fn2 P5 Geometry (Effect Unit)
 foreign import monthImpl :: Fn1 P5 Int
+foreign import mouseClickedImpl :: Fn1 P5 (Effect Unit)
+foreign import mouseDraggedImpl :: Fn1 P5 (Effect Unit)
+foreign import mouseMovedImpl :: Fn1 P5 (Effect Unit)
+foreign import mousePressedImpl :: Fn1 P5 (Effect Unit)
+foreign import mouseReleasedImpl :: Fn1 P5 (Effect Unit)
+foreign import mouseWheelImpl :: Fn1 P5 (Effect Unit)
 foreign import nfImpl :: Fn4 P5 NumberOrString (Maybe IntOrString) (Maybe IntOrString) String
 foreign import nfcImpl :: Fn3 P5 NumberOrString (Maybe IntOrString) String
+foreign import nfc2Impl :: Fn3 P5 (Array Number) (Maybe IntOrString) (Array String)
 foreign import nfpImpl :: Fn4 P5 Number (Maybe Int) (Maybe Int) String
 foreign import nfp2Impl :: Fn4 P5 (Array Number) (Maybe Int) (Maybe Int) (Array String)
 foreign import nfsImpl :: Fn4 P5 Number (Maybe Int) (Maybe Int) String
+foreign import nfs2Impl :: Fn4 P5 (Array Int) (Maybe Int) (Maybe Int) (Array String)
 foreign import noCanvasImpl :: Fn1 P5 (Effect Unit)
 foreign import noCursorImpl :: Fn1 P5 (Effect Unit)
 foreign import noDebugModeImpl :: Fn1 P5 (Effect Unit)
@@ -482,12 +541,16 @@ foreign import roundImpl :: Fn2 P5 Number Int
 foreign import saturationImpl :: Fn2 P5 ArrayNumberOrStringOrColor Number
 foreign import saveCanvasImpl :: Fn3 P5 (Maybe String) (Maybe String) (Effect Unit)
 foreign import saveStringsImpl :: Fn4 P5 (Array String) String (Maybe String) (Effect Unit)
+foreign import saveTableImpl :: Fn4 P5 Table String (Maybe String) (Effect Unit)
 foreign import scaleImpl :: Fn2 P5 ArrayNumberOrVector (Effect Unit)
 foreign import scale2Impl :: Fn4 P5 NumberOrArrayNumberOrVector (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import secondImpl :: Fn1 P5 Int
+foreign import setImpl :: Fn4 P5 Number Number NumberOrArrayNumberOrColorOrImage (Effect Unit)
 foreign import setAttributes2Impl :: Fn3 P5 String Boolean (Effect Unit)
+foreign import setCameraImpl :: Fn2 P5 Camera (Effect Unit)
 foreign import setMoveThresholdImpl :: Fn2 P5 Number (Effect Unit)
 foreign import setShakeThresholdImpl :: Fn2 P5 Number (Effect Unit)
+foreign import shaderImpl :: Fn2 P5 (Maybe Shader) (Effect Unit)
 foreign import shearXImpl :: Fn2 P5 Number (Effect Unit)
 foreign import shearYImpl :: Fn2 P5 Number (Effect Unit)
 foreign import sinImpl :: Fn2 P5 Number Number
@@ -499,6 +562,7 @@ foreign import splitImpl :: Fn3 P5 String String (Array String)
 foreign import splitTokensImpl :: Fn3 P5 String (Maybe String) (Array String)
 foreign import sqImpl :: Fn2 P5 Number Number
 foreign import sqrtImpl :: Fn2 P5 Number Number
+foreign import strImpl :: Fn2 P5 BooleanOrNumberOrString String
 foreign import strokeImpl :: Fn2 P5 String (Effect Unit)
 foreign import stroke2Impl :: Fn2 P5 (Array Number) (Effect Unit)
 foreign import stroke3Impl :: Fn2 P5 Color (Effect Unit)
@@ -518,18 +582,24 @@ foreign import textSize2Impl :: Fn2 P5 Number (Effect Unit)
 foreign import textStyleImpl :: Fn1 P5 String
 foreign import textStyle2Impl :: Fn2 P5 TextStyle (Effect Unit)
 foreign import textWidthImpl :: Fn2 P5 String Number
+foreign import textureImpl :: Fn2 P5 GraphicsOrImageOrMediaElement (Effect Unit)
 foreign import tintImpl :: Fn2 P5 String (Effect Unit)
 foreign import tint2Impl :: Fn2 P5 (Array Number) (Effect Unit)
 foreign import tint3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import tint4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import tint5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 foreign import torusImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Int) (Maybe Int) (Effect Unit)
+foreign import touchEndedImpl :: Fn1 P5 (Effect Unit)
+foreign import touchMovedImpl :: Fn1 P5 (Effect Unit)
+foreign import touchStartedImpl :: Fn1 P5 (Effect Unit)
 foreign import translateImpl :: Fn2 P5 Vector (Effect Unit)
 foreign import translate2Impl :: Fn4 P5 Number Number (Maybe Number) (Effect Unit)
 foreign import triangleImpl :: Fn7 P5 Number Number Number Number Number Number (Effect Unit)
 foreign import trimImpl :: Fn2 P5 String String
 foreign import uncharImpl :: Fn2 P5 String Number
+foreign import unchar2Impl :: Fn2 P5 (Array String) (Array Number)
 foreign import unhexImpl :: Fn2 P5 String Number
+foreign import unhex2Impl :: Fn2 P5 (Array String) (Array Number)
 foreign import updatePixelsImpl :: Fn5 P5 (Maybe Number) (Maybe Number) (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import vertexImpl :: Fn3 P5 Number Number (Effect Unit)
 foreign import vertex2Impl :: Fn6 P5 Number Number Number (Maybe Number) (Maybe Number) (Effect Unit)
@@ -580,8 +650,6 @@ ambientMaterial2 p5 v1 v2 v3 a = runFn5 ambientMaterial2Impl p5 v1 v2 v3 a
 angleMode :: P5 -> AngleMode -> (Effect Unit)
 angleMode p5 mode = runFn2 angleModeImpl p5 mode
 
--- TODO: unsupported: append :: P5 -> Unsupported(Array) -> Unsupported(Any) -> Unsupported(Array)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/applyMatrix)
 applyMatrix :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 applyMatrix p5 a b c d e f = runFn7 applyMatrixImpl p5 a b c d e f
@@ -589,10 +657,6 @@ applyMatrix p5 a b c d e f = runFn7 applyMatrixImpl p5 a b c d e f
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/arc)
 arc :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe ArcMode) -> (Maybe Number) -> (Effect Unit)
 arc p5 x y w h start stop mode detail = runFn9 arcImpl p5 x y w h start stop mode detail
-
--- TODO: unsupported: arrayCopy :: P5 -> Unsupported(Array) -> Unsupported(Array) -> (Maybe Int) -> (Effect Unit)
-
--- TODO: unsupported: arrayCopy2 :: P5 -> Unsupported(Array) -> Int -> Unsupported(Array) -> Int -> Int -> (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/asin)
 asin :: P5 -> Number -> Number
@@ -674,8 +738,6 @@ blendMode p5 mode = runFn2 blendModeImpl p5 mode
 blue :: P5 -> ArrayNumberOrStringOrColor -> Number
 blue p5 color = runFn2 blueImpl p5 color
 
--- TODO: unsupported: boolean :: P5 -> UnsupportedProduct(UnsupportedProduct(UnsupportedProduct(Unsupported(Array)|Boolean)|Number)|String) -> Boolean
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/box)
 box :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
 box p5 width height depth detailX detailY = runFn6 boxImpl p5 width height depth detailX detailY
@@ -688,8 +750,6 @@ brightness p5 color = runFn2 brightnessImpl p5 color
 byte :: P5 -> BooleanOrNumberOrString -> Number
 byte p5 n = runFn2 byteImpl p5 n
 
--- TODO: unsupported: byte2 :: P5 -> Unsupported(Array) -> (Array Number)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/camera)
 camera :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 camera p5 x y z centerX centerY centerZ upX upY upZ = runFn10 cameraImpl p5 x y z centerX centerY centerZ upX upY upZ
@@ -701,8 +761,6 @@ ceil p5 n = runFn2 ceilImpl p5 n
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/char)
 char :: P5 -> NumberOrString -> String
 char p5 n = runFn2 charImpl p5 n
-
--- TODO: unsupported: char2 :: P5 -> Unsupported(Array) -> (Array String)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/clear)
 clear :: P5 -> (Effect Unit)
@@ -736,8 +794,6 @@ colorMode p5 mode max = runFn3 colorModeImpl p5 mode max
 colorMode2 :: P5 -> ColorMode -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 colorMode2 p5 mode max1 max2 max3 maxA = runFn6 colorMode2Impl p5 mode max1 max2 max3 maxA
 
--- TODO: unsupported: concat :: P5 -> Unsupported(Array) -> Unsupported(Array) -> Unsupported(Array)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/cone)
 cone :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Maybe Boolean) -> (Effect Unit)
 cone p5 radius height detailX detailY cap = runFn6 coneImpl p5 radius height detailX detailY cap
@@ -750,35 +806,43 @@ constrain p5 n low high = runFn4 constrainImpl p5 n low high
 copy :: P5 -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
 copy p5 sx sy sw sh dx dy dw dh = runFn9 copyImpl p5 sx sy sw sh dx dy dw dh
 
--- TODO: unsupported: copy2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/copy)
+copy2 :: P5 -> ElementOrImage -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> Int -> (Effect Unit)
+copy2 p5 srcImage sx sy sw sh dx dy dw dh = runFn10 copy2Impl p5 srcImage sx sy sw sh dx dy dw dh
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/cos)
 cos :: P5 -> Number -> Number
 cos p5 angle = runFn2 cosImpl p5 angle
 
--- TODO: unsupported: createCamera :: P5 -> Unsupported(p5.Camera)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/createCamera)
+createCamera :: P5 -> Camera
+createCamera p5  = runFn1 createCameraImpl p5 
 
--- TODO: unsupported: createGraphics :: P5 -> Number -> Number -> (Maybe CreateGraphicsRenderer) -> Unsupported(p5.Graphics)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/createGraphics)
+createGraphics :: P5 -> Number -> Number -> (Maybe CreateGraphicsRenderer) -> Graphics
+createGraphics p5 w h renderer = runFn4 createGraphicsImpl p5 w h renderer
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/createImage)
 createImage :: P5 -> Int -> Int -> Image
 createImage p5 width height = runFn3 createImageImpl p5 width height
 
--- TODO: unsupported: createNumberDict :: P5 -> Unsupported(Object) -> Unsupported(p5.NumberDict)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/createShader)
+createShader :: P5 -> String -> String -> Shader
+createShader p5 vertSrc fragSrc = runFn3 createShaderImpl p5 vertSrc fragSrc
 
--- TODO: unsupported: createNumberDict2 :: P5 -> Number -> Number -> Unsupported(p5.NumberDict)
+-- TODO: unsupported: createStringDict :: P5 -> Unsupported(Object) -> StringDict
 
--- TODO: unsupported: createShader :: P5 -> String -> String -> Unsupported(p5.Shader)
-
--- TODO: unsupported: createStringDict :: P5 -> Unsupported(Object) -> Unsupported(p5.StringDict)
-
--- TODO: unsupported: createStringDict2 :: P5 -> String -> String -> Unsupported(p5.StringDict)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/createStringDict)
+createStringDict2 :: P5 -> String -> String -> StringDict
+createStringDict2 p5 key value = runFn3 createStringDict2Impl p5 key value
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/createVector)
 createVector :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> Vector
 createVector p5 x y z = runFn4 createVectorImpl p5 x y z
 
--- TODO: unsupported: createWriter :: P5 -> String -> (Maybe String) -> Unsupported(p5.PrintWriter)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/createWriter)
+createWriter :: P5 -> String -> (Maybe String) -> PrintWriter
+createWriter p5 name extension = runFn3 createWriterImpl p5 name extension
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/cursor)
 cursor :: P5 -> CursorTypeOrString -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
@@ -884,7 +948,9 @@ dist p5 x1 y1 x2 y2 = runFn5 distImpl p5 x1 y1 x2 y2
 dist2 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> Number
 dist2 p5 x1 y1 z1 x2 y2 z2 = runFn7 dist2Impl p5 x1 y1 z1 x2 y2 z2
 
--- TODO: unsupported: doubleClicked :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/doubleClicked)
+doubleClicked :: P5 -> (Effect Unit)
+doubleClicked p5  = runFn1 doubleClickedImpl p5 
 
 -- TODO: unsupported: downloadFile :: P5 -> UnsupportedProduct(Unsupported(Blob)|String) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 
@@ -1010,21 +1076,21 @@ hour p5  = runFn1 hourImpl p5
 hue :: P5 -> ArrayNumberOrStringOrColor -> Number
 hue p5 color = runFn2 hueImpl p5 color
 
--- TODO: unsupported: image :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/image)
+image :: P5 -> ElementOrImage -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+image p5 img x y width height = runFn6 imageImpl p5 img x y width height
 
--- TODO: unsupported: image2 :: P5 -> UnsupportedProduct(Unsupported(p5.Element)|Image) -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/image)
+image2 :: P5 -> ElementOrImage -> Number -> Number -> Number -> Number -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+image2 p5 img dx dy dWidth dHeight sx sy sWidth sHeight = runFn10 image2Impl p5 img dx dy dWidth dHeight sx sy sWidth sHeight
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/imageMode)
 imageMode :: P5 -> ImageMode -> (Effect Unit)
 imageMode p5 mode = runFn2 imageModeImpl p5 mode
 
--- TODO: unsupported: int :: P5 -> Unsupported(Array) -> (Array Number)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/int)
 int2 :: P5 -> BooleanOrNumberOrString -> (Maybe Int) -> Number
 int2 p5 n radix = runFn3 int2Impl p5 n radix
-
--- TODO: unsupported: join :: P5 -> Unsupported(Array) -> String -> String
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/keyIsDown)
 keyIsDown :: P5 -> Number -> Boolean
@@ -1064,7 +1130,9 @@ line2 p5 x1 y1 z1 x2 y2 z2 = runFn7 line2Impl p5 x1 y1 z1 x2 y2 z2
 
 -- TODO: unsupported: loadBytes :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(Object)
 
--- TODO: unsupported: loadFont :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Unsupported(p5.Font)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/loadFont)
+loadFont :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> Font
+loadFont p5 path callback onError = runFn4 loadFontImpl p5 path callback onError
 
 -- TODO: unsupported: loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Image
 
@@ -1074,15 +1142,17 @@ line2 p5 x1 y1 z1 x2 y2 z2 = runFn7 line2Impl p5 x1 y1 z1 x2 y2 z2
 
 -- TODO: unsupported: loadJSON3 :: P5 -> String -> Unsupported(Object) -> (Maybe String) -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object))
 
--- TODO: unsupported: loadModel :: P5 -> String -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Unsupported(p5.Geometry)
+-- TODO: unsupported: loadModel :: P5 -> String -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Geometry
 
--- TODO: unsupported: loadModel2 :: P5 -> String -> Boolean -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Unsupported(p5.Geometry)
+-- TODO: unsupported: loadModel2 :: P5 -> String -> Boolean -> Unsupported(function(p5.Geometry)) -> Unsupported(Function(Event)) -> Geometry
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/loadPixels)
 loadPixels :: P5 -> (Effect Unit)
 loadPixels p5  = runFn1 loadPixelsImpl p5 
 
--- TODO: unsupported: loadShader :: P5 -> (Maybe String) -> (Maybe String) -> Unsupported(p5.Shader)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/loadShader)
+loadShader :: P5 -> (Maybe String) -> (Maybe String) -> Shader
+loadShader p5 vertFilename fragFilename = runFn3 loadShaderImpl p5 vertFilename fragFilename
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/loadStrings)
 loadStrings :: P5 -> String -> (Maybe (Effect Unit)) -> (Maybe (Effect Unit)) -> (Array String)
@@ -1142,35 +1212,49 @@ min2 p5 n0 n1 = runFn3 min2Impl p5 n0 n1
 minute :: P5 -> Int
 minute p5  = runFn1 minuteImpl p5 
 
--- TODO: unsupported: model :: P5 -> Unsupported(p5.Geometry) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/model)
+model :: P5 -> Geometry -> (Effect Unit)
+model p5 model = runFn2 modelImpl p5 model
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/month)
 month :: P5 -> Int
 month p5  = runFn1 monthImpl p5 
 
--- TODO: unsupported: mouseClicked :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseClicked)
+mouseClicked :: P5 -> (Effect Unit)
+mouseClicked p5  = runFn1 mouseClickedImpl p5 
 
--- TODO: unsupported: mouseDragged :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseDragged)
+mouseDragged :: P5 -> (Effect Unit)
+mouseDragged p5  = runFn1 mouseDraggedImpl p5 
 
--- TODO: unsupported: mouseMoved :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseMoved)
+mouseMoved :: P5 -> (Effect Unit)
+mouseMoved p5  = runFn1 mouseMovedImpl p5 
 
--- TODO: unsupported: mousePressed :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/mousePressed)
+mousePressed :: P5 -> (Effect Unit)
+mousePressed p5  = runFn1 mousePressedImpl p5 
 
--- TODO: unsupported: mouseReleased :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseReleased)
+mouseReleased :: P5 -> (Effect Unit)
+mouseReleased p5  = runFn1 mouseReleasedImpl p5 
 
--- TODO: unsupported: mouseWheel :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseWheel)
+mouseWheel :: P5 -> (Effect Unit)
+mouseWheel p5  = runFn1 mouseWheelImpl p5 
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nf)
 nf :: P5 -> NumberOrString -> (Maybe IntOrString) -> (Maybe IntOrString) -> String
 nf p5 num left right = runFn4 nfImpl p5 num left right
 
--- TODO: unsupported: nf2 :: P5 -> Unsupported(Array) -> (Maybe IntOrString) -> (Maybe IntOrString) -> (Array String)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
 nfc :: P5 -> NumberOrString -> (Maybe IntOrString) -> String
 nfc p5 num right = runFn3 nfcImpl p5 num right
 
--- TODO: unsupported: nfc2 :: P5 -> Unsupported(Array) -> (Maybe IntOrString) -> (Array String)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfc)
+nfc2 :: P5 -> (Array Number) -> (Maybe IntOrString) -> (Array String)
+nfc2 p5 nums right = runFn3 nfc2Impl p5 nums right
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfp)
 nfp :: P5 -> Number -> (Maybe Int) -> (Maybe Int) -> String
@@ -1184,7 +1268,9 @@ nfp2 p5 nums left right = runFn4 nfp2Impl p5 nums left right
 nfs :: P5 -> Number -> (Maybe Int) -> (Maybe Int) -> String
 nfs p5 num left right = runFn4 nfsImpl p5 num left right
 
--- TODO: unsupported: nfs2 :: P5 -> Unsupported(Array) -> (Maybe Int) -> (Maybe Int) -> (Array String)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/nfs)
+nfs2 :: P5 -> (Array Int) -> (Maybe Int) -> (Maybe Int) -> (Array String)
+nfs2 p5 nums left right = runFn4 nfs2Impl p5 nums left right
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/noCanvas)
 noCanvas :: P5 -> (Effect Unit)
@@ -1290,8 +1376,6 @@ pow p5 n e = runFn3 powImpl p5 n e
 preload :: P5 -> (Effect Unit)
 preload p5  = runFn1 preloadImpl p5 
 
--- TODO: unsupported: print :: P5 -> Unsupported(Any) -> (Effect Unit)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/push)
 push :: P5 -> (Effect Unit)
 push p5  = runFn1 pushImpl p5 
@@ -1350,8 +1434,6 @@ resetMatrix p5  = runFn1 resetMatrixImpl p5
 resizeCanvas :: P5 -> Number -> Number -> (Maybe Boolean) -> (Effect Unit)
 resizeCanvas p5 w h noRedraw = runFn4 resizeCanvasImpl p5 w h noRedraw
 
--- TODO: unsupported: reverse :: P5 -> Unsupported(Array) -> Unsupported(Array)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/rotate)
 rotate :: P5 -> Number -> (Maybe ArrayNumberOrVector) -> (Effect Unit)
 rotate p5 angle axis = runFn3 rotateImpl p5 angle axis
@@ -1382,7 +1464,7 @@ saturation p5 color = runFn2 saturationImpl p5 color
 saveCanvas :: P5 -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 saveCanvas p5 filename extension = runFn3 saveCanvasImpl p5 filename extension
 
--- TODO: unsupported: saveCanvas2 :: P5 -> UnsupportedProduct(Unsupported(HTMLCanvasElement)|Unsupported(p5.Element)) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
+-- TODO: unsupported: saveCanvas2 :: P5 -> UnsupportedProduct(Unsupported(HTMLCanvasElement)|Element) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 
 -- TODO: unsupported: saveFrames :: P5 -> String -> String -> Number -> Number -> Unsupported(Function(Array)) -> (Effect Unit)
 
@@ -1392,7 +1474,9 @@ saveCanvas p5 filename extension = runFn3 saveCanvasImpl p5 filename extension
 saveStrings :: P5 -> (Array String) -> String -> (Maybe String) -> (Effect Unit)
 saveStrings p5 list filename extension = runFn4 saveStringsImpl p5 list filename extension
 
--- TODO: unsupported: saveTable :: P5 -> Unsupported(p5.Table) -> String -> (Maybe String) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/saveTable)
+saveTable :: P5 -> Table -> String -> (Maybe String) -> (Effect Unit)
+saveTable p5 table filename options = runFn4 saveTableImpl p5 table filename options
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/scale)
 scale :: P5 -> ArrayNumberOrVector -> (Effect Unit)
@@ -1406,7 +1490,9 @@ scale2 p5 s y z = runFn4 scale2Impl p5 s y z
 second :: P5 -> Int
 second p5  = runFn1 secondImpl p5 
 
--- TODO: unsupported: set :: P5 -> Number -> Number -> UnsupportedProduct(NumberOrArrayNumber|Unsupported(Object)) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/set)
+set :: P5 -> Number -> Number -> NumberOrArrayNumberOrColorOrImage -> (Effect Unit)
+set p5 x y c = runFn4 setImpl p5 x y c
 
 -- TODO: unsupported: setAttributes :: P5 -> Unsupported(Object) -> (Effect Unit)
 
@@ -1414,7 +1500,9 @@ second p5  = runFn1 secondImpl p5
 setAttributes2 :: P5 -> String -> Boolean -> (Effect Unit)
 setAttributes2 p5 key value = runFn3 setAttributes2Impl p5 key value
 
--- TODO: unsupported: setCamera :: P5 -> Unsupported(p5.Camera) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/setCamera)
+setCamera :: P5 -> Camera -> (Effect Unit)
+setCamera p5 cam = runFn2 setCameraImpl p5 cam
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/setMoveThreshold)
 setMoveThreshold :: P5 -> Number -> (Effect Unit)
@@ -1424,7 +1512,9 @@ setMoveThreshold p5 value = runFn2 setMoveThresholdImpl p5 value
 setShakeThreshold :: P5 -> Number -> (Effect Unit)
 setShakeThreshold p5 value = runFn2 setShakeThresholdImpl p5 value
 
--- TODO: unsupported: shader :: P5 -> Unsupported(p5.Shader) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/shader)
+shader :: P5 -> (Maybe Shader) -> (Effect Unit)
+shader p5 s = runFn2 shaderImpl p5 s
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/shearX)
 shearX :: P5 -> Number -> (Effect Unit)
@@ -1434,10 +1524,6 @@ shearX p5 angle = runFn2 shearXImpl p5 angle
 shearY :: P5 -> Number -> (Effect Unit)
 shearY p5 angle = runFn2 shearYImpl p5 angle
 
--- TODO: unsupported: shorten :: P5 -> Unsupported(Array) -> Unsupported(Array)
-
--- TODO: unsupported: shuffle :: P5 -> Unsupported(Array) -> (Maybe Boolean) -> Unsupported(Array)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/sin)
 sin :: P5 -> Number -> Number
 sin p5 angle = runFn2 sinImpl p5 angle
@@ -1445,8 +1531,6 @@ sin p5 angle = runFn2 sinImpl p5 angle
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/smooth)
 smooth :: P5 -> (Effect Unit)
 smooth p5  = runFn1 smoothImpl p5 
-
--- TODO: unsupported: sort :: P5 -> Unsupported(Array) -> (Maybe Int) -> Unsupported(Array)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
 specularMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
@@ -1459,8 +1543,6 @@ specularMaterial2 p5 v1 v2 v3 a = runFn5 specularMaterial2Impl p5 v1 v2 v3 a
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/sphere)
 sphere :: P5 -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
 sphere p5 radius detailX detailY = runFn4 sphereImpl p5 radius detailX detailY
-
--- TODO: unsupported: splice :: P5 -> Unsupported(Array) -> Unsupported(Any) -> Int -> Unsupported(Array)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/split)
 split :: P5 -> String -> String -> (Array String)
@@ -1478,7 +1560,9 @@ sq p5 n = runFn2 sqImpl p5 n
 sqrt :: P5 -> Number -> Number
 sqrt p5 n = runFn2 sqrtImpl p5 n
 
--- TODO: unsupported: str :: P5 -> UnsupportedProduct(UnsupportedProduct(UnsupportedProduct(Unsupported(Array)|Boolean)|Number)|String) -> String
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/str)
+str :: P5 -> BooleanOrNumberOrString -> String
+str p5 n = runFn2 strImpl p5 n
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
 stroke :: P5 -> String -> (Effect Unit)
@@ -1511,8 +1595,6 @@ strokeJoin p5 join = runFn2 strokeJoinImpl p5 join
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/strokeWeight)
 strokeWeight :: P5 -> Number -> (Effect Unit)
 strokeWeight p5 weight = runFn2 strokeWeightImpl p5 weight
-
--- TODO: unsupported: subset :: P5 -> Unsupported(Array) -> Int -> (Maybe Int) -> Unsupported(Array)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/tan)
 tan :: P5 -> Number -> Number
@@ -1566,7 +1648,9 @@ textStyle2 p5 theStyle = runFn2 textStyle2Impl p5 theStyle
 textWidth :: P5 -> String -> Number
 textWidth p5 theText = runFn2 textWidthImpl p5 theText
 
--- TODO: unsupported: texture :: P5 -> UnsupportedProduct(UnsupportedProduct(Unsupported(p5.Graphics)|Image)|Unsupported(p5.MediaElement)) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/texture)
+texture :: P5 -> GraphicsOrImageOrMediaElement -> (Effect Unit)
+texture p5 tex = runFn2 textureImpl p5 tex
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/tint)
 tint :: P5 -> String -> (Effect Unit)
@@ -1592,11 +1676,17 @@ tint5 p5 v1 v2 v3 alpha = runFn5 tint5Impl p5 v1 v2 v3 alpha
 torus :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Int) -> (Maybe Int) -> (Effect Unit)
 torus p5 radius tubeRadius detailX detailY = runFn5 torusImpl p5 radius tubeRadius detailX detailY
 
--- TODO: unsupported: touchEnded :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/touchEnded)
+touchEnded :: P5 -> (Effect Unit)
+touchEnded p5  = runFn1 touchEndedImpl p5 
 
--- TODO: unsupported: touchMoved :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/touchMoved)
+touchMoved :: P5 -> (Effect Unit)
+touchMoved p5  = runFn1 touchMovedImpl p5 
 
--- TODO: unsupported: touchStarted :: P5 -> Unsupported(Object) -> (Effect Unit)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/touchStarted)
+touchStarted :: P5 -> (Effect Unit)
+touchStarted p5  = runFn1 touchStartedImpl p5 
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/translate)
 translate :: P5 -> Vector -> (Effect Unit)
@@ -1614,19 +1704,21 @@ triangle p5 x1 y1 x2 y2 x3 y3 = runFn7 triangleImpl p5 x1 y1 x2 y2 x3 y3
 trim :: P5 -> String -> String
 trim p5 str = runFn2 trimImpl p5 str
 
--- TODO: unsupported: trim2 :: P5 -> Unsupported(Array) -> (Array String)
-
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/unchar)
 unchar :: P5 -> String -> Number
 unchar p5 n = runFn2 uncharImpl p5 n
 
--- TODO: unsupported: unchar2 :: P5 -> Unsupported(Array) -> (Array Number)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/unchar)
+unchar2 :: P5 -> (Array String) -> (Array Number)
+unchar2 p5 ns = runFn2 unchar2Impl p5 ns
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/unhex)
 unhex :: P5 -> String -> Number
 unhex p5 n = runFn2 unhexImpl p5 n
 
--- TODO: unsupported: unhex2 :: P5 -> Unsupported(Array) -> (Array Number)
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/unhex)
+unhex2 :: P5 -> (Array String) -> (Array Number)
+unhex2 p5 ns = runFn2 unhex2Impl p5 ns
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/updatePixels)
 updatePixels :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)

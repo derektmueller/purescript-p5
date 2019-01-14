@@ -47,16 +47,27 @@ prettifyConstant fnName paramName = do
 
 generateP5TypeConstructor :: P5Type -> Maybe String
 generateP5TypeConstructor P5Boolean = Just "Boolean"
+generateP5TypeConstructor P5Camera = Just "Camera"
 generateP5TypeConstructor P5Effect = Just "(Effect Unit)"
+generateP5TypeConstructor P5Graphics = Just "Graphics"
 generateP5TypeConstructor P5Integer = Just "Int"
+generateP5TypeConstructor P5MediaElement = Just "MediaElement"
 generateP5TypeConstructor P5NumberArray = Just "(Array Number)"
+generateP5TypeConstructor P5IntegerArray = Just "(Array Int)"
+generateP5TypeConstructor P5PrintWriter = Just "PrintWriter"
+generateP5TypeConstructor P5StringDict = Just "StringDict"
+generateP5TypeConstructor P5Font = Just "Font"
+generateP5TypeConstructor P5Geometry = Just "Geometry"
 generateP5TypeConstructor P5Number = Just "Number"
 generateP5TypeConstructor P5P5 = Just "P5"
+generateP5TypeConstructor P5Shader = Just "Shader"
 generateP5TypeConstructor P5StringArray = Just "(Array String)"
 generateP5TypeConstructor P5String = Just "String"
+generateP5TypeConstructor P5Table = Just "Table"
 generateP5TypeConstructor P5Vector = Just "Vector"
 generateP5TypeConstructor P5Color = Just "Color"
 generateP5TypeConstructor P5Image = Just "Image"
+generateP5TypeConstructor P5Element = Just "Element"
 generateP5TypeConstructor (P5Constant fnName paramName _) = do
   prettifyConstant fnName paramName
 generateP5TypeConstructor t@(P5Or p5Type1 p5Type2) = do
@@ -79,11 +90,21 @@ generateP5TypeConstructor (P5Unsupported str) =
 
 p5TypeToIdentifier :: P5Type -> Maybe String
 p5TypeToIdentifier P5Boolean = Just "Boolean"
+p5TypeToIdentifier P5Camera = Just "Camera"
 p5TypeToIdentifier P5Integer = Just "Int"
+p5TypeToIdentifier P5Graphics = Just "Graphics"
+p5TypeToIdentifier P5MediaElement = Just "MediaElement"
 p5TypeToIdentifier P5NumberArray = Just "ArrayNumber"
+p5TypeToIdentifier P5IntegerArray = Just "ArrayInteger"
 p5TypeToIdentifier P5Number = Just "Number"
+p5TypeToIdentifier P5PrintWriter = Just "PrintWriter"
+p5TypeToIdentifier P5StringDict = Just "StringDict"
+p5TypeToIdentifier P5Font = Just "Font"
+p5TypeToIdentifier P5Geometry = Just "Geometry"
+p5TypeToIdentifier P5Shader = Just "Shader"
 p5TypeToIdentifier P5StringArray = Just "ArrayString"
 p5TypeToIdentifier P5String = Just "String"
+p5TypeToIdentifier P5Table = Just "Table"
 p5TypeToIdentifier (P5Maybe p5Type) = do
   identifier <- p5TypeToIdentifier p5Type
   Just $ "Maybe" <> identifier
@@ -91,6 +112,7 @@ p5TypeToIdentifier P5P5 = Just "P5"
 p5TypeToIdentifier P5Vector = Just "Vector"
 p5TypeToIdentifier P5Color = Just "Color"
 p5TypeToIdentifier P5Image = Just "Image"
+p5TypeToIdentifier P5Element = Just "Element"
 p5TypeToIdentifier (P5Or _ _) = Nothing
 p5TypeToIdentifier P5Effect = Nothing
 p5TypeToIdentifier (P5Constant fnName paramName _) = 
@@ -301,7 +323,7 @@ generateP5 (P5Doc doc) = do
           [ "import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)"
           , "import Effect (Effect)"
           , "import Prelude (Unit)"
-          , "import P5.Types (P5, Vector, Color, Image)"
+          , "import P5.Types (P5, Vector, Color, Element, Image, Graphics, MediaElement, Shader, Camera, Table, PrintWriter, StringDict, Font, Geometry)"
           , "import Foreign (Foreign, unsafeToForeign)"
           , "import Data.Maybe (Maybe, maybe)"
           , "import Foreign.NullOrUndefined (undefined)"

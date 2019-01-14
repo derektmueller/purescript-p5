@@ -8529,14 +8529,6 @@
             "description": "The <a href=\"#/p5/mouseMoved\">mouseMoved()</a> function is called every time the mouse moves and a mouse\nbutton is not pressed.<br><br>\nBrowsers may have different default\nbehaviors attached to various mouse events. To prevent any default\nbehavior for this event, add \"return false\" to the end of the method.",
             "itemtype": "method",
             "name": "mouseMoved",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional MouseEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Move the mouse across the page\n// to change its value\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\nfunction mouseMoved() {\n  value = value + 5;\n  if (value > 255) {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction mouseMoved() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a MouseEvent object\n// as a callback argument\nfunction mouseMoved(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -8551,14 +8543,6 @@
             "description": "The <a href=\"#/p5/mouseDragged\">mouseDragged()</a> function is called once every time the mouse moves and\na mouse button is pressed. If no <a href=\"#/p5/mouseDragged\">mouseDragged()</a> function is defined, the\n<a href=\"#/p5/touchMoved\">touchMoved()</a> function will be called instead if it is defined.<br><br>\nBrowsers may have different default\nbehaviors attached to various mouse events. To prevent any default\nbehavior for this event, add \"return false\" to the end of the method.",
             "itemtype": "method",
             "name": "mouseDragged",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional MouseEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Drag the mouse across the page\n// to change its value\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\nfunction mouseDragged() {\n  value = value + 5;\n  if (value > 255) {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction mouseDragged() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a MouseEvent object\n// as a callback argument\nfunction mouseDragged(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -8573,14 +8557,6 @@
             "description": "The <a href=\"#/p5/mousePressed\">mousePressed()</a> function is called once after every time a mouse button\nis pressed. The mouseButton variable (see the related reference entry)\ncan be used to determine which button has been pressed. If no\n<a href=\"#/p5/mousePressed\">mousePressed()</a> function is defined, the <a href=\"#/p5/touchStarted\">touchStarted()</a> function will be\ncalled instead if it is defined.<br><br>\nBrowsers may have different default\nbehaviors attached to various mouse events. To prevent any default\nbehavior for this event, add \"return false\" to the end of the method.",
             "itemtype": "method",
             "name": "mousePressed",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional MouseEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Click within the image to change\n// the value of the rectangle\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\nfunction mousePressed() {\n  if (value === 0) {\n    value = 255;\n  } else {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction mousePressed() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a MouseEvent object\n// as a callback argument\nfunction mousePressed(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -8595,14 +8571,6 @@
             "description": "The <a href=\"#/p5/mouseReleased\">mouseReleased()</a> function is called every time a mouse button is\nreleased. If no <a href=\"#/p5/mouseReleased\">mouseReleased()</a> function is defined, the <a href=\"#/p5/touchEnded\">touchEnded()</a>\nfunction will be called instead if it is defined.<br><br>\nBrowsers may have different default\nbehaviors attached to various mouse events. To prevent any default\nbehavior for this event, add \"return false\" to the end of the method.",
             "itemtype": "method",
             "name": "mouseReleased",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional MouseEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Click within the image to change\n// the value of the rectangle\n// after the mouse has been clicked\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\nfunction mouseReleased() {\n  if (value === 0) {\n    value = 255;\n  } else {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction mouseReleased() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a MouseEvent object\n// as a callback argument\nfunction mouseReleased(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -8617,14 +8585,6 @@
             "description": "The <a href=\"#/p5/mouseClicked\">mouseClicked()</a> function is called once after a mouse button has been\npressed and then released.<br><br>\nBrowsers handle clicks differently, so this function is only guaranteed to be\nrun when the left mouse button is clicked. To handle other mouse buttons\nbeing pressed or released, see <a href=\"#/p5/mousePressed\">mousePressed()</a> or <a href=\"#/p5/mouseReleased\">mouseReleased()</a>.<br><br>\nBrowsers may have different default\nbehaviors attached to various mouse events. To prevent any default\nbehavior for this event, add \"return false\" to the end of the method.",
             "itemtype": "method",
             "name": "mouseClicked",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional MouseEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Click within the image to change\n// the value of the rectangle\n// after the mouse has been clicked\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\n\nfunction mouseClicked() {\n  if (value === 0) {\n    value = 255;\n  } else {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction mouseClicked() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a MouseEvent object\n// as a callback argument\nfunction mouseClicked(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -8639,14 +8599,6 @@
             "description": "The <a href=\"#/p5/doubleClicked\">doubleClicked()</a> function is executed every time a event\nlistener has detected a dblclick event which is a part of the\nDOM L3 specification. The doubleClicked event is fired when a\npointing device button (usually a mouse's primary button)\nis clicked twice on a single element. For more info on the\ndblclick event refer to mozilla's documentation here:\nhttps://developer.mozilla.org/en-US/docs/Web/Events/dblclick",
             "itemtype": "method",
             "name": "doubleClicked",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional MouseEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Click within the image to change\n// the value of the rectangle\n// after the mouse has been double clicked\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\n\nfunction doubleClicked() {\n  if (value === 0) {\n    value = 255;\n  } else {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction doubleClicked() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a MouseEvent object\n// as a callback argument\nfunction doubleClicked(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -8689,14 +8641,6 @@
             "description": "The function <a href=\"#/p5/mouseWheel\">mouseWheel()</a> is executed every time a vertical mouse wheel\nevent is detected either triggered by an actual mouse wheel or by a\ntouchpad.<br><br>\nThe event.delta property returns the amount the mouse wheel\nhave scrolled. The values can be positive or negative depending on the\nscroll direction (on OS X with \"natural\" scrolling enabled, the signs\nare inverted).<br><br>\nBrowsers may have different default behaviors attached to various\nmouse events. To prevent any default behavior for this event, add\n\"return false\" to the end of the method.<br><br>\nDue to the current support of the \"wheel\" event on Safari, the function\nmay only work as expected if \"return false\" is included while using Safari.",
             "itemtype": "method",
             "name": "mouseWheel",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional WheelEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\nvar pos = 25;\n\nfunction draw() {\n  background(237, 34, 93);\n  fill(0);\n  rect(25, pos, 50, 50);\n}\n\nfunction mouseWheel(event) {\n  print(event.delta);\n  //move the square according to the vertical scroll amount\n  pos += event.delta;\n  //uncomment to block page scrolling\n  //return false;\n}\n</code>\n</div>"
             ],
@@ -8727,14 +8671,6 @@
             "description": "The touchStarted() function is called once after every time a touch is\nregistered. If no <a href=\"#/p5/touchStarted\">touchStarted()</a> function is defined, the <a href=\"#/p5/mousePressed\">mousePressed()</a>\nfunction will be called instead if it is defined.<br><br>\nBrowsers may have different default behaviors attached to various touch\nevents. To prevent any default behavior for this event, add \"return false\"\nto the end of the method.",
             "itemtype": "method",
             "name": "touchStarted",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional TouchEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Touch within the image to change\n// the value of the rectangle\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\nfunction touchStarted() {\n  if (value === 0) {\n    value = 255;\n  } else {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction touchStarted() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a TouchEvent object\n// as a callback argument\nfunction touchStarted(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -8749,14 +8685,6 @@
             "description": "The <a href=\"#/p5/touchMoved\">touchMoved()</a> function is called every time a touch move is registered.\nIf no <a href=\"#/p5/touchMoved\">touchMoved()</a> function is defined, the <a href=\"#/p5/mouseDragged\">mouseDragged()</a> function will\nbe called instead if it is defined.<br><br>\nBrowsers may have different default behaviors attached to various touch\nevents. To prevent any default behavior for this event, add \"return false\"\nto the end of the method.",
             "itemtype": "method",
             "name": "touchMoved",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional TouchEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Move your finger across the page\n// to change its value\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\nfunction touchMoved() {\n  value = value + 5;\n  if (value > 255) {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction touchMoved() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a TouchEvent object\n// as a callback argument\nfunction touchMoved(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -8771,14 +8699,6 @@
             "description": "The <a href=\"#/p5/touchEnded\">touchEnded()</a> function is called every time a touch ends. If no\n<a href=\"#/p5/touchEnded\">touchEnded()</a> function is defined, the <a href=\"#/p5/mouseReleased\">mouseReleased()</a> function will be\ncalled instead if it is defined.<br><br>\nBrowsers may have different default behaviors attached to various touch\nevents. To prevent any default behavior for this event, add \"return false\"\nto the end of the method.",
             "itemtype": "method",
             "name": "touchEnded",
-            "params": [
-                {
-                    "name": "event",
-                    "description": "optional TouchEvent callback argument.",
-                    "type": "Object",
-                    "optional": true
-                }
-            ],
             "example": [
                 "\n<div>\n<code>\n// Release touch within the image to\n// change the value of the rectangle\n\nvar value = 0;\nfunction draw() {\n  fill(value);\n  rect(25, 25, 50, 50);\n}\nfunction touchEnded() {\n  if (value === 0) {\n    value = 255;\n  } else {\n    value = 0;\n  }\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\nfunction touchEnded() {\n  ellipse(mouseX, mouseY, 5, 5);\n  // prevent default\n  return false;\n}\n</code>\n</div>\n\n<div class=\"norender\">\n<code>\n// returns a TouchEvent object\n// as a callback argument\nfunction touchEnded(event) {\n  console.log(event);\n}\n</code>\n</div>"
             ],
@@ -10436,7 +10356,7 @@
                 {
                     "name": "c",
                     "description": "insert a grayscale value | a pixel array |\n                               a <a href=\"#/p5.Color\">p5.Color</a> object | a <a href=\"#/p5.Image\">p5.Image</a> to copy",
-                    "type": "Number|Number[]|Object"
+                    "type": "Number|Number[]|p5.Image|p5.Color"
                 }
             ],
             "example": [
@@ -11309,7 +11229,7 @@
             "name": "saveTable",
             "params": [
                 {
-                    "name": "Table",
+                    "name": "table",
                     "description": "the <a href=\"#/p5.Table\">Table</a> object to save to a file",
                     "type": "p5.Table"
                 },
@@ -15825,7 +15745,7 @@
                 {
                     "name": "n",
                     "description": "value to parse",
-                    "type": "String|Boolean|Number|Array"
+                    "type": "String|Boolean|Number"
                 }
             ],
             "return": {
@@ -15984,7 +15904,7 @@
                 {
                     "name": "ns",
                     "description": "values to parse",
-                    "type": "Array"
+                    "type": "String[]"
                 }
             ],
             "return": {
@@ -16084,7 +16004,7 @@
                 {
                     "name": "ns",
                     "description": "values to parse",
-                    "type": "Array"
+                    "type": "String[]"
                 }
             ],
             "return": {
@@ -16293,7 +16213,7 @@
                 {
                     "name": "nums",
                     "description": "the Numbers to format",
-                    "type": "Array"
+                    "type": "Number[]"
                 },
                 {
                     "name": "right",
@@ -16425,7 +16345,7 @@
                 {
                     "name": "nums",
                     "description": "the Numbers to format",
-                    "type": "Array"
+                    "type": "Integer[]"
                 },
                 {
                     "name": "left",

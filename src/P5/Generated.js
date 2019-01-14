@@ -219,14 +219,34 @@ exports.copyImpl = function(p, sx, sy, sw, sh, dx, dy, dw, dh) {
     callP5(p, p.copy, [sx, sy, sw, sh, dx, dy, dw, dh]);
   };
 };
+exports.copy2Impl = function(p, srcImage, sx, sy, sw, sh, dx, dy, dw, dh) {
+  return function() {
+    callP5(p, p.copy, [srcImage.value0, sx, sy, sw, sh, dx, dy, dw, dh]);
+  };
+};
 exports.cosImpl = function(p, angle) {
   return callP5(p, p.cos, [angle]);
+};
+exports.createCameraImpl = function(p) {
+  return callP5(p, p.createCamera, []);
+};
+exports.createGraphicsImpl = function(p, w, h, renderer) {
+  return callP5(p, p.createGraphics, [w, h, renderer.value0 ? renderer.value0 : undefined]);
 };
 exports.createImageImpl = function(p, width, height) {
   return callP5(p, p.createImage, [width, height]);
 };
+exports.createShaderImpl = function(p, vertSrc, fragSrc) {
+  return callP5(p, p.createShader, [vertSrc, fragSrc]);
+};
+exports.createStringDict2Impl = function(p, key, value) {
+  return callP5(p, p.createStringDict, [key, value]);
+};
 exports.createVectorImpl = function(p, x, y, z) {
   return callP5(p, p.createVector, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
+};
+exports.createWriterImpl = function(p, name, extension) {
+  return callP5(p, p.createWriter, [name, extension.value0 ? extension.value0 : undefined]);
 };
 exports.cursorImpl = function(p, _type, x, y) {
   return function() {
@@ -344,6 +364,11 @@ exports.distImpl = function(p, x1, y1, x2, y2) {
 exports.dist2Impl = function(p, x1, y1, z1, x2, y2, z2) {
   return callP5(p, p.dist, [x1, y1, z1, x2, y2, z2]);
 };
+exports.doubleClickedImpl = function(p) {
+  return function() {
+    callP5(p, p.doubleClicked, []);
+  };
+};
 exports.ellipseImpl = function(p, x, y, w, h) {
   return function() {
     callP5(p, p.ellipse, [x, y, w, h.value0 ? h.value0 : undefined]);
@@ -448,6 +473,16 @@ exports.hourImpl = function(p) {
 exports.hueImpl = function(p, color) {
   return callP5(p, p.hue, [color.value0]);
 };
+exports.imageImpl = function(p, img, x, y, width, height) {
+  return function() {
+    callP5(p, p.image, [img.value0, x, y, width.value0 ? width.value0 : undefined, height.value0 ? height.value0 : undefined]);
+  };
+};
+exports.image2Impl = function(p, img, dx, dy, dWidth, dHeight, sx, sy, sWidth, sHeight) {
+  return function() {
+    callP5(p, p.image, [img.value0, dx, dy, dWidth, dHeight, sx, sy, sWidth.value0 ? sWidth.value0 : undefined, sHeight.value0 ? sHeight.value0 : undefined]);
+  };
+};
 exports.imageModeImpl = function(p, mode) {
   return function() {
     callP5(p, p.imageMode, [p[mode.constructor.name.replace(new RegExp('^IMAGE_MODE_'), '')]]);
@@ -493,10 +528,16 @@ exports.line2Impl = function(p, x1, y1, z1, x2, y2, z2) {
     callP5(p, p.line, [x1, y1, z1, x2, y2, z2]);
   };
 };
+exports.loadFontImpl = function(p, path, callback, onError) {
+  return callP5(p, p.loadFont, [path, callback.value0 ? callback.value0 : undefined, onError.value0 ? onError.value0 : undefined]);
+};
 exports.loadPixelsImpl = function(p) {
   return function() {
     callP5(p, p.loadPixels, []);
   };
+};
+exports.loadShaderImpl = function(p, vertFilename, fragFilename) {
+  return callP5(p, p.loadShader, [vertFilename.value0 ? vertFilename.value0 : undefined, fragFilename.value0 ? fragFilename.value0 : undefined]);
 };
 exports.loadStringsImpl = function(p, filename, callback, errorCallback) {
   return callP5(p, p.loadStrings, [filename, callback.value0 ? callback.value0 : undefined, errorCallback.value0 ? errorCallback.value0 : undefined]);
@@ -539,14 +580,52 @@ exports.min2Impl = function(p, n0, n1) {
 exports.minuteImpl = function(p) {
   return callP5(p, p.minute, []);
 };
+exports.modelImpl = function(p, model) {
+  return function() {
+    callP5(p, p.model, [model]);
+  };
+};
 exports.monthImpl = function(p) {
   return callP5(p, p.month, []);
+};
+exports.mouseClickedImpl = function(p) {
+  return function() {
+    callP5(p, p.mouseClicked, []);
+  };
+};
+exports.mouseDraggedImpl = function(p) {
+  return function() {
+    callP5(p, p.mouseDragged, []);
+  };
+};
+exports.mouseMovedImpl = function(p) {
+  return function() {
+    callP5(p, p.mouseMoved, []);
+  };
+};
+exports.mousePressedImpl = function(p) {
+  return function() {
+    callP5(p, p.mousePressed, []);
+  };
+};
+exports.mouseReleasedImpl = function(p) {
+  return function() {
+    callP5(p, p.mouseReleased, []);
+  };
+};
+exports.mouseWheelImpl = function(p) {
+  return function() {
+    callP5(p, p.mouseWheel, []);
+  };
 };
 exports.nfImpl = function(p, num, left, right) {
   return callP5(p, p.nf, [num.value0, left.value0 ? left.value0.value0 : undefined, right.value0 ? right.value0.value0 : undefined]);
 };
 exports.nfcImpl = function(p, num, right) {
   return callP5(p, p.nfc, [num.value0, right.value0 ? right.value0.value0 : undefined]);
+};
+exports.nfc2Impl = function(p, nums, right) {
+  return callP5(p, p.nfc, [nums, right.value0 ? right.value0.value0 : undefined]);
 };
 exports.nfpImpl = function(p, num, left, right) {
   return callP5(p, p.nfp, [num, left.value0 ? left.value0 : undefined, right.value0 ? right.value0 : undefined]);
@@ -556,6 +635,9 @@ exports.nfp2Impl = function(p, nums, left, right) {
 };
 exports.nfsImpl = function(p, num, left, right) {
   return callP5(p, p.nfs, [num, left.value0 ? left.value0 : undefined, right.value0 ? right.value0 : undefined]);
+};
+exports.nfs2Impl = function(p, nums, left, right) {
+  return callP5(p, p.nfs, [nums, left.value0 ? left.value0 : undefined, right.value0 ? right.value0 : undefined]);
 };
 exports.noCanvasImpl = function(p) {
   return function() {
@@ -783,6 +865,11 @@ exports.saveStringsImpl = function(p, list, filename, extension) {
     callP5(p, p.saveStrings, [list, filename, extension.value0 ? extension.value0 : undefined]);
   };
 };
+exports.saveTableImpl = function(p, table, filename, options) {
+  return function() {
+    callP5(p, p.saveTable, [table, filename, options.value0 ? options.value0 : undefined]);
+  };
+};
 exports.scaleImpl = function(p, scales) {
   return function() {
     callP5(p, p.scale, [scales.value0]);
@@ -796,9 +883,19 @@ exports.scale2Impl = function(p, s, y, z) {
 exports.secondImpl = function(p) {
   return callP5(p, p.second, []);
 };
+exports.setImpl = function(p, x, y, c) {
+  return function() {
+    callP5(p, p.set, [x, y, c.value0]);
+  };
+};
 exports.setAttributes2Impl = function(p, key, value) {
   return function() {
     callP5(p, p.setAttributes, [key, value]);
+  };
+};
+exports.setCameraImpl = function(p, cam) {
+  return function() {
+    callP5(p, p.setCamera, [cam]);
   };
 };
 exports.setMoveThresholdImpl = function(p, value) {
@@ -809,6 +906,11 @@ exports.setMoveThresholdImpl = function(p, value) {
 exports.setShakeThresholdImpl = function(p, value) {
   return function() {
     callP5(p, p.setShakeThreshold, [value]);
+  };
+};
+exports.shaderImpl = function(p, s) {
+  return function() {
+    callP5(p, p.shader, [s.value0 ? s.value0 : undefined]);
   };
 };
 exports.shearXImpl = function(p, angle) {
@@ -855,6 +957,9 @@ exports.sqImpl = function(p, n) {
 };
 exports.sqrtImpl = function(p, n) {
   return callP5(p, p.sqrt, [n]);
+};
+exports.strImpl = function(p, n) {
+  return callP5(p, p.str, [n.value0]);
 };
 exports.strokeImpl = function(p, value) {
   return function() {
@@ -937,6 +1042,11 @@ exports.textStyle2Impl = function(p, theStyle) {
 exports.textWidthImpl = function(p, theText) {
   return callP5(p, p.textWidth, [theText]);
 };
+exports.textureImpl = function(p, tex) {
+  return function() {
+    callP5(p, p.texture, [tex.value0]);
+  };
+};
 exports.tintImpl = function(p, value) {
   return function() {
     callP5(p, p.tint, [value]);
@@ -967,6 +1077,21 @@ exports.torusImpl = function(p, radius, tubeRadius, detailX, detailY) {
     callP5(p, p.torus, [radius.value0 ? radius.value0 : undefined, tubeRadius.value0 ? tubeRadius.value0 : undefined, detailX.value0 ? detailX.value0 : undefined, detailY.value0 ? detailY.value0 : undefined]);
   };
 };
+exports.touchEndedImpl = function(p) {
+  return function() {
+    callP5(p, p.touchEnded, []);
+  };
+};
+exports.touchMovedImpl = function(p) {
+  return function() {
+    callP5(p, p.touchMoved, []);
+  };
+};
+exports.touchStartedImpl = function(p) {
+  return function() {
+    callP5(p, p.touchStarted, []);
+  };
+};
 exports.translateImpl = function(p, vector) {
   return function() {
     callP5(p, p.translate, [vector]);
@@ -988,8 +1113,14 @@ exports.trimImpl = function(p, str) {
 exports.uncharImpl = function(p, n) {
   return callP5(p, p.unchar, [n]);
 };
+exports.unchar2Impl = function(p, ns) {
+  return callP5(p, p.unchar, [ns]);
+};
 exports.unhexImpl = function(p, n) {
   return callP5(p, p.unhex, [n]);
+};
+exports.unhex2Impl = function(p, ns) {
+  return callP5(p, p.unhex, [ns]);
 };
 exports.updatePixelsImpl = function(p, x, y, w, h) {
   return function() {
