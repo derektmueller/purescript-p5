@@ -1,68 +1,31 @@
 ## Module P5.LightsAndCamera
 
-#### `ambientLight`
+
+### Re-exported from P5.LightsAndCamera.Camera:
+
+#### `setCamera`
 
 ``` purescript
-ambientLight :: P5 -> String -> (Effect Unit)
+setCamera :: P5 -> Camera -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+[p5js.org documentation](https://p5js.org/reference/#/p5/setCamera)
 
-#### `ambientLight2`
+#### `perspective`
 
 ``` purescript
-ambientLight2 :: P5 -> (Array Number) -> (Effect Unit)
+perspective :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+[p5js.org documentation](https://p5js.org/reference/#/p5/perspective)
 
-#### `ambientLight3`
+#### `ortho`
 
 ``` purescript
-ambientLight3 :: P5 -> Color -> (Effect Unit)
+ortho :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
-
-#### `ambientLight4`
-
-``` purescript
-ambientLight4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
-
-#### `ambientLight5`
-
-``` purescript
-ambientLight5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
-
-#### `ambientMaterial`
-
-``` purescript
-ambientMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
-
-#### `ambientMaterial2`
-
-``` purescript
-ambientMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
-
-#### `camera`
-
-``` purescript
-camera :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/camera)
+[p5js.org documentation](https://p5js.org/reference/#/p5/ortho)
 
 #### `createCamera`
 
@@ -72,34 +35,36 @@ createCamera :: P5 -> Camera
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/createCamera)
 
-#### `createShader`
+#### `camera`
 
 ``` purescript
-createShader :: P5 -> String -> String -> Shader
+camera :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/createShader)
+[p5js.org documentation](https://p5js.org/reference/#/p5/camera)
 
-#### `debugMode`
+### Re-exported from P5.LightsAndCamera.Interaction:
+
+#### `orbitControl`
 
 ``` purescript
-debugMode :: P5 -> (Effect Unit)
+orbitControl :: P5 -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
+[p5js.org documentation](https://p5js.org/reference/#/p5/orbitControl)
 
-#### `debugMode2`
+#### `noDebugMode`
 
 ``` purescript
-debugMode2 :: P5 -> DebugMode -> (Effect Unit)
+noDebugMode :: P5 -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
+[p5js.org documentation](https://p5js.org/reference/#/p5/noDebugMode)
 
-#### `debugMode3`
+#### `debugMode5`
 
 ``` purescript
-debugMode3 :: P5 -> DebugMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+debugMode5 :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
@@ -112,106 +77,36 @@ debugMode4 :: P5 -> DebugMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Numb
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
 
-#### `debugMode5`
+#### `debugMode3`
 
 ``` purescript
-debugMode5 :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+debugMode3 :: P5 -> DebugMode -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
 
-#### `directionalLight`
+#### `debugMode2`
 
 ``` purescript
-directionalLight :: P5 -> ArrayNumberOrStringOrColor -> Vector -> (Effect Unit)
+debugMode2 :: P5 -> DebugMode -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
+[p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
 
-#### `directionalLight2`
+#### `debugMode`
 
 ``` purescript
-directionalLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
+debugMode :: P5 -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
+[p5js.org documentation](https://p5js.org/reference/#/p5/debugMode)
 
-#### `directionalLight3`
+### Re-exported from P5.LightsAndCamera.Lights:
 
-``` purescript
-directionalLight3 :: P5 -> ArrayNumberOrStringOrColor -> Number -> Number -> Number -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
-
-#### `directionalLight4`
+#### `pointLight4`
 
 ``` purescript
-directionalLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
-
-#### `loadShader`
-
-``` purescript
-loadShader :: P5 -> (Maybe String) -> (Maybe String) -> Shader
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/loadShader)
-
-#### `noDebugMode`
-
-``` purescript
-noDebugMode :: P5 -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/noDebugMode)
-
-#### `normalMaterial`
-
-``` purescript
-normalMaterial :: P5 -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/normalMaterial)
-
-#### `orbitControl`
-
-``` purescript
-orbitControl :: P5 -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/orbitControl)
-
-#### `ortho`
-
-``` purescript
-ortho :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/ortho)
-
-#### `perspective`
-
-``` purescript
-perspective :: P5 -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/perspective)
-
-#### `pointLight`
-
-``` purescript
-pointLight :: P5 -> ArrayNumberOrStringOrColor -> Vector -> (Effect Unit)
-```
-
-[p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
-
-#### `pointLight2`
-
-``` purescript
-pointLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
+pointLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
@@ -224,45 +119,95 @@ pointLight3 :: P5 -> ArrayNumberOrStringOrColor -> Number -> Number -> Number ->
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 
-#### `pointLight4`
+#### `pointLight2`
 
 ``` purescript
-pointLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
+pointLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 
-#### `setCamera`
+#### `pointLight`
 
 ``` purescript
-setCamera :: P5 -> Camera -> (Effect Unit)
+pointLight :: P5 -> ArrayNumberOrStringOrColor -> Vector -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/setCamera)
+[p5js.org documentation](https://p5js.org/reference/#/p5/pointLight)
 
-#### `shader`
+#### `directionalLight4`
 
 ``` purescript
-shader :: P5 -> (Maybe Shader) -> (Effect Unit)
+directionalLight4 :: P5 -> Number -> Number -> Number -> Number -> Number -> Number -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/shader)
+[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 
-#### `specularMaterial`
+#### `directionalLight3`
 
 ``` purescript
-specularMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
+directionalLight3 :: P5 -> ArrayNumberOrStringOrColor -> Number -> Number -> Number -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
+[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
 
-#### `specularMaterial2`
+#### `directionalLight2`
 
 ``` purescript
-specularMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+directionalLight2 :: P5 -> Number -> Number -> Number -> Vector -> (Effect Unit)
 ```
 
-[p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
+[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
+
+#### `directionalLight`
+
+``` purescript
+directionalLight :: P5 -> ArrayNumberOrStringOrColor -> Vector -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/directionalLight)
+
+#### `ambientLight5`
+
+``` purescript
+ambientLight5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+
+#### `ambientLight4`
+
+``` purescript
+ambientLight4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+
+#### `ambientLight3`
+
+``` purescript
+ambientLight3 :: P5 -> Color -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+
+#### `ambientLight2`
+
+``` purescript
+ambientLight2 :: P5 -> (Array Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+
+#### `ambientLight`
+
+``` purescript
+ambientLight :: P5 -> String -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientLight)
+
+### Re-exported from P5.LightsAndCamera.Material:
 
 #### `texture`
 
@@ -272,4 +217,67 @@ texture :: P5 -> GraphicsOrImageOrMediaElement -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/texture)
 
+#### `specularMaterial2`
+
+``` purescript
+specularMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
+
+#### `specularMaterial`
+
+``` purescript
+specularMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/specularMaterial)
+
+#### `shader`
+
+``` purescript
+shader :: P5 -> (Maybe Shader) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/shader)
+
+#### `normalMaterial`
+
+``` purescript
+normalMaterial :: P5 -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/normalMaterial)
+
+#### `loadShader`
+
+``` purescript
+loadShader :: P5 -> (Maybe String) -> (Maybe String) -> Shader
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/loadShader)
+
+#### `createShader`
+
+``` purescript
+createShader :: P5 -> String -> String -> Shader
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/createShader)
+
+#### `ambientMaterial2`
+
+``` purescript
+ambientMaterial2 :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
+
+#### `ambientMaterial`
+
+``` purescript
+ambientMaterial :: P5 -> ArrayNumberOrStringOrColor -> (Effect Unit)
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/ambientMaterial)
 

@@ -205,21 +205,34 @@ generateMethod x = do
         <> methodBody
         <> "\n"
 
+getSubmoduleNames :: String -> Array String -> Array String
+getSubmoduleNames moduleName submoduleNames =
+  ((\s -> "P5." <> moduleName <> "." <> s) 
+    <$> 
+      (filter (\s -> s /= moduleName) submoduleNames))
+
 generateModuleHeader :: 
-  String -> Array P5Method -> Either String String
-generateModuleHeader moduleName xs = do
+  String -> Maybe String -> Array String -> Array P5Method 
+  -> Either String String
+generateModuleHeader moduleName mSubmoduleName submodules xs = do
   types <- -- Right (<>) 
     -- <*> generateProductTypes xs 
     -- <*> 
     generateConstantTypes xs
   let methodNames = getMethodName <$> xs
-  pure $ "module P5." <> moduleName <> "\n  ( "
-   <> intercalate 
-    "\n  , " 
-    methodNames
+  pure $ "module P5." 
+    <> moduleName 
+    <> maybe "" (\s -> "." <> s) mSubmoduleName
+    <> "\n  ( "
+    <> intercalate 
+      "\n  , " 
+      (methodNames
+        <> 
+        ((\s -> "module " <> s) 
+          <$> (getSubmoduleNames moduleName submodules)))
     --(((\x -> (x <> "(..)")) <$> types)
       -- <> methodNames)
-   <> "\n  ) where"
+    <> "\n  ) where"
 
 productTypeToArray :: P5Type -> Maybe (Array P5Type)
 productTypeToArray t@(P5Or p5Type1 p5Type2) = 
@@ -322,8 +335,8 @@ generateTypeDefinitions xs = do
     --productTypeDefs <> 
     (nub constantTypeDefs)
 
-generateP5 :: String -> P5Doc -> Either String String
-generateP5 moduleName (P5Doc doc) = do
+generateP5 :: String -> Maybe String -> Array String -> P5Doc -> Either String String
+generateP5 moduleName mSubmoduleName submodules (P5Doc doc) = do
   let imports = 
           [ "import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)"
           , "import Effect (Effect)"
@@ -334,14 +347,22 @@ generateP5 moduleName (P5Doc doc) = do
           , "import Foreign.NullOrUndefined (undefined)"
         ]
       supported = filter (\x -> not (isUnsupported x)) doc
+      p5ModuleImports = 
+        (\s -> "import " <> s) <$>
+        (getSubmoduleNames moduleName submodules)
   --types <- generateTypeDefinitions supported
   methods <- (traverse generateMethod doc)
   foreignImports <- (traverse generateForeignImport supported)
-  header <- generateModuleHeader moduleName supported
+  header <- 
+    generateModuleHeader moduleName mSubmoduleName submodules 
+      supported
   pure $ header
     <> "\n" 
     <> "\n" 
     <> (intercalate "\n" imports)
+    <> "\n" 
+    <> "\n" 
+    <> (intercalate "\n" p5ModuleImports)
     <> "\n" 
     <> "\n" 
 --    <> (intercalate "\n" types)

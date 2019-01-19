@@ -14,6 +14,8 @@ import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
 
+
+
 foreign import blendModeImpl :: Fn2 P5 BlendMode (Effect Unit)
 foreign import createGraphicsImpl :: Fn4 P5 Number Number (Maybe CreateGraphicsRenderer) Graphics
 foreign import noCanvasImpl :: Fn1 P5 (Effect Unit)

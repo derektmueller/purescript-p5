@@ -20,6 +20,8 @@ import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
 
+
+
 foreign import cursorImpl :: Fn4 P5 CursorTypeOrString (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import displayDensityImpl :: Fn1 P5 Number
 foreign import frameRateImpl :: Fn1 P5 Number

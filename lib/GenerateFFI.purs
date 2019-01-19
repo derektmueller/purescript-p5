@@ -1,20 +1,30 @@
 module GenerateFFI where
 
-import Prelude
+import Control.Monad.Except (runExcept)
+import Control.Monad.Except.Trans 
+  (ExceptT(..), except, lift, runExceptT)
 import Data.Either (Either(..))
-import Effect (Effect)
+import Data.Maybe
+import Data.Traversable
 import Effect.Console (log, logShow)
-import Node.Encoding (Encoding(..))
-import Node.FS.Sync (readTextFile, writeTextFile)
+import Effect (Effect)
+import Effect.Exception
 import Foreign (F)
 import Foreign.Generic (decodeJSON)
-import Control.Monad.Except (runExcept)
-import Control.Monad.Except.Trans (ExceptT, except, lift, runExceptT)
-import GenerateFFI.Parser (P5Doc, getModuleNames, filterByModuleName)
 import GenerateFFI.CodeGenerator 
-  (generateP5, generateForeignJSModule, generateUnsupportedMethodList)
-import Data.Traversable
---import Debug.Trace (trace)
+  ( generateP5
+  , generateForeignJSModule
+  , generateUnsupportedMethodList )
+import GenerateFFI.Parser 
+  ( P5Doc
+  , getModuleNames
+  , filterByModuleName
+  , getSubmoduleNames
+  , filterBySubmoduleName
+  )
+import Node.Encoding (Encoding(..))
+import Node.FS.Sync (readTextFile, writeTextFile, mkdir, rmdir)
+import Prelude
 
 generateFFI :: ExceptT String Effect Unit
 generateFFI = do
@@ -25,7 +35,32 @@ generateFFI = do
       let modules = getModuleNames p5Doc
       traverse_ (\moduleName -> do
         let p5Doc' = filterByModuleName moduleName p5Doc
-        p5 <- except $ generateP5 moduleName p5Doc'
+            submodules = getSubmoduleNames p5Doc'
+        lift $ logShow submodules
+
+        traverse_ (\submoduleName -> do
+          let p5Doc'' = filterBySubmoduleName submoduleName p5Doc'
+          p5 <- except 
+            $ generateP5 moduleName (Just submoduleName) [] p5Doc''
+          lift $ catchException (\e -> do
+            pure unit
+            ) $ mkdir ("./src/P5/" <> moduleName)
+          lift $ 
+            writeTextFile 
+            UTF8 ("./src/P5/" 
+              <> moduleName <> "/"
+              <> submoduleName <> ".purs") p5
+          js <- except $ generateForeignJSModule p5Doc'
+          lift $ 
+            writeTextFile 
+            UTF8 ("./src/P5/" 
+              <> moduleName <> "/"
+              <> submoduleName <> ".js") js
+        ) submodules
+
+        let p5Doc'' = filterBySubmoduleName moduleName p5Doc'
+        p5 <- except 
+          $ generateP5 moduleName Nothing submodules p5Doc''
         lift $ 
           writeTextFile 
           UTF8 ("./src/P5/" <> moduleName <> ".purs") p5

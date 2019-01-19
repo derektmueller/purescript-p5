@@ -8,7 +8,9 @@ module GenerateFFI.Parser
   , ReturnType
   , ClassItem
   , getModuleNames
+  , getSubmoduleNames
   , filterByModuleName
+  , filterBySubmoduleName
   , isUnsupported
   , typeIsMaybe
   , typeIsOr
@@ -22,13 +24,13 @@ import Data.List.NonEmpty as NEL
 import Control.Monad.Except.Trans (ExceptT, except, lift, runExceptT)
 import Data.NonEmpty (NonEmpty)
 import Data.Array.NonEmpty (toNonEmpty)
-import Data.String.Regex (Regex, regex, test, match)
+import Data.String.Regex (Regex, regex, test, match, replace)
 import Data.String.Regex.Flags (noFlags, global)
 import Data.String.Pattern (Pattern(..))
 import Data.String.Common (split)
 import Data.Maybe (Maybe(..), maybe)
 import Data.Array
-import Data.Either (Either(..), note)
+import Data.Either (Either(..), note, hush)
 import Foreign 
   ( Foreign
   , ForeignError(..)
@@ -96,7 +98,8 @@ type ClassItem =
     className :: String,
     params :: Maybe (Array Param),
     return :: ReturnType,
-    p5Module :: String
+    p5Module :: String,
+    p5Submodule :: Maybe String
   }
 
 type P5Method = 
@@ -107,7 +110,8 @@ type P5Method =
     className :: String,
     params :: Array Param,
     return :: ReturnType,
-    p5Module :: String
+    p5Module :: String,
+    p5Submodule :: String
   }
 
 newtype P5Doc = P5Doc (Array P5Method)
@@ -240,25 +244,51 @@ getModuleNames (P5Doc methods) = nub $ do
   m <- methods
   pure m.p5Module
 
+getSubmoduleNames :: P5Doc -> Array String
+getSubmoduleNames (P5Doc methods) = nub $ do
+  m <- methods
+  pure m.p5Submodule
+
+formatSubmodule :: String -> Maybe String
+formatSubmodule name = do
+  spaces <- hush $ regex " " global
+  and <- hush $ regex "&" global
+  three <- hush $ regex "3" global
+  two <- hush $ regex "2" global
+  pure $
+    replace two "Two" $
+    replace three "Three" $
+    replace and "And" $
+    replace spaces "" name
+
 filterByModuleName :: String -> P5Doc -> P5Doc
 filterByModuleName moduleName (P5Doc methods) = 
   P5Doc $ filter (\m -> m.p5Module == moduleName) methods
+
+filterBySubmoduleName :: String -> P5Doc -> P5Doc
+filterBySubmoduleName mModuleName (P5Doc methods) = 
+  P5Doc $ filter (\m -> m.p5Submodule == mModuleName) methods
 
 classItemToMethod :: ClassItem -> F P5Method
 classItemToMethod i = do
   case i.name of  
     Just name -> do 
       let params = maybe [] identity i.params
-      pure $ 
-        { p5Name: name
-        , name: name
-        , params: params 
-        , description: i.description 
-        , itemType: i.itemType 
-        , className: i.className 
-        , return: i.return 
-        , p5Module: i.p5Module 
-        }
+      case i.p5Submodule of
+        Just submodule ->
+          pure $ 
+            { p5Name: name
+            , name: name
+            , params: params 
+            , description: i.description 
+            , itemType: i.itemType 
+            , className: i.className 
+            , return: i.return 
+            , p5Module: i.p5Module 
+            , p5Submodule: submodule 
+            }
+        Nothing ->
+          fail $ ForeignError "Missing submodule name"
     Nothing -> fail $ ForeignError "Missing method name"
 
 instance decodeP5Doc :: Decode P5Doc where
@@ -379,6 +409,9 @@ instance decodeP5Doc :: Decode P5Doc where
           )
         p5Module <- (x ! "module") 
           >>= readString
+        p5Submodule <- (x ! "submodule") 
+          >>= readUndefined
+          >>= traverse readString
         pure $ {
             name: name,
             description: description,
@@ -391,7 +424,8 @@ instance decodeP5Doc :: Decode P5Doc where
                 , p5Type: P5Effect }
                 identity
                 mReturn,
-            p5Module
+            p5Module,
+            p5Submodule: p5Submodule >>= formatSubmodule
           })
     --trace (show (classItems :: Array ClassItem)) $ \_ -> do
     methods <- traverse classItemToMethod (onlyP5Methods classItems)
