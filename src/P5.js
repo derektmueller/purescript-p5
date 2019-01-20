@@ -41,19 +41,6 @@ exports.drawImpl = function(p) {
   };
 };
 
-exports.createCanvasImpl = function(p) {
-  return function(w) {
-    return function(h) {
-      return function(r) {
-        return function() {
-          return p.createCanvas(
-            w, h, r.value0 ? r.value0 : undefined);
-        };
-      };
-    };
-  };
-};
-
 exports.backgroundImpl = function(p) {
   return function(str) {
     return function() {
@@ -71,24 +58,6 @@ exports.setIdImpl = function(e, x) {
     e.id(x);
   };
 }
-
-exports.noiseImpl = function(p, x, y, z) {
-  return function() {
-    return callP5(p, p.noise, [x, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
-  };
-};
-
-exports.random2Impl = function(p, min, max) {
-  return function() {
-    return callP5(p, p.random, [min.value0 ? min.value0 : undefined, max.value0 ? max.value0 : undefined]);
-  };
-};
-
-exports.randomGaussianImpl = function(p, mean, sd) {
-  return function() {
-    return callP5(p, p.randomGaussian, [mean, sd]);
-  };
-};
 
 //Object.keys (
 //  [].concat (

@@ -16,6 +16,14 @@ createGraphics :: P5 -> Number -> Number -> (Maybe CreateGraphicsRenderer) -> Gr
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/createGraphics)
 
+#### `createCanvas`
+
+``` purescript
+createCanvas :: P5 -> Number -> Number -> Maybe CreateCanvasRenderer -> Effect Element
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/createCanvas)
+
 #### `noCanvas`
 
 ``` purescript

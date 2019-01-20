@@ -189,6 +189,14 @@ noiseDetail :: P5 -> Number -> Number -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/noiseDetail)
 
+#### `noise`
+
+``` purescript
+noise :: P5 -> Number -> (Maybe Number) -> (Maybe Number) -> Effect Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/noise)
+
 ### Re-exported from P5.Math.Random:
 
 #### `randomSeed`
@@ -198,6 +206,22 @@ randomSeed :: P5 -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/randomSeed)
+
+#### `randomGaussian`
+
+``` purescript
+randomGaussian :: P5 -> Number -> Number -> Effect Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/randomGaussian)
+
+#### `random2`
+
+``` purescript
+random2 :: P5 -> (Maybe Number) -> (Maybe Number) -> Effect Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/random)
 
 ### Re-exported from P5.Math.Trigonometry:
 

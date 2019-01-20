@@ -17,3 +17,8 @@ exports.noiseSeedImpl = function(p, seed) {
     callP5(p, p.noiseSeed, [seed]);
   };
 };
+exports.noiseImpl = function(p, x, y, z) {
+  return function() {
+    return callP5(p, p.noise, [x, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
+  };
+};

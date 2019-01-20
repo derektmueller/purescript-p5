@@ -1,6 +1,7 @@
 module P5.Rendering
   ( blendMode
   , createGraphics
+  , createCanvas
   , noCanvas
   , resizeCanvas
   , setAttributes2
@@ -14,8 +15,8 @@ import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
 
-
-
+foreign import createCanvasImpl 
+  :: P5 -> Number -> Number -> Maybe CreateCanvasRenderer -> Effect Element
 foreign import blendModeImpl :: Fn2 P5 BlendMode (Effect Unit)
 foreign import createGraphicsImpl :: Fn4 P5 Number Number (Maybe CreateGraphicsRenderer) Graphics
 foreign import noCanvasImpl :: Fn1 P5 (Effect Unit)
@@ -43,3 +44,8 @@ resizeCanvas p5 w h noRedraw = runFn4 resizeCanvasImpl p5 w h noRedraw
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/setAttributes)
 setAttributes2 :: P5 -> String -> Boolean -> (Effect Unit)
 setAttributes2 p5 key value = runFn3 setAttributes2Impl p5 key value
+
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/createCanvas)
+createCanvas :: P5 -> Number -> Number -> Maybe CreateCanvasRenderer -> Effect Element
+createCanvas p w h r = createCanvasImpl p w h r
+
