@@ -10,37 +10,11 @@ function callP5(p5, method, args) {
 exports.absImpl = function(p, n) {
   return callP5(p, p.abs, [n]);
 };
-exports.acosImpl = function(p, value) {
-  return callP5(p, p.acos, [value]);
-};
-exports.angleModeImpl = function(p, mode) {
-  return function() {
-    callP5(p, p.angleMode, [p[mode.constructor.name.replace(new RegExp('^ANGLE_MODE_'), '')]]);
-  };
-};
-exports.asinImpl = function(p, value) {
-  return callP5(p, p.asin, [value]);
-};
-exports.atanImpl = function(p, value) {
-  return callP5(p, p.atan, [value]);
-};
-exports.atan2Impl = function(p, y, x) {
-  return callP5(p, p.atan2, [y, x]);
-};
 exports.ceilImpl = function(p, n) {
   return callP5(p, p.ceil, [n]);
 };
 exports.constrainImpl = function(p, n, low, high) {
   return callP5(p, p.constrain, [n, low, high]);
-};
-exports.cosImpl = function(p, angle) {
-  return callP5(p, p.cos, [angle]);
-};
-exports.createVectorImpl = function(p, x, y, z) {
-  return callP5(p, p.createVector, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
-};
-exports.degreesImpl = function(p, radians) {
-  return callP5(p, p.degrees, [radians]);
 };
 exports.distImpl = function(p, x1, y1, x2, y2) {
   return callP5(p, p.dist, [x1, y1, x2, y2]);
@@ -78,42 +52,18 @@ exports.minImpl = function(p, nums) {
 exports.min2Impl = function(p, n0, n1) {
   return callP5(p, p.min, [n0, n1]);
 };
-exports.noiseDetailImpl = function(p, lod, falloff) {
-  return function() {
-    callP5(p, p.noiseDetail, [lod, falloff]);
-  };
-};
-exports.noiseSeedImpl = function(p, seed) {
-  return function() {
-    callP5(p, p.noiseSeed, [seed]);
-  };
-};
 exports.normImpl = function(p, value, start, stop) {
   return callP5(p, p.norm, [value, start, stop]);
 };
 exports.powImpl = function(p, n, e) {
   return callP5(p, p.pow, [n, e]);
 };
-exports.radiansImpl = function(p, degrees) {
-  return callP5(p, p.radians, [degrees]);
-};
-exports.randomSeedImpl = function(p, seed) {
-  return function() {
-    callP5(p, p.randomSeed, [seed]);
-  };
-};
 exports.roundImpl = function(p, n) {
   return callP5(p, p.round, [n]);
-};
-exports.sinImpl = function(p, angle) {
-  return callP5(p, p.sin, [angle]);
 };
 exports.sqImpl = function(p, n) {
   return callP5(p, p.sq, [n]);
 };
 exports.sqrtImpl = function(p, n) {
   return callP5(p, p.sqrt, [n]);
-};
-exports.tanImpl = function(p, angle) {
-  return callP5(p, p.tan, [angle]);
 };

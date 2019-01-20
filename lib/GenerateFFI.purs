@@ -36,7 +36,6 @@ generateFFI = do
       traverse_ (\moduleName -> do
         let p5Doc' = filterByModuleName moduleName p5Doc
             submodules = getSubmoduleNames p5Doc'
-        lift $ logShow submodules
 
         traverse_ (\submoduleName -> do
           let p5Doc'' = filterBySubmoduleName submoduleName p5Doc'
@@ -50,7 +49,7 @@ generateFFI = do
             UTF8 ("./src/P5/" 
               <> moduleName <> "/"
               <> submoduleName <> ".purs") p5
-          js <- except $ generateForeignJSModule p5Doc'
+          js <- except $ generateForeignJSModule p5Doc''
           lift $ 
             writeTextFile 
             UTF8 ("./src/P5/" 

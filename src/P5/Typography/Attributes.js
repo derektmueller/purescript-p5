@@ -7,9 +7,6 @@ function callP5(p5, method, args) {
   return method.apply(
     p5, trimRightUndefined(args));
 }
-exports.loadFontImpl = function(p, path, callback, onError) {
-  return callP5(p, p.loadFont, [path, callback.value0 ? callback.value0 : undefined, onError.value0 ? onError.value0 : undefined]);
-};
 exports.textAlign2Impl = function(p, horizAlign, vertAlign) {
   return function() {
     callP5(p, p.textAlign, [p[horizAlign.constructor.name.replace(new RegExp('^TEXT_ALIGN_HORIZ_ALIGN_'), '')], vertAlign.value0 ? vertAlign.value0 : undefined]);

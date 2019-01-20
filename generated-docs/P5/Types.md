@@ -266,6 +266,14 @@ data CreateGraphicsRenderer
   = CREATE_GRAPHICS_RENDERER_WEBGL
 ```
 
+#### `CreateCanvasRenderer`
+
+``` purescript
+data CreateCanvasRenderer
+  = CREATE_CANVAS_RENDERER_P2D
+  | CREATE_CANVAS_RENDERER_WEBGL
+```
+
 #### `ArcMode`
 
 ``` purescript
