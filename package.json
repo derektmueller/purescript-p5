@@ -6,10 +6,7 @@
     "build-watch": "pulp --watch browserify --to dist/Main.js",
     "webpack": "DEBUG=purs-loader* DEBUG_DEPTH=100 webpack --progress --bail",
     "webpack:server": "webpack-dev-server --progress --inline",
-    "webpack:dll": "webpack --verbose --colors --display-error-details --progress --config webpack-dll.config.js",
-    "generate-p5-doc": "yuidoc -p ../p5.js/src/",
-    "generate-ffi": "pulp run --src-path lib --main GenerateFFI",
-    "generate-ffi-watch": "pulp --watch run --src-path lib --main GenerateFFI"
+    "webpack:dll": "webpack --verbose --colors --display-error-details --progress --config webpack-dll.config.js"
   },
   "devDependencies": {
     "canvas": "^2.1.0",
