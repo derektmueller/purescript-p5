@@ -42,16 +42,12 @@ With webpack dev server running, examples can be viewed in a browser by visiting
 
 ## Project Status
 
-Most of the FFI as been auto-generated from the p5.js YUIDoc. Some functions couldn't be auto-generated, sometimes because of missing type information in the YUIDoc. These might have to be written by hand.
-
 Completed:
   * wrappers for most methods defined on the p5 class
 
 TODO:
   * generate methods for classes other than p5 (e.g. p5.Vector, p5.Image)
-  * export easier-to-use interface to hide complicated signatures in generated interface
-  * support functions with greater than 10 arguments (the library uses runFn, which is only defined for functions of at most 10 arguments) 
-  * need something like Haskell's randT so that drawings can be easily seeded
+  * easier-to-use interfaces for functions with numeric suffixes
 
 ## References
 
