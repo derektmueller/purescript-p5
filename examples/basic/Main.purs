@@ -9,8 +9,20 @@ import Data.Int (toNumber)
 import Web.HTML (window)
 import Web.HTML.Window (innerWidth, innerHeight)
 
-import P5 
-import P5.Types (P5)
+import P5
+import P5.Color
+import P5.Data
+import P5.Environment
+import P5.Events
+import P5.IO
+import P5.Image
+import P5.LightsAndCamera
+import P5.Math
+import P5.Rendering
+import P5.Shape
+import P5.Structure
+import P5.Transform
+import P5.Typography
 
 type AppState = {
   p5 :: P5

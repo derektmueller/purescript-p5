@@ -33,6 +33,7 @@ module P5.Types
   , AngleMode(..)
   , BlendMode(..)
   , CreateGraphicsRenderer(..)
+  , CreateCanvasRenderer(..)
   , ArcMode(..)
   , BeginShapeKind(..)
   , EllipseMode(..)
@@ -72,6 +73,7 @@ data GraphicsOrImageOrMediaElement = GraphicsOrImageOrMediaElementGraphics Graph
 data ArrayNumberOrVector = ArrayNumberOrVectorArrayNumber (Array Number) | ArrayNumberOrVectorVector Vector
 data NumberOrArrayNumberOrVector = NumberOrArrayNumberOrVectorNumber Number | NumberOrArrayNumberOrVectorArrayNumber (Array Number) | NumberOrArrayNumberOrVectorVector Vector
 
+data CreateCanvasRenderer = CREATE_CANVAS_RENDERER_P2D | CREATE_CANVAS_RENDERER_WEBGL
 data ColorMode = COLOR_MODE_RGB | COLOR_MODE_HSB | COLOR_MODE_HSL
 data CursorType = CURSOR_TYPE_ARROW | CURSOR_TYPE_CROSS | CURSOR_TYPE_HAND | CURSOR_TYPE_MOVE | CURSOR_TYPE_TEXT | CURSOR_TYPE_WAIT
 data BlendMode = BLEND_MODE_BLEND | BLEND_MODE_DARKEST | BLEND_MODE_LIGHTEST | BLEND_MODE_DIFFERENCE | BLEND_MODE_MULTIPLY | BLEND_MODE_EXCLUSION | BLEND_MODE_SCREEN | BLEND_MODE_REPLACE | BLEND_MODE_OVERLAY | BLEND_MODE_HARD_LIGHT | BLEND_MODE_SOFT_LIGHT | BLEND_MODE_DODGE | BLEND_MODE_BURN | BLEND_MODE_ADD | BLEND_MODE_NORMAL

@@ -22,7 +22,20 @@ import Test.Spec.Assertions (shouldEqual, fail)
 import Test.Spec.Reporter.Console (consoleReporter)
 import Test.Spec.Runner (run', defaultConfig)
 import Unsafe.Coerce (unsafeCoerce)
-import P5 (p5, P5, StrokeJoin(..), background3, createCanvas, draw, getP5, line, setId, setup, stroke, strokeJoin, strokeWeight, dist, nf, abs, NumberOrString(..), IntOrString(..), char, textLeading2, textLeading, resizeCanvas, remove, noise, noiseSeed, random2, randomSeed, randomGaussian)
+import P5
+import P5.Color
+import P5.Data
+import P5.Environment
+import P5.Events
+import P5.IO
+import P5.Image
+import P5.LightsAndCamera
+import P5.Math
+import P5.Rendering
+import P5.Shape
+import P5.Structure
+import P5.Transform
+import P5.Typography
 import Node.Crypto.Hash (Algorithm(..), base64)
 import Data.String.Common (trim)
 import HelloP5SimpleShapes as HelloP5SimpleShapes

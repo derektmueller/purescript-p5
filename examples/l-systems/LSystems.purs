@@ -21,8 +21,21 @@ import Data.String (split, Pattern(..), joinWith)
 import Data.String.CodeUnits (singleton, charAt, length)
 import Web.HTML (window)
 import Web.HTML.Window (innerWidth, innerHeight)
-import P5 (background4, createCanvas, draw, ellipse, fill5, getP5, setId, setup, stroke5, radians, line, cos, sin, clear) 
-import P5.Types (P5)
+
+import P5
+import P5.Color
+import P5.Data
+import P5.Environment
+import P5.Events
+import P5.IO
+import P5.LightsAndCamera
+import P5.Math
+import P5.Rendering
+import P5.Shape
+import P5.Structure
+import P5.Transform
+import P5.Typography
+
 import Data.Enum
 import Math (pi)
 
