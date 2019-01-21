@@ -98,7 +98,8 @@ main = do
               h = 500.0
           p <- liftEffect $ p5 $ \p -> do
             setup p $ do
-              e <- liftEffect $ createCanvas p w h Nothing
+              e <- liftEffect 
+                $ createCanvas p w h (Just CREATE_CANVAS_RENDERER_P2D)
               liftEffect $ setId e sketchName
           liftEffect $ lineDrawing p sketchName w h
           expectCanvasToMatchSnapshot 

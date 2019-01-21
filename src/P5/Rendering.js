@@ -30,15 +30,8 @@ exports.setAttributes2Impl = function(p, key, value) {
     callP5(p, p.setAttributes, [key, value]);
   };
 };
-exports.createCanvasImpl = function(p) {
-  return function(w) {
-    return function(h) {
-      return function(r) {
-        return function() {
-          return p.createCanvas(
-            w, h, r.value0 ? r.value0 : undefined);
-        };
-      };
-    };
+exports.createCanvasImpl = function(p, w, h, r) {
+  return function() {
+    return callP5(p, p.createCanvas, [w, h, r.value0 ? p[r.constructor.name.replace(new RegExp('^CREATE_CANVAS_RENDERER_'), '')] : undefined]);
   };
 };
