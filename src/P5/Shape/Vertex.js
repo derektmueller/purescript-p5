@@ -14,7 +14,7 @@ exports.beginContourImpl = function(p) {
 };
 exports.beginShapeImpl = function(p, kind) {
   return function() {
-    callP5(p, p.beginShape, [kind.value0 ? kind.value0 : undefined]);
+    callP5(p, p.beginShape, [kind.value0 !== undefined ? kind.value0 : undefined]);
   };
 };
 exports.bezierVertexImpl = function(p, x2, y2, x3, y3, x4, y4) {
@@ -34,7 +34,7 @@ exports.curveVertexImpl = function(p, x, y) {
 };
 exports.curveVertex2Impl = function(p, x, y, z) {
   return function() {
-    callP5(p, p.curveVertex, [x, y, z.value0 ? z.value0 : undefined]);
+    callP5(p, p.curveVertex, [x, y, z.value0 !== undefined ? z.value0 : undefined]);
   };
 };
 exports.endContourImpl = function(p) {
@@ -44,7 +44,7 @@ exports.endContourImpl = function(p) {
 };
 exports.endShapeImpl = function(p, mode) {
   return function() {
-    callP5(p, p.endShape, [mode.value0 ? mode.value0 : undefined]);
+    callP5(p, p.endShape, [mode.value0 !== undefined ? mode.value0 : undefined]);
   };
 };
 exports.quadraticVertexImpl = function(p, cx, cy, x3, y3) {
@@ -64,6 +64,6 @@ exports.vertexImpl = function(p, x, y) {
 };
 exports.vertex2Impl = function(p, x, y, z, u, v) {
   return function() {
-    callP5(p, p.vertex, [x, y, z, u.value0 ? u.value0 : undefined, v.value0 ? v.value0 : undefined]);
+    callP5(p, p.vertex, [x, y, z, u.value0 !== undefined ? u.value0 : undefined, v.value0 !== undefined ? v.value0 : undefined]);
   };
 };

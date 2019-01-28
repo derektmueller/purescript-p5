@@ -9,12 +9,12 @@ function callP5(p5, method, args) {
 }
 exports.imageImpl = function(p, img, x, y, width, height) {
   return function() {
-    callP5(p, p.image, [img.value0, x, y, width.value0 ? width.value0 : undefined, height.value0 ? height.value0 : undefined]);
+    callP5(p, p.image, [img.value0, x, y, width.value0 !== undefined ? width.value0 : undefined, height.value0 !== undefined ? height.value0 : undefined]);
   };
 };
 exports.image2Impl = function(p, img, dx, dy, dWidth, dHeight, sx, sy, sWidth, sHeight) {
   return function() {
-    callP5(p, p.image, [img.value0, dx, dy, dWidth, dHeight, sx, sy, sWidth.value0 ? sWidth.value0 : undefined, sHeight.value0 ? sHeight.value0 : undefined]);
+    callP5(p, p.image, [img.value0, dx, dy, dWidth, dHeight, sx, sy, sWidth.value0 !== undefined ? sWidth.value0 : undefined, sHeight.value0 !== undefined ? sHeight.value0 : undefined]);
   };
 };
 exports.imageModeImpl = function(p, mode) {
@@ -44,11 +44,11 @@ exports.tint3Impl = function(p, color) {
 };
 exports.tint4Impl = function(p, gray, alpha) {
   return function() {
-    callP5(p, p.tint, [gray, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.tint, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.tint5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
-    callP5(p, p.tint, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.tint, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };

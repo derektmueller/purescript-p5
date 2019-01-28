@@ -8,11 +8,11 @@ function callP5(p5, method, args) {
     p5, trimRightUndefined(args));
 }
 exports.loadFontImpl = function(p, path, callback, onError) {
-  return callP5(p, p.loadFont, [path, callback.value0 ? callback.value0 : undefined, onError.value0 ? onError.value0 : undefined]);
+  return callP5(p, p.loadFont, [path, callback.value0 !== undefined ? callback.value0 : undefined, onError.value0 !== undefined ? onError.value0 : undefined]);
 };
 exports.textAlign2Impl = function(p, horizAlign, vertAlign) {
   return function() {
-    callP5(p, p.textAlign, [p[horizAlign.constructor.name.replace(new RegExp('^TEXT_ALIGN_HORIZ_ALIGN_'), '')], vertAlign.value0 ? vertAlign.value0 : undefined]);
+    callP5(p, p.textAlign, [p[horizAlign.constructor.name.replace(new RegExp('^TEXT_ALIGN_HORIZ_ALIGN_'), '')], vertAlign.value0 !== undefined ? vertAlign.value0 : undefined]);
   };
 };
 exports.textAscentImpl = function(p) {

@@ -8,5 +8,5 @@ function callP5(p5, method, args) {
     p5, trimRightUndefined(args));
 }
 exports.loadFontImpl = function(p, path, callback, onError) {
-  return callP5(p, p.loadFont, [path, callback.value0 ? callback.value0 : undefined, onError.value0 ? onError.value0 : undefined]);
+  return callP5(p, p.loadFont, [path, callback.value0 !== undefined ? callback.value0 : undefined, onError.value0 !== undefined ? onError.value0 : undefined]);
 };

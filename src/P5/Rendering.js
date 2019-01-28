@@ -13,7 +13,7 @@ exports.blendModeImpl = function(p, mode) {
   };
 };
 exports.createGraphicsImpl = function(p, w, h, renderer) {
-  return callP5(p, p.createGraphics, [w, h, renderer.value0 ? renderer.value0 : undefined]);
+  return callP5(p, p.createGraphics, [w, h, renderer.value0 !== undefined ? renderer.value0 : undefined]);
 };
 exports.noCanvasImpl = function(p) {
   return function() {
@@ -22,7 +22,7 @@ exports.noCanvasImpl = function(p) {
 };
 exports.resizeCanvasImpl = function(p, w, h, noRedraw) {
   return function() {
-    callP5(p, p.resizeCanvas, [w, h, noRedraw.value0 ? noRedraw.value0 : undefined]);
+    callP5(p, p.resizeCanvas, [w, h, noRedraw.value0 !== undefined ? noRedraw.value0 : undefined]);
   };
 };
 exports.setAttributes2Impl = function(p, key, value) {
@@ -32,6 +32,6 @@ exports.setAttributes2Impl = function(p, key, value) {
 };
 exports.createCanvasImpl = function(p, w, h, r) {
   return function() {
-    return callP5(p, p.createCanvas, [w, h, r.value0 ? p[r.value0.constructor.name.replace(new RegExp('^CREATE_CANVAS_RENDERER_'), '')] : undefined]);
+    return callP5(p, p.createCanvas, [w, h, r.value0 !== undefined ? p[r.value0.constructor.name.replace(new RegExp('^CREATE_CANVAS_RENDERER_'), '')] : undefined]);
   };
 };

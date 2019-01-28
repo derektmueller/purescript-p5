@@ -26,7 +26,7 @@ exports.color3Impl = function(p, color) {
   return callP5(p, p.color, [color]);
 };
 exports.color4Impl = function(p, gray, alpha) {
-  return callP5(p, p.color, [gray, alpha.value0 ? alpha.value0 : undefined]);
+  return callP5(p, p.color, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
 };
 exports.color5Impl = function(p, v1, v2, v3, alpha) {
   return callP5(p, p.color, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);

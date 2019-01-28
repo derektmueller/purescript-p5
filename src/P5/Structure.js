@@ -34,7 +34,7 @@ exports.pushImpl = function(p) {
 };
 exports.redrawImpl = function(p, n) {
   return function() {
-    callP5(p, p.redraw, [n.value0 ? n.value0 : undefined]);
+    callP5(p, p.redraw, [n.value0 !== undefined ? n.value0 : undefined]);
   };
 };
 exports.removeImpl = function(p) {

@@ -17,13 +17,13 @@ exports.floatImpl = function(p, str) {
   return callP5(p, p.float, [str]);
 };
 exports.hexImpl = function(p, n, digits) {
-  return callP5(p, p.hex, [n, digits.value0 ? digits.value0 : undefined]);
+  return callP5(p, p.hex, [n, digits.value0 !== undefined ? digits.value0 : undefined]);
 };
 exports.hex2Impl = function(p, ns, digits) {
-  return callP5(p, p.hex, [ns, digits.value0 ? digits.value0 : undefined]);
+  return callP5(p, p.hex, [ns, digits.value0 !== undefined ? digits.value0 : undefined]);
 };
 exports.int2Impl = function(p, n, radix) {
-  return callP5(p, p.int, [n.value0, radix.value0 ? radix.value0 : undefined]);
+  return callP5(p, p.int, [n.value0, radix.value0 !== undefined ? radix.value0 : undefined]);
 };
 exports.strImpl = function(p, n) {
   return callP5(p, p.str, [n.value0]);

@@ -10,7 +10,7 @@ function callP5(p5, method, args) {
 
 exports.random2Impl = function(p, min, max) {
   return function() {
-    return callP5(p, p.random, [min.value0 ? min.value0 : undefined, max.value0 ? max.value0 : undefined]);
+    return callP5(p, p.random, [min.value0 !== undefined ? min.value0 : undefined, max.value0 !== undefined ? max.value0 : undefined]);
   };
 };
 

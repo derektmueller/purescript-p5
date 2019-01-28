@@ -37,7 +37,7 @@ exports.cosImpl = function(p, angle) {
   return callP5(p, p.cos, [angle]);
 };
 exports.createVectorImpl = function(p, x, y, z) {
-  return callP5(p, p.createVector, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
+  return callP5(p, p.createVector, [x.value0 !== undefined ? x.value0 : undefined, y.value0 !== undefined ? y.value0 : undefined, z.value0 !== undefined ? z.value0 : undefined]);
 };
 exports.degreesImpl = function(p, radians) {
   return callP5(p, p.degrees, [radians]);
@@ -64,7 +64,7 @@ exports.magImpl = function(p, a, b) {
   return callP5(p, p.mag, [a, b]);
 };
 exports.mapImpl = function(p, value, start1, stop1, start2, stop2, withinBounds) {
-  return callP5(p, p.map, [value, start1, stop1, start2, stop2, withinBounds.value0 ? withinBounds.value0 : undefined]);
+  return callP5(p, p.map, [value, start1, stop1, start2, stop2, withinBounds.value0 !== undefined ? withinBounds.value0 : undefined]);
 };
 exports.maxImpl = function(p, nums) {
   return callP5(p, p.max, [nums]);

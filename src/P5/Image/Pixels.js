@@ -24,11 +24,11 @@ exports.copy2Impl = function(p, srcImage, sx, sy, sw, sh, dx, dy, dw, dh) {
 };
 exports.filterImpl = function(p, filterType, filterParam) {
   return function() {
-    callP5(p, p.filter, [p[filterType.constructor.name.replace(new RegExp('^FILTER_TYPE_'), '')], filterParam.value0 ? filterParam.value0 : undefined]);
+    callP5(p, p.filter, [p[filterType.constructor.name.replace(new RegExp('^FILTER_TYPE_'), '')], filterParam.value0 !== undefined ? filterParam.value0 : undefined]);
   };
 };
 exports.getImpl = function(p, x, y, w, h) {
-  return callP5(p, p.get, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, w.value0 ? w.value0 : undefined, h.value0 ? h.value0 : undefined]);
+  return callP5(p, p.get, [x.value0 !== undefined ? x.value0 : undefined, y.value0 !== undefined ? y.value0 : undefined, w.value0 !== undefined ? w.value0 : undefined, h.value0 !== undefined ? h.value0 : undefined]);
 };
 exports.loadPixelsImpl = function(p) {
   return function() {
@@ -42,6 +42,6 @@ exports.setImpl = function(p, x, y, c) {
 };
 exports.updatePixelsImpl = function(p, x, y, w, h) {
   return function() {
-    callP5(p, p.updatePixels, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, w.value0 ? w.value0 : undefined, h.value0 ? h.value0 : undefined]);
+    callP5(p, p.updatePixels, [x.value0 !== undefined ? x.value0 : undefined, y.value0 !== undefined ? y.value0 : undefined, w.value0 !== undefined ? w.value0 : undefined, h.value0 !== undefined ? h.value0 : undefined]);
   };
 };

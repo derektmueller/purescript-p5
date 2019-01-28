@@ -9,7 +9,7 @@ function callP5(p5, method, args) {
 }
 exports.cursorImpl = function(p, _type, x, y) {
   return function() {
-    callP5(p, p.cursor, [_type.value0, x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined]);
+    callP5(p, p.cursor, [_type.value0, x.value0 !== undefined ? x.value0 : undefined, y.value0 !== undefined ? y.value0 : undefined]);
   };
 };
 exports.displayDensityImpl = function(p) {
@@ -24,7 +24,7 @@ exports.frameRate2Impl = function(p, fps) {
   };
 };
 exports.fullscreenImpl = function(p, val) {
-  return callP5(p, p.fullscreen, [val.value0 ? val.value0 : undefined]);
+  return callP5(p, p.fullscreen, [val.value0 !== undefined ? val.value0 : undefined]);
 };
 exports.getURLImpl = function(p) {
   return callP5(p, p.getURL, []);

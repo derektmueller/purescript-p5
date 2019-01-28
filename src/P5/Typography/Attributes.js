@@ -9,7 +9,7 @@ function callP5(p5, method, args) {
 }
 exports.textAlign2Impl = function(p, horizAlign, vertAlign) {
   return function() {
-    callP5(p, p.textAlign, [p[horizAlign.constructor.name.replace(new RegExp('^TEXT_ALIGN_HORIZ_ALIGN_'), '')], vertAlign.value0 ? vertAlign.value0 : undefined]);
+    callP5(p, p.textAlign, [p[horizAlign.constructor.name.replace(new RegExp('^TEXT_ALIGN_HORIZ_ALIGN_'), '')], vertAlign.value0 !== undefined ? vertAlign.value0 : undefined]);
   };
 };
 exports.textAscentImpl = function(p) {

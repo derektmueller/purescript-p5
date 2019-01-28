@@ -24,12 +24,12 @@ exports.ambientLight3Impl = function(p, color) {
 };
 exports.ambientLight4Impl = function(p, gray, alpha) {
   return function() {
-    callP5(p, p.ambientLight, [gray, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.ambientLight, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.ambientLight5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
-    callP5(p, p.ambientLight, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.ambientLight, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.directionalLightImpl = function(p, color, position) {

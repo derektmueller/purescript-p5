@@ -9,7 +9,7 @@ function callP5(p5, method, args) {
 }
 exports.cameraImpl = function(p, x, y, z, centerX, centerY, centerZ, upX, upY, upZ) {
   return function() {
-    callP5(p, p.camera, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined, centerX.value0 ? centerX.value0 : undefined, centerY.value0 ? centerY.value0 : undefined, centerZ.value0 ? centerZ.value0 : undefined, upX.value0 ? upX.value0 : undefined, upY.value0 ? upY.value0 : undefined, upZ.value0 ? upZ.value0 : undefined]);
+    callP5(p, p.camera, [x.value0 !== undefined ? x.value0 : undefined, y.value0 !== undefined ? y.value0 : undefined, z.value0 !== undefined ? z.value0 : undefined, centerX.value0 !== undefined ? centerX.value0 : undefined, centerY.value0 !== undefined ? centerY.value0 : undefined, centerZ.value0 !== undefined ? centerZ.value0 : undefined, upX.value0 !== undefined ? upX.value0 : undefined, upY.value0 !== undefined ? upY.value0 : undefined, upZ.value0 !== undefined ? upZ.value0 : undefined]);
   };
 };
 exports.createCameraImpl = function(p) {
@@ -17,12 +17,12 @@ exports.createCameraImpl = function(p) {
 };
 exports.orthoImpl = function(p, left, right, bottom, top, near, far) {
   return function() {
-    callP5(p, p.ortho, [left.value0 ? left.value0 : undefined, right.value0 ? right.value0 : undefined, bottom.value0 ? bottom.value0 : undefined, top.value0 ? top.value0 : undefined, near.value0 ? near.value0 : undefined, far.value0 ? far.value0 : undefined]);
+    callP5(p, p.ortho, [left.value0 !== undefined ? left.value0 : undefined, right.value0 !== undefined ? right.value0 : undefined, bottom.value0 !== undefined ? bottom.value0 : undefined, top.value0 !== undefined ? top.value0 : undefined, near.value0 !== undefined ? near.value0 : undefined, far.value0 !== undefined ? far.value0 : undefined]);
   };
 };
 exports.perspectiveImpl = function(p, fovy, aspect, near, far) {
   return function() {
-    callP5(p, p.perspective, [fovy.value0 ? fovy.value0 : undefined, aspect.value0 ? aspect.value0 : undefined, near.value0 ? near.value0 : undefined, far.value0 ? far.value0 : undefined]);
+    callP5(p, p.perspective, [fovy.value0 !== undefined ? fovy.value0 : undefined, aspect.value0 !== undefined ? aspect.value0 : undefined, near.value0 !== undefined ? near.value0 : undefined, far.value0 !== undefined ? far.value0 : undefined]);
   };
 };
 exports.setCameraImpl = function(p, cam) {

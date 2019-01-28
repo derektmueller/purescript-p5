@@ -8,5 +8,5 @@ function callP5(p5, method, args) {
     p5, trimRightUndefined(args));
 }
 exports.loadStringsImpl = function(p, filename, callback, errorCallback) {
-  return callP5(p, p.loadStrings, [filename, callback.value0 ? callback.value0 : undefined, errorCallback.value0 ? errorCallback.value0 : undefined]);
+  return callP5(p, p.loadStrings, [filename, callback.value0 !== undefined ? callback.value0 : undefined, errorCallback.value0 !== undefined ? errorCallback.value0 : undefined]);
 };

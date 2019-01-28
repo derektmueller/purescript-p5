@@ -27,20 +27,20 @@ exports.createImageImpl = function(p, width, height) {
 };
 exports.filterImpl = function(p, filterType, filterParam) {
   return function() {
-    callP5(p, p.filter, [p[filterType.constructor.name.replace(new RegExp('^FILTER_TYPE_'), '')], filterParam.value0 ? filterParam.value0 : undefined]);
+    callP5(p, p.filter, [p[filterType.constructor.name.replace(new RegExp('^FILTER_TYPE_'), '')], filterParam.value0 !== undefined ? filterParam.value0 : undefined]);
   };
 };
 exports.getImpl = function(p, x, y, w, h) {
-  return callP5(p, p.get, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, w.value0 ? w.value0 : undefined, h.value0 ? h.value0 : undefined]);
+  return callP5(p, p.get, [x.value0 !== undefined ? x.value0 : undefined, y.value0 !== undefined ? y.value0 : undefined, w.value0 !== undefined ? w.value0 : undefined, h.value0 !== undefined ? h.value0 : undefined]);
 };
 exports.imageImpl = function(p, img, x, y, width, height) {
   return function() {
-    callP5(p, p.image, [img.value0, x, y, width.value0 ? width.value0 : undefined, height.value0 ? height.value0 : undefined]);
+    callP5(p, p.image, [img.value0, x, y, width.value0 !== undefined ? width.value0 : undefined, height.value0 !== undefined ? height.value0 : undefined]);
   };
 };
 exports.image2Impl = function(p, img, dx, dy, dWidth, dHeight, sx, sy, sWidth, sHeight) {
   return function() {
-    callP5(p, p.image, [img.value0, dx, dy, dWidth, dHeight, sx, sy, sWidth.value0 ? sWidth.value0 : undefined, sHeight.value0 ? sHeight.value0 : undefined]);
+    callP5(p, p.image, [img.value0, dx, dy, dWidth, dHeight, sx, sy, sWidth.value0 !== undefined ? sWidth.value0 : undefined, sHeight.value0 !== undefined ? sHeight.value0 : undefined]);
   };
 };
 exports.imageModeImpl = function(p, mode) {
@@ -60,7 +60,7 @@ exports.noTintImpl = function(p) {
 };
 exports.saveCanvasImpl = function(p, filename, extension) {
   return function() {
-    callP5(p, p.saveCanvas, [filename.value0 ? filename.value0 : undefined, extension.value0 ? extension.value0 : undefined]);
+    callP5(p, p.saveCanvas, [filename.value0 !== undefined ? filename.value0 : undefined, extension.value0 !== undefined ? extension.value0 : undefined]);
   };
 };
 exports.setImpl = function(p, x, y, c) {
@@ -85,16 +85,16 @@ exports.tint3Impl = function(p, color) {
 };
 exports.tint4Impl = function(p, gray, alpha) {
   return function() {
-    callP5(p, p.tint, [gray, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.tint, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.tint5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
-    callP5(p, p.tint, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.tint, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.updatePixelsImpl = function(p, x, y, w, h) {
   return function() {
-    callP5(p, p.updatePixels, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, w.value0 ? w.value0 : undefined, h.value0 ? h.value0 : undefined]);
+    callP5(p, p.updatePixels, [x.value0 !== undefined ? x.value0 : undefined, y.value0 !== undefined ? y.value0 : undefined, w.value0 !== undefined ? w.value0 : undefined, h.value0 !== undefined ? h.value0 : undefined]);
   };
 };

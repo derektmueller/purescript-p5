@@ -24,12 +24,12 @@ exports.ambientLight3Impl = function(p, color) {
 };
 exports.ambientLight4Impl = function(p, gray, alpha) {
   return function() {
-    callP5(p, p.ambientLight, [gray, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.ambientLight, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.ambientLight5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
-    callP5(p, p.ambientLight, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.ambientLight, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.ambientMaterialImpl = function(p, color) {
@@ -39,12 +39,12 @@ exports.ambientMaterialImpl = function(p, color) {
 };
 exports.ambientMaterial2Impl = function(p, v1, v2, v3, a) {
   return function() {
-    callP5(p, p.ambientMaterial, [v1, v2.value0 ? v2.value0 : undefined, v3.value0 ? v3.value0 : undefined, a.value0 ? a.value0 : undefined]);
+    callP5(p, p.ambientMaterial, [v1, v2.value0 !== undefined ? v2.value0 : undefined, v3.value0 !== undefined ? v3.value0 : undefined, a.value0 !== undefined ? a.value0 : undefined]);
   };
 };
 exports.cameraImpl = function(p, x, y, z, centerX, centerY, centerZ, upX, upY, upZ) {
   return function() {
-    callP5(p, p.camera, [x.value0 ? x.value0 : undefined, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined, centerX.value0 ? centerX.value0 : undefined, centerY.value0 ? centerY.value0 : undefined, centerZ.value0 ? centerZ.value0 : undefined, upX.value0 ? upX.value0 : undefined, upY.value0 ? upY.value0 : undefined, upZ.value0 ? upZ.value0 : undefined]);
+    callP5(p, p.camera, [x.value0 !== undefined ? x.value0 : undefined, y.value0 !== undefined ? y.value0 : undefined, z.value0 !== undefined ? z.value0 : undefined, centerX.value0 !== undefined ? centerX.value0 : undefined, centerY.value0 !== undefined ? centerY.value0 : undefined, centerZ.value0 !== undefined ? centerZ.value0 : undefined, upX.value0 !== undefined ? upX.value0 : undefined, upY.value0 !== undefined ? upY.value0 : undefined, upZ.value0 !== undefined ? upZ.value0 : undefined]);
   };
 };
 exports.createCameraImpl = function(p) {
@@ -65,17 +65,17 @@ exports.debugMode2Impl = function(p, mode) {
 };
 exports.debugMode3Impl = function(p, mode, axesSize, xOff, yOff, zOff) {
   return function() {
-    callP5(p, p.debugMode, [p[mode.constructor.name.replace(new RegExp('^DEBUG_MODE_'), '')], axesSize.value0 ? axesSize.value0 : undefined, xOff.value0 ? xOff.value0 : undefined, yOff.value0 ? yOff.value0 : undefined, zOff.value0 ? zOff.value0 : undefined]);
+    callP5(p, p.debugMode, [p[mode.constructor.name.replace(new RegExp('^DEBUG_MODE_'), '')], axesSize.value0 !== undefined ? axesSize.value0 : undefined, xOff.value0 !== undefined ? xOff.value0 : undefined, yOff.value0 !== undefined ? yOff.value0 : undefined, zOff.value0 !== undefined ? zOff.value0 : undefined]);
   };
 };
 exports.debugMode4Impl = function(p, mode, gridSize, gridDivisions, xOff, yOff, zOff) {
   return function() {
-    callP5(p, p.debugMode, [p[mode.constructor.name.replace(new RegExp('^DEBUG_MODE_'), '')], gridSize.value0 ? gridSize.value0 : undefined, gridDivisions.value0 ? gridDivisions.value0 : undefined, xOff.value0 ? xOff.value0 : undefined, yOff.value0 ? yOff.value0 : undefined, zOff.value0 ? zOff.value0 : undefined]);
+    callP5(p, p.debugMode, [p[mode.constructor.name.replace(new RegExp('^DEBUG_MODE_'), '')], gridSize.value0 !== undefined ? gridSize.value0 : undefined, gridDivisions.value0 !== undefined ? gridDivisions.value0 : undefined, xOff.value0 !== undefined ? xOff.value0 : undefined, yOff.value0 !== undefined ? yOff.value0 : undefined, zOff.value0 !== undefined ? zOff.value0 : undefined]);
   };
 };
 exports.debugMode5Impl = function(p, gridSize, gridDivisions, gridXOff, gridYOff, gridZOff, axesSize, axesXOff, axesYOff, axesZOff) {
   return function() {
-    callP5(p, p.debugMode, [gridSize.value0 ? gridSize.value0 : undefined, gridDivisions.value0 ? gridDivisions.value0 : undefined, gridXOff.value0 ? gridXOff.value0 : undefined, gridYOff.value0 ? gridYOff.value0 : undefined, gridZOff.value0 ? gridZOff.value0 : undefined, axesSize.value0 ? axesSize.value0 : undefined, axesXOff.value0 ? axesXOff.value0 : undefined, axesYOff.value0 ? axesYOff.value0 : undefined, axesZOff.value0 ? axesZOff.value0 : undefined]);
+    callP5(p, p.debugMode, [gridSize.value0 !== undefined ? gridSize.value0 : undefined, gridDivisions.value0 !== undefined ? gridDivisions.value0 : undefined, gridXOff.value0 !== undefined ? gridXOff.value0 : undefined, gridYOff.value0 !== undefined ? gridYOff.value0 : undefined, gridZOff.value0 !== undefined ? gridZOff.value0 : undefined, axesSize.value0 !== undefined ? axesSize.value0 : undefined, axesXOff.value0 !== undefined ? axesXOff.value0 : undefined, axesYOff.value0 !== undefined ? axesYOff.value0 : undefined, axesZOff.value0 !== undefined ? axesZOff.value0 : undefined]);
   };
 };
 exports.directionalLightImpl = function(p, color, position) {
@@ -99,7 +99,7 @@ exports.directionalLight4Impl = function(p, v1, v2, v3, x, y, z) {
   };
 };
 exports.loadShaderImpl = function(p, vertFilename, fragFilename) {
-  return callP5(p, p.loadShader, [vertFilename.value0 ? vertFilename.value0 : undefined, fragFilename.value0 ? fragFilename.value0 : undefined]);
+  return callP5(p, p.loadShader, [vertFilename.value0 !== undefined ? vertFilename.value0 : undefined, fragFilename.value0 !== undefined ? fragFilename.value0 : undefined]);
 };
 exports.noDebugModeImpl = function(p) {
   return function() {
@@ -113,17 +113,17 @@ exports.normalMaterialImpl = function(p) {
 };
 exports.orbitControlImpl = function(p, sensitivityX, sensitivityY) {
   return function() {
-    callP5(p, p.orbitControl, [sensitivityX.value0 ? sensitivityX.value0 : undefined, sensitivityY.value0 ? sensitivityY.value0 : undefined]);
+    callP5(p, p.orbitControl, [sensitivityX.value0 !== undefined ? sensitivityX.value0 : undefined, sensitivityY.value0 !== undefined ? sensitivityY.value0 : undefined]);
   };
 };
 exports.orthoImpl = function(p, left, right, bottom, top, near, far) {
   return function() {
-    callP5(p, p.ortho, [left.value0 ? left.value0 : undefined, right.value0 ? right.value0 : undefined, bottom.value0 ? bottom.value0 : undefined, top.value0 ? top.value0 : undefined, near.value0 ? near.value0 : undefined, far.value0 ? far.value0 : undefined]);
+    callP5(p, p.ortho, [left.value0 !== undefined ? left.value0 : undefined, right.value0 !== undefined ? right.value0 : undefined, bottom.value0 !== undefined ? bottom.value0 : undefined, top.value0 !== undefined ? top.value0 : undefined, near.value0 !== undefined ? near.value0 : undefined, far.value0 !== undefined ? far.value0 : undefined]);
   };
 };
 exports.perspectiveImpl = function(p, fovy, aspect, near, far) {
   return function() {
-    callP5(p, p.perspective, [fovy.value0 ? fovy.value0 : undefined, aspect.value0 ? aspect.value0 : undefined, near.value0 ? near.value0 : undefined, far.value0 ? far.value0 : undefined]);
+    callP5(p, p.perspective, [fovy.value0 !== undefined ? fovy.value0 : undefined, aspect.value0 !== undefined ? aspect.value0 : undefined, near.value0 !== undefined ? near.value0 : undefined, far.value0 !== undefined ? far.value0 : undefined]);
   };
 };
 exports.pointLightImpl = function(p, color, position) {
@@ -153,7 +153,7 @@ exports.setCameraImpl = function(p, cam) {
 };
 exports.shaderImpl = function(p, s) {
   return function() {
-    callP5(p, p.shader, [s.value0 ? s.value0 : undefined]);
+    callP5(p, p.shader, [s.value0 !== undefined ? s.value0 : undefined]);
   };
 };
 exports.specularMaterialImpl = function(p, color) {
@@ -163,7 +163,7 @@ exports.specularMaterialImpl = function(p, color) {
 };
 exports.specularMaterial2Impl = function(p, v1, v2, v3, a) {
   return function() {
-    callP5(p, p.specularMaterial, [v1, v2.value0 ? v2.value0 : undefined, v3.value0 ? v3.value0 : undefined, a.value0 ? a.value0 : undefined]);
+    callP5(p, p.specularMaterial, [v1, v2.value0 !== undefined ? v2.value0 : undefined, v3.value0 !== undefined ? v3.value0 : undefined, a.value0 !== undefined ? a.value0 : undefined]);
   };
 };
 exports.textureImpl = function(p, tex) {

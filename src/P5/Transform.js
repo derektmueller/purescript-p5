@@ -19,7 +19,7 @@ exports.resetMatrixImpl = function(p) {
 };
 exports.rotateImpl = function(p, angle, axis) {
   return function() {
-    callP5(p, p.rotate, [angle, axis.value0 ? axis.value0.value0 : undefined]);
+    callP5(p, p.rotate, [angle, axis.value0 !== undefined ? axis.value0.value0 : undefined]);
   };
 };
 exports.rotateXImpl = function(p, angle) {
@@ -44,7 +44,7 @@ exports.scaleImpl = function(p, scales) {
 };
 exports.scale2Impl = function(p, s, y, z) {
   return function() {
-    callP5(p, p.scale, [s.value0, y.value0 ? y.value0 : undefined, z.value0 ? z.value0 : undefined]);
+    callP5(p, p.scale, [s.value0, y.value0 !== undefined ? y.value0 : undefined, z.value0 !== undefined ? z.value0 : undefined]);
   };
 };
 exports.shearXImpl = function(p, angle) {
@@ -64,6 +64,6 @@ exports.translateImpl = function(p, vector) {
 };
 exports.translate2Impl = function(p, x, y, z) {
   return function() {
-    callP5(p, p.translate, [x, y, z.value0 ? z.value0 : undefined]);
+    callP5(p, p.translate, [x, y, z.value0 !== undefined ? z.value0 : undefined]);
   };
 };

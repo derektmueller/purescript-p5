@@ -22,22 +22,22 @@ exports.background2Impl = function(p, values) {
 };
 exports.background3Impl = function(p, colorstring, a) {
   return function() {
-    callP5(p, p.background, [colorstring, a.value0 ? a.value0 : undefined]);
+    callP5(p, p.background, [colorstring, a.value0 !== undefined ? a.value0 : undefined]);
   };
 };
 exports.background4Impl = function(p, gray, a) {
   return function() {
-    callP5(p, p.background, [gray, a.value0 ? a.value0 : undefined]);
+    callP5(p, p.background, [gray, a.value0 !== undefined ? a.value0 : undefined]);
   };
 };
 exports.background5Impl = function(p, image, a) {
   return function() {
-    callP5(p, p.background, [image, a.value0 ? a.value0 : undefined]);
+    callP5(p, p.background, [image, a.value0 !== undefined ? a.value0 : undefined]);
   };
 };
 exports.background6Impl = function(p, v1, v2, v3, a) {
   return function() {
-    callP5(p, p.background, [v1, v2, v3, a.value0 ? a.value0 : undefined]);
+    callP5(p, p.background, [v1, v2, v3, a.value0 !== undefined ? a.value0 : undefined]);
   };
 };
 exports.blueImpl = function(p, color) {
@@ -61,19 +61,19 @@ exports.color3Impl = function(p, color) {
   return callP5(p, p.color, [color]);
 };
 exports.color4Impl = function(p, gray, alpha) {
-  return callP5(p, p.color, [gray, alpha.value0 ? alpha.value0 : undefined]);
+  return callP5(p, p.color, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
 };
 exports.color5Impl = function(p, v1, v2, v3, alpha) {
-  return callP5(p, p.color, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+  return callP5(p, p.color, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
 };
 exports.colorModeImpl = function(p, mode, max) {
   return function() {
-    callP5(p, p.colorMode, [p[mode.constructor.name.replace(new RegExp('^COLOR_MODE_'), '')], max.value0 ? max.value0 : undefined]);
+    callP5(p, p.colorMode, [p[mode.constructor.name.replace(new RegExp('^COLOR_MODE_'), '')], max.value0 !== undefined ? max.value0 : undefined]);
   };
 };
 exports.colorMode2Impl = function(p, mode, max1, max2, max3, maxA) {
   return function() {
-    callP5(p, p.colorMode, [p[mode.constructor.name.replace(new RegExp('^COLOR_MODE_'), '')], max1, max2, max3, maxA.value0 ? maxA.value0 : undefined]);
+    callP5(p, p.colorMode, [p[mode.constructor.name.replace(new RegExp('^COLOR_MODE_'), '')], max1, max2, max3, maxA.value0 !== undefined ? maxA.value0 : undefined]);
   };
 };
 exports.fillImpl = function(p, value) {
@@ -93,12 +93,12 @@ exports.fill3Impl = function(p, color) {
 };
 exports.fill4Impl = function(p, gray, alpha) {
   return function() {
-    callP5(p, p.fill, [gray, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.fill, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.fill5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
-    callP5(p, p.fill, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.fill, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.greenImpl = function(p, color) {
@@ -146,11 +146,11 @@ exports.stroke3Impl = function(p, color) {
 };
 exports.stroke4Impl = function(p, gray, alpha) {
   return function() {
-    callP5(p, p.stroke, [gray, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.stroke, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
 exports.stroke5Impl = function(p, v1, v2, v3, alpha) {
   return function() {
-    callP5(p, p.stroke, [v1, v2, v3, alpha.value0 ? alpha.value0 : undefined]);
+    callP5(p, p.stroke, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
