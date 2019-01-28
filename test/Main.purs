@@ -24,6 +24,7 @@ import Test.Spec.Runner (run', defaultConfig)
 import Unsafe.Coerce (unsafeCoerce)
 import P5
 import P5.Color
+import P5.Types.Color
 import P5.Data
 import P5.Environment
 import P5.Events
@@ -129,19 +130,6 @@ main = do
             $ StructureWidthAndHeight.main (Just {p5: p})
           expectCanvasToMatchSnapshot 
             sketchName w h sketchName
---        it "renders l-systems" do
---          p <- liftEffect getP5
---          let sketchName = "lSystems"
---              w = 710.0
---              h = 400.0
---          p <- liftEffect $ p5 $ \p -> do
---            setup p $ do
---              e <- liftEffect $ createCanvas p w h Nothing
---              liftEffect $ setId e sketchName
---          _ <- liftEffect 
---            $ LSystems.main (Just {p5: p})
---          expectCanvasToMatchSnapshot 
---            sketchName w h sketchName
       describe "math" do
         describe "dist" do
           it "calculates distance between points" do
@@ -211,6 +199,48 @@ main = do
               liftEffect $ textLeading2 p 1.0
               let leading = textLeading p
               leading `shouldEqual` 1.0
+      describe "types" do
+        describe "color" do
+          describe "setRed" do
+            it "sets the red value" do
+              p <- liftEffect getP5
+              let red' = 200.0
+                  color' = color5 p 0.0 0.0 0.0 Nothing
+              (red p (ArrayNumberOrStringOrColorColor color'))
+                `shouldEqual` 0.0
+              let color'' = setRed p color' red'
+              (red p (ArrayNumberOrStringOrColorColor color''))
+                `shouldEqual` red'
+          describe "setGreen" do
+            it "sets the green value" do
+              p <- liftEffect getP5
+              let green' = 200.0
+                  color' = color5 p 0.0 0.0 0.0 Nothing
+              (green p (ArrayNumberOrStringOrColorColor color'))
+                `shouldEqual` 0.0
+              let color'' = setGreen p color' green'
+              (green p (ArrayNumberOrStringOrColorColor color''))
+                `shouldEqual` green'
+          describe "setBlue" do
+            it "sets the blue value" do
+              p <- liftEffect getP5
+              let blue' = 200.0
+                  color' = color5 p 0.0 0.0 0.0 Nothing
+              (blue p (ArrayNumberOrStringOrColorColor color'))
+                `shouldEqual` 0.0
+              let color'' = setBlue p color' blue'
+              (blue p (ArrayNumberOrStringOrColorColor color''))
+                `shouldEqual` blue'
+          describe "setAlpha" do
+            it "sets the alpha value" do
+              p <- liftEffect getP5
+              let alpha' = 200.0
+                  color' = color5 p 0.0 0.0 0.0 (Just 0.0)
+              (alpha p (ArrayNumberOrStringOrColorColor color'))
+                `shouldEqual` 0.0
+              let color'' = setAlpha p color' alpha'
+              (alpha p (ArrayNumberOrStringOrColorColor color''))
+                `shouldEqual` alpha'
   where
     testConfig = defaultConfig { timeout = Just 10000 }
 
