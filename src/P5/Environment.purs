@@ -1,6 +1,7 @@
 module P5.Environment
   ( cursor
   , displayDensity
+  , frameCount
   , frameRate
   , frameRate2
   , fullscreen
@@ -14,6 +15,7 @@ module P5.Environment
 
 import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)
 import Effect (Effect)
+import Effect.Uncurried (EffectFn1, runEffectFn1)
 import Prelude (Unit)
 import P5.Types
 import Foreign (Foreign, unsafeToForeign)
@@ -48,8 +50,8 @@ frameRate :: P5 -> Number
 frameRate p5  = runFn1 frameRateImpl p5
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/frameCount)
-frameCount :: P5 -> Int
-frameCount = runFn1 frameCountImpl
+frameCount :: P5 -> Effect Int
+frameCount = runEffectFn1 frameCountImpl
 
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/frameRate)

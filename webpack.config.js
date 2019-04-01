@@ -36,7 +36,9 @@ module.exports = {
     "hello-p5-simple-shapes": 
       './examples/hello-p5-simple-shapes/index.js',
     "l-systems": 
-      './examples/l-systems/index.js'
+      './examples/l-systems/index.js',
+    "frame-count": 
+      './examples/frame-count/index.js'
   },
 
   output: {
