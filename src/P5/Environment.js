@@ -15,6 +15,11 @@ exports.cursorImpl = function(p, _type, x, y) {
 exports.displayDensityImpl = function(p) {
   return callP5(p, p.displayDensity, []);
 };
+
+exports.frameCountImpl = function(p) {
+    return p.frameCount;
+};
+
 exports.frameRateImpl = function(p) {
   return callP5(p, p.frameRate, []);
 };
