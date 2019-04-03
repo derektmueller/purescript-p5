@@ -16,6 +16,14 @@ displayDensity :: P5 -> Number
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/displayDensity)
 
+#### `frameCount`
+
+``` purescript
+frameCount :: P5 -> Effect Int
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/frameCount)
+
 #### `frameRate`
 
 ``` purescript
