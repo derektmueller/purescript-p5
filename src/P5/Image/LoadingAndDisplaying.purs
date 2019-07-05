@@ -1,5 +1,6 @@
 module P5.Image.LoadingAndDisplaying
-  ( image
+  ( loadImage
+  , image
   , image2
   , imageMode
   , noTint
