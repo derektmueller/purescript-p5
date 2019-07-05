@@ -20,7 +20,7 @@ import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
 
 
-foreign import loadImageImpl :: Fn4 P5 String (Maybe (Effect Unit)) (Maybe (Effect Unit)) Image
+foreign import loadImageImpl :: Fn4 P5 String (Maybe (Image -> Effect Unit)) (Maybe (Effect Unit)) Image
 foreign import imageImpl :: Fn6 P5 ElementOrImage Number Number (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import image2Impl :: Fn10 P5 ElementOrImage Number Number Number Number Number Number (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import imageModeImpl :: Fn2 P5 ImageMode (Effect Unit)
@@ -33,7 +33,7 @@ foreign import tint5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect U
 
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
-loadImage :: P5 -> String -> Maybe (Effect Unit) -> Maybe (Effect Unit) -> Image
+loadImage :: P5 -> String -> Maybe (Image -> Effect Unit) -> Maybe (Effect Unit) -> Image
 loadImage p5 url callback onError = runFn4 loadImageImpl p5 url callback onError
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/image)
