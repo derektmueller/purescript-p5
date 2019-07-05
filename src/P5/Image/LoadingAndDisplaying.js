@@ -7,6 +7,10 @@ function callP5(p5, method, args) {
   return method.apply(
     p5, trimRightUndefined(args));
 }
+
+exports.loadImageImpl = function(p, path, callback, onError) {
+  return callP5(p, p.loadImage, [path, callback.value0 !== undefined ? callback.value0 : undefined, onError.value0 !== undefined ? onError.value0 : undefined]);
+};
 exports.imageImpl = function(p, img, x, y, width, height) {
   return function() {
     callP5(p, p.image, [img.value0, x, y, width.value0 !== undefined ? width.value0 : undefined, height.value0 !== undefined ? height.value0 : undefined]);
