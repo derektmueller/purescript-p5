@@ -1,4 +1,4 @@
-Progress: implemented **268** out of **299** methods
+Progress: implemented **269** out of **299** methods
 ```
 createStringDict :: P5 -> Unsupported(Object) -> StringDict
 ```
@@ -79,10 +79,6 @@ save :: P5 -> UnsupportedProduct(Unsupported(Object)|String) -> (Maybe String) -
 saveJSON :: P5 -> UnsupportedProduct(Unsupported(Array)|Unsupported(Object)) -> String -> (Maybe Boolean) -> (Effect Unit)
 ```
 [p5js.org documentation](https://p5js.org/reference/#/p5/saveJSON)
-```
-loadImage :: P5 -> String -> Unsupported(function(p5.Image)) -> Unsupported(Function(Event)) -> Image
-```
-[p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
 ```
 saveCanvas2 :: P5 -> UnsupportedProduct(Unsupported(HTMLCanvasElement)|Element) -> (Maybe String) -> (Maybe String) -> (Effect Unit)
 ```
