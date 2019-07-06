@@ -9,7 +9,13 @@ function callP5(p5, method, args) {
 }
 
 exports.loadImageImpl = function(p, path, callback, onError) {
-  return callP5(p, p.loadImage, [path, callback.value0 !== undefined ? callback.value0 : undefined, onError.value0 !== undefined ? onError.value0 : undefined]);
+  return callP5(p, p.loadImage, [
+    path,
+    callback.value0 !== undefined ? function(img) {
+      callback.value0(img)();
+    } : undefined,
+    onError.value0 !== undefined ? onError.value0 : undefined
+  ]);
 };
 exports.imageImpl = function(p, img, x, y, width, height) {
   return function() {
