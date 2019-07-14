@@ -9,12 +9,12 @@
     "webpack:dll": "webpack --verbose --colors --display-error-details --progress --config webpack-dll.config.js"
   },
   "devDependencies": {
-    "canvas": "^2.1.0",
+    "canvas": "^2.5.0",
     "inflection": "^1.12.0",
     "jsdom": "^13.0.0",
     "jsdom-global": "^3.0.2",
     "p5": "^0.7.2",
-    "purescript": "^0.12.0",
+    "purescript": "^0.12.5",
     "purescript-psa": "^0.7.3",
     "purs-loader": "^3.2.0",
     "webpack": "^3.12.0",

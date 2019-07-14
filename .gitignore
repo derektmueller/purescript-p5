@@ -8,3 +8,5 @@
 /.psa*
 /dist
 /TODO
+/vendor-dll.js
+/vendor-manifest.json
