@@ -67,6 +67,14 @@ noTint :: P5 -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/noTint)
 
+#### `loadImage`
+
+``` purescript
+loadImage :: P5 -> String -> Maybe (Image -> Effect Unit) -> Maybe (Effect Unit) -> Image
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
+
 #### `imageMode`
 
 ``` purescript

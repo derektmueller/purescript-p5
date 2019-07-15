@@ -64,6 +64,14 @@ getURLPath :: P5 -> (Array String)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/getURLPath)
 
+#### `height`
+
+``` purescript
+height :: P5 -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/height)
+
 #### `noCursor`
 
 ``` purescript
@@ -87,6 +95,14 @@ pixelDensity2 :: P5 -> Number -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/pixelDensity)
+
+#### `width`
+
+``` purescript
+width :: P5 -> Number
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/width)
 
 #### `windowResized`
 

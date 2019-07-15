@@ -24,6 +24,14 @@ imageMode :: P5 -> ImageMode -> (Effect Unit)
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/imageMode)
 
+#### `loadImage`
+
+``` purescript
+loadImage :: P5 -> String -> Maybe (Image -> Effect Unit) -> Maybe (Effect Unit) -> Image
+```
+
+[p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
+
 #### `noTint`
 
 ``` purescript
