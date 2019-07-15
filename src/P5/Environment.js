@@ -37,6 +37,9 @@ exports.getURLImpl = function(p) {
 exports.getURLPathImpl = function(p) {
   return callP5(p, p.getURLPath, []);
 };
+exports.heightImpl = function(p) {
+  return p.height;
+};
 exports.noCursorImpl = function(p) {
   return function() {
     callP5(p, p.noCursor, []);
@@ -49,6 +52,9 @@ exports.pixelDensity2Impl = function(p, val) {
   return function() {
     callP5(p, p.pixelDensity, [val]);
   };
+};
+exports.widthImpl = function(p) {
+  return p.width;
 };
 exports.windowResizedImpl = function(p) {
   return function() {

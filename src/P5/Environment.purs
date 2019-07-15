@@ -7,9 +7,11 @@ module P5.Environment
   , fullscreen
   , getURL
   , getURLPath
+  , height
   , noCursor
   , pixelDensity
   , pixelDensity2
+  , width
   , windowResized
   ) where
 
@@ -32,9 +34,11 @@ foreign import frameRate2Impl :: Fn2 P5 Number (Effect Unit)
 foreign import fullscreenImpl :: Fn2 P5 (Maybe Boolean) Boolean
 foreign import getURLImpl :: Fn1 P5 String
 foreign import getURLPathImpl :: Fn1 P5 (Array String)
+foreign import heightImpl :: Fn1 P5 Number
 foreign import noCursorImpl :: Fn1 P5 (Effect Unit)
 foreign import pixelDensityImpl :: Fn1 P5 Number
 foreign import pixelDensity2Impl :: Fn2 P5 Number (Effect Unit)
+foreign import widthImpl :: Fn1 P5 Number
 foreign import windowResizedImpl :: Fn1 P5 (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/cursor)
@@ -52,7 +56,6 @@ frameRate p5  = runFn1 frameRateImpl p5
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/frameCount)
 frameCount :: P5 -> Effect Int
 frameCount = runEffectFn1 frameCountImpl
-
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/frameRate)
 frameRate2 :: P5 -> Number -> (Effect Unit)
@@ -72,6 +75,10 @@ getURL p5  = runFn1 getURLImpl p5
 getURLPath :: P5 -> (Array String)
 getURLPath p5  = runFn1 getURLPathImpl p5
 
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/height)
+height :: P5 -> Number
+height p5  = runFn1 heightImpl p5
+
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/noCursor)
 noCursor :: P5 -> (Effect Unit)
 noCursor p5  = runFn1 noCursorImpl p5
@@ -84,6 +91,11 @@ pixelDensity p5  = runFn1 pixelDensityImpl p5
 pixelDensity2 :: P5 -> Number -> (Effect Unit)
 pixelDensity2 p5 val = runFn2 pixelDensity2Impl p5 val
 
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/width)
+width :: P5 -> Number
+width p5  = runFn1 widthImpl p5
+
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/windowResized)
 windowResized :: P5 -> (Effect Unit)
 windowResized p5  = runFn1 windowResizedImpl p5
+

@@ -1,8 +1,8 @@
 module P5.Image.LoadingAndDisplaying
-  ( loadImage
-  , image
+  ( image
   , image2
   , imageMode
+  , loadImage
   , noTint
   , tint
   , tint2
@@ -20,10 +20,10 @@ import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
 
 
-foreign import loadImageImpl :: Fn4 P5 String (Maybe (Image -> Effect Unit)) (Maybe (Effect Unit)) Image
 foreign import imageImpl :: Fn6 P5 ElementOrImage Number Number (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import image2Impl :: Fn10 P5 ElementOrImage Number Number Number Number Number Number (Maybe Number) (Maybe Number) (Effect Unit)
 foreign import imageModeImpl :: Fn2 P5 ImageMode (Effect Unit)
+foreign import loadImageImpl :: Fn4 P5 String (Maybe (Image -> Effect Unit)) (Maybe (Effect Unit)) Image
 foreign import noTintImpl :: Fn1 P5 (Effect Unit)
 foreign import tintImpl :: Fn2 P5 String (Effect Unit)
 foreign import tint2Impl :: Fn2 P5 (Array Number) (Effect Unit)
@@ -31,10 +31,6 @@ foreign import tint3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import tint4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
 foreign import tint5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 
-
--- | [p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
-loadImage :: P5 -> String -> Maybe (Image -> Effect Unit) -> Maybe (Effect Unit) -> Image
-loadImage p5 url callback onError = runFn4 loadImageImpl p5 url callback onError
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/image)
 image :: P5 -> ElementOrImage -> Number -> Number -> (Maybe Number) -> (Maybe Number) -> (Effect Unit)
@@ -47,6 +43,10 @@ image2 p5 img dx dy dWidth dHeight sx sy sWidth sHeight = runFn10 image2Impl p5 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/imageMode)
 imageMode :: P5 -> ImageMode -> (Effect Unit)
 imageMode p5 mode = runFn2 imageModeImpl p5 mode
+
+-- | [p5js.org documentation](https://p5js.org/reference/#/p5/loadImage)
+loadImage :: P5 -> String -> Maybe (Image -> Effect Unit) -> Maybe (Effect Unit) -> Image
+loadImage p5 path successCallback failureCallback = runFn4 loadImageImpl p5 path successCallback failureCallback
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/noTint)
 noTint :: P5 -> (Effect Unit)

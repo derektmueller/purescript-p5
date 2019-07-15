@@ -8,15 +8,6 @@ function callP5(p5, method, args) {
     p5, trimRightUndefined(args));
 }
 
-exports.loadImageImpl = function(p, path, callback, onError) {
-  return callP5(p, p.loadImage, [
-    path,
-    callback.value0 !== undefined ? function(img) {
-      callback.value0(img)();
-    } : undefined,
-    onError.value0 !== undefined ? onError.value0 : undefined
-  ]);
-};
 exports.imageImpl = function(p, img, x, y, width, height) {
   return function() {
     callP5(p, p.image, [img.value0, x, y, width.value0 !== undefined ? width.value0 : undefined, height.value0 !== undefined ? height.value0 : undefined]);
@@ -31,6 +22,16 @@ exports.imageModeImpl = function(p, mode) {
   return function() {
     callP5(p, p.imageMode, [p[mode.constructor.name.replace(new RegExp('^IMAGE_MODE_'), '')]]);
   };
+};
+exports.loadImageImpl = function(p, path, successCallback, failureCallback) {
+  return callP5(p, p.loadImage, [
+    path,
+    successCallback.value0 !== undefined ? function(img) {
+      successCallback.value0(img)();
+    } : undefined,
+    failureCallback.value0 !== undefined ? 
+      failureCallback.value0 : undefined
+  ]);
 };
 exports.noTintImpl = function(p) {
   return function() {

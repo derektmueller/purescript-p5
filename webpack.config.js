@@ -1,9 +1,7 @@
 const path = require('path');
-
+const fs = require('fs');
 const webpack = require('webpack');
-
 const isWebpackDevServer = process.argv.some(a => path.basename(a) === 'webpack-dev-server');
-
 const isWatch = process.argv.some(a => a === '--watch');
 
 const plugins =
@@ -29,17 +27,10 @@ module.exports = {
     hotOnly: true
   },
 
-  entry: {
-    basic: './examples/basic/index.js',
-    "structure-width-and-height": 
-      './examples/structure-width-and-height/index.js',
-    "hello-p5-simple-shapes": 
-      './examples/hello-p5-simple-shapes/index.js',
-    "l-systems": 
-      './examples/l-systems/index.js',
-    "frame-count": 
-      './examples/frame-count/index.js'
-  },
+  entry: fs.readdirSync('./examples').reduce((acc, curr) => {
+    acc[curr] = `./examples/${curr}/index.js`;
+    return acc;
+  }, {}),
 
   output: {
     path: path.resolve(__dirname, 'dist'),
