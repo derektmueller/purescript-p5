@@ -42,17 +42,9 @@ type AppState = {
 initialState :: Maybe AppState
 initialState = Nothing
 
-drawOnGraphics :: forall a. CanDrawOn a => P5T a Unit
-drawOnGraphics = do
-  stroke5T 127.0 63.0 120.0 Nothing
-  pure unit
-
 drawExample :: P5M Unit
 drawExample = do
   p <- ask
-  let graphics = createGraphics p 200.0 200.0 Nothing
-  lift $ stroke5 graphics 127.0 63.0 120.0 Nothing
-  lift $ runReaderT drawOnGraphics $ graphics
   lift $ resetMatrix p
   lift $ background4 p 200.0 Nothing
   lift $ fill5 p 204.0 101.0 192.0 (Just 127.0)

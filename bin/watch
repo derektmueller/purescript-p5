@@ -1,7 +1,7 @@
 #!/bin/bash
 
 while true; do
-  change=$(inotifywait -r -e close_write,moved_to,create ./src/P5 ./src ./test)
+  change=$(inotifywait -r -e close_write,moved_to,create ./src/P5 ./src ./test ./examples)
   pulp test --include examples
 done
 

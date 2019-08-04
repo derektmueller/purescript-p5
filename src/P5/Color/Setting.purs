@@ -53,7 +53,7 @@ foreign import strokeImpl :: Fn2 P5 String (Effect Unit)
 foreign import stroke2Impl :: Fn2 P5 (Array Number) (Effect Unit)
 foreign import stroke3Impl :: Fn2 P5 Color (Effect Unit)
 foreign import stroke4Impl :: Fn3 P5 Number (Maybe Number) (Effect Unit)
-foreign import stroke5Impl :: forall a. (CanDrawOn a) => Fn5 a Number Number Number (Maybe Number) (Effect Unit)
+foreign import stroke5Impl :: Fn5 P5 Number Number Number (Maybe Number) (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/background)
 background :: P5 -> Color -> (Effect Unit)
@@ -136,10 +136,10 @@ stroke4 :: P5 -> Number -> (Maybe Number) -> (Effect Unit)
 stroke4 p5 gray alpha = runFn3 stroke4Impl p5 gray alpha
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/stroke)
-stroke5 :: forall a. (CanDrawOn a) => a -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
+stroke5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 stroke5 p5 v1 v2 v3 alpha = runFn5 stroke5Impl p5 v1 v2 v3 alpha
 
-stroke5T :: forall a. (CanDrawOn a) => Number -> Number -> Number -> (Maybe Number) -> P5T a Unit
+stroke5T :: Number -> Number -> Number -> (Maybe Number) -> P5M Unit
 stroke5T v1 v2 v3 alpha = do
   p5 <- ask
   lift $ runFn5 stroke5Impl p5 v1 v2 v3 alpha
