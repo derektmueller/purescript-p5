@@ -2,6 +2,8 @@
 const fs = require('fs');
 const filename = process.argv[2];
 
+//find src -name '*.purs' | xargs -n 1 -I{} sh -c 'node scripts/reader-refactor.js {} > /tmp/purescript-p5-refactor && cat /tmp/purescript-p5-refactor > {} || exit 255'
+
 let contents = fs.readFileSync(filename).toString();
 
 try {
@@ -10,10 +12,9 @@ const effects = contents
   .split('\n')
   .filter(l => l.match(/=|::/))
   .filter(l => !l.match(/foreign/))
+  .filter(l => !l.match(/--/))
   .reduce((acc, l) => {
-    if(!acc[acc.length - 1]) {
-      acc.push([]);
-    } else if(acc[acc.length - 1].length < 2) {
+    if(acc[acc.length - 1] && acc[acc.length - 1].length < 2) {
       acc[acc.length - 1].push(l);
     } else {
       acc.push([l]);
@@ -50,4 +51,5 @@ console.log(contents);
 
 } catch(e) {
   console.log(`error parsing ${filename}`);
+  throw e;
 }
