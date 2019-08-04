@@ -1,5 +1,8 @@
 module P5.Types
   ( P5
+  , P5T
+  , P5M
+  , GraphicsM
   , Element
   , Vector
   , Color
@@ -44,7 +47,12 @@ module P5.Types
   , TextAlignHorizAlign(..)
   , TextAlignVertAlign(..)
   , TextStyle(..)
+  , class CanDrawOn
   ) where
+
+import Effect (Effect)
+import Prelude (Unit)
+import Control.Monad.Reader
 
 foreign import data P5 :: Type
 foreign import data Element :: Type
@@ -60,6 +68,15 @@ foreign import data PrintWriter :: Type
 foreign import data StringDict :: Type
 foreign import data Font :: Type
 foreign import data Geometry :: Type
+
+class CanDrawOn a
+
+instance canDrawOnGraphics :: CanDrawOn Graphics
+instance canDrawOnP5 :: CanDrawOn P5
+
+type P5T r a = ReaderT r Effect a
+type GraphicsM a = ReaderT Graphics Effect a
+type P5M a = ReaderT P5 Effect a
 
 data ArrayNumberOrStringOrColor = ArrayNumberOrStringOrColorArrayNumber (Array Number) | ArrayNumberOrStringOrColorString String | ArrayNumberOrStringOrColorColor Color
 data BooleanOrNumberOrString = BooleanOrNumberOrStringBoolean Boolean | BooleanOrNumberOrStringNumber Number | BooleanOrNumberOrStringString String

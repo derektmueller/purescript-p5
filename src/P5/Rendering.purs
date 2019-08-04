@@ -2,6 +2,7 @@ module P5.Rendering
   ( blendMode
   , createGraphics
   , createCanvas
+  , createCanvasT
   , noCanvas
   , resizeCanvas
   , setAttributes2
@@ -9,11 +10,12 @@ module P5.Rendering
 
 import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)
 import Effect (Effect)
-import Prelude (Unit)
+import Prelude (Unit, bind, ($))
 import P5.Types
 import Foreign (Foreign, unsafeToForeign)
 import Data.Maybe (Maybe, maybe)
 import Foreign.NullOrUndefined (undefined)
+import Control.Monad.Reader
 
 foreign import createCanvasImpl 
   :: Fn4 P5 Number Number (Maybe CreateCanvasRenderer) (Effect Element)
@@ -49,3 +51,7 @@ setAttributes2 p5 key value = runFn3 setAttributes2Impl p5 key value
 createCanvas :: P5 -> Number -> Number -> Maybe CreateCanvasRenderer -> Effect Element
 createCanvas p w h r = runFn4 createCanvasImpl p w h r
 
+createCanvasT :: Number -> Number -> Maybe CreateCanvasRenderer -> P5M Element
+createCanvasT w h r = do
+  p <- ask
+  lift $ runFn4 createCanvasImpl p w h r

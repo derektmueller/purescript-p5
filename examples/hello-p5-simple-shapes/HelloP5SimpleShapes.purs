@@ -15,6 +15,7 @@ import Data.Unfoldable
 import Data.Traversable
 import Web.HTML (window)
 import Web.HTML.Window (innerWidth, innerHeight)
+import Control.Monad.Reader
 
 import P5
 import P5.Color
@@ -41,19 +42,28 @@ type AppState = {
 initialState :: Maybe AppState
 initialState = Nothing
 
-drawExample :: P5 -> Effect Unit
-drawExample p = do
-  resetMatrix p
-  background4 p 200.0 Nothing
-  fill5 p 204.0 101.0 192.0 (Just 127.0)
-  stroke5 p 127.0 63.0 120.0 Nothing
-  rect p 40.0 120.0 120.0 40.0 Nothing Nothing
-  ellipse p 240.0 240.0 80.0 (Just 80.0)  
-  triangle p 300.0 100.0 320.0 100.0 310.0 80.0
-  translate2 p 580.0 200.0 Nothing
-  noStroke p
+drawOnGraphics :: forall a. CanDrawOn a => P5T a Unit
+drawOnGraphics = do
+  stroke5T 127.0 63.0 120.0 Nothing
+  pure unit
 
-  _ <- traverse
+drawExample :: P5M Unit
+drawExample = do
+  p <- ask
+  let graphics = createGraphics p 200.0 200.0 Nothing
+  lift $ stroke5 graphics 127.0 63.0 120.0 Nothing
+  lift $ runReaderT drawOnGraphics $ graphics
+  lift $ resetMatrix p
+  lift $ background4 p 200.0 Nothing
+  lift $ fill5 p 204.0 101.0 192.0 (Just 127.0)
+  lift $ stroke5 p 127.0 63.0 120.0 Nothing
+  lift $ rect p 40.0 120.0 120.0 40.0 Nothing Nothing
+  lift $ ellipse p 240.0 240.0 80.0 (Just 80.0)  
+  lift $ triangle p 300.0 100.0 320.0 100.0 310.0 80.0
+  lift $ translate2 p 580.0 200.0 Nothing
+  lift $ noStroke p
+
+  _ <- lift $ traverse
     (\_ -> do
       ellipse p 0.0 30.0 20.0 (Just 80.0)  
       rotate p (pi / 5.0) Nothing
@@ -70,11 +80,12 @@ main mAppState = do
 
   case mAppState of
     Nothing ->
-      setup p do
-        e <- createCanvas p (toNumber w) (toNumber h) Nothing
-        setId e "helloP5SimpleShapes"
-        drawExample p
-        pure unit
-    _ -> drawExample p
+      p5Opts {p5: Just p} do
+        setupT (do
+          e <- createCanvasT (toNumber w) (toNumber h) Nothing
+          setIdT e "helloP5SimpleShapes"
+          drawExample
+          pure unit)
+    _ -> p5Opts {p5: Just p } drawExample
 
   pure $ Just { p5: p }

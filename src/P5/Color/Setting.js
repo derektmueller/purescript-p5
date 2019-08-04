@@ -107,8 +107,10 @@ exports.stroke4Impl = function(p, gray, alpha) {
     callP5(p, p.stroke, [gray, alpha.value0 !== undefined ? alpha.value0 : undefined]);
   };
 };
-exports.stroke5Impl = function(p, v1, v2, v3, alpha) {
-  return function() {
-    callP5(p, p.stroke, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
+exports.stroke5Impl = function(d) {
+  return function(p, v1, v2, v3, alpha) {
+    return function() {
+      callP5(p, p.stroke, [v1, v2, v3, alpha.value0 !== undefined ? alpha.value0 : undefined]);
+    };
   };
 };
