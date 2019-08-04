@@ -20,7 +20,6 @@ module P5.Color.Setting
   , stroke3
   , stroke4
   , stroke5
-  , stroke5T
   ) where
 
 import Data.Function.Uncurried (Fn1, Fn10, Fn2, Fn3, Fn4, Fn5, Fn6, Fn7, Fn9, runFn1, runFn10, runFn2, runFn3, runFn4, runFn5, runFn6, runFn7, runFn9)
@@ -139,7 +138,3 @@ stroke4 p5 gray alpha = runFn3 stroke4Impl p5 gray alpha
 stroke5 :: P5 -> Number -> Number -> Number -> (Maybe Number) -> (Effect Unit)
 stroke5 p5 v1 v2 v3 alpha = runFn5 stroke5Impl p5 v1 v2 v3 alpha
 
-stroke5T :: Number -> Number -> Number -> (Maybe Number) -> P5M Unit
-stroke5T v1 v2 v3 alpha = do
-  p5 <- ask
-  lift $ runFn5 stroke5Impl p5 v1 v2 v3 alpha

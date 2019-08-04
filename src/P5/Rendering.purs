@@ -2,7 +2,6 @@ module P5.Rendering
   ( blendMode
   , createGraphics
   , createCanvas
-  , createCanvasT
   , noCanvas
   , resizeCanvas
   , setAttributes2
@@ -51,7 +50,3 @@ setAttributes2 p5 key value = runFn3 setAttributes2Impl p5 key value
 createCanvas :: P5 -> Number -> Number -> Maybe CreateCanvasRenderer -> Effect Element
 createCanvas p w h r = runFn4 createCanvasImpl p w h r
 
-createCanvasT :: Number -> Number -> Maybe CreateCanvasRenderer -> P5M Element
-createCanvasT w h r = do
-  p <- ask
-  lift $ runFn4 createCanvasImpl p w h r

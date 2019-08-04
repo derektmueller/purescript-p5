@@ -4,19 +4,23 @@ const filename = process.argv[2];
 
 let contents = fs.readFileSync(filename).toString();
 
+try {
+
 const effects = contents
   .split('\n')
   .filter(l => l.match(/=|::/))
   .filter(l => !l.match(/foreign/))
   .reduce((acc, l) => {
-    if(acc[acc.length - 1].length < 2) {
+    if(!acc[acc.length - 1]) {
+      acc.push([]);
+    } else if(acc[acc.length - 1].length < 2) {
       acc[acc.length - 1].push(l);
     } else {
       acc.push([l]);
     }
 
     return acc;
-  }, [[]])
+  }, [])
   .filter(([signature, body]) => 
     signature.match(/Effect Unit\)$/))
   .map(([signature, body]) => {
@@ -43,3 +47,7 @@ effects.forEach(([, signature, body, newSignature, newBody]) => {
 });
 
 console.log(contents);
+
+} catch(e) {
+  console.log(`error parsing ${filename}`);
+}

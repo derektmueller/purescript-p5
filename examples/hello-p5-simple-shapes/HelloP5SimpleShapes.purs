@@ -74,7 +74,7 @@ main mAppState = do
     Nothing ->
       p5Opts {p5: Just p} do
         setupT (do
-          e <- createCanvasT (toNumber w) (toNumber h) Nothing
+          e <- lift $ createCanvas p (toNumber w) (toNumber h) Nothing
           setIdT e "helloP5SimpleShapes"
           drawExample
           pure unit)
