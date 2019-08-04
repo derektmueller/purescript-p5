@@ -47,7 +47,8 @@ Completed:
 
 TODO:
   * generate methods for classes other than p5 (e.g. p5.Vector, p5.Image)
-  * easier-to-use interfaces for functions with numeric suffixes
+  * create easier-to-use interfaces for functions with numeric suffixes
+  * use Reader monad to implicitly pass the p5 argument
 
 ## References
 
