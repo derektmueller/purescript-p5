@@ -1,44 +1,35 @@
-function trimRightUndefined(array) {
-  return array.filter(function (x, i) {
-    return i < array.length - 1 || x !== undefined;
-  });
-}
-function callP5(p5, method, args) {
-  return method.apply(
-    p5, trimRightUndefined(args));
-}
-exports.doubleClickedImpl = function(p) {
+exports.doubleClickedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.doubleClicked, []);
+    p.doubleClicked = eff;
   };
 };
-exports.mouseClickedImpl = function(p) {
+exports.mouseClickedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.mouseClicked, []);
+    p.mouseClicked = eff;
   };
 };
-exports.mouseDraggedImpl = function(p) {
+exports.mouseDraggedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.mouseDragged, []);
+    p.mouseDragged = eff;
   };
 };
-exports.mouseMovedImpl = function(p) {
+exports.mouseMovedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.mouseMoved, []);
+    p.mouseMoved = eff;
   };
 };
-exports.mousePressedImpl = function(p) {
+exports.mousePressedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.mousePressed, []);
+    p.mousePressed = eff;
   };
 };
-exports.mouseReleasedImpl = function(p) {
+exports.mouseReleasedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.mouseReleased, []);
+    p.mouseReleased = eff;
   };
 };
-exports.mouseWheelImpl = function(p) {
+exports.mouseWheelImpl = function(p, eff) {
   return function() {
-    callP5(p, p.mouseWheel, []);
+    p.mouseWheel = eff;
   };
 };

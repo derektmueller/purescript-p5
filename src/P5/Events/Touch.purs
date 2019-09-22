@@ -14,18 +14,18 @@ import Foreign.NullOrUndefined (undefined)
 
 
 
-foreign import touchEndedImpl :: Fn1 P5 (Effect Unit)
-foreign import touchMovedImpl :: Fn1 P5 (Effect Unit)
-foreign import touchStartedImpl :: Fn1 P5 (Effect Unit)
+foreign import touchEndedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import touchMovedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import touchStartedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/touchEnded)
-touchEnded :: P5 -> (Effect Unit)
-touchEnded p5  = runFn1 touchEndedImpl p5 
+touchEnded :: P5 -> (Effect Boolean) -> (Effect Unit)
+touchEnded p5 eff = runFn2 touchEndedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/touchMoved)
-touchMoved :: P5 -> (Effect Unit)
-touchMoved p5  = runFn1 touchMovedImpl p5 
+touchMoved :: P5 -> (Effect Boolean) -> (Effect Unit)
+touchMoved p5 eff = runFn2 touchMovedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/touchStarted)
-touchStarted :: P5 -> (Effect Unit)
-touchStarted p5  = runFn1 touchStartedImpl p5 
+touchStarted :: P5 -> (Effect Boolean) -> (Effect Unit)
+touchStarted p5 eff = runFn2 touchStartedImpl p5 eff

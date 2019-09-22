@@ -7,19 +7,19 @@ function callP5(p5, method, args) {
   return method.apply(
     p5, trimRightUndefined(args));
 }
-exports.deviceMovedImpl = function(p) {
+exports.deviceMovedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.deviceMoved, []);
+    p.deviceMoved = eff;
   };
 };
-exports.deviceShakenImpl = function(p) {
+exports.deviceShakenImpl = function(p, eff) {
   return function() {
-    callP5(p, p.deviceShaken, []);
+    p.deviceShaken = eff;
   };
 };
-exports.deviceTurnedImpl = function(p) {
+exports.deviceTurnedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.deviceTurned, []);
+    p.deviceTurned = eff;
   };
 };
 exports.setMoveThresholdImpl = function(p, value) {

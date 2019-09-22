@@ -10,18 +10,18 @@ function callP5(p5, method, args) {
 exports.keyIsDownImpl = function(p, code) {
   return callP5(p, p.keyIsDown, [code]);
 };
-exports.keyPressedImpl = function(p) {
+exports.keyPressedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.keyPressed, []);
+    p.keyPressed = eff;
   };
 };
-exports.keyReleasedImpl = function(p) {
+exports.keyReleasedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.keyReleased, []);
+    p.keyReleased = eff;
   };
 };
-exports.keyTypedImpl = function(p) {
+exports.keyTypedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.keyTyped, []);
+    p.keyTyped = eff;
   };
 };

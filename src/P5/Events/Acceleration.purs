@@ -16,23 +16,23 @@ import Foreign.NullOrUndefined (undefined)
 
 
 
-foreign import deviceMovedImpl :: Fn1 P5 (Effect Unit)
-foreign import deviceShakenImpl :: Fn1 P5 (Effect Unit)
-foreign import deviceTurnedImpl :: Fn1 P5 (Effect Unit)
+foreign import deviceMovedImpl :: Fn2 P5 (Effect Unit) (Effect Unit)
+foreign import deviceShakenImpl :: Fn2 P5 (Effect Unit) (Effect Unit)
+foreign import deviceTurnedImpl :: Fn2 P5 (Effect Unit) (Effect Unit)
 foreign import setMoveThresholdImpl :: Fn2 P5 Number (Effect Unit)
 foreign import setShakeThresholdImpl :: Fn2 P5 Number (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/deviceMoved)
-deviceMoved :: P5 -> (Effect Unit)
-deviceMoved p5  = runFn1 deviceMovedImpl p5 
+deviceMoved :: P5 -> (Effect Unit) -> (Effect Unit)
+deviceMoved p5 eff = runFn2 deviceMovedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/deviceShaken)
-deviceShaken :: P5 -> (Effect Unit)
-deviceShaken p5  = runFn1 deviceShakenImpl p5 
+deviceShaken :: P5 -> (Effect Unit) -> (Effect Unit)
+deviceShaken p5 eff = runFn2 deviceShakenImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/deviceTurned)
-deviceTurned :: P5 -> (Effect Unit)
-deviceTurned p5  = runFn1 deviceTurnedImpl p5 
+deviceTurned :: P5 -> (Effect Unit) -> (Effect Unit)
+deviceTurned p5 eff = runFn2 deviceTurnedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/setMoveThreshold)
 setMoveThreshold :: P5 -> Number -> (Effect Unit)

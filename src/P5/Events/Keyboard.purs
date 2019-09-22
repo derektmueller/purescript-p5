@@ -16,22 +16,22 @@ import Foreign.NullOrUndefined (undefined)
 
 
 foreign import keyIsDownImpl :: Fn2 P5 Number Boolean
-foreign import keyPressedImpl :: Fn1 P5 (Effect Unit)
-foreign import keyReleasedImpl :: Fn1 P5 (Effect Unit)
-foreign import keyTypedImpl :: Fn1 P5 (Effect Unit)
+foreign import keyPressedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import keyReleasedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import keyTypedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/keyIsDown)
 keyIsDown :: P5 -> Number -> Boolean
 keyIsDown p5 code = runFn2 keyIsDownImpl p5 code
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/keyPressed)
-keyPressed :: P5 -> (Effect Unit)
-keyPressed p5  = runFn1 keyPressedImpl p5 
+keyPressed :: P5 -> (Effect Boolean) -> (Effect Unit)
+keyPressed p5 eff = runFn2 keyPressedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/keyReleased)
-keyReleased :: P5 -> (Effect Unit)
-keyReleased p5  = runFn1 keyReleasedImpl p5 
+keyReleased :: P5 -> (Effect Boolean) -> (Effect Unit)
+keyReleased p5 eff = runFn2 keyReleasedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/keyTyped)
-keyTyped :: P5 -> (Effect Unit)
-keyTyped p5  = runFn1 keyTypedImpl p5 
+keyTyped :: P5 -> (Effect Boolean) -> (Effect Unit)
+keyTyped p5 eff = runFn2 keyTypedImpl p5 eff

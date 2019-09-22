@@ -1,24 +1,15 @@
-function trimRightUndefined(array) {
-  return array.filter(function (x, i) {
-    return i < array.length - 1 || x !== undefined;
-  });
-}
-function callP5(p5, method, args) {
-  return method.apply(
-    p5, trimRightUndefined(args));
-}
-exports.touchEndedImpl = function(p) {
+exports.touchEndedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.touchEnded, []);
+    p.touchEnded = eff;
   };
 };
-exports.touchMovedImpl = function(p) {
+exports.touchMovedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.touchMoved, []);
+    p.touchMoved = eff;
   };
 };
-exports.touchStartedImpl = function(p) {
+exports.touchStartedImpl = function(p, eff) {
   return function() {
-    callP5(p, p.touchStarted, []);
+    p.touchStarted = eff;
   };
 };

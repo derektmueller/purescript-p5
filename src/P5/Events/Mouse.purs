@@ -18,38 +18,39 @@ import Foreign.NullOrUndefined (undefined)
 
 
 
-foreign import doubleClickedImpl :: Fn1 P5 (Effect Unit)
-foreign import mouseClickedImpl :: Fn1 P5 (Effect Unit)
-foreign import mouseDraggedImpl :: Fn1 P5 (Effect Unit)
-foreign import mouseMovedImpl :: Fn1 P5 (Effect Unit)
-foreign import mousePressedImpl :: Fn1 P5 (Effect Unit)
-foreign import mouseReleasedImpl :: Fn1 P5 (Effect Unit)
-foreign import mouseWheelImpl :: Fn1 P5 (Effect Unit)
+foreign import doubleClickedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import mouseClickedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import mouseDraggedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import mouseMovedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import mousePressedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import mouseReleasedImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
+foreign import mouseWheelImpl :: Fn2 P5 (Effect Boolean) (Effect Unit)
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/doubleClicked)
-doubleClicked :: P5 -> (Effect Unit)
-doubleClicked p5  = runFn1 doubleClickedImpl p5 
+doubleClicked :: P5 -> (Effect Boolean) -> (Effect Unit)
+doubleClicked p5 eff = runFn2 doubleClickedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseClicked)
-mouseClicked :: P5 -> (Effect Unit)
-mouseClicked p5  = runFn1 mouseClickedImpl p5 
+mouseClicked :: P5 -> (Effect Boolean) -> (Effect Unit)
+mouseClicked p5 eff = runFn2 mouseClickedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseDragged)
-mouseDragged :: P5 -> (Effect Unit)
-mouseDragged p5  = runFn1 mouseDraggedImpl p5 
+mouseDragged :: P5 -> (Effect Boolean) -> (Effect Unit)
+mouseDragged p5 eff = runFn2 mouseDraggedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseMoved)
-mouseMoved :: P5 -> (Effect Unit)
-mouseMoved p5  = runFn1 mouseMovedImpl p5 
+mouseMoved :: P5 -> (Effect Boolean) -> (Effect Unit)
+mouseMoved p5 eff = runFn2 mouseMovedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/mousePressed)
-mousePressed :: P5 -> (Effect Unit)
-mousePressed p5  = runFn1 mousePressedImpl p5 
+mousePressed :: P5 -> (Effect Boolean) -> (Effect Unit)
+mousePressed p5 eff = runFn2 mousePressedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseReleased)
-mouseReleased :: P5 -> (Effect Unit)
-mouseReleased p5  = runFn1 mouseReleasedImpl p5 
+mouseReleased :: P5 -> (Effect Boolean) -> (Effect Unit)
+mouseReleased p5 eff = runFn2 mouseReleasedImpl p5 eff
 
 -- | [p5js.org documentation](https://p5js.org/reference/#/p5/mouseWheel)
-mouseWheel :: P5 -> (Effect Unit)
-mouseWheel p5  = runFn1 mouseWheelImpl p5 
+mouseWheel :: P5 -> (Effect Boolean) -> (Effect Unit)
+mouseWheel p5 eff = runFn2 mouseWheelImpl p5 eff
+
