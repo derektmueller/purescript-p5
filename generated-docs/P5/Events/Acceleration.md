@@ -3,7 +3,7 @@
 #### `deviceMoved`
 
 ``` purescript
-deviceMoved :: P5 -> (Effect Unit)
+deviceMoved :: P5 -> (Effect Unit) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceMoved)
@@ -11,7 +11,7 @@ deviceMoved :: P5 -> (Effect Unit)
 #### `deviceShaken`
 
 ``` purescript
-deviceShaken :: P5 -> (Effect Unit)
+deviceShaken :: P5 -> (Effect Unit) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceShaken)
@@ -19,7 +19,7 @@ deviceShaken :: P5 -> (Effect Unit)
 #### `deviceTurned`
 
 ``` purescript
-deviceTurned :: P5 -> (Effect Unit)
+deviceTurned :: P5 -> (Effect Unit) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceTurned)

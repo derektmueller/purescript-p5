@@ -3,7 +3,7 @@
 #### `doubleClicked`
 
 ``` purescript
-doubleClicked :: P5 -> (Effect Unit)
+doubleClicked :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/doubleClicked)
@@ -11,7 +11,7 @@ doubleClicked :: P5 -> (Effect Unit)
 #### `mouseClicked`
 
 ``` purescript
-mouseClicked :: P5 -> (Effect Unit)
+mouseClicked :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseClicked)
@@ -19,7 +19,7 @@ mouseClicked :: P5 -> (Effect Unit)
 #### `mouseDragged`
 
 ``` purescript
-mouseDragged :: P5 -> (Effect Unit)
+mouseDragged :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseDragged)
@@ -27,7 +27,7 @@ mouseDragged :: P5 -> (Effect Unit)
 #### `mouseMoved`
 
 ``` purescript
-mouseMoved :: P5 -> (Effect Unit)
+mouseMoved :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseMoved)
@@ -35,7 +35,7 @@ mouseMoved :: P5 -> (Effect Unit)
 #### `mousePressed`
 
 ``` purescript
-mousePressed :: P5 -> (Effect Unit)
+mousePressed :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mousePressed)
@@ -43,7 +43,7 @@ mousePressed :: P5 -> (Effect Unit)
 #### `mouseReleased`
 
 ``` purescript
-mouseReleased :: P5 -> (Effect Unit)
+mouseReleased :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseReleased)
@@ -51,7 +51,7 @@ mouseReleased :: P5 -> (Effect Unit)
 #### `mouseWheel`
 
 ``` purescript
-mouseWheel :: P5 -> (Effect Unit)
+mouseWheel :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseWheel)

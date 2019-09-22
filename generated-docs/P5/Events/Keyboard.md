@@ -11,7 +11,7 @@ keyIsDown :: P5 -> Number -> Boolean
 #### `keyPressed`
 
 ``` purescript
-keyPressed :: P5 -> (Effect Unit)
+keyPressed :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/keyPressed)
@@ -19,7 +19,7 @@ keyPressed :: P5 -> (Effect Unit)
 #### `keyReleased`
 
 ``` purescript
-keyReleased :: P5 -> (Effect Unit)
+keyReleased :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/keyReleased)
@@ -27,7 +27,7 @@ keyReleased :: P5 -> (Effect Unit)
 #### `keyTyped`
 
 ``` purescript
-keyTyped :: P5 -> (Effect Unit)
+keyTyped :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/keyTyped)

@@ -22,7 +22,7 @@ setMoveThreshold :: P5 -> Number -> (Effect Unit)
 #### `deviceTurned`
 
 ``` purescript
-deviceTurned :: P5 -> (Effect Unit)
+deviceTurned :: P5 -> (Effect Unit) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceTurned)
@@ -30,7 +30,7 @@ deviceTurned :: P5 -> (Effect Unit)
 #### `deviceShaken`
 
 ``` purescript
-deviceShaken :: P5 -> (Effect Unit)
+deviceShaken :: P5 -> (Effect Unit) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceShaken)
@@ -38,7 +38,7 @@ deviceShaken :: P5 -> (Effect Unit)
 #### `deviceMoved`
 
 ``` purescript
-deviceMoved :: P5 -> (Effect Unit)
+deviceMoved :: P5 -> (Effect Unit) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/deviceMoved)
@@ -48,7 +48,7 @@ deviceMoved :: P5 -> (Effect Unit)
 #### `keyTyped`
 
 ``` purescript
-keyTyped :: P5 -> (Effect Unit)
+keyTyped :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/keyTyped)
@@ -56,7 +56,7 @@ keyTyped :: P5 -> (Effect Unit)
 #### `keyReleased`
 
 ``` purescript
-keyReleased :: P5 -> (Effect Unit)
+keyReleased :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/keyReleased)
@@ -64,7 +64,7 @@ keyReleased :: P5 -> (Effect Unit)
 #### `keyPressed`
 
 ``` purescript
-keyPressed :: P5 -> (Effect Unit)
+keyPressed :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/keyPressed)
@@ -82,7 +82,7 @@ keyIsDown :: P5 -> Number -> Boolean
 #### `mouseWheel`
 
 ``` purescript
-mouseWheel :: P5 -> (Effect Unit)
+mouseWheel :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseWheel)
@@ -90,7 +90,7 @@ mouseWheel :: P5 -> (Effect Unit)
 #### `mouseReleased`
 
 ``` purescript
-mouseReleased :: P5 -> (Effect Unit)
+mouseReleased :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseReleased)
@@ -98,7 +98,7 @@ mouseReleased :: P5 -> (Effect Unit)
 #### `mousePressed`
 
 ``` purescript
-mousePressed :: P5 -> (Effect Unit)
+mousePressed :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mousePressed)
@@ -106,7 +106,7 @@ mousePressed :: P5 -> (Effect Unit)
 #### `mouseMoved`
 
 ``` purescript
-mouseMoved :: P5 -> (Effect Unit)
+mouseMoved :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseMoved)
@@ -114,7 +114,7 @@ mouseMoved :: P5 -> (Effect Unit)
 #### `mouseDragged`
 
 ``` purescript
-mouseDragged :: P5 -> (Effect Unit)
+mouseDragged :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseDragged)
@@ -122,7 +122,7 @@ mouseDragged :: P5 -> (Effect Unit)
 #### `mouseClicked`
 
 ``` purescript
-mouseClicked :: P5 -> (Effect Unit)
+mouseClicked :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/mouseClicked)
@@ -130,7 +130,7 @@ mouseClicked :: P5 -> (Effect Unit)
 #### `doubleClicked`
 
 ``` purescript
-doubleClicked :: P5 -> (Effect Unit)
+doubleClicked :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/doubleClicked)
@@ -140,7 +140,7 @@ doubleClicked :: P5 -> (Effect Unit)
 #### `touchStarted`
 
 ``` purescript
-touchStarted :: P5 -> (Effect Unit)
+touchStarted :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/touchStarted)
@@ -148,7 +148,7 @@ touchStarted :: P5 -> (Effect Unit)
 #### `touchMoved`
 
 ``` purescript
-touchMoved :: P5 -> (Effect Unit)
+touchMoved :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/touchMoved)
@@ -156,7 +156,7 @@ touchMoved :: P5 -> (Effect Unit)
 #### `touchEnded`
 
 ``` purescript
-touchEnded :: P5 -> (Effect Unit)
+touchEnded :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/touchEnded)

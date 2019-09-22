@@ -3,7 +3,7 @@
 #### `touchEnded`
 
 ``` purescript
-touchEnded :: P5 -> (Effect Unit)
+touchEnded :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/touchEnded)
@@ -11,7 +11,7 @@ touchEnded :: P5 -> (Effect Unit)
 #### `touchMoved`
 
 ``` purescript
-touchMoved :: P5 -> (Effect Unit)
+touchMoved :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/touchMoved)
@@ -19,7 +19,7 @@ touchMoved :: P5 -> (Effect Unit)
 #### `touchStarted`
 
 ``` purescript
-touchStarted :: P5 -> (Effect Unit)
+touchStarted :: P5 -> (Effect Boolean) -> (Effect Unit)
 ```
 
 [p5js.org documentation](https://p5js.org/reference/#/p5/touchStarted)
